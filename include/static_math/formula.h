@@ -115,6 +115,28 @@ namespace smath
     constexpr
     Numeric sum(Numeric first, Numeric second);
 
+    /**
+     * @brief Sum of a number of variables
+     */
+    template<typename Numeric, typename... Rest>
+    constexpr
+    Numeric min(Numeric first, Numeric second, Rest... rest);
+
+    template<typename Numeric>
+    constexpr
+    Numeric min(Numeric first, Numeric second);
+
+    /**
+     * @brief Sum of a number of variables
+     */
+    template<typename Numeric, typename... Rest>
+    constexpr
+    Numeric max(Numeric first, Numeric second, Rest... rest);
+
+    template<typename Numeric>
+    constexpr
+    Numeric max(Numeric first, Numeric second);
+
     #include <static_math/formula.inl>
 
 } // namespace smath
