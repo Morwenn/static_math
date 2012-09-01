@@ -14,22 +14,28 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _SMATH_STATIC_MATH_H
-#define _SMATH_STATIC_MATH_H
-
-////////////////////////////////////////////////////////////
-// Headers
-////////////////////////////////////////////////////////////
-#include <static_math/constants.h>
-#include <static_math/formula.h>
 #include <static_math/rational.h>
 
-
-/**
- * @namespace smath
- * Global namespace of static_math.
- */
+using namespace smath;
 
 
-#endif // _SMATH_STATIC_MATH_H
+int main()
+{
+    constexpr auto ratio = rational<int>(4, 2);
 
+    static_assert(ratio.numerator() == 4, "");
+    static_assert(ratio.denominator() == 2, "");
+
+    constexpr auto r1 = rational<int>(1, 2);
+    constexpr auto r2 = rational<int>(2, 4);
+    constexpr auto r3 = rational<int>(1, 3);
+
+    static_assert(r1 == r2, "");
+    static_assert(r1 != r3, "");
+    static_assert(r1 > r3, "");
+    static_assert(r3 < r2, "");
+    static_assert(r1 >= r2, "");
+    static_assert(r3 <= r2, "");
+
+    return 0;
+}
