@@ -119,6 +119,13 @@ Numeric sum(Numeric first, Numeric second)
     return first + second;
 }
 
+template<typename... Args>
+constexpr
+long double mean(Args... args)
+{
+    return (long double) sum(args...) / (long double) sizeof...(args);
+}
+
 template<typename Numeric, typename... Rest>
 constexpr
 Numeric min(Numeric first, Numeric second, Rest... rest)

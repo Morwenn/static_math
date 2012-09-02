@@ -116,7 +116,14 @@ namespace smath
     Numeric sum(Numeric first, Numeric second);
 
     /**
-     * @brief Sum of a number of variables
+     * @brief Mean of a number of variables
+     */
+    template<typename... Args>
+    constexpr
+    long double mean(Args... args);
+
+    /**
+     * @brief Min of a number of variables
      */
     template<typename Numeric, typename... Rest>
     constexpr
@@ -127,7 +134,7 @@ namespace smath
     Numeric min(Numeric first, Numeric second);
 
     /**
-     * @brief Sum of a number of variables
+     * @brief Max of a number of variables
      */
     template<typename Numeric, typename... Rest>
     constexpr
