@@ -34,10 +34,12 @@ namespace smath
     {
         public:
 
-            constexpr rational(T numerator, T denominator);
+            constexpr rational(T numerator, T denominator=1);
 
             constexpr T numerator() const;
             constexpr T denominator() const;
+
+            constexpr operator long double() const;
 
         private:
 
@@ -51,21 +53,69 @@ namespace smath
 
     template<typename T>
     constexpr bool operator==(const rational<T>& lhs, const rational<T>& rhs);
-
     template<typename T>
     constexpr bool operator!=(const rational<T>& lhs, const rational<T>& rhs);
-
     template<typename T>
     constexpr bool operator<(const rational<T>& lhs, const rational<T>& rhs);
-
     template<typename T>
     constexpr bool operator>(const rational<T>& lhs, const rational<T>& rhs);
-
     template<typename T>
     constexpr bool operator<=(const rational<T>& lhs, const rational<T>& rhs);
-
     template<typename T>
     constexpr bool operator>=(const rational<T>& lhs, const rational<T>& rhs);
+
+    template<typename T>
+    constexpr bool operator==(const rational<T>& lhs, const T& rhs);
+    template<typename T>
+    constexpr bool operator!=(const rational<T>& lhs, const T& rhs);
+    template<typename T>
+    constexpr bool operator<(const rational<T>& lhs, const T& rhs);
+    template<typename T>
+    constexpr bool operator>(const rational<T>& lhs, const T& rhs);
+    template<typename T>
+    constexpr bool operator<=(const rational<T>& lhs, const T& rhs);
+    template<typename T>
+    constexpr bool operator>=(const rational<T>& lhs, const T& rhs);
+
+    template<typename T>
+    constexpr bool operator==(const T& lhs, const rational<T>& rhs);
+    template<typename T>
+    constexpr bool operator!=(const T& lhs, const rational<T>& rhs);
+    template<typename T>
+    constexpr bool operator<(const T& lhs, const rational<T>& rhs);
+    template<typename T>
+    constexpr bool operator>(const T& lhs, const rational<T>& rhs);
+    template<typename T>
+    constexpr bool operator<=(const T& lhs, const rational<T>& rhs);
+    template<typename T>
+    constexpr bool operator>=(const T& lhs, const rational<T>& rhs);
+
+    template<typename T>
+    constexpr rational<T> operator+(const rational<T>& lhs, const rational<T>& rhs);
+    template<typename T>
+    constexpr rational<T> operator-(const rational<T>& lhs, const rational<T>& rhs);
+    template<typename T>
+    constexpr rational<T> operator*(const rational<T>& lhs, const rational<T>& rhs);
+    template<typename T>
+    constexpr rational<T> operator/(const rational<T>& lhs, const rational<T>& rhs);
+
+    template<typename T>
+    constexpr rational<T> operator+(const rational<T>& lhs, const T& rhs);
+    template<typename T>
+    constexpr rational<T> operator-(const rational<T>& lhs, const T& rhs);
+    template<typename T>
+    constexpr rational<T> operator*(const rational<T>& lhs, const T& rhs);
+    template<typename T>
+    constexpr rational<T> operator/(const rational<T>& lhs, const T& rhs);
+
+    template<typename T>
+    constexpr rational<T> operator+(const T& lhs, const rational<T> rhs);
+    template<typename T>
+    constexpr rational<T> operator-(const T& lhs, const rational<T> rhs);
+    template<typename T>
+    constexpr rational<T> operator*(const T& lhs, const rational<T> rhs);
+    template<typename T>
+    constexpr rational<T> operator/(const T& lhs, const rational<T> rhs);
 
     #include <static_math/rational.inl>
 

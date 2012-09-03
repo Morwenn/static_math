@@ -34,6 +34,12 @@ constexpr T rational<T>::denominator() const
 }
 
 template<typename T>
+constexpr rational<T>::operator long double() const
+{
+    return (long double) _numerator / (long double) _denominator;
+}
+
+template<typename T>
 constexpr bool operator==(const rational<T>& lhs, const rational<T>& rhs)
 {
     return lhs.numerator() * rhs.denominator() == lhs.denominator() * rhs.numerator();
@@ -67,4 +73,184 @@ template<typename T>
 constexpr bool operator>=(const rational<T>& lhs, const rational<T>& rhs)
 {
     return lhs.numerator() * rhs.denominator() >= lhs.denominator() * rhs.numerator();
+}
+
+template<typename T>
+constexpr bool operator==(const rational<T>& lhs, const T& rhs)
+{
+    return rhs * lhs.denominator() == lhs.numerator();
+}
+
+template<typename T>
+constexpr bool operator!=(const rational<T>& lhs, const T& rhs)
+{
+    return !(lhs == rhs);
+}
+
+template<typename T>
+constexpr bool operator<(const rational<T>& lhs, const T& rhs)
+{
+    return rhs * lhs.denominator() > lhs.numerator();
+}
+
+template<typename T>
+constexpr bool operator>(const rational<T>& lhs, const T& rhs)
+{
+    return rhs * lhs.denominator() < lhs.numerator();
+}
+
+template<typename T>
+constexpr bool operator<=(const rational<T>& lhs, const T& rhs)
+{
+    return rhs * lhs.denominator() >= lhs.numerator();
+}
+
+template<typename T>
+constexpr bool operator>=(const rational<T>& lhs, const T& rhs)
+{
+    return rhs * lhs.denominator() <= lhs.numerator();
+}
+
+template<typename T>
+constexpr bool operator==(const T& lhs, const rational<T>& rhs)
+{
+    return lhs * rhs.denominator() == rhs.numerator();
+}
+
+template<typename T>
+constexpr bool operator!=(const T& lhs, const rational<T>& rhs)
+{
+    return !(rhs == lhs);
+}
+
+template<typename T>
+constexpr bool operator<(const T& lhs, const rational<T>& rhs)
+{
+    return lhs * rhs.denominator() < rhs.numerator();
+}
+
+template<typename T>
+constexpr bool operator>(const T& lhs, const rational<T>& rhs)
+{
+    return lhs * rhs.denominator() > rhs.numerator();
+}
+
+template<typename T>
+constexpr bool operator<=(const T& lhs, const rational<T>& rhs)
+{
+    return lhs * rhs.denominator() <= rhs.numerator();
+}
+
+template<typename T>
+constexpr bool operator>=(const T& lhs, const rational<T>& rhs)
+{
+    return lhs * rhs.denominator() >= rhs.numerator();
+}
+
+template<typename T>
+constexpr rational<T> operator+(const rational<T>& lhs, const rational<T>& rhs)
+{
+    return rational<T>(
+        lhs.numerator() * rhs.denominator() + rhs.numerator() * lhs.denominator(),
+        lhs.denominator() * rhs.denominator()
+    );
+}
+
+template<typename T>
+constexpr rational<T> operator-(const rational<T>& lhs, const rational<T>& rhs)
+{
+    return rational<T>(
+        lhs.numerator() * rhs.denominator() - rhs.numerator() * lhs.denominator(),
+        lhs.denominator() * rhs.denominator()
+    );
+}
+
+template<typename T>
+constexpr rational<T> operator*(const rational<T>& lhs, const rational<T>& rhs)
+{
+    return rational<T>(
+        lhs.numerator() * rhs.numerator(),
+        lhs.denominator() * rhs.denominator()
+    );
+}
+
+template<typename T>
+constexpr rational<T> operator/(const rational<T>& lhs, const rational<T>& rhs)
+{
+    return rational<T>(
+        lhs.numerator() * rhs.denominator(),
+        lhs.denominator() * rhs.numerator()
+    );
+}
+
+template<typename T>
+constexpr rational<T> operator+(const rational<T>& lhs, const T& rhs)
+{
+    return rational<T>(
+        lhs.numerator() + rhs * lhs.denominator(),
+        lhs.denominator()
+    );
+}
+
+template<typename T>
+constexpr rational<T> operator-(const rational<T>& lhs, const T& rhs)
+{
+    return rational<T>(
+        lhs.numerator() - rhs * lhs.denominator(),
+        lhs.denominator()
+    );
+}
+
+template<typename T>
+constexpr rational<T> operator*(const rational<T>& lhs, const T& rhs)
+{
+    return rational<T>(
+        lhs.numerator() * rhs,
+        lhs.denominator()
+    );
+}
+
+template<typename T>
+constexpr rational<T> operator/(const rational<T>& lhs, const T& rhs)
+{
+    return rational<T>(
+        lhs.numerator(),
+        lhs.denominator() * rhs
+    );
+}
+
+template<typename T>
+constexpr rational<T> operator+(const T& lhs, const rational<T> rhs)
+{
+    return rational<T>(
+        lhs * rhs.denominator() + rhs.numerator(),
+        rhs.denominator()
+    );
+}
+
+template<typename T>
+constexpr rational<T> operator-(const T& lhs, const rational<T> rhs)
+{
+    return rational<T>(
+        lhs * rhs.denominator() - rhs.numerator(),
+        rhs.denominator()
+    );
+}
+
+template<typename T>
+constexpr rational<T> operator*(const T& lhs, const rational<T> rhs)
+{
+    return rational<T>(
+        lhs * rhs.numerator(),
+        rhs.denominator()
+    );
+}
+
+template<typename T>
+constexpr rational<T> operator/(const T& lhs, const rational<T> rhs)
+{
+    return rational<T>(
+        lhs * rhs.denominator(),
+        rhs.numerator()
+    );
 }
