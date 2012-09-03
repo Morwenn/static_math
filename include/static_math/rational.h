@@ -32,6 +32,8 @@ namespace smath
     template<typename T>
     class rational
     {
+        static_assert(std::is_integral<T>::value, "A rational can only contain integral values.");
+
         public:
 
             constexpr rational(T numerator, T denominator=1);
