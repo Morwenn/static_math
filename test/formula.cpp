@@ -21,10 +21,6 @@ using namespace smath;
 
 int main()
 {
-    static_assert(abs(-5) == 5, "");
-    static_assert(abs(8) == 8, "");
-    static_assert(abs(-82L) == 82, "");
-
     static_assert(is_even(5) == false, "");
     static_assert(is_even(-4) == true, "");
     static_assert(is_even(0) == true, "");

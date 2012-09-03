@@ -34,16 +34,8 @@ namespace
 
 
 ////////////////////////////////////////////////////////////
-// POLDER functions
+// Functions definitions
 ////////////////////////////////////////////////////////////
-
-template<typename T>
-constexpr
-typename std::enable_if<std::is_arithmetic<T>::value, T>::type
-abs(T x)
-{
-    return (x >= 0) ? x : -x;
-}
 
 template<typename T>
 constexpr

@@ -20,20 +20,12 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <type_traits>
+#include <static_math/utils/type_traits.h>
 #include <static_math/constants.h>
 
 
 namespace smath
 {
-    /**
-     * @brief Absolute value of a number
-     */
-    template<typename T>
-    constexpr
-    typename std::enable_if<std::is_arithmetic<T>::value, T>::type
-    abs(T x);
-
     /**
      * @brief Tells whether the given number is even
      * @param n Integer value
