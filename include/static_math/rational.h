@@ -123,5 +123,11 @@ namespace smath
 
 } // namespace smath
 
+constexpr smath::rational<unsigned long long>
+operator "" _static_r(unsigned long long n)
+{
+    return smath::rational<unsigned long long>(n);
+}
+
 
 #endif // _SMATH_RATIONAL_H

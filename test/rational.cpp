@@ -73,5 +73,8 @@ int main()
     static_assert(1 / r2 == 2, "");
     static_assert(r3 / 3 == rational<int>(1, 9), "");
 
+    // _smath_r literal
+    static_assert(2 / 3_static_r == rational<unsigned long long>(2, 3), "");
+
     return 0;
 }
