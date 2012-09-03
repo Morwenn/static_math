@@ -31,8 +31,10 @@ namespace
                 _is_prime_helper(n, div+2);
     }
 
-    template<typename Integral>
-    constexpr Integral _gcd_helper(Integral b, Integral r)
+    template<typename T, typename U>
+    constexpr
+    typename greater_of<T, U>::type
+    _gcd_helper(T b, U r)
     {
         return (r == 0) ? b : _gcd_helper(r, b % r);
     }
@@ -132,20 +134,20 @@ long double mean(Args... args)
     return (long double) sum(args...) / (long double) sizeof...(args);
 }
 
-template<typename Integral>
+template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<Integral>::value, Integral>::type
-gcd(Integral a, Integral b)
+typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename greater_of<T, U>::type>::type
+gcd(T a, U b)
 {
     return (a == 0 || b == 0) ? 0 :
         (a >= b) ? _gcd_helper(b, a % b) :
             _gcd_helper(a, b % a);
 }
 
-template<typename Integral>
+template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<Integral>::value, Integral>::type
-lcm(Integral a, Integral b)
+typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename greater_of<T, U>::type>::type
+lcm(T a, U b)
 {
     return (a == 0 || b == 0) ? 1 :
         a * b / gcd(a, b);

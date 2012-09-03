@@ -117,10 +117,18 @@ namespace smath
     /**
      * @brief Greatest common divisor
      */
-    template<typename Integral>
+    template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<Integral>::value, Integral>::type
-    gcd(Integral a, Integral b);
+    typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename greater_of<T, U>::type>::type
+    gcd(T a, U b);
+
+    /**
+     * @brief Least common multiple
+     */
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename greater_of<T, U>::type>::type
+    lcm(T a, U b);
 
     #include <static_math/formula.inl>
 
