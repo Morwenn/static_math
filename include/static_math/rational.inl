@@ -18,14 +18,17 @@
 template<typename T>
 constexpr rational<T>::rational(T numerator, T denominator):
     _numerator(
-        denominator >= 0 ?
-            numerator :
-            -numerator
+        denominator < 0 ? (
+            numerator < 0 ?
+                abs(numerator) / gcd(abs(numerator), abs(denominator)) :
+                - (numerator / gcd(numerator, abs(denominator)))
+        ):
+            numerator < 0 ?
+                - abs(numerator) / gcd(abs(numerator), denominator) :
+                numerator / gcd(numerator, denominator)
     ),
     _denominator(
-        denominator >= 0 ?
-            denominator :
-            -denominator
+        abs(denominator) / gcd(abs(numerator), abs(denominator))
     )
 {}
 
