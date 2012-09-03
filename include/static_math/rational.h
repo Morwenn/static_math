@@ -20,7 +20,8 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <type_traits>
+#include <static_math/utils/type_traits.h>
+#include <static_math/cmath.h>
 
 
 namespace smath
@@ -54,70 +55,130 @@ namespace smath
     ////////////////////////////////////////////////////////////
 
     template<typename T>
-    constexpr bool operator==(const rational<T>& lhs, const rational<T>& rhs);
+    constexpr rational<T> operator+(const rational<T>& lhs);
     template<typename T>
-    constexpr bool operator!=(const rational<T>& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr bool operator<(const rational<T>& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr bool operator>(const rational<T>& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr bool operator<=(const rational<T>& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr bool operator>=(const rational<T>& lhs, const rational<T>& rhs);
+    constexpr rational<T> operator-(const rational<T>& lhs);
+
+    template<typename T, typename U>
+    constexpr bool operator==(const rational<T>& lhs, const rational<U>& rhs);
+    template<typename T, typename U>
+    constexpr bool operator!=(const rational<T>& lhs, const rational<U>& rhs);
+    template<typename T, typename U>
+    constexpr bool operator<(const rational<T>& lhs, const rational<U>& rhs);
+    template<typename T, typename U>
+    constexpr bool operator>(const rational<T>& lhs, const rational<U>& rhs);
+    template<typename T, typename U>
+    constexpr bool operator<=(const rational<T>& lhs, const rational<U>& rhs);
+    template<typename T, typename U>
+    constexpr bool operator>=(const rational<T>& lhs, const rational<U>& rhs);
+
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator==(const rational<T>& lhs, const U& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator!=(const rational<T>& lhs, const U& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator<(const rational<T>& lhs, const U& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator>(const rational<T>& lhs, const U& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator<=(const rational<T>& lhs, const U& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator>=(const rational<T>& lhs, const U& rhs);
+
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator==(const U& lhs, const rational<T>& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator!=(const U& lhs, const rational<T>& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator<(const U& lhs, const rational<T>& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator>(const U& lhs, const rational<T>& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator<=(const U& lhs, const rational<T>& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, bool>::type
+    operator>=(const U& lhs, const rational<T>& rhs);
+
+    template<typename T, typename U>
+    constexpr
+    rational<typename greater_of<T, U>::type>
+    operator+(const rational<T>& lhs, const rational<U>& rhs);
+    template<typename T, typename U>
+    constexpr
+    rational<typename greater_of<T, U>::type>
+    operator-(const rational<T>& lhs, const rational<U>& rhs);
+    template<typename T, typename U>
+    constexpr
+    rational<typename greater_of<T, U>::type>
+    operator*(const rational<T>& lhs, const rational<U>& rhs);
+    template<typename T, typename U>
+    constexpr
+    rational<typename greater_of<T, U>::type>
+    operator/(const rational<T>& lhs, const rational<U>& rhs);
+
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    operator+(const rational<T>& lhs, const U& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    operator-(const rational<T>& lhs, const U& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    operator*(const rational<T>& lhs, const U& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    operator/(const rational<T>& lhs, const U& rhs);
+
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    operator+(const U& lhs, const rational<T> rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    operator-(const U& lhs, const rational<T> rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    operator*(const U& lhs, const rational<T> rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    operator/(const U& lhs, const rational<T> rhs);
+
+    ////////////////////////////////////////////////////////////
+    // Mathematical functions
+    ////////////////////////////////////////////////////////////
 
     template<typename T>
-    constexpr bool operator==(const rational<T>& lhs, const T& rhs);
-    template<typename T>
-    constexpr bool operator!=(const rational<T>& lhs, const T& rhs);
-    template<typename T>
-    constexpr bool operator<(const rational<T>& lhs, const T& rhs);
-    template<typename T>
-    constexpr bool operator>(const rational<T>& lhs, const T& rhs);
-    template<typename T>
-    constexpr bool operator<=(const rational<T>& lhs, const T& rhs);
-    template<typename T>
-    constexpr bool operator>=(const rational<T>& lhs, const T& rhs);
-
-    template<typename T>
-    constexpr bool operator==(const T& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr bool operator!=(const T& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr bool operator<(const T& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr bool operator>(const T& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr bool operator<=(const T& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr bool operator>=(const T& lhs, const rational<T>& rhs);
-
-    template<typename T>
-    constexpr rational<T> operator+(const rational<T>& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr rational<T> operator-(const rational<T>& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr rational<T> operator*(const rational<T>& lhs, const rational<T>& rhs);
-    template<typename T>
-    constexpr rational<T> operator/(const rational<T>& lhs, const rational<T>& rhs);
-
-    template<typename T>
-    constexpr rational<T> operator+(const rational<T>& lhs, const T& rhs);
-    template<typename T>
-    constexpr rational<T> operator-(const rational<T>& lhs, const T& rhs);
-    template<typename T>
-    constexpr rational<T> operator*(const rational<T>& lhs, const T& rhs);
-    template<typename T>
-    constexpr rational<T> operator/(const rational<T>& lhs, const T& rhs);
-
-    template<typename T>
-    constexpr rational<T> operator+(const T& lhs, const rational<T> rhs);
-    template<typename T>
-    constexpr rational<T> operator-(const T& lhs, const rational<T> rhs);
-    template<typename T>
-    constexpr rational<T> operator*(const T& lhs, const rational<T> rhs);
-    template<typename T>
-    constexpr rational<T> operator/(const T& lhs, const rational<T> rhs);
+    constexpr rational<T> abs(const rational<T>& ratio);
 
     #include <static_math/rational.inl>
 
