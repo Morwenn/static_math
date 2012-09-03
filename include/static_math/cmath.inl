@@ -50,3 +50,39 @@ Numeric max(Numeric first, Numeric second)
 {
     return (first > second) ? first : second;
 }
+
+template<typename Float>
+constexpr
+typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+floor(Float value)
+{
+    return (int(value) == value) ? int(value) :
+        (value >= 0.0) ? int(value) :
+            int(value) - 1;
+}
+
+template<typename Float>
+constexpr
+typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+ceil(Float value)
+{
+    return (int(value) == value) ? int(value) :
+        (value >= 0.0) ? int(value) + 1 :
+            int(value);
+}
+
+template<typename Float>
+constexpr
+typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+round(Float value)
+{
+    return (value >= 0.0) ? int(value + 0.5) : int(value - 0.5);
+}
+
+template<typename Float>
+constexpr
+typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+trunc(Float value)
+{
+    return int(value);
+}

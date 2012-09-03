@@ -35,5 +35,25 @@ int main()
     static_assert(max(8, -1, 6, 3, 5, 2, -8) == 8, "");
     static_assert(max(-1, 0, 1, 2, 3, 2, 1, 0, -1) == 3, "");
 
+    static_assert(floor(2.5) == 2, "");
+    static_assert(floor(2.01) == 2, "");
+    static_assert(floor(2.8) == 2, "");
+    static_assert(floor(-2.5) == -3, "");
+
+    static_assert(ceil(2.5) == 3, "");
+    static_assert(ceil(2.01) == 3, "");
+    static_assert(ceil(2.8) == 3, "");
+    static_assert(ceil(-2.5) == -2, "");
+
+    static_assert(round(2.5) == 3, "");
+    static_assert(round(2.01) == 2, "");
+    static_assert(round(2.8) == 3, "");
+    static_assert(round(-2.1) == -2, "");
+
+    static_assert(trunc(2.5) == 2, "");
+    static_assert(trunc(2.01) == 2, "");
+    static_assert(trunc(2.8) == 2, "");
+    static_assert(trunc(-2.1) == -2, "");
+
     return 0;
 }

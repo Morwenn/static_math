@@ -68,6 +68,26 @@ namespace smath
     constexpr
     Numeric max(Numeric first, Numeric second);
 
+    template<typename Float>
+    constexpr
+    typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+    floor(Float value);
+
+    template<typename Float>
+    constexpr
+    typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+    ceil(Float value);
+
+    template<typename Float>
+    constexpr
+    typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+    round(Float value);
+
+    template<typename Float>
+    constexpr
+    typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+    trunc(Float value);
+
     #include <static_math/cmath.inl>
 
 } // namespace smath
