@@ -20,14 +20,24 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <static_math/cmath.h>
 #include <static_math/constants.h>
 #include <static_math/formula.h>
 #include <static_math/rational.h>
 
+/**
+ * @file static_math/static_math.h
+ * @brief Main library file.
+ *
+ * This file includes the whole library.
+ */
 
 /**
  * @namespace smath
  * Global namespace of static_math.
+ *
+ * Every function of static_math lives in this namespace.
+ * The library does not contain any other namespace.
  */
 
 
