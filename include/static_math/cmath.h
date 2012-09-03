@@ -20,6 +20,14 @@
 /**
  * @file static_math/cmath.h
  * @brief compile-time clone of the standard header cmath
+ *
+ * This header provides functions aimed to have at least the
+ * same functionnalities as the ones in the standard header
+ * cmath.
+ * The names can be changed (for example fabs, fmin and fmax
+ * do not exist here) and some functionnalities can be added
+ * such as a variadic number of arguments or a support for
+ * more types.
  */
 
 ////////////////////////////////////////////////////////////
@@ -37,6 +45,28 @@ namespace smath
     constexpr
     typename std::enable_if<std::is_arithmetic<T>::value, T>::type
     abs(T x);
+
+    /**
+     * @brief Min of a number of variables
+     */
+    template<typename Numeric, typename... Rest>
+    constexpr
+    Numeric min(Numeric first, Numeric second, Rest... rest);
+
+    template<typename Numeric>
+    constexpr
+    Numeric min(Numeric first, Numeric second);
+
+    /**
+     * @brief Max of a number of variables
+     */
+    template<typename Numeric, typename... Rest>
+    constexpr
+    Numeric max(Numeric first, Numeric second, Rest... rest);
+
+    template<typename Numeric>
+    constexpr
+    Numeric max(Numeric first, Numeric second);
 
     #include <static_math/cmath.inl>
 

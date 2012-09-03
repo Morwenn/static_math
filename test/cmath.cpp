@@ -25,5 +25,15 @@ int main()
     static_assert(abs(8) == 8, "");
     static_assert(abs(-82L) == 82, "");
 
+    static_assert(min(1, 2) == 1, "");
+    static_assert(min(0, 0) == 0, "");
+    static_assert(min(-2, -1, 0, 1, 2) == -2, "");
+    static_assert(min(2, 1, 0, -1, -2) == -2, "");
+
+    static_assert(max(3, 8) == 8, "");
+    static_assert(max(-8, -8) == -8, "");
+    static_assert(max(8, -1, 6, 3, 5, 2, -8) == 8, "");
+    static_assert(max(-1, 0, 1, 2, 3, 2, 1, 0, -1) == 3, "");
+
     return 0;
 }

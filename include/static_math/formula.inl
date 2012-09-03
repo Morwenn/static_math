@@ -117,31 +117,3 @@ long double mean(Args... args)
 {
     return (long double) sum(args...) / (long double) sizeof...(args);
 }
-
-template<typename Numeric, typename... Rest>
-constexpr
-Numeric min(Numeric first, Numeric second, Rest... rest)
-{
-    return (first < second) ? min(first, rest...) : min(second, rest...);
-}
-
-template<typename Numeric>
-constexpr
-Numeric min(Numeric first, Numeric second)
-{
-    return (first < second) ? first : second;
-}
-
-template<typename Numeric, typename... Rest>
-constexpr
-Numeric max(Numeric first, Numeric second, Rest... rest)
-{
-    return (first > second) ? max(first, rest...) : max(second, rest...);
-}
-
-template<typename Numeric>
-constexpr
-Numeric max(Numeric first, Numeric second)
-{
-    return (first > second) ? first : second;
-}

@@ -22,3 +22,31 @@ abs(T x)
 {
     return (x >= 0) ? x : -x;
 }
+
+template<typename Numeric, typename... Rest>
+constexpr
+Numeric min(Numeric first, Numeric second, Rest... rest)
+{
+    return (first < second) ? min(first, rest...) : min(second, rest...);
+}
+
+template<typename Numeric>
+constexpr
+Numeric min(Numeric first, Numeric second)
+{
+    return (first < second) ? first : second;
+}
+
+template<typename Numeric, typename... Rest>
+constexpr
+Numeric max(Numeric first, Numeric second, Rest... rest)
+{
+    return (first > second) ? max(first, rest...) : max(second, rest...);
+}
+
+template<typename Numeric>
+constexpr
+Numeric max(Numeric first, Numeric second)
+{
+    return (first > second) ? first : second;
+}

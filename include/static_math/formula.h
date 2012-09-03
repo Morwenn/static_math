@@ -114,28 +114,6 @@ namespace smath
     constexpr
     long double mean(Args... args);
 
-    /**
-     * @brief Min of a number of variables
-     */
-    template<typename Numeric, typename... Rest>
-    constexpr
-    Numeric min(Numeric first, Numeric second, Rest... rest);
-
-    template<typename Numeric>
-    constexpr
-    Numeric min(Numeric first, Numeric second);
-
-    /**
-     * @brief Max of a number of variables
-     */
-    template<typename Numeric, typename... Rest>
-    constexpr
-    Numeric max(Numeric first, Numeric second, Rest... rest);
-
-    template<typename Numeric>
-    constexpr
-    Numeric max(Numeric first, Numeric second);
-
     #include <static_math/formula.inl>
 
 } // namespace smath
