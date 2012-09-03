@@ -334,3 +334,27 @@ constexpr rational<T> abs(const rational<T>& ratio)
 {
     return (ratio >= 0) ? ratio : -ratio;
 }
+
+template<typename T>
+constexpr T floor(const rational<T>& ratio)
+{
+    return floor((long double) ratio);
+}
+
+template<typename T>
+constexpr T ceil(const rational<T>& ratio)
+{
+    return ceil((long double) ratio);
+}
+
+template<typename T>
+constexpr T round(const rational<T>& ratio)
+{
+    return round((long double) ratio);
+}
+
+template<typename T>
+constexpr T trunc(const rational<T>& ratio)
+{
+    return T((long double) ratio);
+}

@@ -22,9 +22,9 @@ using namespace smath;
 int main()
 {
     // Constructor tests
-    constexpr auto ratio = rational<int>(4, 2);
+    constexpr auto ratio = rational<int>(4, 3);
     static_assert(ratio.numerator() == 4, "");
-    static_assert(ratio.denominator() == 2, "");
+    static_assert(ratio.denominator() == 3, "");
 
     constexpr auto ratio2 = rational<int>(5);
     static_assert(ratio2.numerator() == 5, "");
@@ -95,6 +95,13 @@ int main()
     static_assert(abs(a1) == 1 / 2_static_r, "");
     static_assert(abs(a2) == 3 / 8_static_r, "");
     static_assert(abs(a3) == 6 / 7_static_r, "");
+
+    static_assert(round(a1) == 1, "");
+    /* No more tests for ceil, floor, trunc
+     * and round since they are based on
+     * the floating point functions after
+     * a simple cast.
+     */
 
     return 0;
 }

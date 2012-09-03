@@ -20,8 +20,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <static_math/utils/type_traits.h>
+#include <type_traits>
 #include <static_math/cmath.h>
+#include <static_math/formula.h>
 
 
 namespace smath
@@ -179,6 +180,18 @@ namespace smath
 
     template<typename T>
     constexpr rational<T> abs(const rational<T>& ratio);
+
+    template<typename T>
+    constexpr T floor(const rational<T>& ratio);
+
+    template<typename T>
+    constexpr T ceil(const rational<T>& ratio);
+
+    template<typename T>
+    constexpr T round(const rational<T>& ratio);
+
+    template<typename T>
+    constexpr T trunc(const rational<T>& ratio);
 
     #include <static_math/rational.inl>
 
