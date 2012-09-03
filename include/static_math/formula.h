@@ -114,6 +114,14 @@ namespace smath
     constexpr
     long double mean(Args... args);
 
+    /**
+     * @brief Greatest common divisor
+     */
+    template<typename Integral>
+    constexpr
+    typename std::enable_if<std::is_integral<Integral>::value, Integral>::type
+    gcd(Integral a, Integral b);
+
     #include <static_math/formula.inl>
 
 } // namespace smath

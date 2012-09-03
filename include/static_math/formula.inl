@@ -27,9 +27,23 @@ namespace
     constexpr bool _is_prime_helper(T n, T div)
     {
         return (div*div > n) ? true :
-                             (n % div == 0) ? false :
-                                            _is_prime_helper(n, div+2);
+            (n % div == 0) ? false :
+                _is_prime_helper(n, div+2);
     }
+
+    template<typename Integral>
+    constexpr Integral _gcd_helper(Integral b, Integral r)
+    {
+        return (r == 0) ? b : _gcd_helper(r, b % r);
+    }
+
+    /*while (r != 0)
+    {
+        a = b;
+        b = r;
+        r = a % b;
+    }
+    return b;*/
 }
 
 
@@ -116,4 +130,23 @@ constexpr
 long double mean(Args... args)
 {
     return (long double) sum(args...) / (long double) sizeof...(args);
+}
+
+template<typename Integral>
+constexpr
+typename std::enable_if<std::is_integral<Integral>::value, Integral>::type
+gcd(Integral a, Integral b)
+{
+    return (a == 0 || b == 0) ? 0 :
+        (a >= b) ? _gcd_helper(b, a % b) :
+            _gcd_helper(a, b % a);
+}
+
+template<typename Integral>
+constexpr
+typename std::enable_if<std::is_integral<Integral>::value, Integral>::type
+lcm(Integral a, Integral b)
+{
+    return (a == 0 || b == 0) ? 1 :
+        a * b / gcd(a, b);
 }

@@ -61,5 +61,13 @@ int main()
         sum(1, 2, 3, 4, 5) == 15,
     "");
 
+    static_assert(gcd(1071, 1029) == 21, "");
+    static_assert(gcd(1029, 1071) == 21, "");
+    static_assert(gcd(270, 84) == 6, "");
+    static_assert(gcd(84, 270) == 6, "");
+
+    static_assert(lcm(60, 168) == 840, "");
+    static_assert(lcm(168, 60) == 840, "");
+
     return 0;
 }
