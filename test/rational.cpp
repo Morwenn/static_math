@@ -87,11 +87,17 @@ int main()
     static_assert(1_static_r / 8 == rational<unsigned long long>(1, 8), "");
     static_assert(3 / 5_static_r == 3_static_r / 5, "");
 
+    constexpr auto a0 = rational<int>(0, 1);
     constexpr auto a1 = rational<int>(1, 2);
     constexpr auto a2 = rational<int>(-3, 8);
     constexpr auto a3 = rational<int>(6, -7);
 
     // Math functions
+    static_assert(sign(a0) == 0, "");
+    static_assert(sign(a1) == 1, "");
+    static_assert(sign(a2) == -1, "");
+    static_assert(sign(a3) == -1, "");
+
     static_assert(abs(a1) == 1 / 2_static_r, "");
     static_assert(abs(a2) == 3 / 8_static_r, "");
     static_assert(abs(a3) == 6 / 7_static_r, "");

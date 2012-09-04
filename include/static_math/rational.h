@@ -179,6 +179,9 @@ namespace smath
     ////////////////////////////////////////////////////////////
 
     template<typename T>
+    constexpr int sign(const rational<T>& ratio);
+
+    template<typename T>
     constexpr rational<T> abs(const rational<T>& ratio);
 
     template<typename T>

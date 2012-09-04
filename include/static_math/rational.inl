@@ -21,14 +21,20 @@ constexpr rational<T>::rational(T numerator, T denominator):
         denominator < 0 ? (
             numerator < 0 ?
                 abs(numerator) / gcd(abs(numerator), abs(denominator)) :
-                - (numerator / gcd(numerator, abs(denominator)))
+            numerator > 0 ?
+                - (numerator / gcd(numerator, abs(denominator))) :
+            0
         ):
             numerator < 0 ?
                 - abs(numerator) / gcd(abs(numerator), denominator) :
-                numerator / gcd(numerator, denominator)
+            numerator > 0 ?
+                numerator / gcd(numerator, denominator) :
+            0
     ),
     _denominator(
-        abs(denominator) / gcd(abs(numerator), abs(denominator))
+        numerator != 0 ?
+            abs(denominator) / gcd(abs(numerator), abs(denominator))
+        : 1
     )
 {}
 
@@ -327,6 +333,12 @@ operator/(const U& lhs, const rational<T> rhs)
         lhs * rhs.denominator(),
         rhs.numerator()
     );
+}
+
+template<typename T>
+constexpr int sign(const rational<T>& ratio)
+{
+    return (ratio.numerator() > 0) ? 1 : (ratio.numerator() < 0) ? -1 : 0;
 }
 
 template<typename T>
