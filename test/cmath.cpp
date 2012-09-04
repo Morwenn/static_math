@@ -15,7 +15,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 #include <static_math/cmath.h>
-
+#include <iostream>
 using namespace smath;
 
 
@@ -54,6 +54,11 @@ int main()
     static_assert(trunc(2.01) == 2, "");
     static_assert(trunc(2.8) == 2, "");
     static_assert(trunc(-2.1) == -2, "");
+
+    static_assert(pow(2, 0) == 1, "");
+    static_assert(pow(5.8, 0) == 1.0, "");
+    static_assert(pow(2, 1) == 2, "");
+    static_assert(pow(2, 2) == 4, "");
 
     return 0;
 }

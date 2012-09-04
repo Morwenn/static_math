@@ -88,6 +88,17 @@ namespace smath
     typename std::enable_if<std::is_floating_point<Float>::value, int>::type
     trunc(Float value);
 
+    /**
+     * @brief Power function
+     *
+     * @warning This functions is only available for the integer
+     * @warning exponent right now.
+     */
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_integral<U>::value && std::is_arithmetic<T>::value, T>::type
+    pow(T value, U exponent);
+
     #include <static_math/cmath.inl>
 
 } // namespace smath

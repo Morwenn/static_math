@@ -15,6 +15,17 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace
+{
+    template<typename T, typename U>
+    constexpr T _pow_helper(T acc, T value, U times)
+    {
+        return (times > 1) ?
+            _pow_helper(acc*value, value, times-1) :
+                acc;
+    }
+}
+
 template<typename T>
 constexpr
 typename std::enable_if<std::is_arithmetic<T>::value, T>::type
@@ -85,4 +96,14 @@ typename std::enable_if<std::is_floating_point<Float>::value, int>::type
 trunc(Float value)
 {
     return int(value);
+}
+
+template<typename T, typename U>
+constexpr
+typename std::enable_if<std::is_integral<U>::value && std::is_arithmetic<T>::value, T>::type
+pow(T value, U exponent)
+{
+    return (exponent == 0) ? 1 :
+        (exponent > 0) ? _pow_helper(value, value, exponent) :
+            1 / _pow_helper(value, value, exponent);
 }
