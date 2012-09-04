@@ -49,24 +49,28 @@ namespace smath
     /**
      * @brief Min of a number of variables
      */
-    template<typename Numeric, typename... Rest>
+    template<typename T, typename U, typename... Rest>
     constexpr
-    Numeric min(Numeric first, Numeric second, Rest... rest);
+    typename greater_of<T, U>::type
+    min(T first, U second, Rest... rest);
 
-    template<typename Numeric>
+    template<typename T, typename U>
     constexpr
-    Numeric min(Numeric first, Numeric second);
+    typename greater_of<T, U>::type
+    min(T first, U second);
 
     /**
      * @brief Max of a number of variables
      */
-    template<typename Numeric, typename... Rest>
+    template<typename T, typename U, typename... Rest>
     constexpr
-    Numeric max(Numeric first, Numeric second, Rest... rest);
+    typename greater_of<T, U>::type
+    max(T first, U second, Rest... rest);
 
-    template<typename Numeric>
+    template<typename T, typename U>
     constexpr
-    Numeric max(Numeric first, Numeric second);
+    typename greater_of<T, U>::type
+    max(T first, U second);
 
     template<typename Float>
     constexpr

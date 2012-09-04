@@ -34,30 +34,34 @@ abs(T x)
     return (x >= 0) ? x : -x;
 }
 
-template<typename Numeric, typename... Rest>
+template<typename T, typename U, typename... Rest>
 constexpr
-Numeric min(Numeric first, Numeric second, Rest... rest)
+typename greater_of<T, U>::type
+min(T first, U second, Rest... rest)
 {
     return (first < second) ? min(first, rest...) : min(second, rest...);
 }
 
-template<typename Numeric>
+template<typename T, typename U>
 constexpr
-Numeric min(Numeric first, Numeric second)
+typename greater_of<T, U>::type
+min(T first, U second)
 {
     return (first < second) ? first : second;
 }
 
-template<typename Numeric, typename... Rest>
+template<typename T, typename U, typename... Rest>
 constexpr
-Numeric max(Numeric first, Numeric second, Rest... rest)
+typename greater_of<T, U>::type
+max(T first, U second, Rest... rest)
 {
     return (first > second) ? max(first, rest...) : max(second, rest...);
 }
 
-template<typename Numeric>
+template<typename T, typename U>
 constexpr
-Numeric max(Numeric first, Numeric second)
+typename greater_of<T, U>::type
+max(T first, U second)
 {
     return (first > second) ? first : second;
 }
