@@ -55,3 +55,83 @@ constexpr T complex<T>::imag_value() const
 {
     return _imag.value();
 }
+
+template<typename T, typename U>
+constexpr bool operator==(const imaginary<T>& lhs, const imaginary<U>& rhs)
+{
+        return lhs.value() == rhs.value();
+}
+
+template<typename T, typename U>
+constexpr bool operator!=(const imaginary<T>& lhs, const imaginary<U>& rhs)
+{
+    return !(lhs == rhs);
+}
+
+template<typename T, typename U>
+constexpr bool operator==(const complex<T>& lhs, const complex<U>& rhs)
+{
+    return lhs.real() == rhs.real() && lhs.imag() == rhs.imag();
+}
+
+template<typename T, typename U>
+constexpr bool operator!=(const complex<T>& lhs, const complex<U>& rhs)
+{
+    return !(lhs == rhs);
+}
+
+template<typename T, typename U>
+constexpr
+typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+operator==(const complex<T>& lhs, const U& rhs)
+{
+    return lhs.real() == rhs && lhs.imag_value() == 0.0;
+}
+
+template<typename T, typename U>
+constexpr
+typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+operator!=(const complex<T>& lhs, const U& rhs)
+{
+    return !(lhs == rhs);
+}
+
+template<typename T, typename U>
+constexpr
+typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+operator==(const U& lhs, const complex<T>& rhs)
+{
+    return rhs.real() == lhs && rhs.imag_value() == 0;
+}
+
+template<typename T, typename U>
+constexpr
+typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+operator!=(const U& lhs, const complex<T>& rhs)
+{
+    return !(lhs == rhs);
+}
+
+template<typename T, typename U>
+constexpr bool operator==(const complex<T>& lhs, const imaginary<U>& rhs)
+{
+    return lhs.imag() == rhs && lhs.real() == 0.0;
+}
+
+template<typename T, typename U>
+constexpr bool operator!=(const complex<T>& lhs, const imaginary<U>& rhs)
+{
+    return !(lhs == rhs);
+}
+
+template<typename T, typename U>
+constexpr bool operator==(const imaginary<T>& lhs, const complex<U>& rhs)
+{
+    return rhs.imag() == lhs && rhs.real() == 0.0;
+}
+
+template<typename T, typename U>
+constexpr bool operator!=(const imaginary<T>& lhs, const complex<U>& rhs)
+{
+    return !(lhs == rhs);
+}

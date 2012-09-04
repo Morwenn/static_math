@@ -30,5 +30,18 @@ int main()
     static_assert(equals(c1.real(), 1.2f), "");
     static_assert(equals(c1.imag_value(), 2.5f), "");
 
+    // Comparison tests
+    constexpr auto imag0 = imaginary<int>(0);
+    constexpr auto imag1 = imaginary<int>(1);
+    constexpr auto comp0 = complex<int>(5, 0);
+    constexpr auto comp1 = complex<int>(0, 1);
+    constexpr auto comp3 = complex<long long int>(5, 0);
+    static_assert(comp0 == 5, "");
+    static_assert(comp1 == imag1, "");
+    static_assert(comp0 == comp3, "");
+    static_assert(comp0 != 3, "");
+    static_assert(imag0 != imag1, "");
+    static_assert(comp0 != comp1, "");
+
     return 0;
 }
