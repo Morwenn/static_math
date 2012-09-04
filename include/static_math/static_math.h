@@ -21,6 +21,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <static_math/cmath.h>
+#include <static_math/complex.h>
 #include <static_math/constants.h>
 #include <static_math/formula.h>
 #include <static_math/rational.h>
