@@ -16,6 +16,12 @@
  */
 
 template<typename T>
+constexpr rational<T>::rational(T numerator):
+    _numerator(numerator),
+    _denominator(1)
+{}
+
+template<typename T>
 constexpr rational<T>::rational(T numerator, T denominator):
     _numerator(
         denominator < 0 ? (

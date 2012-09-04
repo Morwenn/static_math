@@ -38,7 +38,8 @@ namespace smath
 
         public:
 
-            constexpr rational(T numerator, T denominator=1);
+            constexpr rational(T numerator);
+            constexpr rational(T numerator, T denominator);
 
             constexpr T numerator() const;
             constexpr T denominator() const;
