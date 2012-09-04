@@ -22,7 +22,8 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <limits>
-#include <type_traits>
+#include <static_math/utils/type_traits.h>
+#include <static_math/cmath.h>
 
 namespace smath
 {
@@ -34,12 +35,12 @@ namespace smath
      * the difference between the two of them is lower than a
      * given value.
      */
-    template<typename Float>
+    template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_floating_point<Float>::value, bool>::type
-    equals(Float a, Float b)
+    typename std::enable_if<std::is_floating_point<T>::value && std::is_floating_point<U>::value, bool>::type
+    equals(T a, U b)
     {
-        return abs(a-b) <= std::numeric_limits<Float>::epsilon() * max(abs(a), abs(b));
+        return abs(a-b) <= std::numeric_limits<typename lesser_of<T, U>::type>::epsilon() * max(abs(a), abs(b));
     }
 
 } // namespace smath
