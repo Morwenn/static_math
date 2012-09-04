@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+#include <static_math/utils/compare.h>
 #include <static_math/complex.h>
 
 using namespace smath;
@@ -21,7 +22,13 @@ using namespace smath;
 
 int main()
 {
-    // Can't really do unit tests with floating point numbers
+    // Constructor tests
+    constexpr auto i1 = imaginary<float>(5.8f);
+    static_assert(equals(i1.value(), 5.8f), "");
+
+    constexpr auto c1 = complex<float>(1.2f, 2.5f);
+    static_assert(equals(c1.real(), 1.2f), "");
+    static_assert(equals(c1.imag_value(), 2.5f), "");
 
     return 0;
 }
