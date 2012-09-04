@@ -27,6 +27,12 @@
 namespace smath
 {
     /**
+     * @brief signum function
+     */
+    template<typename T>
+    constexpr int sign(const T& value);
+
+    /**
      * @brief Tells whether the given number is even
      * @param n Integer value
      * @return Whether \a n is even or not

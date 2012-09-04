@@ -21,6 +21,13 @@ using namespace smath;
 
 int main()
 {
+    static_assert(sign(5) == 1, "");
+    static_assert(sign(-3) == -1, "");
+    static_assert(sign(2.0) == 1, "");
+    static_assert(sign(-5.8) == -1, "");
+    static_assert(sign(0) == 0, "");
+    static_assert(sign(0.0) == 0, "");
+
     static_assert(is_even(5) == false, "");
     static_assert(is_even(-4) == true, "");
     static_assert(is_even(0) == true, "");

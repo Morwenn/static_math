@@ -38,20 +38,18 @@ namespace
     {
         return (r == 0) ? b : _gcd_helper(r, b % r);
     }
-
-    /*while (r != 0)
-    {
-        a = b;
-        b = r;
-        r = a % b;
-    }
-    return b;*/
 }
 
 
 ////////////////////////////////////////////////////////////
 // Functions definitions
 ////////////////////////////////////////////////////////////
+
+template<typename T>
+constexpr int sign(const T& value)
+{
+    return (value > 0) ? 1 : (value < 0) ? -1 : 0;
+}
 
 template<typename T>
 constexpr
