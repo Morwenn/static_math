@@ -63,6 +63,12 @@ constexpr rational<T>::operator long double() const
 }
 
 template<typename T>
+constexpr rational<T>::operator bool() const
+{
+    return _numerator == 0;
+}
+
+template<typename T>
 constexpr rational<T> operator+(const rational<T>& lhs)
 {
     return lhs;

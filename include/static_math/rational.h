@@ -45,6 +45,7 @@ namespace smath
             constexpr T denominator() const;
 
             constexpr operator long double() const;
+            constexpr explicit operator bool() const;
 
         private:
 
