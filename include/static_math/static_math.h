@@ -38,6 +38,18 @@
  *
  * Every function of static_math lives in this namespace.
  * The library does not contain any other namespace.
+ *
+ * All the functions in this library are meant to be used
+ * at compile time. Though can also be used at runtime, it's
+ * generally not a good idea: the functions are implemented
+ * in a way they can actually run at compile time, often at
+ * the expense of performance. The global idea is that
+ * performance of the functions is not an issue since all
+ * will just be computed once.
+ *
+ * If you want some powerful and fast mathematical functions,
+ * you better use those in the standard library or Boost or
+ * any library dedicated to maths.
  */
 
 
