@@ -358,3 +358,28 @@ constexpr T trunc(const rational<T>& ratio)
 {
     return T((long double) ratio);
 }
+
+template<typename T>
+constexpr rational<T> reciprocal(const rational<T>& ratio)
+{
+    return rational<T>(
+        ratio.denominator(),
+        ratio.numerator()
+    );
+}
+
+template<typename T, typename Integral>
+constexpr
+typename std::enable_if<std::is_integral<Integral>::value, rational<T>>::type
+pow(const rational<T>& ratio, Integral exp)
+{
+    return (exp == 0) ? rational<T>(1) :
+        (exp > 0) ? rational<T>(
+                        pow(ratio.numerator(), exp),
+                        pow(ratio.denominator(), exp)
+                    ) :
+                    rational<T>(
+                        pow(ratio.denominator(), -exp),
+                        pow(ratio.numerator(), -exp)
+                    );
+}

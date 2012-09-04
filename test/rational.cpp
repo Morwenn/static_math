@@ -103,5 +103,12 @@ int main()
      * a simple cast.
      */
 
+    static_assert(reciprocal(a1) == 2, "");
+    static_assert(reciprocal(a2) == rational<int>(8, -3), "");
+
+    static_assert(pow(a1, 2) == 1 / 4_static_r, "");
+    static_assert(pow(a2, 3) == -27 / 512_static_r, "");
+    static_assert(pow(a3, -2) == 49 / 36_static_r, "");
+
     return 0;
 }

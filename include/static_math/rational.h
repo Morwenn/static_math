@@ -193,6 +193,14 @@ namespace smath
     template<typename T>
     constexpr T trunc(const rational<T>& ratio);
 
+    template<typename T>
+    constexpr rational<T> reciprocal(const rational<T>& ratio);
+
+    template<typename T, typename Integral>
+    constexpr
+    typename std::enable_if<std::is_integral<Integral>::value, rational<T>>::type
+    pow(const rational<T>& ratio, Integral exp);
+
     #include <static_math/rational.inl>
 
 } // namespace smath
