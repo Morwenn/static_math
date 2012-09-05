@@ -134,7 +134,7 @@ long double mean(Args... args)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename greater_of<T, U>::type>::type
+typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename std::common_type<T, U>::type>::type
 gcd(T a, U b)
 {
     return (a == 0 || b == 0) ? 0 :
@@ -144,7 +144,7 @@ gcd(T a, U b)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename greater_of<T, U>::type>::type
+typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename std::common_type<T, U>::type>::type
 lcm(T a, U b)
 {
     return (a == 0 || b == 0) ? 1 :

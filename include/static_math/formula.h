@@ -20,7 +20,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <static_math/utils/type_traits.h>
+#include <type_traits>
 #include <static_math/constants.h>
 
 
@@ -125,7 +125,7 @@ namespace smath
      */
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename greater_of<T, U>::type>::type
+    typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename std::common_type<T, U>::type>::type
     gcd(T a, U b);
 
     /**
@@ -133,7 +133,7 @@ namespace smath
      */
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename greater_of<T, U>::type>::type
+    typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename std::common_type<T, U>::type>::type
     lcm(T a, U b);
 
     #include <static_math/formula.inl>

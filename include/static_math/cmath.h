@@ -33,7 +33,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <static_math/utils/type_traits.h>
+#include <type_traits>
 
 
 namespace smath
@@ -51,12 +51,12 @@ namespace smath
      */
     template<typename T, typename U, typename... Rest>
     constexpr
-    typename greater_of<T, U>::type
+    typename std::common_type<T, U>::type
     min(T first, U second, Rest... rest);
 
     template<typename T, typename U>
     constexpr
-    typename greater_of<T, U>::type
+    typename std::common_type<T, U>::type
     min(T first, U second);
 
     /**
@@ -64,12 +64,12 @@ namespace smath
      */
     template<typename T, typename U, typename... Rest>
     constexpr
-    typename greater_of<T, U>::type
+    typename std::common_type<T, U>::type
     max(T first, U second, Rest... rest);
 
     template<typename T, typename U>
     constexpr
-    typename greater_of<T, U>::type
+    typename std::common_type<T, U>::type
     max(T first, U second);
 
     template<typename Float>

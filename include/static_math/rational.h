@@ -38,8 +38,8 @@ namespace smath
 
         public:
 
-            constexpr rational(T numerator);
-            constexpr rational(T numerator, T denominator);
+            constexpr explicit rational(T numerator);
+            constexpr explicit rational(T numerator, T denominator);
 
             constexpr T numerator() const;
             constexpr T denominator() const;
@@ -127,53 +127,53 @@ namespace smath
 
     template<typename T, typename U>
     constexpr
-    rational<typename greater_of<T, U>::type>
+    rational<typename std::common_type<T, U>::type>
     operator+(const rational<T>& lhs, const rational<U>& rhs);
     template<typename T, typename U>
     constexpr
-    rational<typename greater_of<T, U>::type>
+    rational<typename std::common_type<T, U>::type>
     operator-(const rational<T>& lhs, const rational<U>& rhs);
     template<typename T, typename U>
     constexpr
-    rational<typename greater_of<T, U>::type>
+    rational<typename std::common_type<T, U>::type>
     operator*(const rational<T>& lhs, const rational<U>& rhs);
     template<typename T, typename U>
     constexpr
-    rational<typename greater_of<T, U>::type>
+    rational<typename std::common_type<T, U>::type>
     operator/(const rational<T>& lhs, const rational<U>& rhs);
 
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
     operator+(const rational<T>& lhs, const U& rhs);
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
     operator-(const rational<T>& lhs, const U& rhs);
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
     operator*(const rational<T>& lhs, const U& rhs);
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
     operator/(const rational<T>& lhs, const U& rhs);
 
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
     operator+(const U& lhs, const rational<T> rhs);
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
     operator-(const U& lhs, const rational<T> rhs);
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
     operator*(const U& lhs, const rational<T> rhs);
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+    typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
     operator/(const U& lhs, const rational<T> rhs);
 
     ////////////////////////////////////////////////////////////

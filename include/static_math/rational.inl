@@ -217,10 +217,10 @@ operator>=(const U& lhs, const rational<T>& rhs)
 
 template<typename T, typename U>
 constexpr
-rational<typename greater_of<T, U>::type>
+rational<typename std::common_type<T, U>::type>
 operator+(const rational<T>& lhs, const rational<U>& rhs)
 {
-    return rational<typename greater_of<T, U>::type>(
+    return rational<typename std::common_type<T, U>::type>(
         lhs.numerator() * rhs.denominator() + rhs.numerator() * lhs.denominator(),
         lhs.denominator() * rhs.denominator()
     );
@@ -228,10 +228,10 @@ operator+(const rational<T>& lhs, const rational<U>& rhs)
 
 template<typename T, typename U>
 constexpr
-rational<typename greater_of<T, U>::type>
+rational<typename std::common_type<T, U>::type>
 operator-(const rational<T>& lhs, const rational<U>& rhs)
 {
-    return rational<typename greater_of<T, U>::type>(
+    return rational<typename std::common_type<T, U>::type>(
         lhs.numerator() * rhs.denominator() - rhs.numerator() * lhs.denominator(),
         lhs.denominator() * rhs.denominator()
     );
@@ -239,7 +239,7 @@ operator-(const rational<T>& lhs, const rational<U>& rhs)
 
 template<typename T, typename U>
 constexpr
-rational<typename greater_of<T, U>::type>
+rational<typename std::common_type<T, U>::type>
 operator*(const rational<T>& lhs, const rational<U>& rhs)
 {
     return rational<T>(
@@ -250,7 +250,7 @@ operator*(const rational<T>& lhs, const rational<U>& rhs)
 
 template<typename T, typename U>
 constexpr
-rational<typename greater_of<T, U>::type>
+rational<typename std::common_type<T, U>::type>
 operator/(const rational<T>& lhs, const rational<U>& rhs)
 {
     return rational<T>(
@@ -261,10 +261,10 @@ operator/(const rational<T>& lhs, const rational<U>& rhs)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
 operator+(const rational<T>& lhs, const U& rhs)
 {
-    return rational<typename greater_of<T, U>::type>(
+    return rational<typename std::common_type<T, U>::type>(
         lhs.numerator() + rhs * lhs.denominator(),
         lhs.denominator()
     );
@@ -272,10 +272,10 @@ operator+(const rational<T>& lhs, const U& rhs)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
 operator-(const rational<T>& lhs, const U& rhs)
 {
-    return rational<typename greater_of<T, U>::type>(
+    return rational<typename std::common_type<T, U>::type>(
         lhs.numerator() - rhs * lhs.denominator(),
         lhs.denominator()
     );
@@ -283,10 +283,10 @@ operator-(const rational<T>& lhs, const U& rhs)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
 operator*(const rational<T>& lhs, const U& rhs)
 {
-    return rational<typename greater_of<T, U>::type>(
+    return rational<typename std::common_type<T, U>::type>(
         lhs.numerator() * rhs,
         lhs.denominator()
     );
@@ -294,10 +294,10 @@ operator*(const rational<T>& lhs, const U& rhs)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
 operator/(const rational<T>& lhs, const U& rhs)
 {
-    return rational<typename greater_of<T, U>::type>(
+    return rational<typename std::common_type<T, U>::type>(
         lhs.numerator(),
         lhs.denominator() * rhs
     );
@@ -305,10 +305,10 @@ operator/(const rational<T>& lhs, const U& rhs)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
 operator+(const U& lhs, const rational<T> rhs)
 {
-    return rational<typename greater_of<T, U>::type>(
+    return rational<typename std::common_type<T, U>::type>(
         lhs * rhs.denominator() + rhs.numerator(),
         rhs.denominator()
     );
@@ -316,10 +316,10 @@ operator+(const U& lhs, const rational<T> rhs)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
 operator-(const U& lhs, const rational<T> rhs)
 {
-    return rational<typename greater_of<T, U>::type>(
+    return rational<typename std::common_type<T, U>::type>(
         lhs * rhs.denominator() - rhs.numerator(),
         rhs.denominator()
     );
@@ -327,10 +327,10 @@ operator-(const U& lhs, const rational<T> rhs)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
 operator*(const U& lhs, const rational<T> rhs)
 {
-    return rational<typename greater_of<T, U>::type>(
+    return rational<typename std::common_type<T, U>::type>(
         lhs * rhs.numerator(),
         rhs.denominator()
     );
@@ -338,10 +338,10 @@ operator*(const U& lhs, const rational<T> rhs)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename greater_of<T, U>::type>>::type
+typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
 operator/(const U& lhs, const rational<T> rhs)
 {
-    return rational<typename greater_of<T, U>::type>(
+    return rational<typename std::common_type<T, U>::type>(
         lhs * rhs.denominator(),
         rhs.numerator()
     );
