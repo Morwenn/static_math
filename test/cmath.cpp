@@ -15,7 +15,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 #include <static_math/cmath.h>
-#include <iostream>
+
 using namespace smath;
 
 
