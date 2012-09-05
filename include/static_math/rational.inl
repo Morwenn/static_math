@@ -259,9 +259,9 @@ operator/(const rational<T>& lhs, const rational<U>& rhs)
     );
 }
 
-template<typename T, typename U>
+template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
+rational<typename std::common_type<T, U>::type>
 operator+(const rational<T>& lhs, const U& rhs)
 {
     return rational<typename std::common_type<T, U>::type>(
@@ -270,9 +270,9 @@ operator+(const rational<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U>
+template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
+rational<typename std::common_type<T, U>::type>
 operator-(const rational<T>& lhs, const U& rhs)
 {
     return rational<typename std::common_type<T, U>::type>(
@@ -281,9 +281,9 @@ operator-(const rational<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U>
+template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
+rational<typename std::common_type<T, U>::type>
 operator*(const rational<T>& lhs, const U& rhs)
 {
     return rational<typename std::common_type<T, U>::type>(
@@ -292,9 +292,9 @@ operator*(const rational<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U>
+template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
+rational<typename std::common_type<T, U>::type>
 operator/(const rational<T>& lhs, const U& rhs)
 {
     return rational<typename std::common_type<T, U>::type>(
@@ -303,10 +303,10 @@ operator/(const rational<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U>
+template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
-operator+(const U& lhs, const rational<T> rhs)
+rational<typename std::common_type<T, U>::type>
+operator+(const U& lhs, const rational<T>& rhs)
 {
     return rational<typename std::common_type<T, U>::type>(
         lhs * rhs.denominator() + rhs.numerator(),
@@ -314,9 +314,9 @@ operator+(const U& lhs, const rational<T> rhs)
     );
 }
 
-template<typename T, typename U>
+template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
+rational<typename std::common_type<T, U>::type>
 operator-(const U& lhs, const rational<T> rhs)
 {
     return rational<typename std::common_type<T, U>::type>(
@@ -325,9 +325,9 @@ operator-(const U& lhs, const rational<T> rhs)
     );
 }
 
-template<typename T, typename U>
+template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
+rational<typename std::common_type<T, U>::type>
 operator*(const U& lhs, const rational<T> rhs)
 {
     return rational<typename std::common_type<T, U>::type>(
@@ -336,9 +336,9 @@ operator*(const U& lhs, const rational<T> rhs)
     );
 }
 
-template<typename T, typename U>
+template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
 constexpr
-typename std::enable_if<std::is_integral<U>::value, rational<typename std::common_type<T, U>::type>>::type
+rational<typename std::common_type<T, U>::type>
 operator/(const U& lhs, const rational<T> rhs)
 {
     return rational<typename std::common_type<T, U>::type>(
