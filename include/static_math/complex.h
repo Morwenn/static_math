@@ -72,6 +72,16 @@ namespace smath
     // Comparison operators
     ////////////////////////////////////////////////////////////
 
+    template<typename T>
+    constexpr imaginary<T> operator+(const imaginary<T>& imag);
+    template<typename T>
+    constexpr imaginary<T> operator-(const imaginary<T>& imag);
+
+    template<typename T>
+    constexpr complex<T> operator+(const complex<T>& ratio);
+    template<typename T>
+    constexpr complex<T> operator-(const complex<T>& ratio);
+
     template<typename T, typename U>
     constexpr bool operator==(const imaginary<T>& lhs, const imaginary<U>& rhs);
     template<typename T, typename U>
