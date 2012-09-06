@@ -187,6 +187,14 @@ operator*(const imaginary<T>& lhs, const imaginary<U>& rhs)
     return -lhs.value() * rhs.value();
 }
 
+template<typename T, typename U>
+constexpr
+typename std::common_type<T, U>::type
+operator/(const imaginary<T>& lhs, const imaginary<U>& rhs)
+{
+    return lhs.value()*rhs.value() / sqr(rhs.value());
+}
+
 template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
 constexpr
 complex<typename std::common_type<T, U>::type>
@@ -217,6 +225,14 @@ operator*(const imaginary<T>& lhs, const U& rhs)
     return imaginary<typename std::common_type<T, U>::type>(lhs.value() * rhs);
 }
 
+template<typename T,  typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr
+imaginary<typename std::common_type<T, U>::type>
+operator/(const imaginary<T>& lhs, const U& rhs)
+{
+    return imaginary<typename std::common_type<T, U>::type>(lhs.value() / 2);
+}
+
 template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
 constexpr
 complex<typename std::common_type<T, U>::type>
@@ -244,6 +260,14 @@ imaginary<typename std::common_type<T, U>::type>
 operator*(const U& lhs, const imaginary<T>& rhs)
 {
     return imaginary<typename std::common_type<T, U>::type>(lhs * rhs.value());
+}
+
+template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr
+imaginary<typename std::common_type<T, U>::type>
+operator/(const U& lhs, const imaginary<T>& rhs)
+{
+    return imaginary<typename std::common_type<T, U>::type>(lhs / rhs.value());
 }
 
 template<typename T, typename U>
@@ -276,6 +300,17 @@ operator*(const complex<T>& lhs, const complex<U>& rhs)
     return complex<typename std::common_type<T, U>::type>(
         lhs.real()*rhs.real() + lhs.imag()*rhs.imag(),
         lhs.real()*rhs.imag() + lhs.imag()*rhs.real()
+    );
+}
+
+template<typename T, typename U>
+constexpr
+complex<typename std::common_type<T, U>::type>
+operator/(const complex<T>& lhs, const complex<U>& rhs)
+{
+    return complex<typename std::common_type<T, U>::type>(
+        (lhs.real()*rhs.real() + lhs.imag_value()*rhs.imag_value()) / (sqr(rhs.real()) + sqr(rhs.imag_value())),
+        (lhs.imag_value()*rhs.real() - lhs.real()*rhs.imag_value()) / (sqr(rhs.real()) + sqr(rhs.imag_value()))
     );
 }
 
@@ -315,6 +350,17 @@ operator*(const complex<T>& lhs, const U& rhs)
 template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
 constexpr
 complex<typename std::common_type<T, U>::type>
+operator/(const complex<T>& lhs, const U& rhs)
+{
+    return complex<typename std::common_type<T, U>::type>(
+        lhs.real() * rhs / sqr(rhs),
+        lhs.imag() / sqr(rhs)
+    );
+}
+
+template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr
+complex<typename std::common_type<T, U>::type>
 operator+(const U& lhs, const complex<T>& rhs)
 {
     return complex<typename std::common_type<T, U>::type>(
@@ -340,6 +386,17 @@ operator*(const U& lhs, const complex<T>& rhs)
     return complex<typename std::common_type<T, U>::type>(
         lhs * rhs.real(),
         lhs * rhs.imag_value()
+    );
+}
+
+template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr
+complex<typename std::common_type<T, U>::type>
+operator/(const U& lhs, const complex<T>& rhs)
+{
+    return complex<typename std::common_type<T, U>::type>(
+        lhs * rhs.real() / (sqr(rhs.real()) + sqr(rhs.imag_value())),
+        -lhs * rhs.imag_value() / (sqr(rhs.real()) + sqr(rhs.imag_value()))
     );
 }
 
@@ -379,6 +436,17 @@ operator*(const complex<T>& lhs, const imaginary<U>& rhs)
 template<typename T, typename U>
 constexpr
 complex<typename std::common_type<T, U>::type>
+operator/(const complex<T>& lhs, const imaginary<U>& rhs)
+{
+    return complex<typename std::common_type<T, U>::type>(
+        lhs.imag_value() * rhs.value() / sqr(rhs.value()),
+        -lhs.real() * rhs.value() / sqr(rhs.value())
+    );
+}
+
+template<typename T, typename U>
+constexpr
+complex<typename std::common_type<T, U>::type>
 operator+(const imaginary<T>& lhs, const complex<U>& rhs)
 {
     return complex<typename std::common_type<T, U>::type>(
@@ -406,6 +474,17 @@ operator*(const imaginary<T>& lhs, const complex<U>& rhs)
     return complex<typename std::common_type<T, U>::type>(
         lhs * rhs.imag(),
         lhs * rhs.real()
+    );
+}
+
+template<typename T, typename U>
+constexpr
+complex<typename std::common_type<T, U>::type>
+operator/(const imaginary<T>& lhs, const complex<U>& rhs)
+{
+    return complex<typename std::common_type<T, U>::type>(
+        lhs.value() * rhs.imag_value() / (sqr(rhs.real()) + sqr(rhs.imag_value())),
+        lhs.value() * rhs.real() / (sqr(rhs.real()) + sqr(rhs.imag_value()))
     );
 }
 

@@ -21,6 +21,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <type_traits>
+#include <static_math/formula.h>
 
 
 namespace smath
@@ -132,6 +133,10 @@ namespace smath
     constexpr
     typename std::common_type<T, U>::type
     operator*(const imaginary<T>& lhs, const imaginary<U>& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::common_type<T, U>::type
+    operator/(const imaginary<T>& lhs, const imaginary<U>& rhs);
 
     template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
     constexpr
@@ -145,6 +150,10 @@ namespace smath
     constexpr
     imaginary<typename std::common_type<T, U>::type>
     operator*(const imaginary<T>& lhs, const U& rhs);
+    template<typename T,  typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr
+    imaginary<typename std::common_type<T, U>::type>
+    operator/(const imaginary<T>& lhs, const U& rhs);
 
     template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
     constexpr
@@ -158,6 +167,10 @@ namespace smath
     constexpr
     imaginary<typename std::common_type<T, U>::type>
     operator*(const U& lhs, const imaginary<T>& rhs);
+    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr
+    imaginary<typename std::common_type<T, U>::type>
+    operator/(const U& lhs, const imaginary<T>& rhs);
 
     template<typename T, typename U>
     constexpr
@@ -171,6 +184,10 @@ namespace smath
     constexpr
     complex<typename std::common_type<T, U>::type>
     operator*(const complex<T>& lhs, const complex<U>& rhs);
+    template<typename T, typename U>
+    constexpr
+    complex<typename std::common_type<T, U>::type>
+    operator/(const complex<T>& lhs, const complex<U>& rhs);
 
     template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
     constexpr
@@ -184,6 +201,10 @@ namespace smath
     constexpr
     complex<typename std::common_type<T, U>::type>
     operator*(const complex<T>& lhs, const U& rhs);
+    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr
+    complex<typename std::common_type<T, U>::type>
+    operator/(const complex<T>& lhs, const U& rhs);
 
     template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
     constexpr
@@ -197,6 +218,10 @@ namespace smath
     constexpr
     complex<typename std::common_type<T, U>::type>
     operator*(const U& lhs, const complex<T>& rhs);
+    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr
+    complex<typename std::common_type<T, U>::type>
+    operator/(const U& lhs, const complex<T>& rhs);
 
     template<typename T, typename U>
     constexpr
@@ -210,6 +235,10 @@ namespace smath
     constexpr
     complex<typename std::common_type<T, U>::type>
     operator*(const complex<T>& lhs, const imaginary<U>& rhs);
+    template<typename T, typename U>
+    constexpr
+    complex<typename std::common_type<T, U>::type>
+    operator/(const complex<T>& lhs, const imaginary<U>& rhs);
 
     template<typename T, typename U>
     constexpr
@@ -223,6 +252,10 @@ namespace smath
     constexpr
     complex<typename std::common_type<T, U>::type>
     operator*(const imaginary<T>& lhs, const complex<U>& rhs);
+    template<typename T, typename U>
+    constexpr
+    complex <typename std::common_type<T, U>::type>
+    operator/(const imaginary<T>& lhs, const complex<U>& rhs);
 
     ////////////////////////////////////////////////////////////
     // Mathematical functions
