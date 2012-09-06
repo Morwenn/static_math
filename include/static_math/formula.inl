@@ -152,7 +152,7 @@ lcm(T a, U b)
 }
 
 template<typename T>
-constexpr sqr(const T& value)
+constexpr T sqr(const T& value)
 {
     return value * value;
 }
