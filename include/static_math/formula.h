@@ -136,6 +136,12 @@ namespace smath
     typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename std::common_type<T, U>::type>::type
     lcm(T a, U b);
 
+    /**
+     * @brief Square of a value
+     */
+    template<typename T>
+    constexpr T sqr(const T& value);
+
     #include <static_math/formula.inl>
 
 } // namespace smath

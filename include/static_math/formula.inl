@@ -150,3 +150,9 @@ lcm(T a, U b)
     return (a == 0 || b == 0) ? 1 :
         a * b / gcd(a, b);
 }
+
+template<typename T>
+constexpr sqr(const T& value)
+{
+    return value * value;
+}
