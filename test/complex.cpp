@@ -32,9 +32,13 @@ int main()
 
     constexpr auto imag0 = imaginary<int>(0);
     constexpr auto imag1 = imaginary<int>(1);
+    constexpr auto imag2 = imaginary<int>(-2);
     constexpr auto comp0 = complex<int>(5, 0);
     constexpr auto comp1 = complex<int>(0, 1);
+    constexpr auto comp2 = complex<int>(-1, 3);
     constexpr auto comp3 = complex<long long int>(5, 0);
+    constexpr auto comp4 = complex<int>(-2, 4);
+    constexpr auto comp5 = complex<int>(3, -1);
 
     // Unary + and -
     static_assert(-imag1 == imaginary<int>(-1), "");
@@ -49,6 +53,46 @@ int main()
     static_assert(comp0 != 3, "");
     static_assert(imag0 != imag1, "");
     static_assert(comp0 != comp1, "");
+
+    // imaginary-imaginary arithmetic
+    static_assert(imag1 + imag1 == 2_static_i, "");
+    static_assert(imag1 - imag0 == 1_static_i, "");
+    static_assert(imag1 * imag1 == -1, "");
+
+    // imaginary-scalar arithmetic
+    static_assert(imag1 + 2 == complex<int>(2, 1), "");
+    static_assert(-3 + imag1 == complex<int>(-3, 1), "");
+    static_assert(imag2 - 5 == complex<int>(-5, -2), "");
+    static_assert(2 - imag2 == complex<int>(2, 2), "");
+    static_assert(imag1 * 3 == imaginary<int>(3), "");
+    static_assert(-4 * imag2 == imaginary<int>(8), "");
+
+    // complex-complex arithmetic
+    static_assert(comp4 + comp5 == complex<int>(1, 3), "");
+    static_assert(comp5 - comp4 == complex<int>(5, -5), "");
+    static_assert(comp4 * comp5 == complex<int>(-2, 14), "");
+
+    // complex-scalar arithmetic
+    static_assert(comp4 + 5 == complex<int>(3, 4), "");
+    static_assert(-2 + comp5 == complex<int>(1, -1), "");
+    static_assert(comp1 - 2 == complex<int>(-2, 1), "");
+    static_assert(3 - comp2 == complex<int>(4, -3), "");
+    static_assert(comp4 * 5 == complex<int>(-10, 20), "");
+    static_assert(-2 * comp5 == complex<int>(-6, 2), "");
+
+    // complex-imaginary arithmetic
+    static_assert(comp1 + 5_static_i == complex<int>(0, 6), "");
+    static_assert(-2_static_i + comp0 == complex<int>(5, -2), "");
+    static_assert(comp2 - -1_static_i == complex<int>(-1, 4), "");
+    static_assert(8_static_i - comp3 == complex<int>(-5, 8), "");
+    static_assert(comp4 * 2_static_i == complex<int>(-8, -4), "");
+    static_assert(-3_static_i * comp5 == complex<int>(-3, -9), "");
+
+    // Mathematical functions
+    static_assert(real(comp5) == 3, "");
+    static_assert(imag(comp4) == 4_static_i, "");
+    static_assert(conj(comp4) == complex<int>(-2, -4), "");
+    static_assert(conj(comp5) == complex<int>(3, 1), "");
 
     return 0;
 }
