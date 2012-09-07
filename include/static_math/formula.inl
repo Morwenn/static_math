@@ -33,7 +33,7 @@ namespace
 
     template<typename T, typename U>
     constexpr
-    typename greater_of<T, U>::type
+    typename std::common_type<T, U>::type
     _gcd_helper(T b, U r)
     {
         return (r == 0) ? b : _gcd_helper(r, b % r);
