@@ -78,7 +78,7 @@ constexpr rational<T> operator-(const rational<T>& lhs)
 template<typename T, typename U>
 constexpr bool operator==(const rational<T>& lhs, const rational<U>& rhs)
 {
-    return lhs.numerator() * rhs.denominator() == lhs.denominator() * rhs.numerator();
+    return lhs.numerator() == rhs.numerator() && lhs.denominator() == rhs.denominator();
 }
 
 template<typename T, typename U>
