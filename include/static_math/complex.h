@@ -37,6 +37,8 @@ namespace smath
 
         public:
 
+            using value_type = T;
+
             constexpr imaginary(T real);
 
             constexpr T value() const;
@@ -55,6 +57,8 @@ namespace smath
         static_assert(std::is_arithmetic<T>::value, "A complex number can only contain arithmetic values.");
 
         public:
+
+            using value_type = T;
 
             constexpr complex(T real, T imag);
             constexpr complex(T real, const imaginary<T>& img);

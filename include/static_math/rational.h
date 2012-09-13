@@ -38,6 +38,8 @@ namespace smath
 
         public:
 
+            using value_type = T;
+
             constexpr rational(T numerator);
             constexpr rational(T numerator, T denominator);
 
