@@ -24,6 +24,13 @@ namespace details
             pow_helper(acc*value, value, times-1) :
                 acc;
     }
+
+    template<typename T>
+    constexpr T sqrt_helper(T x, T y)
+    {
+        return equals(x, y*y) ? y :
+            sqrt_helper(x, (y + x/y) / 2.0);
+    }
 }
 
 template<typename T>
@@ -110,4 +117,12 @@ pow(T value, U exponent)
     return (exponent == 0) ? 1 :
         (exponent > 0) ? details::pow_helper(value, value, exponent) :
             1 / details::pow_helper(value, value, exponent);
+}
+
+template<typename Float>
+constexpr
+typename std::enable_if<std::is_floating_point<Float>::value, Float>::type
+sqrt(Float x)
+{
+    return details::sqrt_helper(x, x);
 }

@@ -34,6 +34,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <type_traits>
+#include <static_math/utils/compare.h>
 
 
 namespace smath
@@ -102,6 +103,18 @@ namespace smath
     constexpr
     typename std::enable_if<std::is_integral<U>::value && std::is_arithmetic<T>::value, T>::type
     pow(T value, U exponent);
+
+    /**
+     * @brief Square root function
+     *
+     * Square root computation with the babylonian method until
+     * the best possible precision for the given floating point
+     * type.
+     */
+    template<typename Float>
+    constexpr
+    typename std::enable_if<std::is_floating_point<Float>::value, Float>::type
+    sqrt(Float x);
 
     #include <static_math/cmath.inl>
 
