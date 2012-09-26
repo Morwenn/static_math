@@ -15,13 +15,13 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace
+namespace details
 {
     template<typename T, typename U>
-    constexpr T _pow_helper(T acc, T value, U times)
+    constexpr T pow_helper(T acc, T value, U times)
     {
         return (times > 1) ?
-            _pow_helper(acc*value, value, times-1) :
+            pow_helper(acc*value, value, times-1) :
                 acc;
     }
 }
@@ -108,6 +108,6 @@ typename std::enable_if<std::is_integral<U>::value && std::is_arithmetic<T>::val
 pow(T value, U exponent)
 {
     return (exponent == 0) ? 1 :
-        (exponent > 0) ? _pow_helper(value, value, exponent) :
-            1 / _pow_helper(value, value, exponent);
+        (exponent > 0) ? details::pow_helper(value, value, exponent) :
+            1 / details::pow_helper(value, value, exponent);
 }

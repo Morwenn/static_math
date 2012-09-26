@@ -20,23 +20,23 @@
 // Static variables, Initialization & Helpers
 ////////////////////////////////////////////////////////////
 
-namespace
+namespace details
 {
     // Helper for the is_prime() function
     template<typename T>
-    constexpr bool _is_prime_helper(T n, T div)
+    constexpr bool is_prime_helper(T n, T div)
     {
         return (div*div > n) ? true :
             (n % div == 0) ? false :
-                _is_prime_helper(n, div+2);
+                is_prime_helper(n, div+2);
     }
 
     template<typename T, typename U>
     constexpr
     typename std::common_type<T, U>::type
-    _gcd_helper(T b, U r)
+    gcd_helper(T b, U r)
     {
-        return (r == 0) ? b : _gcd_helper(r, b % r);
+        return (r == 0) ? b : gcd_helper(r, b % r);
     }
 }
 
@@ -76,7 +76,7 @@ is_prime(T n)
 {
     return (n < 2) ? false :
                      (n == 2) ? true :
-                              _is_prime_helper(n, 2);
+                              details::is_prime_helper(n, 2);
 }
 
 template<typename T>
@@ -138,8 +138,8 @@ typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value
 gcd(T a, U b)
 {
     return (a == 0 || b == 0) ? 0 :
-        (a >= b) ? _gcd_helper(b, a % b) :
-            _gcd_helper(a, b % a);
+        (a >= b) ? details::gcd_helper(b, a % b) :
+            details::gcd_helper(a, b % a);
 }
 
 template<typename T, typename U>
