@@ -23,7 +23,24 @@
 ////////////////////////////////////////////////////////////
 #include <limits>
 #include <static_math/utils/type_traits.h>
-#include <static_math/cmath.h>
+
+
+////////////////////////////////////////////////////////////
+// Macros
+////////////////////////////////////////////////////////////
+
+// To avoid circular dependancy with cmath.h
+
+#define STATIC_MATH_ABS(x) \
+    (((x) >= 0) ? (x) : -(x))
+
+#define STATIC_MATH_MAX(x, y) \
+    (((x) >= (y)) ? (x) : (y))
+
+
+////////////////////////////////////////////////////////////
+// Functions
+////////////////////////////////////////////////////////////
 
 namespace smath
 {
@@ -40,10 +57,21 @@ namespace smath
     typename std::enable_if<std::is_floating_point<T>::value && std::is_floating_point<U>::value, bool>::type
     equals(T a, U b)
     {
-        return abs(a-b) <= std::numeric_limits<typename lesser_of<T, U>::type>::epsilon() * max(abs(a), abs(b));
+        return STATIC_MATH_ABS(a-b) <=
+            std::numeric_limits<typename lesser_of<T, U>::type>::epsilon() *
+            STATIC_MATH_MAX(STATIC_MATH_ABS(a), STATIC_MATH_ABS(b));
     }
 
 } // namespace smath
+
+
+////////////////////////////////////////////////////////////
+// End macros
+////////////////////////////////////////////////////////////
+
+// Cause it's wee-known that macros are evil
+#undef STATIC_MATH_ABS
+#undef STATIC_MATH_MAX
 
 
 #endif // _SMATH_UTILS_COMPARE_H
