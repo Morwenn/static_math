@@ -56,31 +56,6 @@ constexpr double LN10     = 2.30258509299404568402;
  */
 constexpr double PI       = 3.14159265358979323846;
 
-/**
- * sqrt(2)
- */
-constexpr double SQRT2    = 1.41421356237309504880;
-
-/**
- * sqrt(1/2)
- */
-constexpr double SQRT1_2  = 0.70710678118654752440;
-
-
-////////////////////////////////////////////////////////////
-// Constants related to the unit circle
-////////////////////////////////////////////////////////////
-
-/**
- * sqrt(2) / 2
- */
-constexpr double SQRT2_2  = 0.70710678118654752440;
-
-/**
- * sqrt(2) / 3
- */
-constexpr double SQRT2_3  = 0.47140452079103168293;
-
 
 ////////////////////////////////////////////////////////////
 // Other mathematical constants
@@ -90,11 +65,6 @@ constexpr double SQRT2_3  = 0.47140452079103168293;
  * Golden ratio
  */
 constexpr double PHI      = 1.61803398874989484820;
-
-/**
- * sqrt(3)
- */
-constexpr double SQRT3    = 1.73205080756887729352;
 
 
 } // namespace smath
