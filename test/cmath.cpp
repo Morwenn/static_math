@@ -15,7 +15,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 #include <static_math/cmath.h>
-
+#include <iostream>
 using namespace smath;
 
 
@@ -59,6 +59,10 @@ int main()
     static_assert(pow(5.8, 0) == 1.0, "");
     static_assert(pow(2, 1) == 2, "");
     static_assert(pow(2, 2) == 4, "");
+
+    static_assert(equals(sqrt(4.0), 2.0), "");
+    static_assert(equals(sqrt(2.0), 1.414213562373095), "");
+    static_assert(equals(sqrt(3.0), 1.732050807568877), "");
 
     return 0;
 }
