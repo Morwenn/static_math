@@ -76,5 +76,9 @@ int main()
     static_assert(lcm(60, 168) == 840, "");
     static_assert(lcm(168, 60) == 840, "");
 
+    static_assert(clamp(3, 2, 4) == 3, "");
+    static_assert(clamp(1, 2, 4) == 2, "");
+    static_assert(clamp(5, 2, 4) == 4, "");
+
     return 0;
 }

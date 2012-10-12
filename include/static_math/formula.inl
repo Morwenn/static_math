@@ -156,3 +156,9 @@ constexpr T sqr(const T& value)
 {
     return value * value;
 }
+
+template<typename T>
+constexpr T clamp(const T& value, const T& min, const T& max)
+{
+    return (value < min) ? min : (value > max) ? max : value;
+}

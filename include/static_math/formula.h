@@ -142,6 +142,12 @@ namespace smath
     template<typename T>
     constexpr T sqr(const T& value);
 
+    /**
+     * @brief Limiting a value to an area
+     */
+    template<typename T>
+    constexpr T clamp(const T& value, const T& min, const T& max);
+
     #include <static_math/formula.inl>
 
 } // namespace smath
