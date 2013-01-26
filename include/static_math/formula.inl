@@ -53,7 +53,7 @@ constexpr int sign(const T& value)
 
 template<typename T>
 constexpr
-typename std::enable_if<std::is_integral<T>::value, bool>::type
+typename std::enable_if<is_integral<T>::value, bool>::type
 is_even(T n)
 {
     using res_type = typename std::make_unsigned<T>::type;
@@ -62,7 +62,7 @@ is_even(T n)
 
 template<typename T>
 constexpr
-typename std::enable_if<std::is_integral<T>::value, bool>::type
+typename std::enable_if<is_integral<T>::value, bool>::type
 is_odd(T n)
 {
     using res_type = typename std::make_unsigned<T>::type;
@@ -71,7 +71,7 @@ is_odd(T n)
 
 template<typename T>
 constexpr
-typename std::enable_if<std::is_integral<T>::value, bool>::type
+typename std::enable_if<is_integral<T>::value, bool>::type
 is_prime(T n)
 {
     return (n < 2) ? false :
@@ -97,7 +97,7 @@ radian(T deg)
 
 template<typename T>
 constexpr
-typename std::enable_if<std::is_integral<T>::value, T>::type
+typename std::enable_if<is_integral<T>::value, T>::type
 fibonacci(T n)
 {
     return (n < 2) ? n : fibonacci(n-2) + fibonacci(n-1);
@@ -105,7 +105,7 @@ fibonacci(T n)
 
 template<typename T>
 constexpr
-typename std::enable_if<std::is_integral<T>::value, T>::type
+typename std::enable_if<is_integral<T>::value, T>::type
 factorial(T n)
 {
     return (n > 1) ? n * factorial(n - 1) : 1;
@@ -134,7 +134,7 @@ long double mean(Args... args)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename std::common_type<T, U>::type>::type
+typename std::enable_if<is_integral<T, U>::value, typename std::common_type<T, U>::type>::type
 gcd(T a, U b)
 {
     return (a == 0 || b == 0) ? 0 :
@@ -144,7 +144,7 @@ gcd(T a, U b)
 
 template<typename T, typename U>
 constexpr
-typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename std::common_type<T, U>::type>::type
+typename std::enable_if<is_integral<T, U>::value, typename std::common_type<T, U>::type>::type
 lcm(T a, U b)
 {
     return (a == 0 || b == 0) ? 1 :

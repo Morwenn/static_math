@@ -20,8 +20,8 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <type_traits>
 #include <static_math/constants.h>
+#include <static_math/utils/type_traits.h>
 
 
 namespace smath
@@ -39,7 +39,7 @@ namespace smath
      */
     template<typename T>
     constexpr
-    typename std::enable_if<std::is_integral<T>::value, bool>::type
+    typename std::enable_if<is_integral<T>::value, bool>::type
     is_even(T n);
 
     /**
@@ -49,7 +49,7 @@ namespace smath
      */
     template<typename T>
     constexpr
-    typename std::enable_if<std::is_integral<T>::value, bool>::type
+    typename std::enable_if<is_integral<T>::value, bool>::type
     is_odd(T n);
 
     /**
@@ -59,7 +59,7 @@ namespace smath
      */
     template<typename T>
     constexpr
-    typename std::enable_if<std::is_integral<T>::value, bool>::type
+    typename std::enable_if<is_integral<T>::value, bool>::type
     is_prime(T n);
 
     /**
@@ -89,7 +89,7 @@ namespace smath
      */
     template<typename T>
     constexpr
-    typename std::enable_if<std::is_integral<T>::value, T>::type
+    typename std::enable_if<is_integral<T>::value, T>::type
     fibonacci(T n);
 
     /**
@@ -99,7 +99,7 @@ namespace smath
      */
     template<typename T>
     constexpr
-    typename std::enable_if<std::is_integral<T>::value, T>::type
+    typename std::enable_if<is_integral<T>::value, T>::type
     factorial(T n);
 
     /**
@@ -125,7 +125,7 @@ namespace smath
      */
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename std::common_type<T, U>::type>::type
+    typename std::enable_if<is_integral<T, U>::value, typename std::common_type<T, U>::type>::type
     gcd(T a, U b);
 
     /**
@@ -133,7 +133,7 @@ namespace smath
      */
     template<typename T, typename U>
     constexpr
-    typename std::enable_if<std::is_integral<T>::value && std::is_integral<U>::value, typename std::common_type<T, U>::type>::type
+    typename std::enable_if<is_integral<T, U>::value, typename std::common_type<T, U>::type>::type
     lcm(T a, U b);
 
     /**
