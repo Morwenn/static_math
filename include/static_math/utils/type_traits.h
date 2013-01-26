@@ -40,6 +40,27 @@ namespace smath
         U
     >;
 
+    template<typename...>
+    struct is_integral;
+
+    template<typename T>
+    struct is_integral<T>:
+        public std::conditional<
+            std::is_integral<T>::value,
+            std::true_type,
+            std::false_type
+        >::type
+    {};
+
+    template<typename T, typename U, typename... Args>
+    struct is_integral<T, U, Args...>:
+        public std::conditional<
+            is_integral<T>::value,
+            is_integral<U, Args...>,
+            std::false_type
+        >::type
+    {};
+
 } // namespace smath
 
 
