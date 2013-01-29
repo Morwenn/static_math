@@ -15,3 +15,23 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+template<size_t H, size_t W, typename T>
+constexpr auto matrix<H, W, T>::height()
+    -> size_t
+{
+    return H;
+}
+
+template<size_t H, size_t W, typename T>
+constexpr auto matrix<H, W, T>::width()
+    -> size_t
+{
+    return W;
+}
+
+template<size_t H, size_t W, typename T>
+constexpr auto matrix<H, W, T>::size()
+    -> size_t
+{
+    return _size;
+}

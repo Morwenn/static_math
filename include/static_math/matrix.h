@@ -28,18 +28,48 @@ namespace smath
 
     /**
      * @brief Fixed-size matrix
+     *
+     * @tparam H Matrix height
+     * @tparam W Matriw width
+     * @tparam T Type of the data stored in the matrix
      */
-    template<size_t H, size_t W, typename T>
+    template<size_t H, size_t W, typename T=double>
     class matrix
     {
         public:
 
+            using value_type = T;
+
         private:
 
+            static constexpr size_t _size = H * W;  /** Number of elements */
+
+        public:
+
+            ////////////////////////////////////////////////////////////
+            // Constructors
+            ////////////////////////////////////////////////////////////
+
+            ////////////////////////////////////////////////////////////
+            // Operators
+            ////////////////////////////////////////////////////////////
+
+            ////////////////////////////////////////////////////////////
+            // Miscellaneous functions
+            ////////////////////////////////////////////////////////////
+
+            constexpr auto width()  const -> size_t;
+            constexpr auto height() const -> size_t;
+            constexpr auto size()   const -> size_t;
     };
 
     ////////////////////////////////////////////////////////////
     // Operators
     ////////////////////////////////////////////////////////////
 
-}
+    #include <static_math/matrix.inl>
+
+} // namespace smath
+
+
+#endif // _SMATH_MATRIX_H

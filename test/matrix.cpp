@@ -21,6 +21,11 @@ using namespace smath;
 
 int main()
 {
+    matrix<2, 3> a;
+
+    static_assert(a.height() == 2, "");
+    static_assert(a.width() == 3, "");
+    static_assert(a.size() == 6, "");
 
     return 0;
 }
