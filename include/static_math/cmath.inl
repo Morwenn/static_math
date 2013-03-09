@@ -43,7 +43,7 @@ abs(T x)
 
 template<typename T, typename U, typename... Rest>
 constexpr
-typename std::common_type<T, U>::type
+typename std::common_type<T, U, Rest...>::type
 min(T first, U second, Rest... rest)
 {
     return (first < second) ? min(first, rest...) : min(second, rest...);
@@ -59,7 +59,7 @@ min(T first, U second)
 
 template<typename T, typename U, typename... Rest>
 constexpr
-typename std::common_type<T, U>::type
+typename std::common_type<T, U, Rest...>::type
 max(T first, U second, Rest... rest)
 {
     return (first > second) ? max(first, rest...) : max(second, rest...);

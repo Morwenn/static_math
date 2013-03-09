@@ -52,7 +52,7 @@ namespace smath
      */
     template<typename T, typename U, typename... Rest>
     constexpr
-    typename std::common_type<T, U>::type
+    typename std::common_type<T, U, Rest...>::type
     min(T first, U second, Rest... rest);
 
     template<typename T, typename U>
@@ -65,7 +65,7 @@ namespace smath
      */
     template<typename T, typename U, typename... Rest>
     constexpr
-    typename std::common_type<T, U>::type
+    typename std::common_type<T, U, Rest...>::type
     max(T first, U second, Rest... rest);
 
     template<typename T, typename U>
