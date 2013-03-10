@@ -45,11 +45,7 @@ namespace smath
 
     template<typename T>
     struct is_integral<T>:
-        public std::conditional<
-            std::is_integral<T>::value,
-            std::true_type,
-            std::false_type
-        >::type
+        public std::is_integral<T>
     {};
 
     template<typename T, typename U, typename... Args>
