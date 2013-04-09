@@ -15,6 +15,11 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*template<size_t H, size_t W, typename T>
+constexpr matrix<H, W, T>::matrix(const T(&array)[H][W]):
+    _data(array)
+{}*/
+
 template<size_t H, size_t W, typename T>
 constexpr auto matrix<H, W, T>::height()
     -> size_t
@@ -33,5 +38,5 @@ template<size_t H, size_t W, typename T>
 constexpr auto matrix<H, W, T>::size()
     -> size_t
 {
-    return _size;
+    return H * W;
 }

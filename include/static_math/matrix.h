@@ -29,38 +29,43 @@ namespace smath
     /**
      * @brief Fixed-size matrix
      *
+     * All the members of a matrix are public. Otherwise,
+     * the aggregate initialization would not be have been
+     * possible.
+     *
+     * The matrix is constructed from a 2D C array. However,
+     * until the application of N3526, the 2D array initializer
+     * has to be put into an extra pair of curly braces in
+     * order to work fine.
+     *
      * @tparam H Matrix height
      * @tparam W Matriw width
      * @tparam T Type of the data stored in the matrix
      */
     template<size_t H, size_t W, typename T=double>
-    class matrix
+    struct matrix
     {
-        public:
+        ////////////////////////////////////////////////////////////
+        // Types
+        ////////////////////////////////////////////////////////////
+        using value_type = T;
 
-            using value_type = T;
+        ////////////////////////////////////////////////////////////
+        // Member data
+        ////////////////////////////////////////////////////////////
+        value_type _data[H][W];
 
-        private:
+        ////////////////////////////////////////////////////////////
+        // Operators
+        ////////////////////////////////////////////////////////////
 
-            static constexpr size_t _size = H * W;  /** Number of elements */
+        ////////////////////////////////////////////////////////////
+        // Miscellaneous functions
+        ////////////////////////////////////////////////////////////
 
-        public:
-
-            ////////////////////////////////////////////////////////////
-            // Constructors
-            ////////////////////////////////////////////////////////////
-
-            ////////////////////////////////////////////////////////////
-            // Operators
-            ////////////////////////////////////////////////////////////
-
-            ////////////////////////////////////////////////////////////
-            // Miscellaneous functions
-            ////////////////////////////////////////////////////////////
-
-            constexpr auto width()  const -> size_t;
-            constexpr auto height() const -> size_t;
-            constexpr auto size()   const -> size_t;
+        constexpr auto width()  const -> size_t;
+        constexpr auto height() const -> size_t;
+        constexpr auto size()   const -> size_t;
     };
 
     ////////////////////////////////////////////////////////////

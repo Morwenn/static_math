@@ -21,7 +21,10 @@ using namespace smath;
 
 int main()
 {
-    matrix<2, 3> a;
+    constexpr matrix<2, 3> a = {{
+        { 1.0, 2.5, 5.2 },
+        { 2.0, 3.8, 6.8 }
+    }};
 
     static_assert(a.height() == 2, "");
     static_assert(a.width() == 3, "");
