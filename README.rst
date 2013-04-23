@@ -34,27 +34,33 @@ Compile time library
 used at runtime. It's still possible to use it at runtime though, but it's not
 well advised.
 
-On of the reasons is due to the heavy use of the `constexpr` keywords: it forces
+On of the reasons is due to the heavy use of the keyword ``constexpr``: it forces
 the functions to be stateless and so to implement a large part of them with deep
 recursion. Used at runtime, these functions would be very slow because of the high
 number of functions calls that occur for each mathematical computation.
 
 Since the library is only meant to be used at compile time, some choices have
 been done to improve usability or convenience over performance. For example, the
-rational numbers are simplified at construction, which could badly alter the
+rational numbers are simplified after each operation, which could badly alter the
 performance in a runtime library.
 
-In order to force the user to think of this library as only a compile time library,
-somme class functions that could have been implemented but without being compile
-time functions have not been implemented. One of the major examples is that no
-class contains any assignement operator since it involves a change of state.
+In order to force the user to think of this library as only a compile-time only
+library, somme class functions that could have been implemented (without being
+compile-time functions) have simply not been implemented. One of the major examples
+is that no class provides any assignment operator since it involves a change of
+state.
 
 Intuitive feeling
 -----------------
 
 One of ``static_math``'s aims is to be easy to use. The functions are implemented
 so that they can be used in a straightforward way. This implies that the user will
-not have to deal with complex metaprogramming tricks.
+not have to deal with complex metaprogramming tricks - even though some are used in
+the implementation -.
+
+This intuitive feeling is the one reason why ``static_math`` needs a recent compiler
+since the library will need a heavy support for ``constexpr``, ``std::initializer_list``
+and variadic templates in order to work fine.
 
 Flexibility
 -----------
