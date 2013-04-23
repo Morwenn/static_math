@@ -56,7 +56,7 @@ floating point type.
 
 Moreover, if two different types such as ``int`` and ``long long int`` int are passed
 to a function that uses them to output an integral type, the bigger of the two
-will be chosen for the output. :
+will be chosen for the output::
 		
 		// Two different types used to represent
 		// the same kind of data
