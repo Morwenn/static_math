@@ -1,16 +1,16 @@
-static_math
-###########
+``static_math``
+###############
 
-`static_math` is a C++11 library dedicated to compile time mathematics.
+``static_math`` is a C++11 library dedicated to compile time mathematics.
 
-The functions and classes compile fine with G++ 4.7.0.
+The functions and classes compile fine with g++ 4.7.0.
 
 Principle
 =========
 
-`static_math` makes a heavy use of the C++11 keyword `constexpr` to reimplement
+``static_math`` makes a heavy use of the C++11 keyword ``constexpr`` to reimplement
 a number of existing mathematical functions and some new ones. It also provides
-a range of classes (`rational`, `complex`, etc...) whose functions can be used
+a range of classes (``rational``, ``complex``, etc...) whose functions can be used
 at compile time too. The library also contains some common mathematical constants.
 
 Design choices
@@ -19,7 +19,7 @@ Design choices
 Compile time library
 --------------------
 
-`static_math` has only been made to be usable at compile time and shall not be
+``static_math`` has only been made to be usable at compile time and shall not be
 used at runtime. It's still possible to use it at runtime though, but it's not
 well advised.
 
@@ -41,24 +41,22 @@ class contains any assignement operator since it involves a change of state.
 Intuitive feeling
 -----------------
 
-One of `static_math`'s aims is to be easy to use. The functions are implemented
+One of ``static_math``'s aims is to be easy to use. The functions are implemented
 so that they can be used in a straightforward way. This implies that there is no
-complex template meta-programming used to perform the mathematical computations.
+complex template meta-programming used to perform the mathematical computations
+- or at least, they are hidden to the user -.
 
 Flexibility
 -----------
 
-Some classes such as `rational` or `complex` make a heavy use of some templates
+Some classes such as ``rational`` or ``complex`` make a heavy use of some templates
 facilities such as SFINAE in order to gain some flexibility. For example, many
 functions won't compile if the parameters given are not of an integral or a
 floating point type.
 
-Moreover, if two different types such as `int` and `long long int` int are passed
+Moreover, if two different types such as ``int`` and ``long long int`` int are passed
 to a function that uses them to output an integral type, the bigger of the two
-will be chosen for the output.
-
-    .. code-block:: c++
-		:lineno:
+will be chosen for the output. :
 		
 		// Two different types used to represent
 		// the same kind of data
@@ -66,4 +64,4 @@ will be chosen for the output.
 		long long int b = 100000;
 		
 		// The bigger of them is used as the output type
-		long long int c = gcd(a, b);
+		auto c = gcd(a, b); // type is long long int
