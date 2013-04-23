@@ -50,15 +50,15 @@ compile-time functions) have simply not been implemented. One of the major examp
 is that no class provides any assignment operator since it involves a change of
 state.
 
-Intuitive feeling
------------------
+Intuitive feel
+--------------
 
 One of ``static_math``'s aims is to be easy to use. The functions are implemented
 so that they can be used in a straightforward way. This implies that the user will
 not have to deal with complex metaprogramming tricks - even though some are used in
 the implementation -.
 
-This intuitive feeling is the one reason why ``static_math`` needs a recent compiler
+This intuitive feel is the one reason why ``static_math`` needs a recent compiler
 since the library will need a heavy support for ``constexpr``, ``std::initializer_list``
 and variadic templates in order to work fine.
 
