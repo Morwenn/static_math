@@ -16,21 +16,14 @@
  */
 
 template<typename T>
-constexpr array<T>::array(const std::initializer_list<T>& values):
-    _size(values.size()),
-    _data(values.begin())
+constexpr array<T>::array(std::initializer_list<T> values):
+    std::initializer_list<T>(values)
 {}
 
 template<typename T>
 constexpr auto array<T>::operator[](std::size_t n)
     -> value_type
 {
-    return _data[n];
+    return this->begin()[n];
 }
 
-template<typename T>
-constexpr auto array<T>::size() const
-    -> std::size_t
-{
-    return _size;
-}
