@@ -1,9 +1,20 @@
 ``static_math``
 ###############
 
-``static_math`` is a C++11 library dedicated to compile time mathematics.
+``static_math`` is a C++ library dedicated to compile time mathematics.
 
-The functions and classes compile fine with g++ 4.7.0.
+Compatibility
+=============
+
+``static_math`` heavily relies on C++11 features and even on some planned features
+that have been confirmed for the next C++ standards provided some compiler already
+implements them. So, do not have high expectations, only a few compilers will be
+able to compile it.
+
+* Compiles fine with g++ 4.7.0 and later releases.
+* Does not compile with Clang (lack of ``constexpr`` for ``std::initializer_list``,
+  may compile with libstdc++ instead of libc++).
+* Does not compile with MSVC (lack of ``constexpr``).
 
 Principle
 =========
@@ -42,9 +53,8 @@ Intuitive feeling
 -----------------
 
 One of ``static_math``'s aims is to be easy to use. The functions are implemented
-so that they can be used in a straightforward way. This implies that there is no
-complex template meta-programming used to perform the mathematical computations
-- or at least, they are hidden to the user -.
+so that they can be used in a straightforward way. This implies that the user will
+not have to deal with complex metaprogramming tricks.
 
 Flexibility
 -----------
