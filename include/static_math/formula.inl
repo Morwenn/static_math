@@ -75,8 +75,9 @@ typename std::enable_if<is_integral<T>::value, bool>::type
 is_prime(T n)
 {
     return (n < 2) ? false :
-                     (n == 2) ? true :
-                              details::is_prime_helper(n, 2);
+        (n == 2) ? true :
+            (n % 2 == 0) ? false :
+                details::is_prime_helper(n, 3);
 }
 
 template<typename T>

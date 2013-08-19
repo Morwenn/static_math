@@ -43,6 +43,8 @@ int main()
     static_assert(is_prime(4) == false, "");
     static_assert(is_prime(5) == true, "");
     static_assert(is_prime(7) == true, "");
+    static_assert(is_prime(8) == false, "");
+    static_assert(is_prime(9) == false, "");
     static_assert(is_prime(128) == false, "");
 
     static_assert(fibonacci(0) == 0, "");
