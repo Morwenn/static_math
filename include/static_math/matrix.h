@@ -1,18 +1,19 @@
 /*
- * Copyright (C) 2011-2013 Morwenn
+ * Copyright (C) 2013 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
  *
  * static_math is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
+ * GNU Lesser General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License along
- * with this program. If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not,
+ * see <http://www.gnu.org/licenses/>.
  */
 #ifndef _SMATH_MATRIX_H
 #define _SMATH_MATRIX_H
@@ -25,7 +26,6 @@
 
 namespace smath
 {
-
     /**
      * @brief Fixed-size matrix
      *
@@ -42,7 +42,7 @@ namespace smath
      * @tparam W Matriw width
      * @tparam T Type of the data stored in the matrix
      */
-    template<size_t H, size_t W, typename T=double>
+    template<std::size_t H, std::size_t W, typename T=double>
     struct matrix
     {
         ////////////////////////////////////////////////////////////
@@ -63,9 +63,9 @@ namespace smath
         // Miscellaneous functions
         ////////////////////////////////////////////////////////////
 
-        constexpr auto width()  const -> size_t;
-        constexpr auto height() const -> size_t;
-        constexpr auto size()   const -> size_t;
+        constexpr auto width()  const -> std::size_t;
+        constexpr auto height() const -> std::size_t;
+        constexpr auto size()   const -> std::size_t;
     };
 
     ////////////////////////////////////////////////////////////

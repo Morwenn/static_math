@@ -12,8 +12,7 @@ implements them. So, do not have high expectations, only a few compilers will be
 able to compile it.
 
 * Compiles fine with g++ 4.7.0 and later releases.
-* Does not compile with Clang (lack of ``constexpr`` for ``std::initializer_list``,
-  may compile with libstdc++ instead of libc++).
+* Should compile with Clang 3.1 and later releases.
 * Does not compile with MSVC (lack of ``constexpr``).
 
 Principle
