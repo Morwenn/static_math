@@ -45,8 +45,9 @@ namespace details
 // Functions definitions
 ////////////////////////////////////////////////////////////
 
-template<typename T>
-constexpr int sign(const T& value)
+template<typename Number>
+constexpr auto sign(Number value)
+    -> int
 {
     return (value > 0) ? 1 : (value < 0) ? -1 : 0;
 }

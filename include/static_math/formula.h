@@ -28,9 +28,12 @@ namespace smath
 {
     /**
      * @brief signum function
+     * @param val Any number
+     * @return Sign of \a val
      */
-    template<typename T>
-    constexpr int sign(const T& value);
+    template<typename Number>
+    constexpr auto sign(Number val)
+        -> int;
 
     /**
      * @brief Tells whether the given number is even
