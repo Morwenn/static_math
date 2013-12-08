@@ -44,55 +44,46 @@ namespace smath
      * @brief Absolute value of a number
      */
     template<typename T>
-    constexpr
-    typename std::enable_if<std::is_arithmetic<T>::value, T>::type
-    abs(T x);
+    constexpr auto abs(T x)
+        -> typename std::enable_if<std::is_arithmetic<T>::value, T>::type;
 
     /**
      * @brief Min of a number of variables
      */
     template<typename T, typename U, typename... Rest>
-    constexpr
-    typename std::common_type<T, U, Rest...>::type
-    min(T first, U second, Rest... rest);
+    constexpr auto min(T first, U second, Rest... rest)
+        -> typename std::common_type<T, U, Rest...>::type;
 
     template<typename T, typename U>
-    constexpr
-    typename std::common_type<T, U>::type
-    min(T first, U second);
+    constexpr auto min(T first, U second)
+        -> typename std::common_type<T, U>::type;
 
     /**
      * @brief Max of a number of variables
      */
     template<typename T, typename U, typename... Rest>
-    constexpr
-    typename std::common_type<T, U, Rest...>::type
-    max(T first, U second, Rest... rest);
+    constexpr auto max(T first, U second, Rest... rest)
+        -> typename std::common_type<T, U, Rest...>::type;
 
     template<typename T, typename U>
-    constexpr
-    typename std::common_type<T, U>::type
-    max(T first, U second);
+    constexpr auto max(T first, U second)
+        -> typename std::common_type<T, U>::type;
 
     template<typename Float>
-    constexpr
-    typename std::enable_if<std::is_floating_point<Float>::value, int>::type
-    floor(Float value);
+    constexpr auto floor(Float value)
+        -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type;
 
     template<typename Float>
-    constexpr
-    typename std::enable_if<std::is_floating_point<Float>::value, int>::type
-    ceil(Float value);
+    constexpr auto ceil(Float value)
+        -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type;
 
     template<typename Float>
-    constexpr
-    typename std::enable_if<std::is_floating_point<Float>::value, int>::type
-    round(Float value);
+    constexpr auto round(Float value)
+        -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type;
 
     template<typename Float>
-    constexpr
-    typename std::enable_if<std::is_floating_point<Float>::value, int>::type
-    trunc(Float value);
+    constexpr auto trunc(Float value)
+        -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type;
 
     /**
      * @brief Power function
@@ -101,9 +92,8 @@ namespace smath
      * @warning exponent right now.
      */
     template<typename T, typename U>
-    constexpr
-    typename std::enable_if<std::is_integral<U>::value && std::is_arithmetic<T>::value, T>::type
-    pow(T value, U exponent);
+    constexpr auto pow(T value, U exponent)
+        -> typename std::enable_if<std::is_integral<U>::value && std::is_arithmetic<T>::value, T>::type;
 
     /**
      * @brief Square root function
@@ -113,9 +103,8 @@ namespace smath
      * type.
      */
     template<typename Float>
-    constexpr
-    typename std::enable_if<std::is_floating_point<Float>::value, Float>::type
-    sqrt(Float x);
+    constexpr auto sqrt(Float x)
+        -> typename std::enable_if<std::is_floating_point<Float>::value, Float>::type;
 
     #include <static_math/cmath.inl>
 

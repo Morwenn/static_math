@@ -19,7 +19,8 @@
 namespace details
 {
     template<typename T, typename U>
-    constexpr T pow_helper(T acc, T value, U times)
+    constexpr auto pow_helper(T acc, T value, U times)
+        -> T
     {
         return (times > 1) ?
             pow_helper(acc*value, value, times-1) :
@@ -27,7 +28,8 @@ namespace details
     }
 
     template<typename T>
-    constexpr T sqrt_helper(T x, T y)
+    constexpr auto sqrt_helper(T x, T y)
+        -> T
     {
         return equals(x, y*y) ? y :
             sqrt_helper(x, (y + x/y) / 2.0);
@@ -35,49 +37,43 @@ namespace details
 }
 
 template<typename T>
-constexpr
-typename std::enable_if<std::is_arithmetic<T>::value, T>::type
-abs(T x)
+constexpr auto abs(T x)
+    -> typename std::enable_if<std::is_arithmetic<T>::value, T>::type
 {
     return (x >= 0) ? x : -x;
 }
 
 template<typename T, typename U, typename... Rest>
-constexpr
-typename std::common_type<T, U, Rest...>::type
-min(T first, U second, Rest... rest)
+constexpr auto min(T first, U second, Rest... rest)
+    -> typename std::common_type<T, U, Rest...>::type
 {
     return (first < second) ? min(first, rest...) : min(second, rest...);
 }
 
 template<typename T, typename U>
-constexpr
-typename std::common_type<T, U>::type
-min(T first, U second)
+constexpr auto min(T first, U second)
+    -> typename std::common_type<T, U>::type
 {
     return (first < second) ? first : second;
 }
 
 template<typename T, typename U, typename... Rest>
-constexpr
-typename std::common_type<T, U, Rest...>::type
-max(T first, U second, Rest... rest)
+constexpr auto max(T first, U second, Rest... rest)
+    -> typename std::common_type<T, U, Rest...>::type
 {
     return (first > second) ? max(first, rest...) : max(second, rest...);
 }
 
 template<typename T, typename U>
-constexpr
-typename std::common_type<T, U>::type
-max(T first, U second)
+constexpr auto max(T first, U second)
+    -> typename std::common_type<T, U>::type
 {
     return (first > second) ? first : second;
 }
 
 template<typename Float>
-constexpr
-typename std::enable_if<std::is_floating_point<Float>::value, int>::type
-floor(Float value)
+constexpr auto floor(Float value)
+    -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type
 {
     return (int(value) == value) ? int(value) :
         (value >= 0.0) ? int(value) :
@@ -85,9 +81,8 @@ floor(Float value)
 }
 
 template<typename Float>
-constexpr
-typename std::enable_if<std::is_floating_point<Float>::value, int>::type
-ceil(Float value)
+constexpr auto ceil(Float value)
+    -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type
 {
     return (int(value) == value) ? int(value) :
         (value >= 0.0) ? int(value) + 1 :
@@ -95,25 +90,22 @@ ceil(Float value)
 }
 
 template<typename Float>
-constexpr
-typename std::enable_if<std::is_floating_point<Float>::value, int>::type
-round(Float value)
+constexpr auto round(Float value)
+    -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type
 {
     return (value >= 0.0) ? int(value + 0.5) : int(value - 0.5);
 }
 
 template<typename Float>
-constexpr
-typename std::enable_if<std::is_floating_point<Float>::value, int>::type
-trunc(Float value)
+constexpr auto trunc(Float value)
+    -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type
 {
     return int(value);
 }
 
 template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value && std::is_arithmetic<T>::value, T>::type
-pow(T value, U exponent)
+constexpr auto pow(T value, U exponent)
+    -> typename std::enable_if<std::is_integral<U>::value && std::is_arithmetic<T>::value, T>::type
 {
     return (exponent == 0) ? 1 :
         (exponent > 0) ? details::pow_helper(value, value, exponent) :
@@ -121,9 +113,8 @@ pow(T value, U exponent)
 }
 
 template<typename Float>
-constexpr
-typename std::enable_if<std::is_floating_point<Float>::value, Float>::type
-sqrt(Float x)
+constexpr auto sqrt(Float x)
+    -> typename std::enable_if<std::is_floating_point<Float>::value, Float>::type
 {
     return details::sqrt_helper(x, x);
 }
