@@ -381,28 +381,28 @@ constexpr auto abs(const rational<T>& ratio)
 
 template<typename T>
 constexpr auto floor(const rational<T>& ratio)
-    -> T
+    -> decltype(std::floor(T{}))
 {
     return floor((long double) ratio);
 }
 
 template<typename T>
 constexpr auto ceil(const rational<T>& ratio)
-    -> T
+    -> decltype(std::ceil(T{}))
 {
     return ceil((long double) ratio);
 }
 
 template<typename T>
 constexpr auto round(const rational<T>& ratio)
-    -> T
+    -> decltype(std::round(T{}))
 {
     return round((long double) ratio);
 }
 
 template<typename T>
 constexpr auto trunc(const rational<T>& ratio)
-    -> T
+    -> decltype(std::trunc(T{}))
 {
     return T((long double) ratio);
 }

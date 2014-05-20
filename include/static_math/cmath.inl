@@ -83,38 +83,38 @@ constexpr auto max(T first, U second, Rest... rest)
 
 template<typename Float,
          typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
-constexpr auto floor(Float value)
-    -> int
+constexpr auto floor(Float x)
+    -> decltype(std::floor(x))
 {
-    return (int(value) == value) ? int(value) :
-        (value >= 0.0) ? int(value) :
-            int(value) - 1;
+    return (int(x) == x) ? int(x) :
+        (x >= 0.0) ? int(x) :
+            int(x) - 1;
 }
 
 template<typename Float,
          typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
-constexpr auto ceil(Float value)
-    -> int
+constexpr auto ceil(Float x)
+    -> decltype(std::ceil(x))
 {
-    return (int(value) == value) ? int(value) :
-        (value >= 0.0) ? int(value) + 1 :
-            int(value);
+    return (int(x) == x) ? int(x) :
+        (x >= 0.0) ? int(x) + 1 :
+            int(x);
 }
 
 template<typename Float,
          typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
-constexpr auto round(Float value)
-    -> int
+constexpr auto round(Float x)
+    -> decltype(std::round(x))
 {
-    return (value >= 0.0) ? int(value + 0.5) : int(value - 0.5);
+    return (x >= 0.0) ? int(x + 0.5) : int(x - 0.5);
 }
 
 template<typename Float,
          typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
-constexpr auto trunc(Float value)
-    -> int
+constexpr auto trunc(Float x)
+    -> decltype(std::trunc(x))
 {
-    return int(value);
+    return int(x);
 }
 
 ////////////////////////////////////////////////////////////
@@ -134,7 +134,7 @@ constexpr auto pow(Number value, Integer exponent)
 template<typename Float,
          typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
 constexpr auto sqrt(Float x)
-    -> Float
+    -> decltype(std::sqrt(x))
 {
     return details::sqrt_helper(x, x);
 }

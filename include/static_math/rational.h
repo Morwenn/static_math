@@ -21,6 +21,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <cmath>
 #include <type_traits>
 #include <static_math/cmath.h>
 #include <static_math/formula.h>
@@ -202,19 +203,19 @@ namespace smath
 
     template<typename T>
     constexpr auto floor(const rational<T>& ratio)
-        -> T;
+        -> decltype(std::floor(T{}));
 
     template<typename T>
     constexpr auto ceil(const rational<T>& ratio)
-        -> T;
+        -> decltype(std::ceil(T{}));
 
     template<typename T>
     constexpr auto round(const rational<T>& ratio)
-        -> T;
+        -> decltype(std::round(T{}));
 
     template<typename T>
     constexpr auto trunc(const rational<T>& ratio)
-        -> T;
+        -> decltype(std::trunc(T{}));
 
     template<typename T>
     constexpr auto reciprocal(const rational<T>& ratio)

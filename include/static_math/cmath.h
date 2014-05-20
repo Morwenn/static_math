@@ -34,6 +34,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <cmath>
 #include <type_traits>
 #include <static_math/utils/compare.h>
 
@@ -69,23 +70,23 @@ namespace smath
 
     template<typename Float,
              typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
-    constexpr auto floor(Float value)
-        -> int;
+    constexpr auto floor(Float x)
+        -> decltype(std::floor(x));
 
     template<typename Float,
              typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
-    constexpr auto ceil(Float value)
-        -> int;
+    constexpr auto ceil(Float x)
+        -> decltype(std::ceil(x));
 
     template<typename Float,
              typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
-    constexpr auto round(Float value)
-        -> int;
+    constexpr auto round(Float x)
+        -> decltype(std::round(x));
 
     template<typename Float,
              typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
-    constexpr auto trunc(Float value)
-        -> int;
+    constexpr auto trunc(Float x)
+        -> decltype(std::trunc(x));
 
     ////////////////////////////////////////////////////////////
     // Power and logarithmic functions
@@ -112,7 +113,7 @@ namespace smath
     template<typename Float,
              typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
     constexpr auto sqrt(Float x)
-        -> Float;
+        -> decltype(std::sqrt(x));
 
     #include <static_math/cmath.inl>
 }

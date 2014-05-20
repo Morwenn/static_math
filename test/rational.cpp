@@ -103,7 +103,7 @@ int main()
     static_assert(abs(a2) == 3 / 8_r, "");
     static_assert(abs(a3) == 6 / 7_r, "");
 
-    static_assert(round(a1) == 1, "");
+    static_assert(round(a1) == 1.0, "");
     /* No more tests for ceil, floor, trunc
      * and round since they are based on
      * the floating point functions after
