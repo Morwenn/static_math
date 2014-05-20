@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#ifndef _SMATH_FORMULA_H
-#define _SMATH_FORMULA_H
+#ifndef SMATH_FORMULA_H_
+#define SMATH_FORMULA_H_
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -126,6 +126,9 @@ namespace smath
 
     /**
      * @brief Greatest common divisor
+     * @param a Some integer
+     * @param b Some integer
+     * @return Greatest common divisor of a and b
      */
     template<typename T, typename U>
     constexpr
@@ -134,6 +137,9 @@ namespace smath
 
     /**
      * @brief Least common multiple
+     * @param a Some integer
+     * @param b Some integer
+     * @return Least common multiple of a and b
      */
     template<typename T, typename U>
     constexpr
@@ -141,13 +147,19 @@ namespace smath
     lcm(T a, U b);
 
     /**
-     * @brief Square of a value
+     * @brief Square function
+     * @param val Some number
+     * @return Square of \a val
      */
     template<typename T>
     constexpr T sqr(const T& value);
 
     /**
-     * @brief Limiting a value to an area
+     * @brief Limits a value to a range
+     * @param val Number to clamp
+     * @param min Lower limit
+     * @param max Higher limit
+     * @return \a val clamped between \a min and \a max
      */
     template<typename T>
     constexpr T clamp(const T& value, const T& min, const T& max);
@@ -157,5 +169,5 @@ namespace smath
 } // namespace smath
 
 
-#endif // _SMATH_FORMULA_H
+#endif // SMATH_FORMULA_H_
 

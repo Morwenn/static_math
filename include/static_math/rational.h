@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#ifndef _SMATH_RATIONAL_H
-#define _SMATH_RATIONAL_H
+#ifndef SMATH_RATIONAL_H_
+#define SMATH_RATIONAL_H_
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -220,4 +220,4 @@ operator "" _static_r(unsigned long long n)
 }
 
 
-#endif // _SMATH_RATIONAL_H
+#endif // SMATH_RATIONAL_H_

@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#ifndef _SMATH_UTILS_TYPE_TRAITS_H
-#define _SMATH_UTILS_TYPE_TRAITS_H
+#ifndef SMATH_UTILS_TYPE_TRAITS_H_
+#define SMATH_UTILS_TYPE_TRAITS_H_
 
 
 ////////////////////////////////////////////////////////////
@@ -61,4 +61,4 @@ namespace smath
 } // namespace smath
 
 
-#endif // _SMATH_UTILS_TYPE_TRAITS_H
+#endif // SMATH_UTILS_TYPE_TRAITS_H_

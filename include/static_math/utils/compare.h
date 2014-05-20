@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#ifndef _SMATH_UTILS_COMPARE_H
-#define _SMATH_UTILS_COMPARE_H
+#ifndef SMATH_UTILS_COMPARE_H_
+#define SMATH_UTILS_COMPARE_H_
 
 
 ////////////////////////////////////////////////////////////
@@ -30,7 +30,7 @@
 // Macros
 ////////////////////////////////////////////////////////////
 
-// To avoid circular dependancy with cmath.h
+// To avoid circular dependency with cmath.h
 
 #define STATIC_MATH_ABS(x) \
     (((x) >= 0) ? (x) : -(x))
@@ -70,9 +70,9 @@ namespace smath
 // End macros
 ////////////////////////////////////////////////////////////
 
-// Cause it's wee-known that macros are evil
+// Not to pollute the global namespace
 #undef STATIC_MATH_ABS
 #undef STATIC_MATH_MAX
 
 
-#endif // _SMATH_UTILS_COMPARE_H
+#endif // SMATH_UTILS_COMPARE_H_

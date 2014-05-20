@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#ifndef _SMATH_CONSTANTS_H
-#define _SMATH_CONSTANTS_H
+#ifndef SMATH_CONSTANTS_H_
+#define SMATH_CONSTANTS_H_
 
 
 namespace smath
@@ -71,5 +71,5 @@ constexpr double PHI      = 1.61803398874989484820;
 } // namespace smath
 
 
-#endif // _SMATH_CONSTANTS_H
+#endif // SMATH_CONSTANTS_H_
 

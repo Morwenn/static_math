@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#ifndef _SMATH_ARRAY_H
-#define _SMATH_ARRAY_H
+#ifndef SMATH_ARRAY_H_
+#define SMATH_ARRAY_H_
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -71,4 +71,4 @@ namespace smath
 } // namespace smath
 
 
-#endif // _SMATH_ARRAY_H
+#endif // SMATH_ARRAY_H_

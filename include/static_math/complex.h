@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#ifndef _SMATH_COMPLEX_H
-#define _SMATH_COMPLEX_H
+#ifndef SMATH_COMPLEX_H_
+#define SMATH_COMPLEX_H_
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -292,4 +292,4 @@ operator"" _static_i(unsigned long long n)
     return smath::imaginary<unsigned long long>(n);
 }
 
-#endif // _SMATH_COMPLEX_H
+#endif // SMATH_COMPLEX_H_

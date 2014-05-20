@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#ifndef _SMATH_MATRIX_H
-#define _SMATH_MATRIX_H
+#ifndef SMATH_MATRIX_H_
+#define SMATH_MATRIX_H_
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -77,4 +77,4 @@ namespace smath
 } // namespace smath
 
 
-#endif // _SMATH_MATRIX_H
+#endif // SMATH_MATRIX_H_

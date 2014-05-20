@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#ifndef _SMATH_STATIC_MATH_H
-#define _SMATH_STATIC_MATH_H
+#ifndef SMATH_STATIC_MATH_H_
+#define SMATH_STATIC_MATH_H_
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -55,5 +55,5 @@
  */
 
 
-#endif // _SMATH_STATIC_MATH_H
+#endif // SMATH_STATIC_MATH_H_
 

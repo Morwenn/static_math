@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#ifndef _SMATH_CMATH_H
-#define _SMATH_CMATH_H
+#ifndef SMATH_CMATH_H_
+#define SMATH_CMATH_H_
 
 /**
  * @file static_math/cmath.h
@@ -111,4 +111,4 @@ namespace smath
 } // namespace smath
 
 
-#endif // _SMATH_CMATH_H
+#endif // SMATH_CMATH_H_
