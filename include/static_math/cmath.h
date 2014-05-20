@@ -37,9 +37,11 @@
 #include <type_traits>
 #include <static_math/utils/compare.h>
 
-
 namespace smath
 {
+    ////////////////////////////////////////////////////////////
+    // Basic functions
+
     /**
      * @brief Absolute value of a number
      */
@@ -54,10 +56,6 @@ namespace smath
     constexpr auto min(T first, U second, Rest... rest)
         -> typename std::common_type<T, U, Rest...>::type;
 
-    template<typename T, typename U>
-    constexpr auto min(T first, U second)
-        -> typename std::common_type<T, U>::type;
-
     /**
      * @brief Max of a number of variables
      */
@@ -65,9 +63,8 @@ namespace smath
     constexpr auto max(T first, U second, Rest... rest)
         -> typename std::common_type<T, U, Rest...>::type;
 
-    template<typename T, typename U>
-    constexpr auto max(T first, U second)
-        -> typename std::common_type<T, U>::type;
+    ////////////////////////////////////////////////////////////
+    // Number-theoretic and representation functions
 
     template<typename Float>
     constexpr auto floor(Float value)
@@ -85,6 +82,9 @@ namespace smath
     constexpr auto trunc(Float value)
         -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type;
 
+    ////////////////////////////////////////////////////////////
+    // Power and logarithmic functions
+
     /**
      * @brief Power function
      *
@@ -93,7 +93,8 @@ namespace smath
      */
     template<typename T, typename U>
     constexpr auto pow(T value, U exponent)
-        -> typename std::enable_if<std::is_integral<U>::value && std::is_arithmetic<T>::value, T>::type;
+        -> typename std::enable_if<std::is_integral<U>::value
+                                   && std::is_arithmetic<T>::value, T>::type;
 
     /**
      * @brief Square root function
@@ -107,8 +108,6 @@ namespace smath
         -> typename std::enable_if<std::is_floating_point<Float>::value, Float>::type;
 
     #include <static_math/cmath.inl>
-
-} // namespace smath
-
+}
 
 #endif // SMATH_CMATH_H_

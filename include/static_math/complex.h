@@ -24,17 +24,16 @@
 #include <type_traits>
 #include <static_math/formula.h>
 
-
 namespace smath
 {
-
     /**
      * @brief Imaginary numbers
      */
     template<typename T>
     class imaginary
     {
-        static_assert(std::is_arithmetic<T>::value, "An imaginary number can only contain arithmetic values.");
+        static_assert(std::is_arithmetic<T>::value,
+                      "An imaginary number can only contain arithmetic values.");
 
         public:
 
@@ -55,7 +54,8 @@ namespace smath
     template<typename T>
     class complex
     {
-        static_assert(std::is_arithmetic<T>::value, "A complex number can only contain arithmetic values.");
+        static_assert(std::is_arithmetic<T>::value,
+                      "A complex number can only contain arithmetic values.");
 
         public:
 
@@ -75,8 +75,7 @@ namespace smath
     };
 
     ////////////////////////////////////////////////////////////
-    // Comparison operators
-    ////////////////////////////////////////////////////////////
+    // Unary arithmetic operators
 
     template<typename T>
     constexpr imaginary<T> operator+(const imaginary<T>& imag);
@@ -88,43 +87,8 @@ namespace smath
     template<typename T>
     constexpr complex<T> operator-(const complex<T>& ratio);
 
-    template<typename T, typename U>
-    constexpr bool operator==(const imaginary<T>& lhs, const imaginary<U>& rhs);
-    template<typename T, typename U>
-    constexpr bool operator!=(const imaginary<T>& lhs, const imaginary<U>& rhs);
-
-    template<typename T, typename U>
-    constexpr bool operator==(const complex<T>& lhs, const complex<U>& rhs);
-    template<typename T, typename U>
-    constexpr bool operator!=(const complex<T>& lhs, const complex<U>& rhs);
-
-    template<typename T, typename U>
-    constexpr
-    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-    operator==(const complex<T>& lhs, const U& rhs);
-    template<typename T, typename U>
-    constexpr
-    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-    operator!=(const complex<T>& lhs, const U& rhs);
-
-    template<typename T, typename U>
-    constexpr
-    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-    operator==(const U& lhs, const complex<T>& rhs);
-    template<typename T, typename U>
-    constexpr
-    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-    operator!=(const U& lhs, const complex<T>& rhs);
-
-    template<typename T, typename U>
-    constexpr bool operator==(const complex<T>& lhs, const imaginary<U>& rhs);
-    template<typename T, typename U>
-    constexpr bool operator!=(const complex<T>& lhs, const imaginary<U>& rhs);
-
-    template<typename T, typename U>
-    constexpr bool operator==(const imaginary<T>& lhs, const complex<U>& rhs);
-    template<typename T, typename U>
-    constexpr bool operator!=(const imaginary<T>& lhs, const complex<U>& rhs);
+    ////////////////////////////////////////////////////////////
+    // Binary arithmetic operators
 
     template<typename T, typename U>
     constexpr
@@ -263,8 +227,48 @@ namespace smath
     operator/(const imaginary<T>& lhs, const complex<U>& rhs);
 
     ////////////////////////////////////////////////////////////
-    // Mathematical functions
+    // Comparison operators
+
+    template<typename T, typename U>
+    constexpr bool operator==(const imaginary<T>& lhs, const imaginary<U>& rhs);
+    template<typename T, typename U>
+    constexpr bool operator!=(const imaginary<T>& lhs, const imaginary<U>& rhs);
+
+    template<typename T, typename U>
+    constexpr bool operator==(const complex<T>& lhs, const complex<U>& rhs);
+    template<typename T, typename U>
+    constexpr bool operator!=(const complex<T>& lhs, const complex<U>& rhs);
+
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+    operator==(const complex<T>& lhs, const U& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+    operator!=(const complex<T>& lhs, const U& rhs);
+
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+    operator==(const U& lhs, const complex<T>& rhs);
+    template<typename T, typename U>
+    constexpr
+    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+    operator!=(const U& lhs, const complex<T>& rhs);
+
+    template<typename T, typename U>
+    constexpr bool operator==(const complex<T>& lhs, const imaginary<U>& rhs);
+    template<typename T, typename U>
+    constexpr bool operator!=(const complex<T>& lhs, const imaginary<U>& rhs);
+
+    template<typename T, typename U>
+    constexpr bool operator==(const imaginary<T>& lhs, const complex<U>& rhs);
+    template<typename T, typename U>
+    constexpr bool operator!=(const imaginary<T>& lhs, const complex<U>& rhs);
+
     ////////////////////////////////////////////////////////////
+    // Mathematical functions
 
     template<typename T>
     constexpr T real(const complex<T>& x);
@@ -277,8 +281,10 @@ namespace smath
 
     #include <static_math/complex.inl>
 
-} // namespace smath
+}
 
+////////////////////////////////////////////////////////////
+// User-defined literals
 
 constexpr smath::imaginary<long double>
 operator"" _static_i(long double n)

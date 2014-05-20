@@ -18,19 +18,16 @@
 #ifndef SMATH_UTILS_COMPARE_H_
 #define SMATH_UTILS_COMPARE_H_
 
-
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
 #include <limits>
 #include <static_math/utils/type_traits.h>
 
-
 ////////////////////////////////////////////////////////////
 // Macros
-////////////////////////////////////////////////////////////
 
-// To avoid circular dependency with cmath.h
+// Avoid circular dependency with cmath.h
 
 #define STATIC_MATH_ABS(x) \
     (((x) >= 0) ? (x) : -(x))
@@ -38,14 +35,11 @@
 #define STATIC_MATH_MAX(x, y) \
     (((x) >= (y)) ? (x) : (y))
 
-
 ////////////////////////////////////////////////////////////
 // Functions
-////////////////////////////////////////////////////////////
 
 namespace smath
 {
-
     /**
      * @brief Floating point comparison
      *
@@ -62,17 +56,13 @@ namespace smath
             std::numeric_limits<typename lesser_of<T, U>::type>::epsilon() *
             STATIC_MATH_MAX(STATIC_MATH_ABS(a), STATIC_MATH_ABS(b));
     }
-
-} // namespace smath
-
+}
 
 ////////////////////////////////////////////////////////////
 // End macros
-////////////////////////////////////////////////////////////
 
-// Not to pollute the global namespace
+// Avoid polluting the global namespace
 #undef STATIC_MATH_ABS
 #undef STATIC_MATH_MAX
-
 
 #endif // SMATH_UTILS_COMPARE_H_

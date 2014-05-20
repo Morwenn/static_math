@@ -16,6 +16,9 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
+////////////////////////////////////////////////////////////
+// imaginary<T> functions
+
 template<typename T>
 constexpr imaginary<T>::imaginary(T real):
     _value(real)
@@ -26,6 +29,9 @@ constexpr T imaginary<T>::value() const
 {
     return _value;
 }
+
+////////////////////////////////////////////////////////////
+// complex<T> functions
 
 template<typename T>
 constexpr complex<T>::complex(T real, T imag):
@@ -57,6 +63,9 @@ constexpr T complex<T>::imag_value() const
     return _imag.value();
 }
 
+////////////////////////////////////////////////////////////
+// Unary arithmetic operators
+
 template<typename T>
 constexpr imaginary<T> operator+(const imaginary<T>& imag)
 {
@@ -84,85 +93,8 @@ constexpr complex<T> operator-(const complex<T>& ratio)
     );
 }
 
-template<typename T, typename U>
-constexpr bool operator==(const imaginary<T>& lhs, const imaginary<U>& rhs)
-{
-        return lhs.value() == rhs.value();
-}
-
-template<typename T, typename U>
-constexpr bool operator!=(const imaginary<T>& lhs, const imaginary<U>& rhs)
-{
-    return !(lhs == rhs);
-}
-
-template<typename T, typename U>
-constexpr bool operator==(const complex<T>& lhs, const complex<U>& rhs)
-{
-    return lhs.real() == rhs.real() && lhs.imag() == rhs.imag();
-}
-
-template<typename T, typename U>
-constexpr bool operator!=(const complex<T>& lhs, const complex<U>& rhs)
-{
-    return !(lhs == rhs);
-}
-
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-operator==(const complex<T>& lhs, const U& rhs)
-{
-    return lhs.real() == rhs && lhs.imag_value() == 0;
-}
-
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-operator!=(const complex<T>& lhs, const U& rhs)
-{
-    return !(lhs == rhs);
-}
-
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-operator==(const U& lhs, const complex<T>& rhs)
-{
-    return rhs.real() == lhs && rhs.imag_value() == 0;
-}
-
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-operator!=(const U& lhs, const complex<T>& rhs)
-{
-    return !(lhs == rhs);
-}
-
-template<typename T, typename U>
-constexpr bool operator==(const complex<T>& lhs, const imaginary<U>& rhs)
-{
-    return lhs.imag() == rhs && lhs.real() == 0;
-}
-
-template<typename T, typename U>
-constexpr bool operator!=(const complex<T>& lhs, const imaginary<U>& rhs)
-{
-    return !(lhs == rhs);
-}
-
-template<typename T, typename U>
-constexpr bool operator==(const imaginary<T>& lhs, const complex<U>& rhs)
-{
-    return rhs.imag() == lhs && rhs.real() == 0;
-}
-
-template<typename T, typename U>
-constexpr bool operator!=(const imaginary<T>& lhs, const complex<U>& rhs)
-{
-    return !(lhs == rhs);
-}
+////////////////////////////////////////////////////////////
+// Binary arithmetic operators
 
 template<typename T, typename U>
 constexpr
@@ -231,7 +163,7 @@ constexpr
 imaginary<typename std::common_type<T, U>::type>
 operator/(const imaginary<T>& lhs, const U& rhs)
 {
-    return imaginary<typename std::common_type<T, U>::type>(lhs.value() / 2);
+    return imaginary<typename std::common_type<T, U>::type>(lhs.value() / rhs);
 }
 
 template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
@@ -354,8 +286,8 @@ complex<typename std::common_type<T, U>::type>
 operator/(const complex<T>& lhs, const U& rhs)
 {
     return complex<typename std::common_type<T, U>::type>(
-        lhs.real() * rhs / sqr(rhs),
-        lhs.imag() / sqr(rhs)
+        lhs.real() / rhs,
+        lhs.imag() / rhs
     );
 }
 
@@ -488,6 +420,92 @@ operator/(const imaginary<T>& lhs, const complex<U>& rhs)
         lhs.value() * rhs.real() / (sqr(rhs.real()) + sqr(rhs.imag_value()))
     );
 }
+
+////////////////////////////////////////////////////////////
+// Comparison operators
+
+template<typename T, typename U>
+constexpr bool operator==(const imaginary<T>& lhs, const imaginary<U>& rhs)
+{
+        return lhs.value() == rhs.value();
+}
+
+template<typename T, typename U>
+constexpr bool operator!=(const imaginary<T>& lhs, const imaginary<U>& rhs)
+{
+    return !(lhs == rhs);
+}
+
+template<typename T, typename U>
+constexpr bool operator==(const complex<T>& lhs, const complex<U>& rhs)
+{
+    return lhs.real() == rhs.real() && lhs.imag() == rhs.imag();
+}
+
+template<typename T, typename U>
+constexpr bool operator!=(const complex<T>& lhs, const complex<U>& rhs)
+{
+    return !(lhs == rhs);
+}
+
+template<typename T, typename U>
+constexpr
+typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+operator==(const complex<T>& lhs, const U& rhs)
+{
+    return lhs.real() == rhs && lhs.imag_value() == 0;
+}
+
+template<typename T, typename U>
+constexpr
+typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+operator!=(const complex<T>& lhs, const U& rhs)
+{
+    return !(lhs == rhs);
+}
+
+template<typename T, typename U>
+constexpr
+typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+operator==(const U& lhs, const complex<T>& rhs)
+{
+    return rhs.real() == lhs && rhs.imag_value() == 0;
+}
+
+template<typename T, typename U>
+constexpr
+typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
+operator!=(const U& lhs, const complex<T>& rhs)
+{
+    return !(lhs == rhs);
+}
+
+template<typename T, typename U>
+constexpr bool operator==(const complex<T>& lhs, const imaginary<U>& rhs)
+{
+    return lhs.imag() == rhs && lhs.real() == 0;
+}
+
+template<typename T, typename U>
+constexpr bool operator!=(const complex<T>& lhs, const imaginary<U>& rhs)
+{
+    return !(lhs == rhs);
+}
+
+template<typename T, typename U>
+constexpr bool operator==(const imaginary<T>& lhs, const complex<U>& rhs)
+{
+    return rhs.imag() == lhs && rhs.real() == 0;
+}
+
+template<typename T, typename U>
+constexpr bool operator!=(const imaginary<T>& lhs, const complex<U>& rhs)
+{
+    return !(lhs == rhs);
+}
+
+////////////////////////////////////////////////////////////
+// Mathematical functions
 
 template<typename T>
 constexpr T real(const complex<T>& x)

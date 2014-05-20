@@ -27,4 +27,3 @@ constexpr auto array<T>::operator[](std::size_t n)
 {
     return this->begin()[n];
 }
-

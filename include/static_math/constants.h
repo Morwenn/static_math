@@ -18,58 +18,34 @@
 #ifndef SMATH_CONSTANTS_H_
 #define SMATH_CONSTANTS_H_
 
-
 namespace smath
 {
+    ////////////////////////////////////////////////////////////
+    // POSIX constants from cmath
 
+    /** e */
+    constexpr double E        = 2.71828182845904523540;
 
-////////////////////////////////////////////////////////////
-// Non-standard constants from math.h
-////////////////////////////////////////////////////////////
+    /** log2(e) */
+    constexpr double LOG2E    = 1.44269504088896340740;
 
-/**
- * e
- */
-constexpr double E        = 2.71828182845904523540;
+    /** log10(e) */
+    constexpr double LOG10E   = 0.43429448190325182765;
 
-/**
- * log2(e)
- */
-constexpr double LOG2E    = 1.44269504088896340740;
+    /** ln(2) */
+    constexpr double LN2      = 0.69314718055994530942;
 
-/**
- * log10(e)
- */
-constexpr double LOG10E   = 0.43429448190325182765;
+    /** ln(10) */
+    constexpr double LN10     = 2.30258509299404568402;
 
-/**
- * ln(2)
- */
-constexpr double LN2      = 0.69314718055994530942;
+    /** pi */
+    constexpr double PI       = 3.14159265358979323846;
 
-/**
- * ln(10)
- */
-constexpr double LN10     = 2.30258509299404568402;
+    ////////////////////////////////////////////////////////////
+    // Other mathematical constants
 
-/**
- * pi
- */
-constexpr double PI       = 3.14159265358979323846;
-
-
-////////////////////////////////////////////////////////////
-// Other mathematical constants
-////////////////////////////////////////////////////////////
-
-/**
- * Golden ratio
- */
-constexpr double PHI      = 1.61803398874989484820;
-
-
-} // namespace smath
-
+    /** Golden ratio */
+    constexpr double PHI      = 1.61803398874989484820;
+}
 
 #endif // SMATH_CONSTANTS_H_
-

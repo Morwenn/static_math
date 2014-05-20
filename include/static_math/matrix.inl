@@ -17,21 +17,21 @@
  */
 
 template<std::size_t H, std::size_t W, typename T>
-constexpr auto matrix<H, W, T>::height()
+constexpr auto matrix<H, W, T>::height() const
     -> std::size_t
 {
     return H;
 }
 
 template<std::size_t H, std::size_t W, typename T>
-constexpr auto matrix<H, W, T>::width()
+constexpr auto matrix<H, W, T>::width() const
     -> std::size_t
 {
     return W;
 }
 
 template<std::size_t H, std::size_t W, typename T>
-constexpr auto matrix<H, W, T>::size()
+constexpr auto matrix<H, W, T>::size() const
     -> std::size_t
 {
     return H * W;

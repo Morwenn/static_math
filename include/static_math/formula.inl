@@ -17,12 +17,10 @@
  */
 
 ////////////////////////////////////////////////////////////
-// Static variables, Initialization & Helpers
-////////////////////////////////////////////////////////////
+// Helper functions
 
 namespace details
 {
-    // Helper for the is_prime() function
     template<typename T>
     constexpr bool is_prime_helper(T n, T div)
     {
@@ -40,17 +38,51 @@ namespace details
     }
 }
 
-
 ////////////////////////////////////////////////////////////
-// Functions definitions
-////////////////////////////////////////////////////////////
+// Basic functions
 
 template<typename Number>
-constexpr auto sign(Number value)
+constexpr auto sign(Number x)
     -> int
 {
-    return (value > 0) ? 1 : (value < 0) ? -1 : 0;
+    return (x > 0) ? 1 : (x < 0) ? -1 : 0;
 }
+
+template<typename Numeric>
+constexpr
+Numeric sum(Numeric first, Numeric second)
+{
+    return first + second;
+}
+
+template<typename Numeric, typename... Rest>
+constexpr
+Numeric sum(Numeric first, Numeric second, Rest... rest)
+{
+    return first + sum(second, rest...);
+}
+
+template<typename... Numbers>
+constexpr
+long double mean(Numbers... args)
+{
+    return (long double) sum(args...) / (long double) sizeof...(args);
+}
+
+template<typename Number>
+constexpr Number sqr(Number x)
+{
+    return x * x;
+}
+
+template<typename Number>
+constexpr Number clamp(Number x, Number min, Number max)
+{
+    return (x < min) ? min : (x > max) ? max : x;
+}
+
+////////////////////////////////////////////////////////////
+// Integer-related functions
 
 template<typename T>
 constexpr
@@ -83,22 +115,6 @@ is_prime(T n)
 
 template<typename T>
 constexpr
-typename std::enable_if<std::is_floating_point<T>::value, T>::type
-degree(T rad)
-{
-    return rad * 180.0L / PI;
-}
-
-template<typename T>
-constexpr
-typename std::enable_if<std::is_floating_point<T>::value, T>::type
-radian(T deg)
-{
-    return deg * PI / 180.0L;
-}
-
-template<typename T>
-constexpr
 typename std::enable_if<is_integral<T>::value, T>::type
 fibonacci(T n)
 {
@@ -111,27 +127,6 @@ typename std::enable_if<is_integral<T>::value, T>::type
 factorial(T n)
 {
     return (n > 1) ? n * factorial(n - 1) : 1;
-}
-
-template<typename Numeric, typename... Rest>
-constexpr
-Numeric sum(Numeric first, Numeric second, Rest... rest)
-{
-    return first + sum(second, rest...);
-}
-
-template<typename Numeric>
-constexpr
-Numeric sum(Numeric first, Numeric second)
-{
-    return first + second;
-}
-
-template<typename... Args>
-constexpr
-long double mean(Args... args)
-{
-    return (long double) sum(args...) / (long double) sizeof...(args);
 }
 
 template<typename T, typename U>
@@ -153,14 +148,21 @@ lcm(T a, U b)
         a * b / gcd(a, b);
 }
 
+////////////////////////////////////////////////////////////
+// Angle conversions
+
 template<typename T>
-constexpr T sqr(const T& value)
+constexpr
+typename std::enable_if<std::is_floating_point<T>::value, T>::type
+degree(T x)
 {
-    return value * value;
+    return x * 180.0L / PI;
 }
 
 template<typename T>
-constexpr T clamp(const T& value, const T& min, const T& max)
+constexpr
+typename std::enable_if<std::is_floating_point<T>::value, T>::type
+radian(T x)
 {
-    return (value < min) ? min : (value > max) ? max : value;
+    return x * PI / 180.0L;
 }

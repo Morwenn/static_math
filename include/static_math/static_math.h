@@ -54,6 +54,4 @@
  * any library dedicated to maths.
  */
 
-
 #endif // SMATH_STATIC_MATH_H_
-

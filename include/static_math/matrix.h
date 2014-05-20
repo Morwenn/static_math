@@ -23,7 +23,6 @@
 ////////////////////////////////////////////////////////////
 #include <cstddef>
 
-
 namespace smath
 {
     /**
@@ -73,8 +72,6 @@ namespace smath
     ////////////////////////////////////////////////////////////
 
     #include <static_math/matrix.inl>
-
-} // namespace smath
-
+}
 
 #endif // SMATH_MATRIX_H_

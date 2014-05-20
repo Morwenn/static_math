@@ -18,7 +18,6 @@
 #ifndef SMATH_UTILS_TYPE_TRAITS_H_
 #define SMATH_UTILS_TYPE_TRAITS_H_
 
-
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
@@ -26,7 +25,6 @@
 
 namespace smath
 {
-
     template<typename T, typename U>
     using greater_of = std::conditional<
         sizeof(T) >= sizeof(U),
@@ -57,8 +55,6 @@ namespace smath
             std::false_type
         >::type
     {};
-
-} // namespace smath
-
+}
 
 #endif // SMATH_UTILS_TYPE_TRAITS_H_

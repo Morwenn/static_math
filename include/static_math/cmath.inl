@@ -16,6 +16,9 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
+////////////////////////////////////////////////////////////
+// Helper functions
+
 namespace details
 {
     template<typename T, typename U>
@@ -36,18 +39,14 @@ namespace details
     }
 }
 
+////////////////////////////////////////////////////////////
+// Basic functions
+
 template<typename T>
 constexpr auto abs(T x)
     -> typename std::enable_if<std::is_arithmetic<T>::value, T>::type
 {
     return (x >= 0) ? x : -x;
-}
-
-template<typename T, typename U, typename... Rest>
-constexpr auto min(T first, U second, Rest... rest)
-    -> typename std::common_type<T, U, Rest...>::type
-{
-    return (first < second) ? min(first, rest...) : min(second, rest...);
 }
 
 template<typename T, typename U>
@@ -58,10 +57,10 @@ constexpr auto min(T first, U second)
 }
 
 template<typename T, typename U, typename... Rest>
-constexpr auto max(T first, U second, Rest... rest)
+constexpr auto min(T first, U second, Rest... rest)
     -> typename std::common_type<T, U, Rest...>::type
 {
-    return (first > second) ? max(first, rest...) : max(second, rest...);
+    return (first < second) ? min(first, rest...) : min(second, rest...);
 }
 
 template<typename T, typename U>
@@ -70,6 +69,16 @@ constexpr auto max(T first, U second)
 {
     return (first > second) ? first : second;
 }
+
+template<typename T, typename U, typename... Rest>
+constexpr auto max(T first, U second, Rest... rest)
+    -> typename std::common_type<T, U, Rest...>::type
+{
+    return (first > second) ? max(first, rest...) : max(second, rest...);
+}
+
+////////////////////////////////////////////////////////////
+// Number-theoretic and representation functions
 
 template<typename Float>
 constexpr auto floor(Float value)
@@ -103,9 +112,13 @@ constexpr auto trunc(Float value)
     return int(value);
 }
 
+////////////////////////////////////////////////////////////
+// Power and logarithmic functions
+
 template<typename T, typename U>
 constexpr auto pow(T value, U exponent)
-    -> typename std::enable_if<std::is_integral<U>::value && std::is_arithmetic<T>::value, T>::type
+    -> typename std::enable_if<std::is_integral<U>::value
+                               && std::is_arithmetic<T>::value, T>::type
 {
     return (exponent == 0) ? 1 :
         (exponent > 0) ? details::pow_helper(value, value, exponent) :

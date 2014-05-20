@@ -24,17 +24,54 @@
 #include <static_math/constants.h>
 #include <static_math/utils/type_traits.h>
 
-
 namespace smath
 {
+    ////////////////////////////////////////////////////////////
+    // Basic functions
+
     /**
      * @brief signum function
      * @param val Any number
      * @return Sign of \a val
      */
     template<typename Number>
-    constexpr auto sign(Number val)
+    constexpr auto sign(Number x)
         -> int;
+
+    /**
+     * @brief Sum of a number of variables
+     */
+    template<typename Numeric, typename... Rest>
+    constexpr
+    Numeric sum(Numeric first, Numeric second, Rest... rest);
+
+    /**
+     * @brief Mean of a number of variables
+     */
+    template<typename... Numbers>
+    constexpr
+    long double mean(Numbers... args);
+
+    /**
+     * @brief Square function
+     * @param x Some number
+     * @return Square of \a x
+     */
+    template<typename Number>
+    constexpr Number sqr(Number x);
+
+    /**
+     * @brief Limits a value to a range
+     * @param val Number to clamp
+     * @param min Lower limit
+     * @param max Higher limit
+     * @return \a val clamped between \a min and \a max
+     */
+    template<typename Number>
+    constexpr Number clamp(Number x, Number min, Number max);
+
+    ////////////////////////////////////////////////////////////
+    // Integer-related functions
 
     /**
      * @brief Tells whether the given number is even
@@ -67,26 +104,6 @@ namespace smath
     is_prime(T n);
 
     /**
-     * @brief Converts an angle in radians into an angle in degrees.
-     * @param radians Angle in radians
-     * @return The degrees value
-     */
-    template<typename T>
-    constexpr
-    typename std::enable_if<std::is_floating_point<T>::value, T>::type
-    degrees(T radians);
-
-    /**
-     * @brief Converts an angle in degrees into an angle in radians.
-     * @param degrees Angle in degrees
-     * @return The radians value
-     */
-    template<typename T>
-    constexpr
-    typename std::enable_if<std::is_floating_point<T>::value, T>::type
-    radians(T degrees);
-
-    /**
      * @brief Fibonacci function
      * @param n Some integer
      * @return nth Fibonacci number
@@ -105,24 +122,6 @@ namespace smath
     constexpr
     typename std::enable_if<is_integral<T>::value, T>::type
     factorial(T n);
-
-    /**
-     * @brief Sum of a number of variables
-     */
-    template<typename Numeric, typename... Rest>
-    constexpr
-    Numeric sum(Numeric first, Numeric second, Rest... rest);
-
-    template<typename Numeric>
-    constexpr
-    Numeric sum(Numeric first, Numeric second);
-
-    /**
-     * @brief Mean of a number of variables
-     */
-    template<typename... Args>
-    constexpr
-    long double mean(Args... args);
 
     /**
      * @brief Greatest common divisor
@@ -146,28 +145,30 @@ namespace smath
     typename std::enable_if<is_integral<T, U>::value, typename std::common_type<T, U>::type>::type
     lcm(T a, U b);
 
-    /**
-     * @brief Square function
-     * @param val Some number
-     * @return Square of \a val
-     */
-    template<typename T>
-    constexpr T sqr(const T& value);
+    ////////////////////////////////////////////////////////////
+    // Angle conversions
 
     /**
-     * @brief Limits a value to a range
-     * @param val Number to clamp
-     * @param min Lower limit
-     * @param max Higher limit
-     * @return \a val clamped between \a min and \a max
+     * @brief Converts an angle in radians into an angle in degrees.
+     * @param x Angle in radians
+     * @return The degrees value
      */
     template<typename T>
-    constexpr T clamp(const T& value, const T& min, const T& max);
+    constexpr
+    typename std::enable_if<std::is_floating_point<T>::value, T>::type
+    degrees(T x);
+
+    /**
+     * @brief Converts an angle in degrees into an angle in radians.
+     * @param x Angle in degrees
+     * @return The radians value
+     */
+    template<typename T>
+    constexpr
+    typename std::enable_if<std::is_floating_point<T>::value, T>::type
+    radians(T x);
 
     #include <static_math/formula.inl>
-
-} // namespace smath
-
+}
 
 #endif // SMATH_FORMULA_H_
-
