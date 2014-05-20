@@ -62,9 +62,12 @@ namespace smath
         // Miscellaneous functions
         ////////////////////////////////////////////////////////////
 
-        constexpr auto width()  const -> std::size_t;
-        constexpr auto height() const -> std::size_t;
-        constexpr auto size()   const -> std::size_t;
+        constexpr auto width() const
+            -> std::size_t;
+        constexpr auto height() const
+            -> std::size_t;
+        constexpr auto size() const
+            -> std::size_t;
     };
 
     ////////////////////////////////////////////////////////////

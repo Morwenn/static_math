@@ -47,10 +47,10 @@ namespace smath
      * the difference between the two of them is lower than a
      * given value.
      */
-    template<typename T, typename U>
-    constexpr
-    typename std::enable_if<std::is_floating_point<T>::value && std::is_floating_point<U>::value, bool>::type
-    equals(T a, U b)
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_floating_point<T>::value && std::is_floating_point<U>::value, void>::type>
+    constexpr auto equals(T a, U b)
+        -> bool
     {
         return STATIC_MATH_ABS(a-b) <=
             std::numeric_limits<typename lesser_of<T, U>::type>::epsilon() *

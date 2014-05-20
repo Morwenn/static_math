@@ -44,13 +44,15 @@ constexpr rational<T>::rational(T numerator, T denominator):
 // Accessors
 
 template<typename T>
-constexpr T rational<T>::numerator() const
+constexpr auto rational<T>::numerator() const
+    -> value_type
 {
     return _numerator;
 }
 
 template<typename T>
-constexpr T rational<T>::denominator() const
+constexpr auto rational<T>::denominator() const
+    -> value_type
 {
     return _denominator;
 }
@@ -71,13 +73,15 @@ constexpr rational<T>::operator bool() const
 // Unary arithmetic operators
 
 template<typename T>
-constexpr rational<T> operator+(const rational<T>& lhs)
+constexpr auto operator+(const rational<T>& lhs)
+    -> rational<T>
 {
     return lhs;
 }
 
 template<typename T>
-constexpr rational<T> operator-(const rational<T>& lhs)
+constexpr auto operator-(const rational<T>& lhs)
+    -> rational<T>
 {
     return rational<T>(
         -lhs.numerator(),
@@ -89,9 +93,8 @@ constexpr rational<T> operator-(const rational<T>& lhs)
 // Binary arithmetic operators
 
 template<typename T, typename U>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator+(const rational<T>& lhs, const rational<U>& rhs)
+constexpr auto operator+(const rational<T>& lhs, const rational<U>& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<typename std::common_type<T, U>::type>(
         lhs.numerator() * rhs.denominator() + rhs.numerator() * lhs.denominator(),
@@ -100,9 +103,8 @@ operator+(const rational<T>& lhs, const rational<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator-(const rational<T>& lhs, const rational<U>& rhs)
+constexpr auto operator-(const rational<T>& lhs, const rational<U>& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<typename std::common_type<T, U>::type>(
         lhs.numerator() * rhs.denominator() - rhs.numerator() * lhs.denominator(),
@@ -111,9 +113,8 @@ operator-(const rational<T>& lhs, const rational<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator*(const rational<T>& lhs, const rational<U>& rhs)
+constexpr auto operator*(const rational<T>& lhs, const rational<U>& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<T>(
         lhs.numerator() * rhs.numerator(),
@@ -122,9 +123,8 @@ operator*(const rational<T>& lhs, const rational<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator/(const rational<T>& lhs, const rational<U>& rhs)
+constexpr auto operator/(const rational<T>& lhs, const rational<U>& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<T>(
         lhs.numerator() * rhs.denominator(),
@@ -132,10 +132,10 @@ operator/(const rational<T>& lhs, const rational<U>& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator+(const rational<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator+(const rational<T>& lhs, const U& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<typename std::common_type<T, U>::type>(
         lhs.numerator() + rhs * lhs.denominator(),
@@ -143,10 +143,10 @@ operator+(const rational<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator-(const rational<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator-(const rational<T>& lhs, const U& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<typename std::common_type<T, U>::type>(
         lhs.numerator() - rhs * lhs.denominator(),
@@ -154,10 +154,10 @@ operator-(const rational<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator*(const rational<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator*(const rational<T>& lhs, const U& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<typename std::common_type<T, U>::type>(
         lhs.numerator() * rhs,
@@ -165,10 +165,10 @@ operator*(const rational<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator/(const rational<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator/(const rational<T>& lhs, const U& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<typename std::common_type<T, U>::type>(
         lhs.numerator(),
@@ -176,10 +176,10 @@ operator/(const rational<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator+(const U& lhs, const rational<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator+(const U& lhs, const rational<T>& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<typename std::common_type<T, U>::type>(
         lhs * rhs.denominator() + rhs.numerator(),
@@ -187,10 +187,10 @@ operator+(const U& lhs, const rational<T>& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator-(const U& lhs, const rational<T> rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator-(const U& lhs, const rational<T>& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<typename std::common_type<T, U>::type>(
         lhs * rhs.denominator() - rhs.numerator(),
@@ -198,10 +198,10 @@ operator-(const U& lhs, const rational<T> rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator*(const U& lhs, const rational<T> rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator*(const U& lhs, const rational<T>& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<typename std::common_type<T, U>::type>(
         lhs * rhs.numerator(),
@@ -209,10 +209,10 @@ operator*(const U& lhs, const rational<T> rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
-constexpr
-rational<typename std::common_type<T, U>::type>
-operator/(const U& lhs, const rational<T> rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator/(const U& lhs, const rational<T>& rhs)
+    -> rational<typename std::common_type<T, U>::type>
 {
     return rational<typename std::common_type<T, U>::type>(
         lhs * rhs.denominator(),
@@ -224,133 +224,139 @@ operator/(const U& lhs, const rational<T> rhs)
 // Relational operators
 
 template<typename T, typename U>
-constexpr bool operator==(const rational<T>& lhs, const rational<U>& rhs)
+constexpr auto operator==(const rational<T>& lhs, const rational<U>& rhs)
+    -> bool
 {
     return lhs.numerator() == rhs.numerator() && lhs.denominator() == rhs.denominator();
 }
 
 template<typename T, typename U>
-constexpr bool operator!=(const rational<T>& lhs, const rational<U>& rhs)
+constexpr auto operator!=(const rational<T>& lhs, const rational<U>& rhs)
+    -> bool
 {
     return !(lhs == rhs);
 }
 
 template<typename T, typename U>
-constexpr bool operator<(const rational<T>& lhs, const rational<U>& rhs)
+constexpr auto operator<(const rational<T>& lhs, const rational<U>& rhs)
+    -> bool
 {
     return lhs.numerator() * rhs.denominator() < lhs.denominator() * rhs.numerator();
 }
 
 template<typename T, typename U>
-constexpr bool operator>(const rational<T>& lhs, const rational<U>& rhs)
+constexpr auto operator>(const rational<T>& lhs, const rational<U>& rhs)
+    -> bool
 {
     return lhs.numerator() * rhs.denominator() > lhs.denominator() * rhs.numerator();
 }
 
 template<typename T, typename U>
-constexpr bool operator<=(const rational<T>& lhs, const rational<U>& rhs)
+constexpr auto operator<=(const rational<T>& lhs, const rational<U>& rhs)
+    -> bool
 {
     return lhs.numerator() * rhs.denominator() <= lhs.denominator() * rhs.numerator();
 }
 
 template<typename T, typename U>
-constexpr bool operator>=(const rational<T>& lhs, const rational<U>& rhs)
+constexpr auto operator>=(const rational<T>& lhs, const rational<U>& rhs)
+    -> bool
 {
     return lhs.numerator() * rhs.denominator() >= lhs.denominator() * rhs.numerator();
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator==(const rational<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator==(const rational<T>& lhs, const U& rhs)
+    -> bool
 {
     return rhs * lhs.denominator() == lhs.numerator();
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator!=(const rational<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator!=(const rational<T>& lhs, const U& rhs)
+    -> bool
 {
     return !(lhs == rhs);
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator<(const rational<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator<(const rational<T>& lhs, const U& rhs)
+    -> bool
 {
     return lhs.numerator() < lhs.denominator() * rhs;
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator>(const rational<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator>(const rational<T>& lhs, const U& rhs)
+    -> bool
 {
     return lhs.numerator() > lhs.denominator() * rhs;
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator<=(const rational<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator<=(const rational<T>& lhs, const U& rhs)
+    -> bool
 {
     return lhs.numerator() <= lhs.denominator() * rhs;
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator>=(const rational<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator>=(const rational<T>& lhs, const U& rhs)
+    -> bool
 {
     return lhs.numerator() >= lhs.denominator() * rhs;
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator==(const U& lhs, const rational<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator==(const U& lhs, const rational<T>& rhs)
+    -> bool
 {
     return lhs * rhs.denominator() == rhs.numerator();
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator!=(const U& lhs, const rational<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator!=(const U& lhs, const rational<T>& rhs)
+    -> bool
 {
     return !(rhs == lhs);
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator<(const U& lhs, const rational<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator<(const U& lhs, const rational<T>& rhs)
+    -> bool
 {
     return lhs * rhs.denominator() < rhs.numerator();
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator>(const U& lhs, const rational<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator>(const U& lhs, const rational<T>& rhs)
+    -> bool
 {
     return lhs * rhs.denominator() > rhs.numerator();
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator<=(const U& lhs, const rational<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator<=(const U& lhs, const rational<T>& rhs)
+    -> bool
 {
     return lhs * rhs.denominator() <= rhs.numerator();
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_integral<U>::value, bool>::type
-operator>=(const U& lhs, const rational<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_integral<U>::value, void>::type>
+constexpr auto operator>=(const U& lhs, const rational<T>& rhs)
+    -> bool
 {
     return lhs * rhs.denominator() >= rhs.numerator();
 }
@@ -359,43 +365,50 @@ operator>=(const U& lhs, const rational<T>& rhs)
 // Mathematical functions
 
 template<typename T>
-constexpr int sign(const rational<T>& ratio)
+constexpr auto sign(const rational<T>& ratio)
+    -> int
 {
     return (ratio.numerator() > 0) ? 1 : (ratio.numerator() < 0) ? -1 : 0;
 }
 
 template<typename T>
-constexpr rational<T> abs(const rational<T>& ratio)
+constexpr auto abs(const rational<T>& ratio)
+    -> rational<T>
 {
     return (ratio >= 0) ? ratio : -ratio;
 }
 
 template<typename T>
-constexpr T floor(const rational<T>& ratio)
+constexpr auto floor(const rational<T>& ratio)
+    -> T
 {
     return floor((long double) ratio);
 }
 
 template<typename T>
-constexpr T ceil(const rational<T>& ratio)
+constexpr auto ceil(const rational<T>& ratio)
+    -> T
 {
     return ceil((long double) ratio);
 }
 
 template<typename T>
-constexpr T round(const rational<T>& ratio)
+constexpr auto round(const rational<T>& ratio)
+    -> T
 {
     return round((long double) ratio);
 }
 
 template<typename T>
-constexpr T trunc(const rational<T>& ratio)
+constexpr auto trunc(const rational<T>& ratio)
+    -> T
 {
     return T((long double) ratio);
 }
 
 template<typename T>
-constexpr rational<T> reciprocal(const rational<T>& ratio)
+constexpr auto reciprocal(const rational<T>& ratio)
+    -> rational<T>
 {
     return rational<T>(
         ratio.denominator(),
@@ -403,10 +416,10 @@ constexpr rational<T> reciprocal(const rational<T>& ratio)
     );
 }
 
-template<typename T, typename Integral>
-constexpr
-typename std::enable_if<std::is_integral<Integral>::value, rational<T>>::type
-pow(const rational<T>& ratio, Integral exp)
+template<typename T, typename Integral,
+         typename = typename std::enable_if<std::is_integral<Integral>::value, void>::type>
+constexpr auto pow(const rational<T>& ratio, Integral exp)
+    -> rational<T>
 {
     return (exp == 0) ? rational<T>(1) :
         (exp > 0) ? rational<T>(

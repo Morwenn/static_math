@@ -46,19 +46,22 @@ constexpr complex<T>::complex(T real, const imaginary<T>& imag):
 {}
 
 template<typename T>
-constexpr T complex<T>::real() const
+constexpr auto complex<T>::real() const
+    -> value_type
 {
     return _real;
 }
 
 template<typename T>
-constexpr const imaginary<T>& complex<T>::imag() const
+constexpr auto complex<T>::imag() const
+    -> const imaginary<T>&
 {
     return _imag;
 }
 
 template<typename T>
-constexpr T complex<T>::imag_value() const
+constexpr auto complex<T>::imag_value() const
+    -> value_type
 {
     return _imag.value();
 }
@@ -67,25 +70,29 @@ constexpr T complex<T>::imag_value() const
 // Unary arithmetic operators
 
 template<typename T>
-constexpr imaginary<T> operator+(const imaginary<T>& imag)
+constexpr auto operator+(const imaginary<T>& imag)
+    -> imaginary<T>
 {
     return imag;
 }
 
 template<typename T>
-constexpr imaginary<T> operator-(const imaginary<T>& imag)
+constexpr auto operator-(const imaginary<T>& imag)
+    -> imaginary<T>
 {
     return imaginary<T>(-imag.value());
 }
 
 template<typename T>
-constexpr complex<T> operator+(const complex<T>& ratio)
+constexpr auto operator+(const complex<T>& ratio)
+    -> complex<T>
 {
     return ratio;
 }
 
 template<typename T>
-constexpr complex<T> operator-(const complex<T>& ratio)
+constexpr auto operator-(const complex<T>& ratio)
+    -> complex<T>
 {
     return complex<T>(
         -ratio.real(),
@@ -97,41 +104,37 @@ constexpr complex<T> operator-(const complex<T>& ratio)
 // Binary arithmetic operators
 
 template<typename T, typename U>
-constexpr
-imaginary<typename std::common_type<T, U>::type>
-operator+(const imaginary<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator+(const imaginary<T>& lhs, const imaginary<U>& rhs)
+    -> imaginary<typename std::common_type<T, U>::type>
 {
     return imaginary<typename std::common_type<T, U>::type>(lhs.value() + rhs.value());
 }
 
 template<typename T, typename U>
-constexpr
-imaginary<typename std::common_type<T, U>::type>
-operator-(const imaginary<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator-(const imaginary<T>& lhs, const imaginary<U>& rhs)
+    -> imaginary<typename std::common_type<T, U>::type>
 {
     return imaginary<typename std::common_type<T, U>::type>(lhs.value() - rhs.value());
 }
 
 template<typename T, typename U>
-constexpr
-typename std::common_type<T, U>::type
-operator*(const imaginary<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator*(const imaginary<T>& lhs, const imaginary<U>& rhs)
+    -> typename std::common_type<T, U>::type
 {
     return -lhs.value() * rhs.value();
 }
 
 template<typename T, typename U>
-constexpr
-typename std::common_type<T, U>::type
-operator/(const imaginary<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator/(const imaginary<T>& lhs, const imaginary<U>& rhs)
+    -> typename std::common_type<T, U>::type
 {
     return lhs.value()*rhs.value() / sqr(rhs.value());
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator+(const imaginary<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator+(const imaginary<T>& lhs, const U& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         rhs,
@@ -139,10 +142,10 @@ operator+(const imaginary<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator-(const imaginary<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator-(const imaginary<T>& lhs, const U& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         -rhs,
@@ -150,36 +153,37 @@ operator-(const imaginary<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-imaginary<typename std::common_type<T, U>::type>
-operator*(const imaginary<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator*(const imaginary<T>& lhs, const U& rhs)
+    -> imaginary<typename std::common_type<T, U>::type>
 {
     return imaginary<typename std::common_type<T, U>::type>(lhs.value() * rhs);
 }
 
-template<typename T,  typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-imaginary<typename std::common_type<T, U>::type>
-operator/(const imaginary<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator/(const imaginary<T>& lhs, const U& rhs)
+    -> imaginary<typename std::common_type<T, U>::type>
 {
     return imaginary<typename std::common_type<T, U>::type>(lhs.value() / rhs);
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator+(const U& lhs, const imaginary<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator+(const U& lhs, const imaginary<T>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs,
         rhs
     );
 }
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator-(const U& lhs, const imaginary<T>& rhs)
+
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator-(const U& lhs, const imaginary<T>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs,
@@ -187,26 +191,25 @@ operator-(const U& lhs, const imaginary<T>& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-imaginary<typename std::common_type<T, U>::type>
-operator*(const U& lhs, const imaginary<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator*(const U& lhs, const imaginary<T>& rhs)
+    -> imaginary<typename std::common_type<T, U>::type>
 {
     return imaginary<typename std::common_type<T, U>::type>(lhs * rhs.value());
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-imaginary<typename std::common_type<T, U>::type>
-operator/(const U& lhs, const imaginary<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator/(const U& lhs, const imaginary<T>& rhs)
+    -> imaginary<typename std::common_type<T, U>::type>
 {
     return imaginary<typename std::common_type<T, U>::type>(lhs / rhs.value());
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator+(const complex<T>& lhs, const complex<U>& rhs)
+constexpr auto operator+(const complex<T>& lhs, const complex<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.real() + rhs.real(),
@@ -215,9 +218,8 @@ operator+(const complex<T>& lhs, const complex<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator-(const complex<T>& lhs, const complex<U>& rhs)
+constexpr auto operator-(const complex<T>& lhs, const complex<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.real() - rhs.real(),
@@ -226,9 +228,8 @@ operator-(const complex<T>& lhs, const complex<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator*(const complex<T>& lhs, const complex<U>& rhs)
+constexpr auto operator*(const complex<T>& lhs, const complex<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.real()*rhs.real() + lhs.imag()*rhs.imag(),
@@ -237,9 +238,8 @@ operator*(const complex<T>& lhs, const complex<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator/(const complex<T>& lhs, const complex<U>& rhs)
+constexpr auto operator/(const complex<T>& lhs, const complex<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         (lhs.real()*rhs.real() + lhs.imag_value()*rhs.imag_value()) / (sqr(rhs.real()) + sqr(rhs.imag_value())),
@@ -247,10 +247,10 @@ operator/(const complex<T>& lhs, const complex<U>& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator+(const complex<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator+(const complex<T>& lhs, const U& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.real() + rhs,
@@ -258,10 +258,10 @@ operator+(const complex<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator-(const complex<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator-(const complex<T>& lhs, const U& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.real() - rhs,
@@ -269,10 +269,10 @@ operator-(const complex<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator*(const complex<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator*(const complex<T>& lhs, const U& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.real() * rhs,
@@ -280,10 +280,10 @@ operator*(const complex<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator/(const complex<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator/(const complex<T>& lhs, const U& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.real() / rhs,
@@ -291,30 +291,31 @@ operator/(const complex<T>& lhs, const U& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator+(const U& lhs, const complex<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator+(const U& lhs, const complex<T>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs + rhs.real(),
         rhs.imag()
     );
 }
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator-(const U& lhs, const complex<T>& rhs)
+
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator-(const U& lhs, const complex<T>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs - rhs.real(),
         -rhs.imag()
     );
 }
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator*(const U& lhs, const complex<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator*(const U& lhs, const complex<T>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs * rhs.real(),
@@ -322,10 +323,10 @@ operator*(const U& lhs, const complex<T>& rhs)
     );
 }
 
-template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator/(const U& lhs, const complex<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator/(const U& lhs, const complex<T>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs * rhs.real() / (sqr(rhs.real()) + sqr(rhs.imag_value())),
@@ -334,9 +335,8 @@ operator/(const U& lhs, const complex<T>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator+(const complex<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator+(const complex<T>& lhs, const imaginary<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.real(),
@@ -345,9 +345,8 @@ operator+(const complex<T>& lhs, const imaginary<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator-(const complex<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator-(const complex<T>& lhs, const imaginary<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.real(),
@@ -356,9 +355,8 @@ operator-(const complex<T>& lhs, const imaginary<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator*(const complex<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator*(const complex<T>& lhs, const imaginary<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.imag() * rhs,
@@ -367,9 +365,8 @@ operator*(const complex<T>& lhs, const imaginary<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator/(const complex<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator/(const complex<T>& lhs, const imaginary<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.imag_value() * rhs.value() / sqr(rhs.value()),
@@ -378,9 +375,8 @@ operator/(const complex<T>& lhs, const imaginary<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator+(const imaginary<T>& lhs, const complex<U>& rhs)
+constexpr auto operator+(const imaginary<T>& lhs, const complex<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         rhs.real(),
@@ -389,9 +385,8 @@ operator+(const imaginary<T>& lhs, const complex<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator-(const imaginary<T>& lhs, const complex<U>& rhs)
+constexpr auto operator-(const imaginary<T>& lhs, const complex<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         -rhs.real(),
@@ -400,9 +395,8 @@ operator-(const imaginary<T>& lhs, const complex<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator*(const imaginary<T>& lhs, const complex<U>& rhs)
+constexpr auto operator*(const imaginary<T>& lhs, const complex<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs * rhs.imag(),
@@ -411,9 +405,8 @@ operator*(const imaginary<T>& lhs, const complex<U>& rhs)
 }
 
 template<typename T, typename U>
-constexpr
-complex<typename std::common_type<T, U>::type>
-operator/(const imaginary<T>& lhs, const complex<U>& rhs)
+constexpr auto operator/(const imaginary<T>& lhs, const complex<U>& rhs)
+    -> complex<typename std::common_type<T, U>::type>
 {
     return complex<typename std::common_type<T, U>::type>(
         lhs.value() * rhs.imag_value() / (sqr(rhs.real()) + sqr(rhs.imag_value())),
@@ -425,81 +418,89 @@ operator/(const imaginary<T>& lhs, const complex<U>& rhs)
 // Comparison operators
 
 template<typename T, typename U>
-constexpr bool operator==(const imaginary<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator==(const imaginary<T>& lhs, const imaginary<U>& rhs)
+    -> bool
 {
         return lhs.value() == rhs.value();
 }
 
 template<typename T, typename U>
-constexpr bool operator!=(const imaginary<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator!=(const imaginary<T>& lhs, const imaginary<U>& rhs)
+    -> bool
 {
     return !(lhs == rhs);
 }
 
 template<typename T, typename U>
-constexpr bool operator==(const complex<T>& lhs, const complex<U>& rhs)
+constexpr auto operator==(const complex<T>& lhs, const complex<U>& rhs)
+    -> bool
 {
     return lhs.real() == rhs.real() && lhs.imag() == rhs.imag();
 }
 
 template<typename T, typename U>
-constexpr bool operator!=(const complex<T>& lhs, const complex<U>& rhs)
+constexpr auto operator!=(const complex<T>& lhs, const complex<U>& rhs)
+    -> bool
 {
     return !(lhs == rhs);
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-operator==(const complex<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator==(const complex<T>& lhs, const U& rhs)
+    -> bool
 {
     return lhs.real() == rhs && lhs.imag_value() == 0;
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-operator!=(const complex<T>& lhs, const U& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator!=(const complex<T>& lhs, const U& rhs)
+    -> bool
 {
     return !(lhs == rhs);
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-operator==(const U& lhs, const complex<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator==(const U& lhs, const complex<T>& rhs)
+    -> bool
 {
     return rhs.real() == lhs && rhs.imag_value() == 0;
 }
 
-template<typename T, typename U>
-constexpr
-typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-operator!=(const U& lhs, const complex<T>& rhs)
+template<typename T, typename U,
+         typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+constexpr auto operator!=(const U& lhs, const complex<T>& rhs)
+    -> bool
 {
     return !(lhs == rhs);
 }
 
 template<typename T, typename U>
-constexpr bool operator==(const complex<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator==(const complex<T>& lhs, const imaginary<U>& rhs)
+    -> bool
 {
     return lhs.imag() == rhs && lhs.real() == 0;
 }
 
 template<typename T, typename U>
-constexpr bool operator!=(const complex<T>& lhs, const imaginary<U>& rhs)
+constexpr auto operator!=(const complex<T>& lhs, const imaginary<U>& rhs)
+    -> bool
 {
     return !(lhs == rhs);
 }
 
 template<typename T, typename U>
-constexpr bool operator==(const imaginary<T>& lhs, const complex<U>& rhs)
+constexpr auto operator==(const imaginary<T>& lhs, const complex<U>& rhs)
+    -> bool
 {
     return rhs.imag() == lhs && rhs.real() == 0;
 }
 
 template<typename T, typename U>
-constexpr bool operator!=(const imaginary<T>& lhs, const complex<U>& rhs)
+constexpr auto operator!=(const imaginary<T>& lhs, const complex<U>& rhs)
+    -> bool
 {
     return !(lhs == rhs);
 }
@@ -508,19 +509,22 @@ constexpr bool operator!=(const imaginary<T>& lhs, const complex<U>& rhs)
 // Mathematical functions
 
 template<typename T>
-constexpr T real(const complex<T>& x)
+constexpr auto real(const complex<T>& x)
+    -> T
 {
     return x.real();
 }
 
 template<typename T>
-constexpr imaginary<T> imag(const complex<T>& x)
+constexpr auto imag(const complex<T>& x)
+    -> imaginary<T>
 {
     return x.imag();
 }
 
 template<typename T>
-constexpr complex<T> conj(const complex<T>& x)
+constexpr auto conj(const complex<T>& x)
+    -> complex<T>
 {
     return complex<T>(
         x.real(),

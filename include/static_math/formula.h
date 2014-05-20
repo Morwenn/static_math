@@ -41,16 +41,16 @@ namespace smath
     /**
      * @brief Sum of a number of variables
      */
-    template<typename Numeric, typename... Rest>
-    constexpr
-    Numeric sum(Numeric first, Numeric second, Rest... rest);
+    template<typename Number, typename... Rest>
+    constexpr auto sum(Number first, Number second, Rest... rest)
+        -> Number;
 
     /**
      * @brief Mean of a number of variables
      */
     template<typename... Numbers>
-    constexpr
-    long double mean(Numbers... args);
+    constexpr auto mean(Numbers... args)
+        -> long double;
 
     /**
      * @brief Square function
@@ -58,7 +58,8 @@ namespace smath
      * @return Square of \a x
      */
     template<typename Number>
-    constexpr Number sqr(Number x);
+    constexpr auto sqr(Number x)
+        -> Number;
 
     /**
      * @brief Limits a value to a range
@@ -68,7 +69,8 @@ namespace smath
      * @return \a val clamped between \a min and \a max
      */
     template<typename Number>
-    constexpr Number clamp(Number x, Number min, Number max);
+    constexpr auto clamp(Number x, Number min, Number max)
+        -> Number;
 
     ////////////////////////////////////////////////////////////
     // Integer-related functions
@@ -78,50 +80,50 @@ namespace smath
      * @param n Integer value
      * @return Whether \a n is even or not
      */
-    template<typename T>
-    constexpr
-    typename std::enable_if<is_integral<T>::value, bool>::type
-    is_even(T n);
+    template<typename T,
+             typename = typename std::enable_if<is_integral<T>::value, void>::type>
+    constexpr auto is_even(T n)
+        -> bool;
 
     /**
      * @brief Tells whether the given number is odd
      * @param n Integer value
      * @return Whether \a n is odd or not
      */
-    template<typename T>
-    constexpr
-    typename std::enable_if<is_integral<T>::value, bool>::type
-    is_odd(T n);
+    template<typename T,
+             typename = typename std::enable_if<is_integral<T>::value, void>::type>
+    constexpr auto is_odd(T n)
+        -> bool;
 
     /**
      * @brief Tells whether the given number is a prime number
      * @param n Integer value
      * @return True if \a n is a prime number
      */
-    template<typename T>
-    constexpr
-    typename std::enable_if<is_integral<T>::value, bool>::type
-    is_prime(T n);
+    template<typename T,
+             typename = typename std::enable_if<is_integral<T>::value, void>::type>
+    constexpr auto is_prime(T n)
+        -> bool;
 
     /**
      * @brief Fibonacci function
      * @param n Some integer
      * @return nth Fibonacci number
      */
-    template<typename T>
-    constexpr
-    typename std::enable_if<is_integral<T>::value, T>::type
-    fibonacci(T n);
+    template<typename T,
+             typename = typename std::enable_if<is_integral<T>::value, void>::type>
+    constexpr auto fibonacci(T n)
+        -> T;
 
     /**
      * @brief Factorial function
      * @param n Some integer
      * @return Factorial of n
      */
-    template<typename T>
-    constexpr
-    typename std::enable_if<is_integral<T>::value, T>::type
-    factorial(T n);
+    template<typename T,
+             typename = typename std::enable_if<is_integral<T>::value, void>::type>
+    constexpr auto factorial(T n)
+        -> T;
 
     /**
      * @brief Greatest common divisor
@@ -129,10 +131,10 @@ namespace smath
      * @param b Some integer
      * @return Greatest common divisor of a and b
      */
-    template<typename T, typename U>
-    constexpr
-    typename std::enable_if<is_integral<T, U>::value, typename std::common_type<T, U>::type>::type
-    gcd(T a, U b);
+    template<typename T, typename U,
+             typename = typename std::enable_if<is_integral<T, U>::value, void>::type>
+    constexpr auto gcd(T a, U b)
+        -> typename std::common_type<T, U>::type;
 
     /**
      * @brief Least common multiple
@@ -140,10 +142,10 @@ namespace smath
      * @param b Some integer
      * @return Least common multiple of a and b
      */
-    template<typename T, typename U>
-    constexpr
-    typename std::enable_if<is_integral<T, U>::value, typename std::common_type<T, U>::type>::type
-    lcm(T a, U b);
+    template<typename T, typename U,
+             typename = typename std::enable_if<is_integral<T, U>::value, void>::type>
+    constexpr auto lcm(T a, U b)
+        -> typename std::common_type<T, U>::type;
 
     ////////////////////////////////////////////////////////////
     // Angle conversions
@@ -153,20 +155,20 @@ namespace smath
      * @param x Angle in radians
      * @return The degrees value
      */
-    template<typename T>
-    constexpr
-    typename std::enable_if<std::is_floating_point<T>::value, T>::type
-    degrees(T x);
+    template<typename T,
+             typename = typename std::enable_if<std::is_floating_point<T>::value, void>::type>
+    constexpr auto degrees(T x)
+        -> T;
 
     /**
      * @brief Converts an angle in degrees into an angle in radians.
      * @param x Angle in degrees
      * @return The radians value
      */
-    template<typename T>
-    constexpr
-    typename std::enable_if<std::is_floating_point<T>::value, T>::type
-    radians(T x);
+    template<typename T,
+             typename = typename std::enable_if<std::is_floating_point<T>::value, void>::type>
+    constexpr auto radians(T x)
+        -> T;
 
     #include <static_math/formula.inl>
 }

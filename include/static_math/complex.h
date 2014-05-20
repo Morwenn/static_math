@@ -39,9 +39,12 @@ namespace smath
 
             using value_type = T;
 
-            constexpr imaginary(T real);
+            // Constructor
+            constexpr imaginary(value_type real);
 
-            constexpr T value() const;
+            // Getter
+            constexpr auto value() const
+                -> value_type;
 
         private:
 
@@ -61,12 +64,17 @@ namespace smath
 
             using value_type = T;
 
-            constexpr complex(T real, T imag);
-            constexpr complex(T real, const imaginary<T>& img);
+            // Constructors
+            constexpr complex(value_type real, value_type imag);
+            constexpr complex(value_type real, const imaginary<T>& img);
 
-            constexpr T real() const;
-            constexpr const imaginary<T>& imag() const;
-            constexpr T imag_value() const;
+            // Getters
+            constexpr auto real() const
+                -> value_type;
+            constexpr auto imag() const
+                -> const imaginary<T>&;
+            constexpr auto imag_value() const
+                -> value_type;
 
         private:
 
@@ -78,206 +86,205 @@ namespace smath
     // Unary arithmetic operators
 
     template<typename T>
-    constexpr imaginary<T> operator+(const imaginary<T>& imag);
+    constexpr auto operator+(const imaginary<T>& imag)
+        -> imaginary<T>;
     template<typename T>
-    constexpr imaginary<T> operator-(const imaginary<T>& imag);
+    constexpr auto operator-(const imaginary<T>& imag)
+        -> imaginary<T>;
 
     template<typename T>
-    constexpr complex<T> operator+(const complex<T>& ratio);
+    constexpr auto operator+(const complex<T>& ratio)
+        -> complex<T>;
     template<typename T>
-    constexpr complex<T> operator-(const complex<T>& ratio);
+    constexpr auto operator-(const complex<T>& ratio)
+        -> complex<T>;
 
     ////////////////////////////////////////////////////////////
     // Binary arithmetic operators
 
     template<typename T, typename U>
-    constexpr
-    imaginary<typename std::common_type<T, U>::type>
-    operator+(const imaginary<T>& lhs, const imaginary<U>& rhs);
+    constexpr auto operator+(const imaginary<T>& lhs, const imaginary<U>& rhs)
+        -> imaginary<typename std::common_type<T, U>::type>;
     template<typename T, typename U>
-    constexpr
-    imaginary<typename std::common_type<T, U>::type>
-    operator-(const imaginary<T>& lhs, const imaginary<U>& rhs);
+    constexpr auto operator-(const imaginary<T>& lhs, const imaginary<U>& rhs)
+        -> imaginary<typename std::common_type<T, U>::type>;
     template<typename T, typename U>
-    constexpr
-    typename std::common_type<T, U>::type
-    operator*(const imaginary<T>& lhs, const imaginary<U>& rhs);
+    constexpr auto operator*(const imaginary<T>& lhs, const imaginary<U>& rhs)
+        -> typename std::common_type<T, U>::type;
     template<typename T, typename U>
-    constexpr
-    typename std::common_type<T, U>::type
-    operator/(const imaginary<T>& lhs, const imaginary<U>& rhs);
+    constexpr auto operator/(const imaginary<T>& lhs, const imaginary<U>& rhs)
+        -> typename std::common_type<T, U>::type;
 
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator+(const imaginary<T>& lhs, const U& rhs);
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator-(const imaginary<T>& lhs, const U& rhs);
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    imaginary<typename std::common_type<T, U>::type>
-    operator*(const imaginary<T>& lhs, const U& rhs);
-    template<typename T,  typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    imaginary<typename std::common_type<T, U>::type>
-    operator/(const imaginary<T>& lhs, const U& rhs);
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator+(const imaginary<T>& lhs, const U& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator-(const imaginary<T>& lhs, const U& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator*(const imaginary<T>& lhs, const U& rhs)
+        -> imaginary<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator/(const imaginary<T>& lhs, const U& rhs)
+        -> imaginary<typename std::common_type<T, U>::type>;
 
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator+(const U& lhs, const imaginary<T>& rhs);
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator-(const U& lhs, const imaginary<T>& rhs);
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    imaginary<typename std::common_type<T, U>::type>
-    operator*(const U& lhs, const imaginary<T>& rhs);
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    imaginary<typename std::common_type<T, U>::type>
-    operator/(const U& lhs, const imaginary<T>& rhs);
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator+(const U& lhs, const imaginary<T>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator-(const U& lhs, const imaginary<T>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator*(const U& lhs, const imaginary<T>& rhs)
+        -> imaginary<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator/(const U& lhs, const imaginary<T>& rhs)
+        -> imaginary<typename std::common_type<T, U>::type>;
 
     template<typename T, typename U>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator+(const complex<T>& lhs, const complex<U>& rhs);
+    constexpr auto operator+(const complex<T>& lhs, const complex<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
     template<typename T, typename U>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator-(const complex<T>& lhs, const complex<U>& rhs);
+    constexpr auto operator-(const complex<T>& lhs, const complex<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
     template<typename T, typename U>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator*(const complex<T>& lhs, const complex<U>& rhs);
+    constexpr auto operator*(const complex<T>& lhs, const complex<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
     template<typename T, typename U>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator/(const complex<T>& lhs, const complex<U>& rhs);
+    constexpr auto operator/(const complex<T>& lhs, const complex<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
 
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator+(const complex<T>& lhs, const U& rhs);
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator-(const complex<T>& lhs, const U& rhs);
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator*(const complex<T>& lhs, const U& rhs);
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator/(const complex<T>& lhs, const U& rhs);
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator+(const complex<T>& lhs, const U& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator-(const complex<T>& lhs, const U& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator*(const complex<T>& lhs, const U& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator/(const complex<T>& lhs, const U& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
 
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator+(const U& lhs, const complex<T>& rhs);
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator-(const U& lhs, const complex<T>& rhs);
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator*(const U& lhs, const complex<T>& rhs);
-    template<typename T, typename U, typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator/(const U& lhs, const complex<T>& rhs);
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator+(const U& lhs, const complex<T>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator-(const U& lhs, const complex<T>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator*(const U& lhs, const complex<T>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator/(const U& lhs, const complex<T>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
 
     template<typename T, typename U>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator+(const complex<T>& lhs, const imaginary<U>& rhs);
+    constexpr auto operator+(const complex<T>& lhs, const imaginary<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
     template<typename T, typename U>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator-(const complex<T>& lhs, const imaginary<U>& rhs);
+    constexpr auto operator-(const complex<T>& lhs, const imaginary<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
     template<typename T, typename U>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator*(const complex<T>& lhs, const imaginary<U>& rhs);
+    constexpr auto operator*(const complex<T>& lhs, const imaginary<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
     template<typename T, typename U>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator/(const complex<T>& lhs, const imaginary<U>& rhs);
+    constexpr auto operator/(const complex<T>& lhs, const imaginary<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
 
     template<typename T, typename U>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator+(const imaginary<T>& lhs, const complex<U>& rhs);
+    constexpr auto operator+(const imaginary<T>& lhs, const complex<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
     template<typename T, typename U>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator-(const imaginary<T>& lhs, const complex<U>& rhs);
+    constexpr auto operator-(const imaginary<T>& lhs, const complex<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
     template<typename T, typename U>
-    constexpr
-    complex<typename std::common_type<T, U>::type>
-    operator*(const imaginary<T>& lhs, const complex<U>& rhs);
+    constexpr auto operator*(const imaginary<T>& lhs, const complex<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
     template<typename T, typename U>
-    constexpr
-    complex <typename std::common_type<T, U>::type>
-    operator/(const imaginary<T>& lhs, const complex<U>& rhs);
+    constexpr auto operator/(const imaginary<T>& lhs, const complex<U>& rhs)
+        -> complex<typename std::common_type<T, U>::type>;
 
     ////////////////////////////////////////////////////////////
     // Comparison operators
 
     template<typename T, typename U>
-    constexpr bool operator==(const imaginary<T>& lhs, const imaginary<U>& rhs);
+    constexpr auto operator==(const imaginary<T>& lhs, const imaginary<U>& rhs)
+        -> bool;
     template<typename T, typename U>
-    constexpr bool operator!=(const imaginary<T>& lhs, const imaginary<U>& rhs);
+    constexpr auto operator!=(const imaginary<T>& lhs, const imaginary<U>& rhs)
+        -> bool;
 
     template<typename T, typename U>
-    constexpr bool operator==(const complex<T>& lhs, const complex<U>& rhs);
+    constexpr auto operator==(const complex<T>& lhs, const complex<U>& rhs)
+        -> bool;
     template<typename T, typename U>
-    constexpr bool operator!=(const complex<T>& lhs, const complex<U>& rhs);
+    constexpr auto operator!=(const complex<T>& lhs, const complex<U>& rhs)
+        -> bool;
+
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator==(const complex<T>& lhs, const U& rhs)
+        -> bool;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator!=(const complex<T>& lhs, const U& rhs)
+        -> bool;
+
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator==(const U& lhs, const complex<T>& rhs)
+        -> bool;
+    template<typename T, typename U,
+             typename = typename std::enable_if<std::is_arithmetic<U>::value, void>::type>
+    constexpr auto operator!=(const U& lhs, const complex<T>& rhs)
+        -> bool;
 
     template<typename T, typename U>
-    constexpr
-    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-    operator==(const complex<T>& lhs, const U& rhs);
+    constexpr auto operator==(const complex<T>& lhs, const imaginary<U>& rhs)
+        -> bool;
     template<typename T, typename U>
-    constexpr
-    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-    operator!=(const complex<T>& lhs, const U& rhs);
+    constexpr auto operator!=(const complex<T>& lhs, const imaginary<U>& rhs)
+        -> bool;
 
     template<typename T, typename U>
-    constexpr
-    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-    operator==(const U& lhs, const complex<T>& rhs);
+    constexpr auto operator==(const imaginary<T>& lhs, const complex<U>& rhs)
+        -> bool;
     template<typename T, typename U>
-    constexpr
-    typename std::enable_if<std::is_arithmetic<U>::value, bool>::type
-    operator!=(const U& lhs, const complex<T>& rhs);
-
-    template<typename T, typename U>
-    constexpr bool operator==(const complex<T>& lhs, const imaginary<U>& rhs);
-    template<typename T, typename U>
-    constexpr bool operator!=(const complex<T>& lhs, const imaginary<U>& rhs);
-
-    template<typename T, typename U>
-    constexpr bool operator==(const imaginary<T>& lhs, const complex<U>& rhs);
-    template<typename T, typename U>
-    constexpr bool operator!=(const imaginary<T>& lhs, const complex<U>& rhs);
+    constexpr auto operator!=(const imaginary<T>& lhs, const complex<U>& rhs)
+        -> bool;
 
     ////////////////////////////////////////////////////////////
     // Mathematical functions
 
     template<typename T>
-    constexpr T real(const complex<T>& x);
+    constexpr auto real(const complex<T>& x)
+        -> T;
 
     template<typename T>
-    constexpr imaginary<T> imag(const complex<T>& x);
+    constexpr auto imag(const complex<T>& x)
+        -> imaginary<T>;
 
     template<typename T>
-    constexpr complex<T> conj(const complex<T>& x);
+    constexpr auto conj(const complex<T>& x)
+        -> complex<T>;
 
     #include <static_math/complex.inl>
 
@@ -286,14 +293,14 @@ namespace smath
 ////////////////////////////////////////////////////////////
 // User-defined literals
 
-constexpr smath::imaginary<long double>
-operator"" _static_i(long double n)
+constexpr auto operator"" _static_i(long double n)
+    -> smath::imaginary<long double>
 {
     return smath::imaginary<long double>(n);
 }
 
-constexpr smath::imaginary<unsigned long long>
-operator"" _static_i(unsigned long long n)
+constexpr auto operator"" _static_i(unsigned long long n)
+    -> smath::imaginary<unsigned long long>
 {
     return smath::imaginary<unsigned long long>(n);
 }

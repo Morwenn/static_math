@@ -42,9 +42,10 @@ namespace details
 ////////////////////////////////////////////////////////////
 // Basic functions
 
-template<typename T>
-constexpr auto abs(T x)
-    -> typename std::enable_if<std::is_arithmetic<T>::value, T>::type
+template<typename Number,
+         typename = typename std::enable_if<std::is_arithmetic<Number>::value, void>::type>
+constexpr auto abs(Number x)
+    -> Number
 {
     return (x >= 0) ? x : -x;
 }
@@ -80,34 +81,38 @@ constexpr auto max(T first, U second, Rest... rest)
 ////////////////////////////////////////////////////////////
 // Number-theoretic and representation functions
 
-template<typename Float>
+template<typename Float,
+         typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
 constexpr auto floor(Float value)
-    -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+    -> int
 {
     return (int(value) == value) ? int(value) :
         (value >= 0.0) ? int(value) :
             int(value) - 1;
 }
 
-template<typename Float>
+template<typename Float,
+         typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
 constexpr auto ceil(Float value)
-    -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+    -> int
 {
     return (int(value) == value) ? int(value) :
         (value >= 0.0) ? int(value) + 1 :
             int(value);
 }
 
-template<typename Float>
+template<typename Float,
+         typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
 constexpr auto round(Float value)
-    -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+    -> int
 {
     return (value >= 0.0) ? int(value + 0.5) : int(value - 0.5);
 }
 
-template<typename Float>
+template<typename Float,
+         typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
 constexpr auto trunc(Float value)
-    -> typename std::enable_if<std::is_floating_point<Float>::value, int>::type
+    -> int
 {
     return int(value);
 }
@@ -115,19 +120,21 @@ constexpr auto trunc(Float value)
 ////////////////////////////////////////////////////////////
 // Power and logarithmic functions
 
-template<typename T, typename U>
-constexpr auto pow(T value, U exponent)
-    -> typename std::enable_if<std::is_integral<U>::value
-                               && std::is_arithmetic<T>::value, T>::type
+template<typename Number, typename Integer,
+         typename = typename std::enable_if<std::is_integral<Integer>::value
+                          && std::is_arithmetic<Number>::value, void>::type>
+constexpr auto pow(Number value, Integer exponent)
+    -> Number
 {
     return (exponent == 0) ? 1 :
         (exponent > 0) ? details::pow_helper(value, value, exponent) :
             1 / details::pow_helper(value, value, exponent);
 }
 
-template<typename Float>
+template<typename Float,
+         typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
 constexpr auto sqrt(Float x)
-    -> typename std::enable_if<std::is_floating_point<Float>::value, Float>::type
+    -> Float
 {
     return details::sqrt_helper(x, x);
 }
