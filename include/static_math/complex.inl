@@ -536,3 +536,66 @@ constexpr auto conj(const complex<T>& x)
         -x.imag()
     };
 }
+
+inline namespace literals
+{
+    ////////////////////////////////////////////////////////////
+    // Float user-defined literals
+
+    constexpr auto operator"" _if(long double n)
+        -> imaginary<float>
+    {
+        return { static_cast<float>(n) };
+    }
+
+    constexpr auto operator"" _i(long double n)
+        -> imaginary<double>
+    {
+        return { static_cast<double>(n) };
+    }
+
+    constexpr auto operator"" _il(long double n)
+        -> imaginary<long double>
+    {
+        return { n };
+    }
+
+    ////////////////////////////////////////////////////////////
+    // Integer user-defined literals
+
+    constexpr auto operator"" _i(unsigned long long n)
+        -> imaginary<int>
+    {
+        return { static_cast<int>(n) };
+    }
+
+    constexpr auto operator"" _il(unsigned long long n)
+        -> imaginary<long>
+    {
+        return { static_cast<long>(n) };
+    }
+
+    constexpr auto operator"" _ill(unsigned long long n)
+        -> imaginary<long long>
+    {
+        return { static_cast<long long>(n) };
+    }
+
+    constexpr auto operator"" _ui(unsigned long long n)
+        -> imaginary<unsigned>
+    {
+        return { static_cast<unsigned>(n) };
+    }
+
+    constexpr auto operator"" _uil(unsigned long long n)
+        -> imaginary<unsigned long>
+    {
+        return { static_cast<unsigned long>(n) };
+    }
+
+    constexpr auto operator"" _uill(unsigned long long n)
+        -> imaginary<unsigned long long>
+    {
+        return { n };
+    }
+}

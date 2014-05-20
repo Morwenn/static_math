@@ -432,3 +432,45 @@ constexpr auto pow(const rational<T>& ratio, Integral exp)
                         pow(ratio.numerator(), -exp)
                     );
 }
+
+inline namespace literals
+{
+    ////////////////////////////////////////////////////////////
+    // User-defined literals
+
+    constexpr auto operator "" _r(unsigned long long n)
+        -> rational<int>
+    {
+        return { static_cast<int>(n) };
+    }
+
+    constexpr auto operator "" _rl(unsigned long long n)
+        -> rational<long>
+    {
+        return { static_cast<long>(n) };
+    }
+
+    constexpr auto operator "" _rll(unsigned long long n)
+        -> rational<long long>
+    {
+        return { static_cast<long long>(n) };
+    }
+
+    constexpr auto operator "" _ru(unsigned long long n)
+        -> rational<unsigned>
+    {
+        return { static_cast<unsigned>(n) };
+    }
+
+    constexpr auto operator "" _rul(unsigned long long n)
+        -> rational<unsigned long>
+    {
+        return { static_cast<unsigned long>(n) };
+    }
+
+    constexpr auto operator "" _rull(unsigned long long n)
+        -> rational<unsigned long long>
+    {
+        return { n };
+    }
+}

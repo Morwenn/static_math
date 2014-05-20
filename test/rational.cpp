@@ -84,9 +84,9 @@ int main()
     static_assert(rational<unsigned long long>(3, 2) == rational<short>(3, 2), "");
 
     // _smath_r literal
-    static_assert(2 / 3_static_r == rational<unsigned long long>(2, 3), "");
-    static_assert(1_static_r / 8 == rational<unsigned long long>(1, 8), "");
-    static_assert(3 / 5_static_r == 3_static_r / 5, "");
+    static_assert(2 / 3_r == rational<unsigned long long>(2, 3), "");
+    static_assert(1_r / 8 == rational<unsigned long long>(1, 8), "");
+    static_assert(3 / 5_r == 3_r / 5, "");
 
     constexpr auto a0 = rational<int>(0, 1);
     constexpr auto a1 = rational<int>(1, 2);
@@ -99,9 +99,9 @@ int main()
     static_assert(sign(a2) == -1, "");
     static_assert(sign(a3) == -1, "");
 
-    static_assert(abs(a1) == 1 / 2_static_r, "");
-    static_assert(abs(a2) == 3 / 8_static_r, "");
-    static_assert(abs(a3) == 6 / 7_static_r, "");
+    static_assert(abs(a1) == 1 / 2_r, "");
+    static_assert(abs(a2) == 3 / 8_r, "");
+    static_assert(abs(a3) == 6 / 7_r, "");
 
     static_assert(round(a1) == 1, "");
     /* No more tests for ceil, floor, trunc
@@ -113,7 +113,7 @@ int main()
     static_assert(reciprocal(a1) == 2, "");
     static_assert(reciprocal(a2) == rational<int>(8, -3), "");
 
-    static_assert(pow(a1, 2) == 1 / 4_static_r, "");
-    static_assert(pow(a2, 3) == -27 / 512_static_r, "");
-    static_assert(pow(a3, -2) == 49 / 36_static_r, "");
+    static_assert(pow(a1, 2) == 1 / 4_r, "");
+    static_assert(pow(a2, 3) == -27 / 512_r, "");
+    static_assert(pow(a3, -2) == 49 / 36_r, "");
 }

@@ -225,16 +225,31 @@ namespace smath
     constexpr auto pow(const rational<T>& ratio, Integral exp)
         -> rational<T>;
 
+    inline namespace literals
+    {
+        ////////////////////////////////////////////////////////////
+        // User-defined literals
+
+        constexpr auto operator "" _r(unsigned long long n)
+            -> rational<int>;
+
+        constexpr auto operator "" _rl(unsigned long long n)
+            -> rational<long>;
+
+        constexpr auto operator "" _rll(unsigned long long n)
+            -> rational<long long>;
+
+        constexpr auto operator "" _ru(unsigned long long n)
+            -> rational<unsigned>;
+
+        constexpr auto operator "" _rul(unsigned long long n)
+            -> rational<unsigned long>;
+
+        constexpr auto operator "" _rull(unsigned long long n)
+            -> rational<unsigned long long>;
+    }
+
     #include <static_math/rational.inl>
-}
-
-////////////////////////////////////////////////////////////
-// User-defined literals
-
-constexpr auto operator "" _static_r(unsigned long long n)
-    -> smath::rational<unsigned long long>
-{
-    return { n };
 }
 
 #endif // SMATH_RATIONAL_H_

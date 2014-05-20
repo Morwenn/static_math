@@ -288,21 +288,41 @@ namespace smath
 
     #include <static_math/complex.inl>
 
-}
+    inline namespace literals
+    {
+        ////////////////////////////////////////////////////////////
+        // Float user-defined literals
 
-////////////////////////////////////////////////////////////
-// User-defined literals
+        constexpr auto operator"" _if(long double n)
+            -> smath::imaginary<float>;
 
-constexpr auto operator"" _static_i(long double n)
-    -> smath::imaginary<long double>
-{
-    return { n };
-}
+        constexpr auto operator"" _i(long double n)
+            -> smath::imaginary<double>;
 
-constexpr auto operator"" _static_i(unsigned long long n)
-    -> smath::imaginary<unsigned long long>
-{
-    return { n };
+        constexpr auto operator"" _il(long double n)
+            -> smath::imaginary<long double>;
+
+        ////////////////////////////////////////////////////////////
+        // Integer user-defined literals
+
+        constexpr auto operator"" _i(unsigned long long n)
+            -> smath::imaginary<int>;
+
+        constexpr auto operator"" _il(unsigned long long n)
+            -> smath::imaginary<long>;
+
+        constexpr auto operator"" _ill(unsigned long long n)
+            -> smath::imaginary<long long>;
+
+        constexpr auto operator"" _ui(unsigned long long n)
+            -> smath::imaginary<unsigned>;
+
+        constexpr auto operator"" _uil(unsigned long long n)
+            -> smath::imaginary<unsigned long>;
+
+        constexpr auto operator"" _uill(unsigned long long n)
+            -> smath::imaginary<unsigned long long>;
+    }
 }
 
 #endif // SMATH_COMPLEX_H_
