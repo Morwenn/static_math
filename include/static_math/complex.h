@@ -296,13 +296,13 @@ namespace smath
 constexpr auto operator"" _static_i(long double n)
     -> smath::imaginary<long double>
 {
-    return smath::imaginary<long double>(n);
+    return { n };
 }
 
 constexpr auto operator"" _static_i(unsigned long long n)
     -> smath::imaginary<unsigned long long>
 {
-    return smath::imaginary<unsigned long long>(n);
+    return { n };
 }
 
 #endif // SMATH_COMPLEX_H_

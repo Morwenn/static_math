@@ -234,7 +234,7 @@ namespace smath
 constexpr auto operator "" _static_r(unsigned long long n)
     -> smath::rational<unsigned long long>
 {
-    return smath::rational<unsigned long long>(n);
+    return { n };
 }
 
 #endif // SMATH_RATIONAL_H_

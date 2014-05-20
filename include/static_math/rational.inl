@@ -83,10 +83,10 @@ template<typename T>
 constexpr auto operator-(const rational<T>& lhs)
     -> rational<T>
 {
-    return rational<T>(
+    return {
         -lhs.numerator(),
         lhs.denominator()
-    );
+    };
 }
 
 ////////////////////////////////////////////////////////////
@@ -96,40 +96,40 @@ template<typename T, typename U>
 constexpr auto operator+(const rational<T>& lhs, const rational<U>& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<typename std::common_type<T, U>::type>(
+    return {
         lhs.numerator() * rhs.denominator() + rhs.numerator() * lhs.denominator(),
         lhs.denominator() * rhs.denominator()
-    );
+    };
 }
 
 template<typename T, typename U>
 constexpr auto operator-(const rational<T>& lhs, const rational<U>& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<typename std::common_type<T, U>::type>(
+    return {
         lhs.numerator() * rhs.denominator() - rhs.numerator() * lhs.denominator(),
         lhs.denominator() * rhs.denominator()
-    );
+    };
 }
 
 template<typename T, typename U>
 constexpr auto operator*(const rational<T>& lhs, const rational<U>& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<T>(
+    return {
         lhs.numerator() * rhs.numerator(),
         lhs.denominator() * rhs.denominator()
-    );
+    };
 }
 
 template<typename T, typename U>
 constexpr auto operator/(const rational<T>& lhs, const rational<U>& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<T>(
+    return {
         lhs.numerator() * rhs.denominator(),
         lhs.denominator() * rhs.numerator()
-    );
+    };
 }
 
 template<typename T, typename U,
@@ -137,10 +137,10 @@ template<typename T, typename U,
 constexpr auto operator+(const rational<T>& lhs, const U& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<typename std::common_type<T, U>::type>(
+    return {
         lhs.numerator() + rhs * lhs.denominator(),
         lhs.denominator()
-    );
+    };
 }
 
 template<typename T, typename U,
@@ -148,10 +148,10 @@ template<typename T, typename U,
 constexpr auto operator-(const rational<T>& lhs, const U& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<typename std::common_type<T, U>::type>(
+    return {
         lhs.numerator() - rhs * lhs.denominator(),
         lhs.denominator()
-    );
+    };
 }
 
 template<typename T, typename U,
@@ -159,10 +159,10 @@ template<typename T, typename U,
 constexpr auto operator*(const rational<T>& lhs, const U& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<typename std::common_type<T, U>::type>(
+    return {
         lhs.numerator() * rhs,
         lhs.denominator()
-    );
+    };
 }
 
 template<typename T, typename U,
@@ -170,10 +170,10 @@ template<typename T, typename U,
 constexpr auto operator/(const rational<T>& lhs, const U& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<typename std::common_type<T, U>::type>(
+    return {
         lhs.numerator(),
         lhs.denominator() * rhs
-    );
+    };
 }
 
 template<typename T, typename U,
@@ -181,10 +181,10 @@ template<typename T, typename U,
 constexpr auto operator+(const U& lhs, const rational<T>& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<typename std::common_type<T, U>::type>(
+    return {
         lhs * rhs.denominator() + rhs.numerator(),
         rhs.denominator()
-    );
+    };
 }
 
 template<typename T, typename U,
@@ -192,10 +192,10 @@ template<typename T, typename U,
 constexpr auto operator-(const U& lhs, const rational<T>& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<typename std::common_type<T, U>::type>(
+    return {
         lhs * rhs.denominator() - rhs.numerator(),
         rhs.denominator()
-    );
+    };
 }
 
 template<typename T, typename U,
@@ -203,10 +203,10 @@ template<typename T, typename U,
 constexpr auto operator*(const U& lhs, const rational<T>& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<typename std::common_type<T, U>::type>(
+    return {
         lhs * rhs.numerator(),
         rhs.denominator()
-    );
+    };
 }
 
 template<typename T, typename U,
@@ -214,10 +214,10 @@ template<typename T, typename U,
 constexpr auto operator/(const U& lhs, const rational<T>& rhs)
     -> rational<typename std::common_type<T, U>::type>
 {
-    return rational<typename std::common_type<T, U>::type>(
+    return {
         lhs * rhs.denominator(),
         rhs.numerator()
-    );
+    };
 }
 
 ////////////////////////////////////////////////////////////
@@ -227,7 +227,8 @@ template<typename T, typename U>
 constexpr auto operator==(const rational<T>& lhs, const rational<U>& rhs)
     -> bool
 {
-    return lhs.numerator() == rhs.numerator() && lhs.denominator() == rhs.denominator();
+    return lhs.numerator() == rhs.numerator()
+        && lhs.denominator() == rhs.denominator();
 }
 
 template<typename T, typename U>
@@ -410,10 +411,10 @@ template<typename T>
 constexpr auto reciprocal(const rational<T>& ratio)
     -> rational<T>
 {
-    return rational<T>(
+    return {
         ratio.denominator(),
         ratio.numerator()
-    );
+    };
 }
 
 template<typename T, typename Integral,
