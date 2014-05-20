@@ -100,8 +100,8 @@ namespace smath
     template<typename Number, typename Integer,
              typename = typename std::enable_if<std::is_integral<Integer>::value
                               && std::is_arithmetic<Number>::value, void>::type>
-    constexpr auto pow(Number value, Integer exponent)
-        -> Number;
+    constexpr auto pow(Number x, Integer exponent)
+        -> typename std::common_type<Number, Integer>::type;
 
     /**
      * @brief Square root function
