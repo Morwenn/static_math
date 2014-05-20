@@ -41,16 +41,16 @@ namespace smath
     /**
      * @brief Sum of a number of variables
      */
-    template<typename Number, typename... Rest>
-    constexpr auto sum(Number first, Number second, Rest... rest)
-        -> Number;
+    template<typename T, typename U, typename... Rest>
+    constexpr auto sum(T first, U second, Rest... rest)
+        -> typename std::common_type<T, U, Rest...>::type;
 
     /**
      * @brief Mean of a number of variables
      */
     template<typename... Numbers>
     constexpr auto mean(Numbers... args)
-        -> long double;
+        -> decltype(sum(args...) / sizeof...(args));
 
     /**
      * @brief Square function

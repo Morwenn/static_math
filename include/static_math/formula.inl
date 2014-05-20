@@ -48,25 +48,25 @@ constexpr auto sign(Number x)
     return (x > 0) ? 1 : (x < 0) ? -1 : 0;
 }
 
-template<typename Number>
-constexpr auto sum(Number first, Number second)
-    -> Number
+template<typename T, typename U>
+constexpr auto sum(T first, U second)
+    -> typename std::common_type<T, U>::type
 {
     return first + second;
 }
 
-template<typename Number, typename... Rest>
-constexpr auto sum(Number first, Number second, Rest... rest)
-    -> Number
+template<typename T, typename U, typename... Rest>
+constexpr auto sum(T first, U second, Rest... rest)
+    -> typename std::common_type<T, U, Rest...>::type
 {
     return first + sum(second, rest...);
 }
 
 template<typename... Numbers>
 constexpr auto mean(Numbers... args)
-    -> long double
+    -> decltype(sum(args...) / sizeof...(args))
 {
-    return (long double) sum(args...) / (long double) sizeof...(args);
+    return sum(args...) / sizeof...(args);
 }
 
 template<typename Number>
