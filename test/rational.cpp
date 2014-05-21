@@ -37,8 +37,9 @@ int main()
     constexpr auto r4 = rational<int>(5, 1);
     constexpr auto r5 = rational<int>(-1, 2);
     constexpr auto r6 = rational<int>(1, -2);
+    constexpr auto r7 = rational<int>(4, 5);
 
-    // rational-rational comparison
+    // Rational-rational comparison
     static_assert(r1 == r2, "");
     static_assert(r1 != r3, "");
     static_assert(r1 > r3, "");
@@ -47,7 +48,7 @@ int main()
     static_assert(r3 <= r2, "");
     static_assert(r5 == r6, "");
 
-    // rational-integral comparison
+    // Rational-integral comparison
     static_assert(r4 == 5, "");
     static_assert(5 == r4, "");
     static_assert(r1 != 3, "");
@@ -63,13 +64,13 @@ int main()
     static_assert(r5 <= 0, "");
     static_assert(r6 <= 0, "");
 
-    // rational-rational arithmetic operations
+    // Rational-rational arithmetic operations
     static_assert(r1 + r2 == 1, "");
     static_assert(r4 - r1 == rational<int>(9, 2), "");
     static_assert(r2 * r3 == rational<int>(1, 6), "");
     static_assert(r1 / r3 == rational<int>(3, 2), "");
 
-    // rational-integral arithmetic operations
+    // Rational-integral arithmetic operations
     static_assert(r1 + 1 == rational<int>(3, 2), "");
     static_assert(2 + r2 == rational<int>(5, 2), "");
     static_assert(r3 - 3 == rational<int>(-8, 3), "");
@@ -79,11 +80,11 @@ int main()
     static_assert(1 / r2 == 2, "");
     static_assert(r3 / 3 == rational<int>(1, 9), "");
 
-    // cast
+    // Cast
     static_assert(rational<int>(1, 2) == rational<long int>(1, 2), "");
     static_assert(rational<unsigned long long>(3, 2) == rational<short>(3, 2), "");
 
-    // _smath_r literal
+    // User-defined literal
     static_assert(2 / 3_r == rational<unsigned long long>(2, 3), "");
     static_assert(1_r / 8 == rational<unsigned long long>(1, 8), "");
     static_assert(3 / 5_r == 3_r / 5, "");
@@ -116,4 +117,7 @@ int main()
     static_assert(pow(a1, 2) == 1 / 4_r, "");
     static_assert(pow(a2, 3) == -27 / 512_r, "");
     static_assert(pow(a3, -2) == 49 / 36_r, "");
+    static_assert(pow(r1, 0) == 1_r, "");
+    static_assert(pow(r2, 1) == r2, "");
+    static_assert(pow(r7, 3) == 64 / 125_r, "");
 }
