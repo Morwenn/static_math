@@ -43,7 +43,7 @@ namespace smath
      */
     template<typename T, typename U, typename... Rest>
     constexpr auto sum(T first, U second, Rest... rest)
-        -> typename std::common_type<T, U, Rest...>::type;
+        -> std::common_type_t<T, U, Rest...>;
 
     /**
      * @brief Mean of a number of variables
@@ -81,7 +81,7 @@ namespace smath
      * @return Whether \a n is even or not
      */
     template<typename T,
-             typename = typename std::enable_if<is_integral<T>::value, void>::type>
+             typename = std::enable_if_t<is_integral<T>::value, void>>
     constexpr auto is_even(T n)
         -> bool;
 
@@ -91,7 +91,7 @@ namespace smath
      * @return Whether \a n is odd or not
      */
     template<typename T,
-             typename = typename std::enable_if<is_integral<T>::value, void>::type>
+             typename = std::enable_if_t<is_integral<T>::value, void>>
     constexpr auto is_odd(T n)
         -> bool;
 
@@ -101,7 +101,7 @@ namespace smath
      * @return True if \a n is a prime number
      */
     template<typename T,
-             typename = typename std::enable_if<is_integral<T>::value, void>::type>
+             typename = std::enable_if_t<is_integral<T>::value, void>>
     constexpr auto is_prime(T n)
         -> bool;
 
@@ -111,7 +111,7 @@ namespace smath
      * @return nth Fibonacci number
      */
     template<typename T,
-             typename = typename std::enable_if<is_integral<T>::value, void>::type>
+             typename = std::enable_if_t<is_integral<T>::value, void>>
     constexpr auto fibonacci(T n)
         -> T;
 
@@ -121,7 +121,7 @@ namespace smath
      * @return Factorial of n
      */
     template<typename T,
-             typename = typename std::enable_if<is_integral<T>::value, void>::type>
+             typename = std::enable_if_t<is_integral<T>::value, void>>
     constexpr auto factorial(T n)
         -> T;
 
@@ -132,9 +132,9 @@ namespace smath
      * @return Greatest common divisor of a and b
      */
     template<typename T, typename U,
-             typename = typename std::enable_if<is_integral<T, U>::value, void>::type>
+             typename = std::enable_if_t<is_integral<T, U>::value, void>>
     constexpr auto gcd(T a, U b)
-        -> typename std::common_type<T, U>::type;
+        -> std::common_type_t<T, U>;
 
     /**
      * @brief Least common multiple
@@ -143,9 +143,9 @@ namespace smath
      * @return Least common multiple of a and b
      */
     template<typename T, typename U,
-             typename = typename std::enable_if<is_integral<T, U>::value, void>::type>
+             typename = std::enable_if_t<is_integral<T, U>::value, void>>
     constexpr auto lcm(T a, U b)
-        -> typename std::common_type<T, U>::type;
+        -> std::common_type_t<T, U>;
 
     ////////////////////////////////////////////////////////////
     // Angle conversions
@@ -156,7 +156,7 @@ namespace smath
      * @return The degrees value
      */
     template<typename T,
-             typename = typename std::enable_if<std::is_floating_point<T>::value, void>::type>
+             typename = std::enable_if_t<std::is_floating_point<T>::value, void>>
     constexpr auto degrees(T x)
         -> T;
 
@@ -166,7 +166,7 @@ namespace smath
      * @return The radians value
      */
     template<typename T,
-             typename = typename std::enable_if<std::is_floating_point<T>::value, void>::type>
+             typename = std::enable_if_t<std::is_floating_point<T>::value, void>>
     constexpr auto radians(T x)
         -> T;
 

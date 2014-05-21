@@ -44,7 +44,7 @@ namespace details
 // Basic functions
 
 template<typename Number,
-         typename = typename std::enable_if<std::is_arithmetic<Number>::value, void>::type>
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value, void>>
 constexpr auto abs(Number x)
     -> Number
 {
@@ -53,28 +53,28 @@ constexpr auto abs(Number x)
 
 template<typename T, typename U>
 constexpr auto min(T first, U second)
-    -> typename std::common_type<T, U>::type
+    -> std::common_type_t<T, U>
 {
     return (first < second) ? first : second;
 }
 
 template<typename T, typename U, typename... Rest>
 constexpr auto min(T first, U second, Rest... rest)
-    -> typename std::common_type<T, U, Rest...>::type
+    -> std::common_type_t<T, U, Rest...>
 {
     return (first < second) ? min(first, rest...) : min(second, rest...);
 }
 
 template<typename T, typename U>
 constexpr auto max(T first, U second)
-    -> typename std::common_type<T, U>::type
+    -> std::common_type_t<T, U>
 {
     return (first > second) ? first : second;
 }
 
 template<typename T, typename U, typename... Rest>
 constexpr auto max(T first, U second, Rest... rest)
-    -> typename std::common_type<T, U, Rest...>::type
+    -> std::common_type_t<T, U, Rest...>
 {
     return (first > second) ? max(first, rest...) : max(second, rest...);
 }
@@ -83,7 +83,7 @@ constexpr auto max(T first, U second, Rest... rest)
 // Number-theoretic and representation functions
 
 template<typename Float,
-         typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
+         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
 constexpr auto floor(Float x)
     -> decltype(std::floor(x))
 {
@@ -93,7 +93,7 @@ constexpr auto floor(Float x)
 }
 
 template<typename Float,
-         typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
+         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
 constexpr auto ceil(Float x)
     -> decltype(std::ceil(x))
 {
@@ -103,7 +103,7 @@ constexpr auto ceil(Float x)
 }
 
 template<typename Float,
-         typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
+         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
 constexpr auto round(Float x)
     -> decltype(std::round(x))
 {
@@ -111,7 +111,7 @@ constexpr auto round(Float x)
 }
 
 template<typename Float,
-         typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
+         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
 constexpr auto trunc(Float x)
     -> decltype(std::trunc(x))
 {
@@ -122,10 +122,10 @@ constexpr auto trunc(Float x)
 // Power and logarithmic functions
 
 template<typename Number, typename Integer,
-         typename = typename std::enable_if<std::is_integral<Integer>::value
-                          && std::is_arithmetic<Number>::value, void>::type>
+         typename = std::enable_if_t<std::is_integral<Integer>::value
+                          && std::is_arithmetic<Number>::value, void>>
 constexpr auto pow(Number x, Integer exponent)
-    -> typename std::common_type<Number, Integer>::type
+    -> std::common_type_t<Number, Integer>
 {
     return (exponent == 0) ? 1 :
         (exponent > 0) ? details::pow_helper(x, exponent) :
@@ -133,7 +133,7 @@ constexpr auto pow(Number x, Integer exponent)
 }
 
 template<typename Float,
-         typename = typename std::enable_if<std::is_floating_point<Float>::value, void>::type>
+         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
 constexpr auto sqrt(Float x)
     -> decltype(std::sqrt(x))
 {

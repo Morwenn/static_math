@@ -32,7 +32,7 @@ namespace details
 
     template<typename T, typename U>
     constexpr auto gcd_helper(T b, U r)
-        -> typename std::common_type<T, U>::type
+        -> std::common_type_t<T, U>
     {
         return (r == 0) ? b : gcd_helper(r, b % r);
     }
@@ -50,14 +50,14 @@ constexpr auto sign(Number x)
 
 template<typename T, typename U>
 constexpr auto sum(T first, U second)
-    -> typename std::common_type<T, U>::type
+    -> std::common_type_t<T, U>
 {
     return first + second;
 }
 
 template<typename T, typename U, typename... Rest>
 constexpr auto sum(T first, U second, Rest... rest)
-    -> typename std::common_type<T, U, Rest...>::type
+    -> std::common_type_t<T, U, Rest...>
 {
     return first + sum(second, rest...);
 }
@@ -87,25 +87,25 @@ constexpr auto clamp(Number x, Number min, Number max)
 // Integer-related functions
 
 template<typename T,
-         typename = typename std::enable_if<is_integral<T>::value, void>::type>
+         typename = std::enable_if_t<is_integral<T>::value, void>>
 constexpr auto is_even(T n)
     -> bool
 {
-    using res_type = typename std::make_unsigned<T>::type;
+    using res_type = std::make_unsigned_t<T>;
     return !((res_type) n & 1);
 }
 
 template<typename T,
-         typename = typename std::enable_if<is_integral<T>::value, void>::type>
+         typename = std::enable_if_t<is_integral<T>::value, void>>
 constexpr auto is_odd(T n)
     -> bool
 {
-    using res_type = typename std::make_unsigned<T>::type;
+    using res_type = std::make_unsigned_t<T>;
     return (res_type) n & 1;
 }
 
 template<typename T,
-         typename = typename std::enable_if<is_integral<T>::value, void>::type>
+         typename = std::enable_if_t<is_integral<T>::value, void>>
 constexpr auto is_prime(T n)
     -> bool
 {
@@ -116,7 +116,7 @@ constexpr auto is_prime(T n)
 }
 
 template<typename T,
-         typename = typename std::enable_if<is_integral<T>::value, void>::type>
+         typename = std::enable_if_t<is_integral<T>::value, void>>
 constexpr auto fibonacci(T n)
     -> T
 {
@@ -124,7 +124,7 @@ constexpr auto fibonacci(T n)
 }
 
 template<typename T,
-         typename = typename std::enable_if<is_integral<T>::value, void>::type>
+         typename = std::enable_if_t<is_integral<T>::value, void>>
 constexpr auto factorial(T n)
     -> T
 {
@@ -132,9 +132,9 @@ constexpr auto factorial(T n)
 }
 
 template<typename T, typename U,
-         typename = typename std::enable_if<is_integral<T, U>::value, void>::type>
+         typename = std::enable_if_t<is_integral<T, U>::value, void>>
 constexpr auto gcd(T a, U b)
-    -> typename std::common_type<T, U>::type
+    -> std::common_type_t<T, U>
 {
     return (a == 0 || b == 0) ? 0 :
         (a >= b) ? details::gcd_helper(b, a % b) :
@@ -142,9 +142,9 @@ constexpr auto gcd(T a, U b)
 }
 
 template<typename T, typename U,
-         typename = typename std::enable_if<is_integral<T, U>::value, void>::type>
+         typename = std::enable_if_t<is_integral<T, U>::value, void>>
 constexpr auto lcm(T a, U b)
-    -> typename std::common_type<T, U>::type
+    -> std::common_type_t<T, U>
 {
     return (a == 0 || b == 0) ? 1 :
         a * b / gcd(a, b);
@@ -154,7 +154,7 @@ constexpr auto lcm(T a, U b)
 // Angle conversions
 
 template<typename T,
-         typename = typename std::enable_if<std::is_floating_point<T>::value, void>::type>
+         typename = std::enable_if_t<std::is_floating_point<T>::value, void>>
 constexpr auto degree(T x)
     -> T
 {
@@ -162,7 +162,7 @@ constexpr auto degree(T x)
 }
 
 template<typename T,
-         typename = typename std::enable_if<std::is_floating_point<T>::value, void>::type>
+         typename = std::enable_if_t<std::is_floating_point<T>::value, void>>
 constexpr auto radian(T x)
     -> T
 {
