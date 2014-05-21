@@ -86,27 +86,25 @@ constexpr auto clamp(Number x, Number min, Number max)
 ////////////////////////////////////////////////////////////
 // Integer-related functions
 
-template<typename T,
-         typename = std::enable_if_t<is_integral<T>::value, void>>
-constexpr auto is_even(T n)
+template<typename Integer,
+         typename = std::enable_if_t<is_integral<Integer>::value, void>>
+constexpr auto is_even(Integer n)
     -> bool
 {
-    using res_type = std::make_unsigned_t<T>;
-    return !((res_type) n & 1);
+    return not bool(n % 2);
 }
 
-template<typename T,
-         typename = std::enable_if_t<is_integral<T>::value, void>>
-constexpr auto is_odd(T n)
+template<typename Integer,
+         typename = std::enable_if_t<is_integral<Integer>::value, void>>
+constexpr auto is_odd(Integer n)
     -> bool
 {
-    using res_type = std::make_unsigned_t<T>;
-    return (res_type) n & 1;
+    return bool(n % 2);
 }
 
-template<typename T,
-         typename = std::enable_if_t<is_integral<T>::value, void>>
-constexpr auto is_prime(T n)
+template<typename Integer,
+         typename = std::enable_if_t<is_integral<Integer>::value, void>>
+constexpr auto is_prime(Integer n)
     -> bool
 {
     return (n < 2) ? false :
@@ -115,18 +113,18 @@ constexpr auto is_prime(T n)
                 details::is_prime_helper(n, 3);
 }
 
-template<typename T,
-         typename = std::enable_if_t<is_integral<T>::value, void>>
-constexpr auto fibonacci(T n)
-    -> T
+template<typename Integer,
+         typename = std::enable_if_t<is_integral<Integer>::value, void>>
+constexpr auto fibonacci(Integer n)
+    -> Integer
 {
     return (n < 2) ? n : fibonacci(n-2) + fibonacci(n-1);
 }
 
-template<typename T,
-         typename = std::enable_if_t<is_integral<T>::value, void>>
-constexpr auto factorial(T n)
-    -> T
+template<typename Integer,
+         typename = std::enable_if_t<is_integral<Integer>::value, void>>
+constexpr auto factorial(Integer n)
+    -> Integer
 {
     return (n > 1) ? n * factorial(n - 1) : 1;
 }

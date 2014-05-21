@@ -80,9 +80,9 @@ namespace smath
      * @param n Integer value
      * @return Whether \a n is even or not
      */
-    template<typename T,
-             typename = std::enable_if_t<is_integral<T>::value, void>>
-    constexpr auto is_even(T n)
+    template<typename Integer,
+             typename = std::enable_if_t<is_integral<Integer>::value, void>>
+    constexpr auto is_even(Integer n)
         -> bool;
 
     /**
@@ -90,9 +90,9 @@ namespace smath
      * @param n Integer value
      * @return Whether \a n is odd or not
      */
-    template<typename T,
-             typename = std::enable_if_t<is_integral<T>::value, void>>
-    constexpr auto is_odd(T n)
+    template<typename Integer,
+             typename = std::enable_if_t<is_integral<Integer>::value, void>>
+    constexpr auto is_odd(Integer n)
         -> bool;
 
     /**
@@ -100,9 +100,9 @@ namespace smath
      * @param n Integer value
      * @return True if \a n is a prime number
      */
-    template<typename T,
-             typename = std::enable_if_t<is_integral<T>::value, void>>
-    constexpr auto is_prime(T n)
+    template<typename Integer,
+             typename = std::enable_if_t<is_integral<Integer>::value, void>>
+    constexpr auto is_prime(Integer n)
         -> bool;
 
     /**
@@ -110,20 +110,20 @@ namespace smath
      * @param n Some integer
      * @return nth Fibonacci number
      */
-    template<typename T,
-             typename = std::enable_if_t<is_integral<T>::value, void>>
-    constexpr auto fibonacci(T n)
-        -> T;
+    template<typename Integer,
+             typename = std::enable_if_t<is_integral<Integer>::value, void>>
+    constexpr auto fibonacci(Integer n)
+        -> Integer;
 
     /**
      * @brief Factorial function
      * @param n Some integer
      * @return Factorial of n
      */
-    template<typename T,
-             typename = std::enable_if_t<is_integral<T>::value, void>>
-    constexpr auto factorial(T n)
-        -> T;
+    template<typename Integer,
+             typename = std::enable_if_t<is_integral<Integer>::value, void>>
+    constexpr auto factorial(Integer n)
+        -> Integer;
 
     /**
      * @brief Greatest common divisor
