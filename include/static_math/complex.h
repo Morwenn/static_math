@@ -286,8 +286,6 @@ namespace smath
     constexpr auto conj(const complex<T>& x)
         -> complex<T>;
 
-    #include <static_math/complex.inl>
-
     inline namespace literals
     {
         ////////////////////////////////////////////////////////////
@@ -323,6 +321,8 @@ namespace smath
         constexpr auto operator"" _uill(unsigned long long n)
             -> smath::imaginary<unsigned long long>;
     }
+
+    #include <static_math/complex.inl>
 }
 
 #endif // SMATH_COMPLEX_H_
