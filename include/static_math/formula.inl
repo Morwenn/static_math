@@ -153,7 +153,7 @@ constexpr auto lcm(T a, U b)
 
 template<typename T,
          typename = std::enable_if_t<std::is_floating_point<T>::value, void>>
-constexpr auto degree(T x)
+constexpr auto degrees(T x)
     -> T
 {
     return x * 180.0L / PI;
@@ -161,7 +161,7 @@ constexpr auto degree(T x)
 
 template<typename T,
          typename = std::enable_if_t<std::is_floating_point<T>::value, void>>
-constexpr auto radian(T x)
+constexpr auto radians(T x)
     -> T
 {
     return x * PI / 180.0L;
