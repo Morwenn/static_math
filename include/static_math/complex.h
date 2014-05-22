@@ -78,8 +78,8 @@ namespace smath
 
         private:
 
-            T _real;
-            imaginary<T> _imag;
+            const value_type _real;
+            const imaginary<T> _imag;
     };
 
     ////////////////////////////////////////////////////////////

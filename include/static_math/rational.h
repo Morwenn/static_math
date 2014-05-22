@@ -57,8 +57,8 @@ namespace smath
 
         private:
 
-            T _numerator;
-            T _denominator;
+            const value_type _numerator;
+            const value_type _denominator;
     };
 
     ////////////////////////////////////////////////////////////
