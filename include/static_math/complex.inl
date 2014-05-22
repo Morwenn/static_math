@@ -539,6 +539,8 @@ constexpr auto conj(const complex<T>& x)
 
 inline namespace literals
 {
+inline namespace complex_literals
+{
     ////////////////////////////////////////////////////////////
     // Float user-defined literals
 
@@ -598,4 +600,4 @@ inline namespace literals
     {
         return { n };
     }
-}
+}}

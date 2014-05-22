@@ -228,6 +228,8 @@ namespace smath
 
     inline namespace literals
     {
+    inline namespace rational_literals
+    {
         ////////////////////////////////////////////////////////////
         // User-defined literals
 
@@ -248,7 +250,7 @@ namespace smath
 
         constexpr auto operator "" _rull(unsigned long long n)
             -> rational<unsigned long long>;
-    }
+    }}
 
     #include <static_math/rational.inl>
 }

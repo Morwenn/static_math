@@ -435,6 +435,8 @@ constexpr auto pow(const rational<T>& ratio, Integral exp)
 
 inline namespace literals
 {
+inline namespace rational_literals
+{
     ////////////////////////////////////////////////////////////
     // User-defined literals
 
@@ -473,4 +475,4 @@ inline namespace literals
     {
         return { n };
     }
-}
+}}

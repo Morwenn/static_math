@@ -288,6 +288,8 @@ namespace smath
 
     inline namespace literals
     {
+    inline namespace complex_literals
+    {
         ////////////////////////////////////////////////////////////
         // Float user-defined literals
 
@@ -320,7 +322,7 @@ namespace smath
 
         constexpr auto operator"" _uill(unsigned long long n)
             -> smath::imaginary<unsigned long long>;
-    }
+    }}
 
     #include <static_math/complex.inl>
 }
