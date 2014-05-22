@@ -30,7 +30,7 @@ constexpr imaginary<T>::imaginary(value_type real):
 template<typename T>
 constexpr complex<T>::complex(value_type real, value_type imag):
     real(real),
-    imag(imaginary<T>(imag))
+    imag(imag)
 {}
 
 template<typename T>
