@@ -21,50 +21,23 @@
 
 template<typename T>
 constexpr imaginary<T>::imaginary(value_type real):
-    _value(real)
+    value(real)
 {}
-
-template<typename T>
-constexpr T imaginary<T>::value() const
-{
-    return _value;
-}
 
 ////////////////////////////////////////////////////////////
 // complex<T> functions
 
 template<typename T>
 constexpr complex<T>::complex(value_type real, value_type imag):
-    _real(real),
-    _imag(imaginary<T>(imag))
+    real(real),
+    imag(imaginary<T>(imag))
 {}
 
 template<typename T>
 constexpr complex<T>::complex(value_type real, imaginary<T> imag):
-    _real(real),
-    _imag(imag)
+    real(real),
+    imag(imag)
 {}
-
-template<typename T>
-constexpr auto complex<T>::real() const
-    -> value_type
-{
-    return _real;
-}
-
-template<typename T>
-constexpr auto complex<T>::imag() const
-    -> imaginary<T>
-{
-    return _imag;
-}
-
-template<typename T>
-constexpr auto complex<T>::imag_value() const
-    -> value_type
-{
-    return _imag.value();
-}
 
 ////////////////////////////////////////////////////////////
 // Unary arithmetic operators
@@ -80,7 +53,7 @@ template<typename T>
 constexpr auto operator-(imaginary<T> imag)
     -> imaginary<T>
 {
-    return { -imag.value() };
+    return { -imag.value };
 }
 
 template<typename T>
@@ -95,8 +68,8 @@ constexpr auto operator-(complex<T> ratio)
     -> complex<T>
 {
     return {
-        -ratio.real(),
-        -ratio.imag()
+        -ratio.real,
+        -ratio.imag
     };
 }
 
@@ -107,28 +80,28 @@ template<typename T, typename U>
 constexpr auto operator+(imaginary<T> lhs, imaginary<U> rhs)
     -> imaginary<std::common_type_t<T, U>>
 {
-    return { lhs.value() + rhs.value() };
+    return { lhs.value + rhs.value };
 }
 
 template<typename T, typename U>
 constexpr auto operator-(imaginary<T> lhs, imaginary<U> rhs)
     -> imaginary<std::common_type_t<T, U>>
 {
-    return { lhs.value() - rhs.value() };
+    return { lhs.value - rhs.value };
 }
 
 template<typename T, typename U>
 constexpr auto operator*(imaginary<T> lhs, imaginary<U> rhs)
     -> std::common_type_t<T, U>
 {
-    return -lhs.value() * rhs.value();
+    return -lhs.value * rhs.value;
 }
 
 template<typename T, typename U>
 constexpr auto operator/(imaginary<T> lhs, imaginary<U> rhs)
     -> std::common_type_t<T, U>
 {
-    return lhs.value()*rhs.value() / sqr(rhs.value());
+    return lhs.value*rhs.value / sqr(rhs.value);
 }
 
 template<typename T, typename U,
@@ -136,10 +109,7 @@ template<typename T, typename U,
 constexpr auto operator+(imaginary<T> lhs, U rhs)
     -> complex<std::common_type_t<T, U>>
 {
-    return {
-        rhs,
-        lhs
-    };
+    return { rhs, lhs };
 }
 
 template<typename T, typename U,
@@ -147,10 +117,7 @@ template<typename T, typename U,
 constexpr auto operator-(imaginary<T> lhs, U rhs)
     -> complex<std::common_type_t<T, U>>
 {
-    return {
-        -rhs,
-        lhs
-    };
+    return { -rhs, lhs };
 }
 
 template<typename T, typename U,
@@ -158,7 +125,7 @@ template<typename T, typename U,
 constexpr auto operator*(imaginary<T> lhs, U rhs)
     -> imaginary<std::common_type_t<T, U>>
 {
-    return { lhs.value() * rhs };
+    return { lhs.value * rhs };
 }
 
 template<typename T, typename U,
@@ -166,7 +133,7 @@ template<typename T, typename U,
 constexpr auto operator/(imaginary<T> lhs, U rhs)
     -> imaginary<std::common_type_t<T, U>>
 {
-    return { lhs.value() / rhs };
+    return { lhs.value / rhs };
 }
 
 template<typename T, typename U,
@@ -174,10 +141,7 @@ template<typename T, typename U,
 constexpr auto operator+(U lhs, imaginary<T> rhs)
     -> complex<std::common_type_t<T, U>>
 {
-    return {
-        lhs,
-        rhs
-    };
+    return { lhs, rhs };
 }
 
 template<typename T, typename U,
@@ -185,10 +149,7 @@ template<typename T, typename U,
 constexpr auto operator-(U lhs, imaginary<T> rhs)
     -> complex<std::common_type_t<T, U>>
 {
-    return {
-        lhs,
-        -rhs
-    };
+    return { lhs, -rhs };
 }
 
 template<typename T, typename U,
@@ -196,7 +157,7 @@ template<typename T, typename U,
 constexpr auto operator*(U lhs, imaginary<T> rhs)
     -> imaginary<std::common_type_t<T, U>>
 {
-    return { lhs * rhs.value() };
+    return { lhs * rhs.value };
 }
 
 template<typename T, typename U,
@@ -204,7 +165,7 @@ template<typename T, typename U,
 constexpr auto operator/(U lhs, imaginary<T> rhs)
     -> imaginary<std::common_type_t<T, U>>
 {
-    return { lhs / rhs.value() };
+    return { lhs / rhs.value };
 }
 
 template<typename T, typename U>
@@ -212,8 +173,8 @@ constexpr auto operator+(complex<T> lhs, complex<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.real() + rhs.real(),
-        lhs.imag() + rhs.imag()
+        lhs.real + rhs.real,
+        lhs.imag + rhs.imag
     };
 }
 
@@ -222,8 +183,8 @@ constexpr auto operator-(complex<T> lhs, complex<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.real() - rhs.real(),
-        lhs.imag() - rhs.imag()
+        lhs.real - rhs.real,
+        lhs.imag - rhs.imag
     };
 }
 
@@ -232,8 +193,8 @@ constexpr auto operator*(complex<T> lhs, complex<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.real()*rhs.real() + lhs.imag()*rhs.imag(),
-        lhs.real()*rhs.imag() + lhs.imag()*rhs.real()
+        lhs.real*rhs.real + lhs.imag*rhs.imag,
+        lhs.real*rhs.imag + lhs.imag*rhs.real
     };
 }
 
@@ -242,8 +203,8 @@ constexpr auto operator/(complex<T> lhs, complex<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        (lhs.real()*rhs.real() + lhs.imag_value()*rhs.imag_value()) / (sqr(rhs.real()) + sqr(rhs.imag_value())),
-        (lhs.imag_value()*rhs.real() - lhs.real()*rhs.imag_value()) / (sqr(rhs.real()) + sqr(rhs.imag_value()))
+        (lhs.real*rhs.real + lhs.imag.value*rhs.imag.value) / (sqr(rhs.real) + sqr(rhs.imag.value)),
+        (lhs.imag.value*rhs.real - lhs.real*rhs.imag.value) / (sqr(rhs.real) + sqr(rhs.imag.value))
     };
 }
 
@@ -253,8 +214,8 @@ constexpr auto operator+(complex<T> lhs, U rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.real() + rhs,
-        lhs.imag()
+        lhs.real + rhs,
+        lhs.imag
     };
 }
 
@@ -264,8 +225,8 @@ constexpr auto operator-(complex<T> lhs, U rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.real() - rhs,
-        lhs.imag()
+        lhs.real - rhs,
+        lhs.imag
     };
 }
 
@@ -275,8 +236,8 @@ constexpr auto operator*(complex<T> lhs, U rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.real() * rhs,
-        lhs.imag_value() * rhs
+        lhs.real * rhs,
+        lhs.imag.value * rhs
     };
 }
 
@@ -286,8 +247,8 @@ constexpr auto operator/(complex<T> lhs, U rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.real() / rhs,
-        lhs.imag() / rhs
+        lhs.real / rhs,
+        lhs.imag / rhs
     };
 }
 
@@ -297,8 +258,8 @@ constexpr auto operator+(U lhs, complex<T> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs + rhs.real(),
-        rhs.imag()
+        lhs + rhs.real,
+        rhs.imag
     };
 }
 
@@ -308,8 +269,8 @@ constexpr auto operator-(U lhs, complex<T> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs - rhs.real(),
-        -rhs.imag()
+        lhs - rhs.real,
+        -rhs.imag
     };
 }
 template<typename T, typename U,
@@ -318,8 +279,8 @@ constexpr auto operator*(U lhs, complex<T> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs * rhs.real(),
-        lhs * rhs.imag_value()
+        lhs * rhs.real,
+        lhs * rhs.imag.value
     };
 }
 
@@ -329,8 +290,8 @@ constexpr auto operator/(U lhs, complex<T> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs * rhs.real() / (sqr(rhs.real()) + sqr(rhs.imag_value())),
-        -lhs * rhs.imag_value() / (sqr(rhs.real()) + sqr(rhs.imag_value()))
+        lhs * rhs.real / (sqr(rhs.real) + sqr(rhs.imag.value)),
+        -lhs * rhs.imag.value / (sqr(rhs.real) + sqr(rhs.imag.value))
     };
 }
 
@@ -339,8 +300,8 @@ constexpr auto operator+(complex<T> lhs, imaginary<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.real(),
-        lhs.imag() + rhs
+        lhs.real,
+        lhs.imag + rhs
     };
 }
 
@@ -349,8 +310,8 @@ constexpr auto operator-(complex<T> lhs, imaginary<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.real(),
-        lhs.imag() - rhs
+        lhs.real,
+        lhs.imag - rhs
     };
 }
 
@@ -359,8 +320,8 @@ constexpr auto operator*(complex<T> lhs, imaginary<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.imag() * rhs,
-        lhs.real() * rhs
+        lhs.imag * rhs,
+        lhs.real * rhs
     };
 }
 
@@ -369,8 +330,8 @@ constexpr auto operator/(complex<T> lhs, imaginary<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.imag_value() * rhs.value() / sqr(rhs.value()),
-        -lhs.real() * rhs.value() / sqr(rhs.value())
+        lhs.imag.value * rhs.value / sqr(rhs.value),
+        -lhs.real * rhs.value / sqr(rhs.value)
     };
 }
 
@@ -379,8 +340,8 @@ constexpr auto operator+(imaginary<T> lhs, complex<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        rhs.real(),
-        rhs.imag() + lhs
+        rhs.real,
+        rhs.imag + lhs
     };
 }
 
@@ -389,8 +350,8 @@ constexpr auto operator-(imaginary<T> lhs, complex<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        -rhs.real(),
-        lhs - rhs.imag()
+        -rhs.real,
+        lhs - rhs.imag
     };
 }
 
@@ -399,8 +360,8 @@ constexpr auto operator*(imaginary<T> lhs, complex<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs * rhs.imag(),
-        lhs * rhs.real()
+        lhs * rhs.imag,
+        lhs * rhs.real
     };
 }
 
@@ -409,8 +370,8 @@ constexpr auto operator/(imaginary<T> lhs, complex<U> rhs)
     -> complex<std::common_type_t<T, U>>
 {
     return {
-        lhs.value() * rhs.imag_value() / (sqr(rhs.real()) + sqr(rhs.imag_value())),
-        lhs.value() * rhs.real() / (sqr(rhs.real()) + sqr(rhs.imag_value()))
+        lhs.value * rhs.imag.value / (sqr(rhs.real) + sqr(rhs.imag.value)),
+        lhs.value * rhs.real / (sqr(rhs.real) + sqr(rhs.imag.value))
     };
 }
 
@@ -421,7 +382,7 @@ template<typename T, typename U>
 constexpr auto operator==(imaginary<T> lhs, imaginary<U> rhs)
     -> bool
 {
-        return lhs.value() == rhs.value();
+        return lhs.value == rhs.value;
 }
 
 template<typename T, typename U>
@@ -435,8 +396,8 @@ template<typename T, typename U>
 constexpr auto operator==(complex<T> lhs, complex<U> rhs)
     -> bool
 {
-    return lhs.real() == rhs.real()
-        && lhs.imag() == rhs.imag();
+    return lhs.real == rhs.real
+        && lhs.imag == rhs.imag;
 }
 
 template<typename T, typename U>
@@ -451,8 +412,8 @@ template<typename T, typename U,
 constexpr auto operator==(complex<T> lhs, U rhs)
     -> bool
 {
-    return lhs.real() == rhs
-        && lhs.imag_value() == 0;
+    return lhs.real == rhs
+        && lhs.imag.value == 0;
 }
 
 template<typename T, typename U,
@@ -468,8 +429,8 @@ template<typename T, typename U,
 constexpr auto operator==(U lhs, complex<T> rhs)
     -> bool
 {
-    return rhs.real() == lhs
-        && rhs.imag_value() == 0;
+    return rhs.real == lhs
+        && rhs.imag_value == 0;
 }
 
 template<typename T, typename U,
@@ -484,8 +445,8 @@ template<typename T, typename U>
 constexpr auto operator==(complex<T> lhs, imaginary<U> rhs)
     -> bool
 {
-    return lhs.imag() == rhs
-        && lhs.real() == 0;
+    return lhs.imag == rhs
+        && lhs.real == 0;
 }
 
 template<typename T, typename U>
@@ -499,8 +460,8 @@ template<typename T, typename U>
 constexpr auto operator==(imaginary<T> lhs, complex<U> rhs)
     -> bool
 {
-    return rhs.imag() == lhs
-        && rhs.real() == 0;
+    return rhs.imag == lhs
+        && rhs.real == 0;
 }
 
 template<typename T, typename U>
@@ -514,26 +475,12 @@ constexpr auto operator!=(imaginary<T> lhs, complex<U> rhs)
 // Mathematical functions
 
 template<typename T>
-constexpr auto real(complex<T> x)
-    -> T
-{
-    return x.real();
-}
-
-template<typename T>
-constexpr auto imag(complex<T> x)
-    -> imaginary<T>
-{
-    return x.imag();
-}
-
-template<typename T>
 constexpr auto conj(complex<T> x)
     -> complex<T>
 {
     return {
-        x.real(),
-        -x.imag()
+        x.real,
+        -x.imag
     };
 }
 

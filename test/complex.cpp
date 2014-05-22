@@ -24,11 +24,11 @@ int main()
 {
     // Constructor tests
     constexpr auto i1 = imaginary<float>(5.8f);
-    static_assert(equals(i1.value(), 5.8f), "");
+    static_assert(equals(i1.value, 5.8f), "");
 
     constexpr auto c1 = complex<float>(1.2f, 2.5f);
-    static_assert(equals(c1.real(), 1.2f), "");
-    static_assert(equals(c1.imag_value(), 2.5f), "");
+    static_assert(equals(c1.real, 1.2f), "");
+    static_assert(equals(c1.imag.value, 2.5f), "");
 
     constexpr auto imag0 = imaginary<int>(0);
     constexpr auto imag1 = imaginary<int>(1);
@@ -97,8 +97,6 @@ int main()
     static_assert(4_i / complex<int>(2, 2) == complex<int>(1, 1), "");
 
     // Mathematical functions
-    static_assert(real(comp5) == 3, "");
-    static_assert(imag(comp4) == 4_i, "");
     static_assert(conj(comp4) == complex<int>(-2, -4), "");
     static_assert(conj(comp5) == complex<int>(3, 1), "");
 }

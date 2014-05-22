@@ -30,56 +30,36 @@ namespace smath
      * @brief Imaginary numbers
      */
     template<typename T>
-    class imaginary
+    struct imaginary
     {
         static_assert(std::is_arithmetic<T>::value,
                       "an imaginary number can only contain arithmetic values");
 
-        public:
+        using value_type = T;
 
-            using value_type = T;
+        // Constructor
+        constexpr imaginary(value_type real);
 
-            // Constructor
-            constexpr imaginary(value_type real);
-
-            // Getter
-            constexpr auto value() const
-                -> value_type;
-
-        private:
-
-            const value_type _value;
+        const value_type value;
     };
 
     /**
      * @brief Complex numbers
      */
     template<typename T>
-    class complex
+    struct complex
     {
         static_assert(std::is_arithmetic<T>::value,
                       "A complex number can only contain arithmetic values.");
 
-        public:
+        using value_type = T;
 
-            using value_type = T;
+        // Constructors
+        constexpr complex(value_type real, value_type imag);
+        constexpr complex(value_type real, imaginary<T> img);
 
-            // Constructors
-            constexpr complex(value_type real, value_type imag);
-            constexpr complex(value_type real, imaginary<T> img);
-
-            // Getters
-            constexpr auto real() const
-                -> value_type;
-            constexpr auto imag() const
-                -> imaginary<T>;
-            constexpr auto imag_value() const
-                -> value_type;
-
-        private:
-
-            const value_type _real;
-            const imaginary<T> _imag;
+        const value_type real;
+        const imaginary<T> imag;
     };
 
     ////////////////////////////////////////////////////////////
@@ -273,14 +253,6 @@ namespace smath
 
     ////////////////////////////////////////////////////////////
     // Mathematical functions
-
-    template<typename T>
-    constexpr auto real(complex<T> x)
-        -> T;
-
-    template<typename T>
-    constexpr auto imag(complex<T> x)
-        -> imaginary<T>;
 
     template<typename T>
     constexpr auto conj(complex<T> x)
