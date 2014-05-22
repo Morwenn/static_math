@@ -90,39 +90,31 @@ namespace smath
     constexpr auto operator/(rational<T> lhs, rational<U> rhs)
         -> rational<std::common_type_t<T, U>>;
 
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator+(rational<T> lhs, U rhs)
-        -> rational<std::common_type_t<T, U>>;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator-(rational<T> lhs, U rhs)
-        -> rational<std::common_type_t<T, U>>;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator*(rational<T> lhs, U rhs)
-        -> rational<std::common_type_t<T, U>>;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator/(rational<T> lhs, U rhs)
-        -> rational<std::common_type_t<T, U>>;
+    template<typename T, typename Integer>
+    constexpr auto operator+(rational<T> lhs, Integer rhs)
+        -> rational<std::common_type_t<T, Integer>>;
+    template<typename T, typename Integer>
+    constexpr auto operator-(rational<T> lhs, Integer rhs)
+        -> rational<std::common_type_t<T, Integer>>;
+    template<typename T, typename Integer>
+    constexpr auto operator*(rational<T> lhs, Integer rhs)
+        -> rational<std::common_type_t<T, Integer>>;
+    template<typename T, typename Integer>
+    constexpr auto operator/(rational<T> lhs, Integer rhs)
+        -> rational<std::common_type_t<T, Integer>>;
 
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator+(U lhs, rational<T> rhs)
-        -> rational<std::common_type_t<T, U>>;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator-(U lhs, rational<T> rhs)
-        -> rational<std::common_type_t<T, U>>;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator*(U lhs, rational<T> rhs)
-        -> rational<std::common_type_t<T, U>>;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator/(U lhs, rational<T> rhs)
-        -> rational<std::common_type_t<T, U>>;
+    template<typename T, typename Integer>
+    constexpr auto operator+(Integer lhs, rational<T> rhs)
+        -> rational<std::common_type_t<T, Integer>>;
+    template<typename T, typename Integer>
+    constexpr auto operator-(Integer lhs, rational<T> rhs)
+        -> rational<std::common_type_t<T, Integer>>;
+    template<typename T, typename Integer>
+    constexpr auto operator*(Integer lhs, rational<T> rhs)
+        -> rational<std::common_type_t<T, Integer>>;
+    template<typename T, typename Integer>
+    constexpr auto operator/(Integer lhs, rational<T> rhs)
+        -> rational<std::common_type_t<T, Integer>>;
 
     ////////////////////////////////////////////////////////////
     // Relational operators
@@ -146,54 +138,42 @@ namespace smath
     constexpr auto operator>=(rational<T> lhs, rational<U> rhs)
         -> bool;
 
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator==(rational<T> lhs, U rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator==(rational<T> lhs, Integer rhs)
         -> bool;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator!=(rational<T> lhs, U rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator!=(rational<T> lhs, Integer rhs)
         -> bool;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator<(rational<T> lhs, U rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator<(rational<T> lhs, Integer rhs)
         -> bool;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator>(rational<T> lhs, U rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator>(rational<T> lhs, Integer rhs)
         -> bool;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator<=(rational<T> lhs, U rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator<=(rational<T> lhs, Integer rhs)
         -> bool;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator>=(rational<T> lhs, U rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator>=(rational<T> lhs, Integer rhs)
         -> bool;
 
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator==(U lhs, rational<T> rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator==(Integer lhs, rational<T> rhs)
         -> bool;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator!=(U lhs, rational<T> rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator!=(Integer lhs, rational<T> rhs)
         -> bool;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator<(U lhs, rational<T> rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator<(Integer lhs, rational<T> rhs)
         -> bool;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator>(U lhs, rational<T> rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator>(Integer lhs, rational<T> rhs)
         -> bool;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator<=(U lhs, rational<T> rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator<=(Integer lhs, rational<T> rhs)
         -> bool;
-    template<typename T, typename U,
-             typename = std::enable_if_t<std::is_integral<U>::value, void>>
-    constexpr auto operator>=(U lhs, rational<T> rhs)
+    template<typename T, typename Integer>
+    constexpr auto operator>=(Integer lhs, rational<T> rhs)
         -> bool;
 
     ////////////////////////////////////////////////////////////
@@ -227,9 +207,8 @@ namespace smath
     constexpr auto reciprocal(rational<T> ratio)
         -> rational<T>;
 
-    template<typename T, typename Integral,
-             typename = std::enable_if_t<std::is_integral<Integral>::value, void>>
-    constexpr auto pow(rational<T> ratio, Integral exp)
+    template<typename T, typename Integer>
+    constexpr auto pow(rational<T> ratio, Integer exp)
         -> rational<T>;
 
     inline namespace literals

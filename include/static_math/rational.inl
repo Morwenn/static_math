@@ -133,10 +133,9 @@ constexpr auto operator/(rational<T> lhs, rational<U> rhs)
     };
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator+(rational<T> lhs, U rhs)
-    -> rational<std::common_type_t<T, U>>
+template<typename T, typename Integer>
+constexpr auto operator+(rational<T> lhs, Integer rhs)
+    -> rational<std::common_type_t<T, Integer>>
 {
     return {
         lhs.numer + rhs * lhs.denom,
@@ -144,10 +143,9 @@ constexpr auto operator+(rational<T> lhs, U rhs)
     };
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator-(rational<T> lhs, U rhs)
-    -> rational<std::common_type_t<T, U>>
+template<typename T, typename Integer>
+constexpr auto operator-(rational<T> lhs, Integer rhs)
+    -> rational<std::common_type_t<T, Integer>>
 {
     return {
         lhs.numer - rhs * lhs.denom,
@@ -155,10 +153,9 @@ constexpr auto operator-(rational<T> lhs, U rhs)
     };
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator*(rational<T> lhs, U rhs)
-    -> rational<std::common_type_t<T, U>>
+template<typename T, typename Integer>
+constexpr auto operator*(rational<T> lhs, Integer rhs)
+    -> rational<std::common_type_t<T, Integer>>
 {
     return {
         lhs.numer * rhs,
@@ -166,10 +163,9 @@ constexpr auto operator*(rational<T> lhs, U rhs)
     };
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator/(rational<T> lhs, U rhs)
-    -> rational<std::common_type_t<T, U>>
+template<typename T, typename Integer>
+constexpr auto operator/(rational<T> lhs, Integer rhs)
+    -> rational<std::common_type_t<T, Integer>>
 {
     return {
         lhs.numer,
@@ -177,10 +173,9 @@ constexpr auto operator/(rational<T> lhs, U rhs)
     };
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator+(U lhs, rational<T> rhs)
-    -> rational<std::common_type_t<T, U>>
+template<typename T, typename Integer>
+constexpr auto operator+(Integer lhs, rational<T> rhs)
+    -> rational<std::common_type_t<T, Integer>>
 {
     return {
         lhs * rhs.denom + rhs.numer,
@@ -188,10 +183,9 @@ constexpr auto operator+(U lhs, rational<T> rhs)
     };
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator-(U lhs, rational<T> rhs)
-    -> rational<std::common_type_t<T, U>>
+template<typename T, typename Integer>
+constexpr auto operator-(Integer lhs, rational<T> rhs)
+    -> rational<std::common_type_t<T, Integer>>
 {
     return {
         lhs * rhs.denom - rhs.numer,
@@ -199,10 +193,9 @@ constexpr auto operator-(U lhs, rational<T> rhs)
     };
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator*(U lhs, rational<T> rhs)
-    -> rational<std::common_type_t<T, U>>
+template<typename T, typename Integer>
+constexpr auto operator*(Integer lhs, rational<T> rhs)
+    -> rational<std::common_type_t<T, Integer>>
 {
     return {
         lhs * rhs.numer,
@@ -210,10 +203,9 @@ constexpr auto operator*(U lhs, rational<T> rhs)
     };
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator/(U lhs, rational<T> rhs)
-    -> rational<std::common_type_t<T, U>>
+template<typename T, typename Integer>
+constexpr auto operator/(Integer lhs, rational<T> rhs)
+    -> rational<std::common_type_t<T, Integer>>
 {
     return {
         lhs * rhs.denom,
@@ -267,97 +259,85 @@ constexpr auto operator>=(rational<T> lhs, rational<U> rhs)
     return lhs.numer * rhs.denom >= lhs.denom * rhs.numer;
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator==(rational<T> lhs, U rhs)
+template<typename T, typename Integer>
+constexpr auto operator==(rational<T> lhs, Integer rhs)
     -> bool
 {
     return rhs * lhs.denom == lhs.numer;
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator!=(rational<T> lhs, U rhs)
+template<typename T, typename Integer>
+constexpr auto operator!=(rational<T> lhs, Integer rhs)
     -> bool
 {
     return !(lhs == rhs);
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator<(rational<T> lhs, U rhs)
+template<typename T, typename Integer>
+constexpr auto operator<(rational<T> lhs, Integer rhs)
     -> bool
 {
     return lhs.numer < lhs.denom * rhs;
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator>(rational<T> lhs, U rhs)
+template<typename T, typename Integer>
+constexpr auto operator>(rational<T> lhs, Integer rhs)
     -> bool
 {
     return lhs.numer > lhs.denom * rhs;
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator<=(rational<T> lhs, U rhs)
+template<typename T, typename Integer>
+constexpr auto operator<=(rational<T> lhs, Integer rhs)
     -> bool
 {
     return lhs.numer <= lhs.denom * rhs;
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator>=(rational<T> lhs, U rhs)
+template<typename T, typename Integer>
+constexpr auto operator>=(rational<T> lhs, Integer rhs)
     -> bool
 {
     return lhs.numer >= lhs.denom * rhs;
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator==(U lhs, rational<T> rhs)
+template<typename T, typename Integer>
+constexpr auto operator==(Integer lhs, rational<T> rhs)
     -> bool
 {
     return lhs * rhs.denom == rhs.numer;
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator!=(U lhs, rational<T> rhs)
+template<typename T, typename Integer>
+constexpr auto operator!=(Integer lhs, rational<T> rhs)
     -> bool
 {
     return !(rhs == lhs);
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator<(U lhs, rational<T> rhs)
+template<typename T, typename Integer>
+constexpr auto operator<(Integer lhs, rational<T> rhs)
     -> bool
 {
     return lhs * rhs.denom < rhs.numer;
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator>(U lhs, rational<T> rhs)
+template<typename T, typename Integer>
+constexpr auto operator>(Integer lhs, rational<T> rhs)
     -> bool
 {
     return lhs * rhs.denom > rhs.numer;
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator<=(U lhs, rational<T> rhs)
+template<typename T, typename Integer>
+constexpr auto operator<=(Integer lhs, rational<T> rhs)
     -> bool
 {
     return lhs * rhs.denom <= rhs.numer;
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<std::is_integral<U>::value, void>>
-constexpr auto operator>=(U lhs, rational<T> rhs)
+template<typename T, typename Integer>
+constexpr auto operator>=(Integer lhs, rational<T> rhs)
     -> bool
 {
     return lhs * rhs.denom >= rhs.numer;
@@ -415,11 +395,13 @@ constexpr auto reciprocal(rational<T> ratio)
     return { ratio.denom, ratio.numer };
 }
 
-template<typename T, typename Integral,
-         typename = std::enable_if_t<std::is_integral<Integral>::value, void>>
-constexpr auto pow(rational<T> ratio, Integral exp)
+template<typename T, typename Integer>
+constexpr auto pow(rational<T> ratio, Integer exp)
     -> rational<T>
 {
+    static_assert(std::is_integral<Integer>::value,
+                  "pow only accepts integer exponents");
+
     return (exp == 0) ? rational<T>(1) :
         (exp > 0) ? rational<T>(
                         pow(ratio.numer, exp),
