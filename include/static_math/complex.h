@@ -33,7 +33,7 @@ namespace smath
     class imaginary
     {
         static_assert(std::is_arithmetic<T>::value,
-                      "An imaginary number can only contain arithmetic values.");
+                      "an imaginary number can only contain arithmetic values");
 
         public:
 

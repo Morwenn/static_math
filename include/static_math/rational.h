@@ -35,7 +35,7 @@ namespace smath
     class rational
     {
         static_assert(std::is_integral<T>::value,
-                      "A rational can only contain integral values.");
+                      "a rational can only contain integral values");
 
         public:
 
