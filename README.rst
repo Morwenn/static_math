@@ -38,11 +38,11 @@ been done to improve usability or convenience over performance. For example, the
 rational numbers are simplified after each operation, which could badly alter the
 performance in a runtime context.
 
-In order to force the user to think of this library as only a compile-time only
+In order to force the users to think of this library as only a compile-time only
 library, some class functions that could have been implemented (without being
-compile-time functions) have simply not been implemented. One of the major examples
-is that no class provides any assignment operator since it involves a change of
-state.
+compile-time functions) have simply not been implemented. For example, even though
+the classes provide arithmetic operators, none of them provides the corresponding
+coumpound assignement operators.
 
 Intuitive feel
 --------------
@@ -56,18 +56,21 @@ This intuitive feel is the one reason why ``static_math`` needs a recent compile
 since the library will need a heavy support for ``constexpr``, ``std::initializer_list``
 and variadic templates in order to work fine.
 
+Some classes (*e.g.* ``rational`` and ``complex``) use ``const`` public member
+variables instead of getters. This simplifies the access to the internals and
+also ensures that they cannot be modified after construction.
+
 Flexibility
 -----------
 
-Some classes such as ``rational`` or ``complex`` make a heavy use of some templates
-facilities such as SFINAE in order to gain some flexibility. For example, many
+Some classes such as ``rational`` or ``complex`` make a heavy use of some type traits
+facilities such as ``std::common_type`` in order to offer some flexibility. Many
 functions accept different number types and return and instance of the common type
 of the arguments::
 
-		// Two different types used to represent
-		// the same kind of data
+		// Two different types used to represent numbers
 		int a = 5;
-		long long int b = 100000;
+		long int b = 100000;
 
 		// The bigger of them is used as the output type
-		auto c = gcd(a, b); // type is long long int
+		auto c = gcd(a, b); // type is long int
