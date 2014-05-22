@@ -32,33 +32,36 @@ namespace smath
      * @brief Rational numbers
      */
     template<typename T>
-    class rational
+    struct rational
     {
         static_assert(std::is_integral<T>::value,
                       "a rational can only contain integral values");
 
-        public:
+        ////////////////////////////////////////////////////////////
+        // Types
 
-            using value_type = T;
+        using value_type = T;
 
-            constexpr rational(value_type numerator);
-            constexpr rational(value_type numerator, value_type denominator);
+        ////////////////////////////////////////////////////////////
+        // Constructors
 
-            constexpr auto numerator() const
-                -> value_type;
-            constexpr auto denominator() const
-                -> value_type;
+        constexpr rational(value_type numerator);
+        constexpr rational(value_type numerator, value_type denominator);
 
-            constexpr explicit operator float() const;
-            constexpr explicit operator double() const;
-            constexpr explicit operator long double() const;
+        ////////////////////////////////////////////////////////////
+        // Cast
 
-            constexpr explicit operator bool() const;
+        constexpr explicit operator float() const;
+        constexpr explicit operator double() const;
+        constexpr explicit operator long double() const;
 
-        private:
+        constexpr explicit operator bool() const;
 
-            const value_type _numerator;
-            const value_type _denominator;
+        ////////////////////////////////////////////////////////////
+        // Member data
+
+        const value_type numer;
+        const value_type denom;
     };
 
     ////////////////////////////////////////////////////////////

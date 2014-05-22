@@ -24,12 +24,12 @@ int main()
 {
     // Constructor tests
     constexpr auto ratio = rational<int>(4, 3);
-    static_assert(ratio.numerator() == 4, "");
-    static_assert(ratio.denominator() == 3, "");
+    static_assert(ratio.numer == 4, "");
+    static_assert(ratio.denom == 3, "");
 
     constexpr auto ratio2 = rational<int>(5);
-    static_assert(ratio2.numerator() == 5, "");
-    static_assert(ratio2.denominator() == 1, "");
+    static_assert(ratio2.numer == 5, "");
+    static_assert(ratio2.denom == 1, "");
 
     constexpr auto r1 = rational<int>(1, 2);
     constexpr auto r2 = rational<int>(2, 4);
