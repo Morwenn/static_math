@@ -97,9 +97,7 @@ namespace smath
      * @warning This functions is only available for the integer
      * @warning exponent right now.
      */
-    template<typename Number, typename Integer,
-             typename = std::enable_if_t<std::is_integral<Integer>::value
-                              && std::is_arithmetic<Number>::value, void>>
+    template<typename Number, typename Integer>
     constexpr auto pow(Number x, Integer exponent)
         -> typename std::common_type_t<Number, Integer>;
 

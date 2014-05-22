@@ -121,12 +121,13 @@ constexpr auto trunc(Float x)
 ////////////////////////////////////////////////////////////
 // Power and logarithmic functions
 
-template<typename Number, typename Integer,
-         typename = std::enable_if_t<std::is_integral<Integer>::value
-                          && std::is_arithmetic<Number>::value, void>>
+template<typename Number, typename Integer>
 constexpr auto pow(Number x, Integer exponent)
     -> std::common_type_t<Number, Integer>
 {
+    static_assert(std::is_integral<Integer>::value,
+                  "pow only accepts integer exponents");
+
     return (exponent == 0) ? 1 :
         (exponent > 0) ? details::pow_helper(x, exponent) :
             1 / details::pow_helper(x, -exponent);
