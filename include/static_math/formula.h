@@ -155,20 +155,20 @@ namespace smath
      * @param x Angle in radians
      * @return The degrees value
      */
-    template<typename T,
-             typename = std::enable_if_t<std::is_floating_point<T>::value, void>>
-    constexpr auto degrees(T x)
-        -> T;
+    template<typename Float,
+             typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+    constexpr auto degrees(Float x)
+        -> Float;
 
     /**
      * @brief Converts an angle in degrees into an angle in radians.
      * @param x Angle in degrees
      * @return The radians value
      */
-    template<typename T,
-             typename = std::enable_if_t<std::is_floating_point<T>::value, void>>
-    constexpr auto radians(T x)
-        -> T;
+    template<typename Float,
+             typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+    constexpr auto radians(Float x)
+        -> Float;
 
     #include <static_math/formula.inl>
 }

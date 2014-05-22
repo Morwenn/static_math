@@ -151,18 +151,18 @@ constexpr auto lcm(T a, U b)
 ////////////////////////////////////////////////////////////
 // Angle conversions
 
-template<typename T,
-         typename = std::enable_if_t<std::is_floating_point<T>::value, void>>
-constexpr auto degrees(T x)
-    -> T
+template<typename Float,
+         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+constexpr auto degrees(Float x)
+    -> Float
 {
     return x * 180.0L / PI;
 }
 
-template<typename T,
-         typename = std::enable_if_t<std::is_floating_point<T>::value, void>>
-constexpr auto radians(T x)
-    -> T
+template<typename Float,
+         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+constexpr auto radians(Float x)
+    -> Float
 {
     return x * PI / 180.0L;
 }
