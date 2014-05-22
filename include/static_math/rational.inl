@@ -58,9 +58,24 @@ constexpr auto rational<T>::denominator() const
 }
 
 template<typename T>
+constexpr rational<T>::operator float() const
+{
+    return static_cast<float>(_numerator) /
+           static_cast<float>(_denominator);
+}
+
+template<typename T>
+constexpr rational<T>::operator double() const
+{
+    return static_cast<double>(_numerator) /
+           static_cast<double>(_denominator);
+}
+
+template<typename T>
 constexpr rational<T>::operator long double() const
 {
-    return (long double) _numerator / (long double) _denominator;
+    return static_cast<long double>(_numerator) /
+           static_cast<long double>(_denominator);
 }
 
 template<typename T>

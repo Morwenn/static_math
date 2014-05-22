@@ -49,7 +49,10 @@ namespace smath
             constexpr auto denominator() const
                 -> value_type;
 
-            constexpr operator long double() const;
+            constexpr explicit operator float() const;
+            constexpr explicit operator double() const;
+            constexpr explicit operator long double() const;
+
             constexpr explicit operator bool() const;
 
         private:

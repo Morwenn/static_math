@@ -83,6 +83,9 @@ int main()
     // Cast
     static_assert(rational<int>(1, 2) == rational<long int>(1, 2), "");
     static_assert(rational<unsigned long long>(3, 2) == rational<short>(3, 2), "");
+    static_assert(float(r1) == 0.5f, "");
+    static_assert(double(r1) == 0.5, "");
+    static_assert((long double)(r1) == 0.5l, "");
 
     // User-defined literal
     static_assert(2 / 3_r == rational<unsigned long long>(2, 3), "");
