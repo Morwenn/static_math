@@ -29,13 +29,14 @@ template<typename T>
 constexpr rational<T>::rational(value_type numerator, value_type denominator):
     numer(
         numerator != 0 ?
-            sign(numerator) * sign(denominator) * abs(numerator)
+            numerator * sign(denominator)
                 / gcd(abs(numerator), abs(denominator))
         : 0
     ),
     denom(
         numerator != 0 ?
-            abs(denominator) / gcd(abs(numerator), abs(denominator))
+            abs(denominator)
+                / gcd(abs(numerator), abs(denominator))
         : 1
     )
 {}
