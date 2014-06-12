@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <array>
 #include <cstddef>
+#include <utility>
 
 namespace smath
 {
@@ -80,6 +81,17 @@ namespace smath
         // aggregate initialization.
         const std::array<T, N> elems;
     };
+
+    ////////////////////////////////////////////////////////////
+    // Element-wise operations
+
+    template<typename T, std::size_t N>
+    constexpr auto operator+(vector<T, N> lhs, vector<T, N> rhs)
+        -> vector<T, N>;
+
+    template<typename T, std::size_t N>
+    constexpr auto operator-(vector<T, N> lhs, vector<T, N> rhs)
+        -> vector<T, N>;
 
     #include "vector.inl"
 }

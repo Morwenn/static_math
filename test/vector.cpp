@@ -45,4 +45,18 @@ int main()
         static_assert(v1.size() == 3, "");
         static_assert(v1.max_size() == v1.size(), "");
     }
+
+    // TEST: addition and subtraction
+    {
+        constexpr vector<int, 2> v0 = { 1, 2 };
+        constexpr vector<int, 2> v1 = { 3, 8 };
+
+        constexpr auto res0 = v0 + v1;
+        static_assert(res0[0] == 4, "");
+        static_assert(res0[1] == 10, "");
+
+        constexpr auto res1 = v1 - v0;
+        static_assert(res1[0] == 2, "");
+        static_assert(res1[1] == 6, "");
+    }
 }

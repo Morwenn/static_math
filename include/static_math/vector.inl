@@ -17,6 +17,26 @@
  */
 
 ////////////////////////////////////////////////////////////
+// Details
+
+namespace details
+{
+    template<typename T, std::size_t N, std::size_t... Ind>
+    constexpr auto add(vector<T, N> lhs, vector<T, N> rhs, std::index_sequence<Ind...>)
+        -> vector<T, N>
+    {
+        return { (lhs[Ind] + rhs[Ind])... };
+    }
+
+    template<typename T, std::size_t N, std::size_t... Ind>
+    constexpr auto sub(vector<T, N> lhs, vector<T, N> rhs, std::index_sequence<Ind...>)
+        -> vector<T, N>
+    {
+        return { (lhs[Ind] - rhs[Ind])... };
+    }
+}
+
+////////////////////////////////////////////////////////////
 // In-class operators
 
 template<typename T, std::size_t N>
@@ -79,4 +99,23 @@ constexpr auto vector<T, N>::max_size() const
     -> size_type
 {
     return elems.max_size();
+}
+
+////////////////////////////////////////////////////////////
+// Element-wise operations
+
+template<typename T, std::size_t N>
+constexpr auto operator+(vector<T, N> lhs, vector<T, N> rhs)
+    -> vector<T, N>
+{
+    using Indices = std::make_index_sequence<N>;
+    return details::add(lhs, rhs, Indices{});
+}
+
+template<typename T, std::size_t N>
+constexpr auto operator-(vector<T, N> lhs, vector<T, N> rhs)
+    -> vector<T, N>
+{
+    using Indices = std::make_index_sequence<N>;
+    return details::sub(lhs, rhs, Indices{});
 }
