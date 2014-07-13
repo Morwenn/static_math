@@ -76,6 +76,11 @@ int main()
     static_assert(gcd(270, 84) == 6, "");
     static_assert(gcd(84, 270) == 6, "");
 
+    static_assert(gcd(3, 6) == 3, "");
+    static_assert(gcd(-3, 6) == 3, "");
+    static_assert(gcd(3, -6) == 3, "");
+    static_assert(gcd(-3, -6) == 3, "");
+
     static_assert(lcm(60, 168) == 840, "");
     static_assert(lcm(168, 60) == 840, "");
 

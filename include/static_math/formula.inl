@@ -135,8 +135,9 @@ constexpr auto gcd(T a, U b)
     -> std::common_type_t<T, U>
 {
     return (a == 0 || b == 0) ? 0 :
-        (a >= b) ? details::gcd_helper(b, a % b) :
-            details::gcd_helper(a, b % a);
+        (a < 0 || b < 0) ? gcd(abs(a), abs(b)) :
+            (a >= b) ? details::gcd_helper(b, a % b) :
+                details::gcd_helper(a, b % a);
 }
 
 template<typename T, typename U,
