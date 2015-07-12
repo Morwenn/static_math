@@ -35,7 +35,7 @@ namespace details
     constexpr auto sqrt_helper(T x, T y)
         -> decltype(std::sqrt(x))
     {
-        return float_equal(x, y*y) ? y :
+        return equals(x, y*y) ? y :
             sqrt_helper(x, (y + x/y) / 2.0);
     }
 }
