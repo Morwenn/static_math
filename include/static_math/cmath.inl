@@ -35,7 +35,7 @@ namespace details
     constexpr auto sqrt_helper(T x, T y)
         -> decltype(std::sqrt(x))
     {
-        return float_equal(x, y*y) ? y :
+        return equals(x, y*y) ? y :
             sqrt_helper(x, (y + x/y) / 2.0);
     }
 }
@@ -44,7 +44,7 @@ namespace details
 // Basic functions
 
 template<typename Number,
-         typename = std::enable_if_t<std::is_arithmetic<Number>::value, void>>
+         typename >
 constexpr auto abs(Number x)
     -> Number
 {
@@ -83,7 +83,7 @@ constexpr auto max(T first, U second, Rest... rest)
 // Number-theoretic and representation functions
 
 template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+         typename >
 constexpr auto floor(Float x)
     -> decltype(std::floor(x))
 {
@@ -93,7 +93,7 @@ constexpr auto floor(Float x)
 }
 
 template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+         typename >
 constexpr auto ceil(Float x)
     -> decltype(std::ceil(x))
 {
@@ -103,7 +103,7 @@ constexpr auto ceil(Float x)
 }
 
 template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+         typename >
 constexpr auto round(Float x)
     -> decltype(std::round(x))
 {
@@ -111,7 +111,7 @@ constexpr auto round(Float x)
 }
 
 template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+         typename >
 constexpr auto trunc(Float x)
     -> decltype(std::trunc(x))
 {
@@ -134,7 +134,7 @@ constexpr auto pow(Number x, Integer exponent)
 }
 
 template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+         typename >
 constexpr auto sqrt(Float x)
     -> decltype(std::sqrt(x))
 {
