@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Morwenn
+ * Copyright (C) 2013-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -98,29 +98,29 @@ int main()
     constexpr auto a3 = rational<int>(6, -7);
 
     // Math functions
-    static_assert(sign(a0) == 0, "");
-    static_assert(sign(a1) == 1, "");
-    static_assert(sign(a2) == -1, "");
-    static_assert(sign(a3) == -1, "");
+    static_assert(smath::sign(a0) == 0, "");
+    static_assert(smath::sign(a1) == 1, "");
+    static_assert(smath::sign(a2) == -1, "");
+    static_assert(smath::sign(a3) == -1, "");
 
-    static_assert(abs(a1) == 1 / 2_r, "");
-    static_assert(abs(a2) == 3 / 8_r, "");
-    static_assert(abs(a3) == 6 / 7_r, "");
+    static_assert(smath::abs(a1) == 1 / 2_r, "");
+    static_assert(smath::abs(a2) == 3 / 8_r, "");
+    static_assert(smath::abs(a3) == 6 / 7_r, "");
 
-    static_assert(round(a1) == 1.0, "");
+    static_assert(smath::round(a1) == 1.0, "");
     /* No more tests for ceil, floor, trunc
      * and round since they are based on
      * the floating point functions after
      * a simple cast.
      */
 
-    static_assert(reciprocal(a1) == 2, "");
-    static_assert(reciprocal(a2) == rational<int>(8, -3), "");
+    static_assert(smath::reciprocal(a1) == 2, "");
+    static_assert(smath::reciprocal(a2) == rational<int>(8, -3), "");
 
-    static_assert(pow(a1, 2) == 1 / 4_r, "");
-    static_assert(pow(a2, 3) == -27 / 512_r, "");
-    static_assert(pow(a3, -2) == 49 / 36_r, "");
-    static_assert(pow(r1, 0) == 1_r, "");
-    static_assert(pow(r2, 1) == r2, "");
-    static_assert(pow(r7, 3) == 64 / 125_r, "");
+    static_assert(smath::pow(a1, 2) == 1 / 4_r, "");
+    static_assert(smath::pow(a2, 3) == -27 / 512_r, "");
+    static_assert(smath::pow(a3, -2) == 49 / 36_r, "");
+    static_assert(smath::pow(r1, 0) == 1_r, "");
+    static_assert(smath::pow(r2, 1) == r2, "");
+    static_assert(smath::pow(r7, 3) == 64 / 125_r, "");
 }

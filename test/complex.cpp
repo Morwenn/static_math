@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Morwenn
+ * Copyright (C) 2013-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -97,6 +97,6 @@ int main()
     static_assert(4_i / complex<int>(2, 2) == complex<int>(1, 1), "");
 
     // Mathematical functions
-    static_assert(conj(comp4) == complex<int>(-2, -4), "");
-    static_assert(conj(comp5) == complex<int>(3, 1), "");
+    static_assert(smath::conj(comp4) == complex<int>(-2, -4), "");
+    static_assert(smath::conj(comp5) == complex<int>(3, 1), "");
 }
