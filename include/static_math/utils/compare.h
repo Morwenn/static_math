@@ -43,25 +43,33 @@ namespace smath
     /**
      * @brief Floating point comparison
      *
-     * Compares two floting point numbers by checking whether
+     * Compares two floating point numbers by checking whether
      * the difference between the two of them is lower than a
      * given value.
+     *
+     * For other types, it performs a regular comparison.
      */
-    template<typename T, typename U,
-             typename = typename std::enable_if<std::is_floating_point<T>::value && std::is_floating_point<U>::value, void>::type>
-    constexpr auto equals(T a, U b)
-        -> bool
+    template<typename T, typename U>
+    constexpr auto is_close(T a, U b)
+        -> std::enable_if_t<std::is_floating_point<T>::value && std::is_floating_point<U>::value, bool>
     {
         return STATIC_MATH_ABS(a-b) <=
             std::numeric_limits<typename lesser_of<T, U>::type>::epsilon() *
             STATIC_MATH_MAX(STATIC_MATH_ABS(a), STATIC_MATH_ABS(b));
+    }
+
+    template<typename T, typename U>
+    constexpr auto is_close(T a, U b)
+        -> std::enable_if_t<not std::is_floating_point<T>::value || not std::is_floating_point<U>::value, bool>
+    {
+        return a == b;
     }
 }
 
 ////////////////////////////////////////////////////////////
 // End macros
 
-// Avoid polluting the global namespace
+// Not to pollute the global namespace
 #undef STATIC_MATH_ABS
 #undef STATIC_MATH_MAX
 

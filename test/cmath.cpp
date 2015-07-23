@@ -58,7 +58,7 @@ int main()
     static_assert(smath::pow(2, 1) == 2, "");
     static_assert(smath::pow(2, 2) == 4, "");
 
-    static_assert(smath::equals(smath::sqrt(4.0), 2.0), "");
-    static_assert(smath::equals(smath::sqrt(2.0), 1.414213562373095), "");
-    static_assert(smath::equals(smath::sqrt(3.0), 1.732050807568877), "");
+    static_assert(smath::is_close(smath::sqrt(4.0), 2.0), "");
+    static_assert(smath::is_close(smath::sqrt(2.0), 1.414213562373095), "");
+    static_assert(smath::is_close(smath::sqrt(3.0), 1.732050807568877), "");
 }
