@@ -29,38 +29,18 @@ namespace smath
     // Size traits
 
     template<typename T, typename U>
-    using greater_of = std::conditional<
+    using greater_of = std::conditional_t<
         sizeof(T) >= sizeof(U),
         T,
         U
     >;
 
     template<typename T, typename U>
-    using lesser_of = std::conditional<
+    using lesser_of = std::conditional_t<
         sizeof(T) <= sizeof(U),
         T,
         U
     >;
-
-    ////////////////////////////////////////////////////////////
-    // Variadic is_integral
-
-    template<typename...>
-    struct is_integral;
-
-    template<typename T>
-    struct is_integral<T>:
-        std::is_integral<T>
-    {};
-
-    template<typename T, typename U, typename... Args>
-    struct is_integral<T, U, Args...>:
-        std::conditional_t<
-            is_integral<T>::value,
-            is_integral<U, Args...>,
-            std::false_type
-        >::type
-    {};
 }
 
 #endif // SMATH_UTILS_TYPE_TRAITS_H_

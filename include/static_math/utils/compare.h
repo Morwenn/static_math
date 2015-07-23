@@ -54,7 +54,7 @@ namespace smath
         -> std::enable_if_t<std::is_floating_point<T>::value && std::is_floating_point<U>::value, bool>
     {
         return STATIC_MATH_ABS(a-b) <=
-            std::numeric_limits<typename lesser_of<T, U>::type>::epsilon() *
+            std::numeric_limits<lesser_of<T, U>>::epsilon() *
             STATIC_MATH_MAX(STATIC_MATH_ABS(a), STATIC_MATH_ABS(b));
     }
 
