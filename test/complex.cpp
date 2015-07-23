@@ -15,7 +15,7 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#include <static_math/utils/compare.h>
+#include <static_math/compare.h>
 #include <static_math/complex.h>
 
 using namespace smath;
@@ -24,11 +24,11 @@ int main()
 {
     // Constructor tests
     constexpr auto i1 = imaginary<float>(5.8f);
-    static_assert(is_close(i1.value, 5.8f), "");
+    static_assert(smath::is_close(i1.value, 5.8f), "");
 
     constexpr auto c1 = complex<float>(1.2f, 2.5f);
-    static_assert(is_close(c1.real, 1.2f), "");
-    static_assert(is_close(c1.imag.value, 2.5f), "");
+    static_assert(smath::is_close(c1.real, 1.2f), "");
+    static_assert(smath::is_close(c1.imag.value, 2.5f), "");
 
     constexpr auto imag0 = imaginary<int>(0);
     constexpr auto imag1 = imaginary<int>(1);

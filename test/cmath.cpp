@@ -15,6 +15,7 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
+#include <static_math/compare.h>
 #include <static_math/cmath.h>
 
 int main()

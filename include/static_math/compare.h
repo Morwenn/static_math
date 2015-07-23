@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Morwenn
+ * Copyright (C) 2013-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#ifndef SMATH_UTILS_COMPARE_H_
-#define SMATH_UTILS_COMPARE_H_
+#ifndef SMATH_COMPARE_H_
+#define SMATH_COMPARE_H_
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -41,7 +41,7 @@
 namespace smath
 {
     /**
-     * @brief Floating point comparison
+     * @brief Approximative comparison.
      *
      * Compares two floating point numbers by checking whether
      * the difference between the two of them is lower than a
@@ -73,4 +73,4 @@ namespace smath
 #undef STATIC_MATH_ABS
 #undef STATIC_MATH_MAX
 
-#endif // SMATH_UTILS_COMPARE_H_
+#endif // SMATH_COMPARE_H_
