@@ -20,15 +20,14 @@
 
 /**
  * @file static_math/cmath.h
- * @brief compile-time clone of the standard header cmath
+ * @brief compile-time clone of the standard header <cmath>.
  *
  * This header provides functions aimed to have at least the
- * same functionnalities as the ones in the standard header
- * cmath.
+ * same features as the ones in the standard header <cmath>.
  * The names can be changed (for example fabs, fmin and fmax
- * do not exist here) and some functionnalities can be added
- * such as a variadic number of arguments or a support for
- * more types.
+ * do not exist here) and some additional features can be
+ * added to some of the functions, such as a variadic number
+ * of arguments or a support for more different types.
  */
 
 ////////////////////////////////////////////////////////////
