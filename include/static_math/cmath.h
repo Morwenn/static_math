@@ -94,12 +94,12 @@ namespace smath
      */
     template<typename Number, typename Integer>
     constexpr auto pow(Number x, Integer exponent)
-        -> typename std::common_type_t<Number, Integer>;
+        -> std::common_type_t<Number, Integer>;
 
     /**
      * @brief Square root function
      *
-     * Square root computation with the babylonian method until
+     * Square root computation with the Babylonian method until
      * the best possible precision for the given floating point
      * type.
      */
