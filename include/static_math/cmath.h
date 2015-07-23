@@ -46,8 +46,7 @@ namespace smath
     /**
      * @brief Absolute value of a number
      */
-    template<typename Number,
-             typename = std::enable_if_t<std::is_arithmetic<Number>::value, void>>
+    template<typename Number>
     constexpr auto abs(Number x)
         -> Number;
 
@@ -68,23 +67,19 @@ namespace smath
     ////////////////////////////////////////////////////////////
     // Number-theoretic and representation functions
 
-    template<typename Float,
-             typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+    template<typename Float>
     constexpr auto floor(Float x)
         -> decltype(std::floor(x));
 
-    template<typename Float,
-             typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+    template<typename Float>
     constexpr auto ceil(Float x)
         -> decltype(std::ceil(x));
 
-    template<typename Float,
-             typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+    template<typename Float>
     constexpr auto round(Float x)
         -> decltype(std::round(x));
 
-    template<typename Float,
-             typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+    template<typename Float>
     constexpr auto trunc(Float x)
         -> decltype(std::trunc(x));
 
@@ -108,8 +103,7 @@ namespace smath
      * the best possible precision for the given floating point
      * type.
      */
-    template<typename Float,
-             typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+    template<typename Float>
     constexpr auto sqrt(Float x)
         -> decltype(std::sqrt(x));
 

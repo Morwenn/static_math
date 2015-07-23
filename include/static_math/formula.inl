@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Morwenn
+ * Copyright (C) 2013-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -86,24 +86,21 @@ constexpr auto clamp(Number x, Number min, Number max)
 ////////////////////////////////////////////////////////////
 // Integer-related functions
 
-template<typename Integer,
-         typename = std::enable_if_t<is_integral<Integer>::value, void>>
+template<typename Integer>
 constexpr auto is_even(Integer n)
     -> bool
 {
     return not bool(n % 2);
 }
 
-template<typename Integer,
-         typename = std::enable_if_t<is_integral<Integer>::value, void>>
+template<typename Integer>
 constexpr auto is_odd(Integer n)
     -> bool
 {
     return bool(n % 2);
 }
 
-template<typename Integer,
-         typename = std::enable_if_t<is_integral<Integer>::value, void>>
+template<typename Integer>
 constexpr auto is_prime(Integer n)
     -> bool
 {
@@ -113,24 +110,21 @@ constexpr auto is_prime(Integer n)
                 details::is_prime_helper(n, 3);
 }
 
-template<typename Integer,
-         typename = std::enable_if_t<is_integral<Integer>::value, void>>
+template<typename Integer>
 constexpr auto fibonacci(Integer n)
     -> Integer
 {
     return (n < 2) ? n : fibonacci(n-2) + fibonacci(n-1);
 }
 
-template<typename Integer,
-         typename = std::enable_if_t<is_integral<Integer>::value, void>>
+template<typename Integer>
 constexpr auto factorial(Integer n)
     -> Integer
 {
     return (n > 1) ? n * factorial(n - 1) : 1;
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<is_integral<T, U>::value, void>>
+template<typename T, typename U>
 constexpr auto gcd(T a, U b)
     -> std::common_type_t<T, U>
 {
@@ -140,8 +134,7 @@ constexpr auto gcd(T a, U b)
                 details::gcd_helper(a, b % a);
 }
 
-template<typename T, typename U,
-         typename = std::enable_if_t<is_integral<T, U>::value, void>>
+template<typename T, typename U>
 constexpr auto lcm(T a, U b)
     -> std::common_type_t<T, U>
 {
@@ -152,16 +145,14 @@ constexpr auto lcm(T a, U b)
 ////////////////////////////////////////////////////////////
 // Angle conversions
 
-template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+template<typename Float>
 constexpr auto degrees(Float x)
     -> Float
 {
     return x * 180.0L / PI;
 }
 
-template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+template<typename Float>
 constexpr auto radians(Float x)
     -> Float
 {

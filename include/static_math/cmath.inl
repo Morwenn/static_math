@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Morwenn
+ * Copyright (C) 2013-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -43,8 +43,7 @@ namespace details
 ////////////////////////////////////////////////////////////
 // Basic functions
 
-template<typename Number,
-         typename = std::enable_if_t<std::is_arithmetic<Number>::value, void>>
+template<typename Number>
 constexpr auto abs(Number x)
     -> Number
 {
@@ -82,8 +81,7 @@ constexpr auto max(T first, U second, Rest... rest)
 ////////////////////////////////////////////////////////////
 // Number-theoretic and representation functions
 
-template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+template<typename Float>
 constexpr auto floor(Float x)
     -> decltype(std::floor(x))
 {
@@ -92,8 +90,7 @@ constexpr auto floor(Float x)
             int(x) - 1;
 }
 
-template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+template<typename Float>
 constexpr auto ceil(Float x)
     -> decltype(std::ceil(x))
 {
@@ -102,16 +99,14 @@ constexpr auto ceil(Float x)
             int(x);
 }
 
-template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+template<typename Float>
 constexpr auto round(Float x)
     -> decltype(std::round(x))
 {
     return (x >= 0.0) ? int(x + 0.5) : int(x - 0.5);
 }
 
-template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+template<typename Float>
 constexpr auto trunc(Float x)
     -> decltype(std::trunc(x))
 {
@@ -133,8 +128,7 @@ constexpr auto pow(Number x, Integer exponent)
             1 / details::pow_helper(x, -exponent);
 }
 
-template<typename Float,
-         typename = std::enable_if_t<std::is_floating_point<Float>::value, void>>
+template<typename Float>
 constexpr auto sqrt(Float x)
     -> decltype(std::sqrt(x))
 {
