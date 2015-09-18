@@ -36,7 +36,7 @@ namespace details
         -> decltype(std::sqrt(x))
     {
         return smath::is_close(x, y*y) ? y :
-            sqrt_helper(x, (y + x/y) / 2.0);
+            sqrt_helper(x, (y + x/y) / 2);
     }
 }
 
