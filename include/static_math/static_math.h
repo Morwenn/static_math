@@ -25,6 +25,7 @@
 #include <static_math/complex.h>
 #include <static_math/constants.h>
 #include <static_math/formula.h>
+#include <static_math/trigonometry.h>
 #include <static_math/rational.h>
 
 /**
