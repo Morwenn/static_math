@@ -268,7 +268,7 @@ namespace details
         exponential() = delete;
 
         template<typename T>
-        static constexpr auto compute(T x)
+        static constexpr auto compute(T)
             -> T
         {
             return T();
@@ -281,14 +281,14 @@ namespace details
         sine() = delete;
 
         template<typename T>
-        static constexpr auto trig(T x)
+        static constexpr auto trig(T)
             -> T
         {
             return T();
         }
 
         template<typename T>
-        static constexpr auto hyper(T x)
+        static constexpr auto hyper(T)
             -> T
         {
             return T();
@@ -301,14 +301,14 @@ namespace details
         cosine() = delete;
 
         template<typename T>
-        static constexpr auto trig(T x)
+        static constexpr auto trig(T)
             -> T
         {
             return T();
         }
 
         template<typename T>
-        static constexpr auto hyper(T x)
+        static constexpr auto hyper(T)
             -> T
         {
             return T();
