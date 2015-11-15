@@ -55,7 +55,7 @@ namespace details
     {
         exponential() = delete;
 
-        static_assert(N < EXP_MAX_DEPTH, "exceeded maximum recursion depth.");
+        static_assert(N < EXP_MAX_DEPTH, "exceeded maximum recursion depth");
 
         template<typename T>
         static constexpr auto compute(T x)
@@ -70,8 +70,8 @@ namespace details
     {
         sine() = delete;
 
-        static_assert(smath::is_odd(N), "N must be odd for sin functions.");
-        static_assert(N < SIN_MAX_DEPTH, "exceeded maximum recursion depth.");
+        static_assert(smath::is_odd(N), "N must be odd for sin functions");
+        static_assert(N < SIN_MAX_DEPTH, "exceeded maximum recursion depth");
 
         template<typename T>
         static constexpr auto trig(T x)
@@ -93,8 +93,8 @@ namespace details
     {
         cosine() = delete;
 
-        static_assert(smath::is_even(N), "N must be even for cos functions.");
-        static_assert(N < COS_MAX_DEPTH, "exceeded maximum recursion depth.");
+        static_assert(smath::is_even(N), "N must be even for cos functions");
+        static_assert(N < COS_MAX_DEPTH, "exceeded maximum recursion depth");
 
         template<typename T>
         static constexpr auto trig(T x)

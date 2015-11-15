@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Morwenn
+ * Copyright (C) 2013-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -25,8 +25,8 @@
 #include <static_math/complex.h>
 #include <static_math/constants.h>
 #include <static_math/formula.h>
-#include <static_math/trigonometry.h>
 #include <static_math/rational.h>
+#include <static_math/trigonometry.h>
 
 /**
  * @file static_math/static_math.h
