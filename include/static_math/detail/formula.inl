@@ -78,7 +78,7 @@ constexpr auto mean(Numbers... args)
 
 template<typename Number>
 constexpr auto sqr(Number x)
-    -> Number
+    -> decltype(auto)
 {
     return x * x;
 }
@@ -95,14 +95,14 @@ constexpr auto clamp(Number x, Number min, Number max)
 
 template<typename Integer>
 constexpr auto is_even(Integer n)
-    -> bool
+    -> decltype(auto)
 {
     return detail::is_even(n);
 }
 
 template<typename Integer>
 constexpr auto is_odd(Integer n)
-    -> bool
+    -> decltype(auto)
 {
     return detail::is_odd(n);
 }

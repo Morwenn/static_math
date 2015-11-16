@@ -236,23 +236,23 @@ namespace detail
 
 template<typename Number>
 constexpr auto abs(Number x)
-    -> Number
+    -> decltype(auto)
 {
     return detail::abs(x);
 }
 
-template<typename T, typename U, typename... Rest>
-constexpr auto min(T first, U second, Rest... rest)
-    -> std::common_type_t<T, U, Rest...>
+template<typename... Args>
+constexpr auto min(Args... args)
+    -> decltype(auto)
 {
-    return detail::min(first, second, rest...);
+    return detail::min(args...);
 }
 
-template<typename T, typename U, typename... Rest>
-constexpr auto max(T first, U second, Rest... rest)
-    -> std::common_type_t<T, U, Rest...>
+template<typename... Args>
+constexpr auto max(Args... args)
+    -> decltype(auto)
 {
-    return detail::max(first, second, rest...);
+    return detail::max(args...);
 }
 
 ////////////////////////////////////////////////////////////
@@ -310,6 +310,13 @@ constexpr auto pow(Number x, Integer exponent)
     return (exponent == 0) ? 1 :
         (exponent > 0) ? detail::pow_helper(x, exponent) :
             1 / detail::pow_helper(x, -exponent);
+}
+
+template<typename Integer, Integer N, Integer M>
+constexpr auto pow(constant<Integer, N>, constant<Integer, M>)
+    -> constant<Integer, smath::pow(N, M)>
+{
+    return {};
 }
 
 template<typename Float>

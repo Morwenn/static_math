@@ -73,7 +73,7 @@ namespace smath
      */
     template<typename Number>
     constexpr auto sqr(Number x)
-        -> Number;
+        -> decltype(auto);
 
     /**
      * @brief Limits a value to a range
@@ -96,7 +96,7 @@ namespace smath
      */
     template<typename Integer>
     constexpr auto is_even(Integer n)
-        -> bool;
+        -> decltype(auto);
 
     /**
      * @brief Tells whether the given number is odd
@@ -105,7 +105,7 @@ namespace smath
      */
     template<typename Integer>
     constexpr auto is_odd(Integer n)
-        -> bool;
+        -> decltype(auto);
 
     /**
      * @brief Tells whether the given number is a prime number

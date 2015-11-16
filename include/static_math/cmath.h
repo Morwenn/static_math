@@ -36,6 +36,7 @@
 #include <cmath>
 #include <cstddef>
 #include <type_traits>
+#include <static_math/constant.h>
 #include "detail/core.h"
 
 namespace smath
@@ -48,21 +49,21 @@ namespace smath
      */
     template<typename Number>
     constexpr auto abs(Number x)
-        -> Number;
+        -> decltype(auto);
 
     /**
      * @brief Min of a number of variables
      */
-    template<typename T, typename U, typename... Rest>
-    constexpr auto min(T first, U second, Rest... rest)
-        -> std::common_type_t<T, U, Rest...>;
+    template<typename... Args>
+    constexpr auto min(Args... args)
+        -> decltype(auto);
 
     /**
      * @brief Max of a number of variables
      */
-    template<typename T, typename U, typename... Rest>
-    constexpr auto max(T first, U second, Rest... rest)
-        -> std::common_type_t<T, U, Rest...>;
+    template<typename... Args>
+    constexpr auto max(Args... args)
+        -> decltype(auto);
 
     ////////////////////////////////////////////////////////////
     // Number-theoretic and representation functions

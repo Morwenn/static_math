@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 #include <limits>
 #include <type_traits>
+#include <static_math/constant.h>
 
 // This header contains very basic functions that are
 // often used by many headers but may introduce some
@@ -42,6 +43,13 @@ namespace detail
         return (x >= 0) ? x : -x;
     }
 
+    template<typename Integer, Integer N>
+    constexpr auto abs(constant<Integer, N>)
+        -> constant<Integer, abs(N)>
+    {
+        return {};
+    }
+
     ////////////////////////////////////////////////////////////
     // Minimal and maximal values
 
@@ -56,7 +64,16 @@ namespace detail
     constexpr auto min(T first, U second, Rest... rest)
         -> std::common_type_t<T, U, Rest...>
     {
-        return (first < second) ? min(first, rest...) : min(second, rest...);
+        return (first < second) ?
+            detail::min(first, rest...) :
+            detail::min(second, rest...);
+    }
+
+    template<typename Integer, Integer... Numbers>
+    constexpr auto min(constant<Integer, Numbers>...)
+        -> constant<Integer, detail::min(Numbers...)>
+    {
+        return {};
     }
 
     template<typename T, typename U>
@@ -70,7 +87,16 @@ namespace detail
     constexpr auto max(T first, U second, Rest... rest)
         -> std::common_type_t<T, U, Rest...>
     {
-        return (first > second) ? max(first, rest...) : max(second, rest...);
+        return (first > second) ?
+            detail::max(first, rest...) :
+            detail::max(second, rest...);
+    }
+
+    template<typename Integer, Integer... Numbers>
+    constexpr auto max(constant<Integer, Numbers>...)
+        -> constant<Integer, max(Numbers...)>
+    {
+        return {};
     }
 
     ////////////////////////////////////////////////////////////
@@ -110,16 +136,17 @@ namespace detail
 
     template<typename Integer>
     constexpr auto is_even(Integer n)
-        -> bool
+        -> decltype(auto)
     {
-        return not bool(n % 2);
+        using namespace constant_literals;
+        return not (n % 2_c);
     }
 
     template<typename Integer>
     constexpr auto is_odd(Integer n)
-        -> bool
+        -> decltype(auto)
     {
-        return bool(n % 2);
+        return not detail::is_even(n);
     }
 
     ////////////////////////////////////////////////////////////
