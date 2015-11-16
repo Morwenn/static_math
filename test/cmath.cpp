@@ -16,6 +16,7 @@
  * see <http://www.gnu.org/licenses/>.
  */
 #include <static_math/cmath.h>
+#include <static_math/constants.h>
 #include <static_math/formula.h>
 
 int main()
@@ -53,6 +54,9 @@ int main()
     static_assert(smath::trunc(2.01) == 2.0, "");
     static_assert(smath::trunc(2.8) == 2.0, "");
     static_assert(smath::trunc(-2.1) == -2.0, "");
+
+    static_assert(smath::is_close(smath::exp(0.0), 1.0), "");
+    static_assert(smath::is_close(smath::exp(1.0), smath::E), "");
 
     static_assert(smath::pow(2, 0) == 1, "");
     static_assert(smath::pow(5.8, 0) == 1.0, "");

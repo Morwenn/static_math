@@ -123,16 +123,6 @@ namespace detail
 }
 
 ////////////////////////////////////////////////////////////
-// Other functions
-
-template<typename Float>
-constexpr auto exp(Float x)
-    -> Float
-{
-    return 1 + x + detail::exp_helper<2>(x);
-}
-
-////////////////////////////////////////////////////////////
 // Trigonometric functions
 
 template<typename Float>
