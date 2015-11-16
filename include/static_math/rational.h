@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Morwenn
+ * Copyright (C) 2013-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -237,7 +237,7 @@ namespace smath
             -> rational<unsigned long long>;
     }}
 
-    #include <static_math/rational.inl>
+    #include "detail/rational.inl"
 }
 
 #endif // SMATH_RATIONAL_H_

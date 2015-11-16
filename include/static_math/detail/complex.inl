@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Morwenn
+ * Copyright (C) 2013-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -366,7 +366,7 @@ template<typename T, typename U>
 constexpr auto operator==(imaginary<T> lhs, imaginary<U> rhs)
     -> bool
 {
-        return lhs.value == rhs.value;
+    return lhs.value == rhs.value;
 }
 
 template<typename T, typename U>

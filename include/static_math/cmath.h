@@ -34,8 +34,9 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <cmath>
+#include <cstddef>
 #include <type_traits>
-#include <static_math/compare.h>
+#include "detail/core.h"
 
 namespace smath
 {
@@ -86,6 +87,13 @@ namespace smath
     // Power and logarithmic functions
 
     /**
+     * @brief Exponential function.
+     */
+    template<typename Float>
+    constexpr auto exp(Float x)
+        -> decltype(std::exp(x));
+
+    /**
      * @brief Power function
      *
      * @warning This functions is only available for the integer
@@ -106,7 +114,7 @@ namespace smath
     constexpr auto sqrt(Float x)
         -> decltype(std::sqrt(x));
 
-    #include <static_math/cmath.inl>
+    #include "detail/cmath.inl"
 }
 
 #endif // SMATH_CMATH_H_

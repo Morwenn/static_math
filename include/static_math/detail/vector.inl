@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Morwenn
+ * Copyright (C) 2014-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -19,7 +19,7 @@
 ////////////////////////////////////////////////////////////
 // Details
 
-namespace details
+namespace detail
 {
     template<typename T, std::size_t N, std::size_t... Ind>
     constexpr auto add(vector<T, N> lhs, vector<T, N> rhs, std::index_sequence<Ind...>)
@@ -109,7 +109,7 @@ constexpr auto operator+(vector<T, N> lhs, vector<T, N> rhs)
     -> vector<T, N>
 {
     using Indices = std::make_index_sequence<N>;
-    return details::add(lhs, rhs, Indices{});
+    return detail::add(lhs, rhs, Indices{});
 }
 
 template<typename T, std::size_t N>
@@ -117,5 +117,5 @@ constexpr auto operator-(vector<T, N> lhs, vector<T, N> rhs)
     -> vector<T, N>
 {
     using Indices = std::make_index_sequence<N>;
-    return details::sub(lhs, rhs, Indices{});
+    return detail::sub(lhs, rhs, Indices{});
 }

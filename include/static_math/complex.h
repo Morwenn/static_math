@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Morwenn
+ * Copyright (C) 2013-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -276,7 +276,7 @@ namespace smath
             -> imaginary<unsigned long long>;
     }}
 
-    #include <static_math/complex.inl>
+    #include "detail/complex.inl"
 }
 
 #endif // SMATH_COMPLEX_H_

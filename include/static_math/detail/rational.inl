@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Morwenn
+ * Copyright (C) 2013-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -365,21 +365,21 @@ template<typename T>
 constexpr auto floor(rational<T> ratio)
     -> decltype(std::floor(T{}))
 {
-    return floor((long double) ratio);
+    return smath::floor((long double) ratio);
 }
 
 template<typename T>
 constexpr auto ceil(rational<T> ratio)
     -> decltype(std::ceil(T{}))
 {
-    return ceil((long double) ratio);
+    return smath::ceil((long double) ratio);
 }
 
 template<typename T>
 constexpr auto round(rational<T> ratio)
     -> decltype(std::round(T{}))
 {
-    return round((long double) ratio);
+    return smath::round((long double) ratio);
 }
 
 template<typename T>

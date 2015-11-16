@@ -15,8 +15,8 @@
  * License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
-#include <static_math/compare.h>
 #include <static_math/complex.h>
+#include <static_math/formula.h>
 
 using namespace smath;
 

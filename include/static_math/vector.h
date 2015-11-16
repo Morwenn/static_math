@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Morwenn
+ * Copyright (C) 2014-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -93,7 +93,7 @@ namespace smath
     constexpr auto operator-(vector<T, N> lhs, vector<T, N> rhs)
         -> vector<T, N>;
 
-    #include "vector.inl"
+    #include "detail/vector.inl"
 }
 
 #endif // SMATH_VECTOR_H_

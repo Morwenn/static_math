@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Morwenn
+ * Copyright (C) 2013-2015 Morwenn
  *
  * static_math is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -22,8 +22,8 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <type_traits>
-#include <static_math/cmath.h>
 #include <static_math/constants.h>
+#include "detail/core.h"
 
 namespace smath
 {
@@ -38,6 +38,19 @@ namespace smath
     template<typename Number>
     constexpr auto sign(Number x)
         -> int;
+
+    /**
+     * @brief Approximative comparison.
+     *
+     * Compares two floating point numbers by checking whether
+     * the difference between the two of them is lower than a
+     * given value.
+     *
+     * For other types, it performs a regular comparison.
+     */
+    template<typename T, typename U>
+    constexpr auto is_close(T a, U b)
+        -> bool;
 
     /**
      * @brief Sum of a number of variables
@@ -162,7 +175,7 @@ namespace smath
     constexpr auto radians(Float x)
         -> Float;
 
-    #include <static_math/formula.inl>
+    #include "detail/formula.inl"
 }
 
 #endif // SMATH_FORMULA_H_

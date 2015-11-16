@@ -19,7 +19,7 @@
 ////////////////////////////////////////////////////////////
 // Helper functions
 
-namespace details
+namespace detail
 {
     template<typename T, typename Unsigned>
     constexpr auto pow_helper(T x, Unsigned exponent)
@@ -35,8 +35,53 @@ namespace details
     constexpr auto sqrt_helper(T x, T y)
         -> decltype(std::sqrt(x))
     {
-        return smath::is_close(x, y*y) ? y :
+        return detail::is_close(x, y*y) ? y :
             sqrt_helper(x, (y + x/y) / 2);
+    }
+
+    // x^n / n!
+    template<typename T>
+    constexpr auto xn_nfac(T x, int n)
+        -> T
+    {
+        return smath::pow(x, n) / detail::factorial<T>(n);
+    }
+
+    constexpr std::size_t EXP_MAX_DEPTH = 50;
+
+    template<std::size_t N>
+    struct exponential
+    {
+        exponential() = delete;
+
+        static_assert(N < EXP_MAX_DEPTH, "exceeded maximum recursion depth");
+
+        template<typename T>
+        static constexpr auto compute(T x)
+            -> T
+        {
+            return xn_nfac(x, N) + exponential<N + 1>::compute(x);
+        }
+    };
+
+    template<>
+    struct exponential<EXP_MAX_DEPTH>
+    {
+        exponential() = delete;
+
+        template<typename T>
+        static constexpr auto compute(T)
+            -> T
+        {
+            return T();
+        }
+    };
+
+    template<std::size_t N, typename T>
+    constexpr auto exp_helper(T x)
+        -> T
+    {
+        return exponential<N>::compute(x);
     }
 }
 
@@ -47,35 +92,21 @@ template<typename Number>
 constexpr auto abs(Number x)
     -> Number
 {
-    return (x >= 0) ? x : -x;
-}
-
-template<typename T, typename U>
-constexpr auto min(T first, U second)
-    -> std::common_type_t<T, U>
-{
-    return (first < second) ? first : second;
+    return detail::abs(x);
 }
 
 template<typename T, typename U, typename... Rest>
 constexpr auto min(T first, U second, Rest... rest)
     -> std::common_type_t<T, U, Rest...>
 {
-    return (first < second) ? min(first, rest...) : min(second, rest...);
-}
-
-template<typename T, typename U>
-constexpr auto max(T first, U second)
-    -> std::common_type_t<T, U>
-{
-    return (first > second) ? first : second;
+    return detail::min(first, second, rest...);
 }
 
 template<typename T, typename U, typename... Rest>
 constexpr auto max(T first, U second, Rest... rest)
     -> std::common_type_t<T, U, Rest...>
 {
-    return (first > second) ? max(first, rest...) : max(second, rest...);
+    return detail::max(first, second, rest...);
 }
 
 ////////////////////////////////////////////////////////////
@@ -116,6 +147,13 @@ constexpr auto trunc(Float x)
 ////////////////////////////////////////////////////////////
 // Power and logarithmic functions
 
+template<typename Float>
+constexpr auto exp(Float x)
+    -> decltype(std::exp(x))
+{
+    return 1 + x + detail::exp_helper<2>(x);
+}
+
 template<typename Number, typename Integer>
 constexpr auto pow(Number x, Integer exponent)
     -> std::common_type_t<Number, Integer>
@@ -124,13 +162,13 @@ constexpr auto pow(Number x, Integer exponent)
                   "pow only accepts integer exponents");
 
     return (exponent == 0) ? 1 :
-        (exponent > 0) ? details::pow_helper(x, exponent) :
-            1 / details::pow_helper(x, -exponent);
+        (exponent > 0) ? detail::pow_helper(x, exponent) :
+            1 / detail::pow_helper(x, -exponent);
 }
 
 template<typename Float>
 constexpr auto sqrt(Float x)
     -> decltype(std::sqrt(x))
 {
-    return details::sqrt_helper(x, x);
+    return detail::sqrt_helper(x, x);
 }

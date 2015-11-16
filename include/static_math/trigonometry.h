@@ -33,60 +33,53 @@
 
 namespace smath
 {
-    /**
-    * @brief Exponential function.
-    */
-    template<typename Float>
-    constexpr auto exp(Float x)
-        -> Float;
-
     ////////////////////////////////////////////////////////////
     // Trigonometric functions
 
     /**
-    * @brief Sine function.
-    * @param x Angle in radians
-    */
+     * @brief Sine function.
+     * @param x Angle in radians
+     */
     template<typename Float>
     constexpr auto sin(Float x)
         -> Float;
 
     /**
-    * @brief Cosine function.
-    * @param x Angle in radians
-    */
+     * @brief Cosine function.
+     * @param x Angle in radians
+     */
     template<typename Float>
     constexpr auto cos(Float x)
         -> Float;
 
     /**
-    * @brief Tangent function.
-    * @param x Angle in radians
-    */
+     * @brief Tangent function.
+     * @param x Angle in radians
+     */
     template<typename Float>
     constexpr auto tan(Float x)
         -> Float;
 
     /**
-    * @brief Cotangent function.
-    * @param x Angle in radians
-    */
+     * @brief Cotangent function.
+     * @param x Angle in radians
+     */
     template<typename Float>
     constexpr auto cot(Float x)
         -> Float;
 
     /**
-    * @brief Secant function.
-    * @param x Angle in radians
-    */
+     * @brief Secant function.
+     * @param x Angle in radians
+     */
     template<typename Float>
     constexpr auto sec(Float x)
         -> Float;
 
     /**
-    * @brief Cosecant function.
-    * @param x Angle in radians
-    */
+     * @brief Cosecant function.
+     * @param x Angle in radians
+     */
     template<typename Float>
     constexpr auto csc(Float x)
         -> Float;
@@ -95,54 +88,54 @@ namespace smath
     // Hyperbolic functions
 
     /**
-    * @brief Hyperbolic sine function.
-    * @param x Hyperbolic angle in radians
-    */
+     * @brief Hyperbolic sine function.
+     * @param x Hyperbolic angle in radians
+     */
     template<typename Float>
     constexpr auto sinh(Float x)
         -> Float;
 
     /**
-    * @brief Hyperbolic cosine function.
-    * @param x Hyperbolic angle in radians
-    */
+     * @brief Hyperbolic cosine function.
+     * @param x Hyperbolic angle in radians
+     */
     template<typename Float>
     constexpr auto cosh(Float x)
         -> Float;
 
     /**
-    * @brief Hyperbolic tangent function.
-    * @param x Hyperbolic angle in radians
-    */
+     * @brief Hyperbolic tangent function.
+     * @param x Hyperbolic angle in radians
+     */
     template<typename Float>
     constexpr auto tanh(Float x)
         -> Float;
 
     /**
-    * @brief Hyperbolic cotangent function.
-    * @param x Hyperbolic angle in radians
-    */
+     * @brief Hyperbolic cotangent function.
+     * @param x Hyperbolic angle in radians
+     */
     template<typename Float>
     constexpr auto coth(Float x)
         -> Float;
 
     /**
-    * @brief Hyperbolic secant function.
-    * @param x Hyperbolic angle in radians
-    */
+     * @brief Hyperbolic secant function.
+     * @param x Hyperbolic angle in radians
+     */
     template<typename Float>
     constexpr auto sech(Float x)
         -> Float;
 
     /**
-    * @brief Hyperbolic cosecant function.
-    * @param x Hyperbolic angle in radians
-    */
+     * @brief Hyperbolic cosecant function.
+     * @param x Hyperbolic angle in radians
+     */
     template<typename Float>
     constexpr auto csch(Float x)
         -> Float;
 
-    #include <static_math/trigonometry.inl>
+    #include "detail/trigonometry.inl"
 }
 
 #endif // SMATH_TRIGONOMETRY_H_

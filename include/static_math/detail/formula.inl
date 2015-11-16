@@ -19,7 +19,7 @@
 ////////////////////////////////////////////////////////////
 // Helper functions
 
-namespace details
+namespace detail
 {
     template<typename T>
     constexpr auto is_prime_helper(T n, T div)
@@ -46,6 +46,13 @@ constexpr auto sign(Number x)
     -> int
 {
     return (x > 0) ? 1 : (x < 0) ? -1 : 0;
+}
+
+template<typename T, typename U>
+constexpr auto is_close(T a, U b)
+    -> bool
+{
+    return detail::is_close(a, b);
 }
 
 template<typename T, typename U>
@@ -107,7 +114,7 @@ constexpr auto is_prime(Integer n)
     return (n < 2) ? false :
         (n == 2) ? true :
             (n % 2 == 0) ? false :
-                details::is_prime_helper(n, 3);
+                detail::is_prime_helper(n, 3);
 }
 
 template<typename Integer>
@@ -121,7 +128,7 @@ template<typename Integer>
 constexpr auto factorial(Integer n)
     -> Integer
 {
-    return (n > 1) ? n * factorial(n - 1) : 1;
+    return detail::factorial(n);
 }
 
 template<typename T, typename U>
@@ -129,9 +136,9 @@ constexpr auto gcd(T a, U b)
     -> std::common_type_t<T, U>
 {
     return (a == 0 || b == 0) ? 0 :
-        (a < 0 || b < 0) ? gcd(abs(a), abs(b)) :
-            (a >= b) ? details::gcd_helper(b, a % b) :
-                details::gcd_helper(a, b % a);
+        (a < 0 || b < 0) ? gcd(detail::abs(a), detail::abs(b)) :
+            (a >= b) ? detail::gcd_helper(b, a % b) :
+                detail::gcd_helper(a, b % a);
 }
 
 template<typename T, typename U>
