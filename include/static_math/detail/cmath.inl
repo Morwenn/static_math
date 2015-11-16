@@ -16,11 +16,33 @@
  * see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * Part of this file is the work of theLOLflashlight's GitHub account.
+ */
+
 ////////////////////////////////////////////////////////////
 // Helper functions
 
 namespace detail
 {
+    // x^n / n!
+    template<typename T>
+    constexpr auto xn_nfac(T x, int n)
+        -> T
+    {
+        return smath::pow(x, n) / detail::factorial<T>(n);
+    }
+
+    template<typename T>
+    constexpr auto trig_helper(T x, int n, bool s)
+        -> T
+    {
+        return s ? detail::xn_nfac(x, n) : -detail::xn_nfac(x, n);
+    }
+
+    ////////////////////////////////////////////////////////////
+    // pow
+
     template<typename T, typename Unsigned>
     constexpr auto pow_helper(T x, Unsigned exponent)
         -> std::common_type_t<T, Unsigned>
@@ -31,6 +53,9 @@ namespace detail
                 x * pow_helper(x*x, (exponent-1)/2);
     }
 
+    ////////////////////////////////////////////////////////////
+    // sqrt
+
     template<typename T>
     constexpr auto sqrt_helper(T x, T y)
         -> decltype(std::sqrt(x))
@@ -39,13 +64,8 @@ namespace detail
             sqrt_helper(x, (y + x/y) / 2);
     }
 
-    // x^n / n!
-    template<typename T>
-    constexpr auto xn_nfac(T x, int n)
-        -> T
-    {
-        return smath::pow(x, n) / detail::factorial<T>(n);
-    }
+    ////////////////////////////////////////////////////////////
+    // exp
 
     constexpr std::size_t EXP_MAX_DEPTH = 50;
 
@@ -82,6 +102,132 @@ namespace detail
         -> T
     {
         return exponential<N>::compute(x);
+    }
+
+    ////////////////////////////////////////////////////////////
+    // sin & sinh
+
+    constexpr std::size_t SIN_MAX_DEPTH = 51;
+    static_assert(detail::is_odd(SIN_MAX_DEPTH), "");
+
+    template<std::size_t N>
+    struct sine
+    {
+        sine() = delete;
+
+        static_assert(detail::is_odd(N), "N must be odd for sin functions");
+        static_assert(N < SIN_MAX_DEPTH, "exceeded maximum recursion depth");
+
+        template<typename T>
+        static constexpr auto trig(T x)
+            -> T
+        {
+            return trig_helper(x, N, detail::is_even((N - 1) / 2)) + sine<N + 2>::trig(x);
+        }
+
+        template<typename T>
+        static constexpr auto hyper(T x)
+            -> T
+        {
+            return xn_nfac(x, N) + sine<N + 2>::hyper(x);
+        }
+    };
+
+    template<>
+    struct sine<SIN_MAX_DEPTH>
+    {
+        sine() = delete;
+
+        template<typename T>
+        static constexpr auto trig(T)
+            -> T
+        {
+            return T();
+        }
+
+        template<typename T>
+        static constexpr auto hyper(T)
+            -> T
+        {
+            return T();
+        }
+    };
+
+    template<std::size_t N, typename T>
+    constexpr auto sin_helper(T x)
+        -> T
+    {
+        return sine<N>::trig(x);
+    }
+
+    template<std::size_t N, typename T>
+    constexpr auto sinh_helper(T x)
+        -> T
+    {
+        return sine<N>::hyper(x);
+    }
+
+    ////////////////////////////////////////////////////////////
+    // cos & cosh
+
+    constexpr std::size_t COS_MAX_DEPTH = 50;
+    static_assert(detail::is_even(COS_MAX_DEPTH), "");
+
+    template<std::size_t N>
+    struct cosine
+    {
+        cosine() = delete;
+
+        static_assert(detail::is_even(N), "N must be even for cos functions");
+        static_assert(N < COS_MAX_DEPTH, "exceeded maximum recursion depth");
+
+        template<typename T>
+        static constexpr auto trig(T x)
+            -> T
+        {
+            return trig_helper(x, N, is_even(N / 2)) + cosine<N + 2>::trig(x);
+        }
+
+        template<typename T>
+        static constexpr auto hyper(T x)
+            -> T
+        {
+            return xn_nfac(x, N) + cosine<N + 2>::hyper(x);
+        }
+    };
+
+    template<>
+    struct cosine<COS_MAX_DEPTH>
+    {
+        cosine() = delete;
+
+        template<typename T>
+        static constexpr auto trig(T)
+            -> T
+        {
+            return T();
+        }
+
+        template<typename T>
+        static constexpr auto hyper(T)
+            -> T
+        {
+            return T();
+        }
+    };
+
+    template<std::size_t N, typename T>
+    constexpr auto cos_helper(T x)
+        -> T
+    {
+        return cosine<N>::trig(x);
+    }
+
+    template<std::size_t N, typename T>
+    constexpr auto cosh_helper(T x)
+        -> T
+    {
+        return cosine<N>::hyper(x);
     }
 }
 
@@ -171,4 +317,52 @@ constexpr auto sqrt(Float x)
     -> decltype(std::sqrt(x))
 {
     return detail::sqrt_helper(x, x);
+}
+
+////////////////////////////////////////////////////////////
+// Trigonometric functions
+
+template<typename Float>
+constexpr auto sin(Float x)
+    -> Float
+{
+    return x + detail::sin_helper<3>(x);
+}
+
+template<typename Float>
+constexpr auto cos(Float x)
+    -> Float
+{
+    return 1 + detail::cos_helper<2>(x);
+}
+
+template<typename Float>
+constexpr auto tan(Float x)
+    -> Float
+{
+    return sin(x) / cos(x);
+}
+
+////////////////////////////////////////////////////////////
+// Hyperbolic functions
+
+template<typename Float>
+constexpr auto sinh(Float x)
+    -> Float
+{
+    return x + detail::sinh_helper<3>(x);
+}
+
+template<typename Float>
+constexpr auto cosh(Float x)
+    -> Float
+{
+    return 1 + detail::cosh_helper<2>(x);
+}
+
+template<typename Float>
+constexpr auto tanh(Float x)
+    -> Float
+{
+    return sinh(x) / cosh(x);
 }

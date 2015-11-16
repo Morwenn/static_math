@@ -97,14 +97,14 @@ template<typename Integer>
 constexpr auto is_even(Integer n)
     -> bool
 {
-    return not bool(n % 2);
+    return detail::is_even(n);
 }
 
 template<typename Integer>
 constexpr auto is_odd(Integer n)
     -> bool
 {
-    return bool(n % 2);
+    return detail::is_odd(n);
 }
 
 template<typename Integer>

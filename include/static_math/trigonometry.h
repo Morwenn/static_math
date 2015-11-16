@@ -37,30 +37,6 @@ namespace smath
     // Trigonometric functions
 
     /**
-     * @brief Sine function.
-     * @param x Angle in radians
-     */
-    template<typename Float>
-    constexpr auto sin(Float x)
-        -> Float;
-
-    /**
-     * @brief Cosine function.
-     * @param x Angle in radians
-     */
-    template<typename Float>
-    constexpr auto cos(Float x)
-        -> Float;
-
-    /**
-     * @brief Tangent function.
-     * @param x Angle in radians
-     */
-    template<typename Float>
-    constexpr auto tan(Float x)
-        -> Float;
-
-    /**
      * @brief Cotangent function.
      * @param x Angle in radians
      */
@@ -86,30 +62,6 @@ namespace smath
 
     ////////////////////////////////////////////////////////////
     // Hyperbolic functions
-
-    /**
-     * @brief Hyperbolic sine function.
-     * @param x Hyperbolic angle in radians
-     */
-    template<typename Float>
-    constexpr auto sinh(Float x)
-        -> Float;
-
-    /**
-     * @brief Hyperbolic cosine function.
-     * @param x Hyperbolic angle in radians
-     */
-    template<typename Float>
-    constexpr auto cosh(Float x)
-        -> Float;
-
-    /**
-     * @brief Hyperbolic tangent function.
-     * @param x Hyperbolic angle in radians
-     */
-    template<typename Float>
-    constexpr auto tanh(Float x)
-        -> Float;
 
     /**
      * @brief Hyperbolic cotangent function.

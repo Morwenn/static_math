@@ -106,6 +106,23 @@ namespace detail
     }
 
     ////////////////////////////////////////////////////////////
+    // Odd & even checks
+
+    template<typename Integer>
+    constexpr auto is_even(Integer n)
+        -> bool
+    {
+        return not bool(n % 2);
+    }
+
+    template<typename Integer>
+    constexpr auto is_odd(Integer n)
+        -> bool
+    {
+        return bool(n % 2);
+    }
+
+    ////////////////////////////////////////////////////////////
     // Factorial function
 
     template<typename Integer>
