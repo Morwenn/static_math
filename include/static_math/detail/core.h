@@ -163,6 +163,13 @@ namespace detail
         }
         return res;
     }
+
+    template<typename Integer, Integer N>
+    constexpr auto factorial(constant<Integer, N>)
+        -> constant<Integer, factorial(N)>
+    {
+        return {};
+    }
 }}
 
 #endif // SMATH_DETAIL_CORE_H_

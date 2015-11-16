@@ -16,9 +16,7 @@
  * see <http://www.gnu.org/licenses/>.
  */
 #include <type_traits>
-#include <static_math/cmath.h>
 #include <static_math/constant.h>
-#include <static_math/formula.h>
 
 int main()
 {
@@ -172,81 +170,6 @@ int main()
             std::is_same<
                 decltype(45_c >= 23_c),
                 smath::true_type
-            >::value, "");
-    }
-
-    // Constant cmath functions
-    {
-        static_assert(smath::abs(-5_c) == 5_c, "");
-        static_assert(smath::abs(8_c) == 8_c, "");
-        static_assert(smath::abs(-82_cl) == 82_cl, "");
-
-        static_assert(
-            std::is_same<
-                decltype(smath::abs(-5_c)),
-                smath::constant<int, 5>
-            >::value, "");
-
-        static_assert(
-            smath::min(1_c, 2_c) == 1_c, "");
-        static_assert(
-            smath::min(0_c, 0_c) == 0_c, "");
-        static_assert(
-            smath::min(-2_c, -1_c, 0_c, 1_c, 2_c) == -2_c, "");
-        static_assert(
-            smath::min(2_c, 1_c, 0_c, -1_c, -2_c) == -2_c, "");
-
-        static_assert(
-            smath::max(3_c, 8_c) == 8_c, "");
-        static_assert(
-            smath::max(-8_c, -8_c) == -8_c, "");
-        static_assert(
-            smath::max(8_c, -1_c, 6_c, 3_c, 5_c, 2_c, -8_c) == 8_c, "");
-        static_assert(
-            smath::max(-1_c, 0_c, 1_c, 2_c, 3_c, 2_c, 1_c, 0_c, -1_c) == 3_c, "");
-
-        static_assert(smath::pow(2_c, 0_c) == 1_c, "");
-        static_assert(smath::pow(2_c, 1_c) == 2_c, "");
-        static_assert(smath::pow(5_c, 1_c) == 5_c, "");
-        static_assert(smath::pow(5_c, 0_c) == 1_c, "");
-        static_assert(smath::pow(2_c, 1_c) == 2_c, "");
-        static_assert(smath::pow(2_c, 2_c) == 4_c, "");
-
-        static_assert(
-            std::is_same<
-                decltype(smath::pow(5_c, 2_c)),
-                smath::constant<int, 25_c>
-            >::value, "");
-    }
-
-    // Constant formula functions
-    {
-        static_assert(smath::sqr(0_c) == 0_c, "");
-        static_assert(smath::sqr(1_c) == 1_c, "");
-        static_assert(smath::sqr(2_c) == 4_c, "");
-        static_assert(smath::sqr(3_c) == 9_c, "");
-        static_assert(smath::sqr(4_c) == 16_c, "");
-        static_assert(smath::sqr(5_c) == 25_c, "");
-        static_assert(smath::sqr(10_c) == 100_c, "");
-
-        static_assert(
-            std::is_same<
-                decltype(smath::sqr(8_c)),
-                smath::constant<int, 64>
-            >::value, "");
-
-        static_assert(not smath::is_even(5_c), "");
-        static_assert(smath::is_even(-4_c), "");
-        static_assert(smath::is_even(0_c), "");
-
-        static_assert(not smath::is_odd(8_c), "");
-        static_assert(not smath::is_odd(0_c), "");
-        static_assert(smath::is_odd(-5_c), "");
-
-        static_assert(
-            std::is_same<
-                decltype(smath::is_odd(64_c)),
-                smath::false_type
             >::value, "");
     }
 }

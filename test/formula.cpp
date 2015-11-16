@@ -19,6 +19,9 @@
 
 int main()
 {
+    ////////////////////////////////////////////////////////////
+    // Regular functions
+
     static_assert(smath::sign(5) == 1, "");
     static_assert(smath::sign(-3) == -1, "");
     static_assert(smath::sign(2.0) == 1, "");
@@ -84,4 +87,80 @@ int main()
     static_assert(smath::clamp(3, 2, 4) == 3, "");
     static_assert(smath::clamp(1, 2, 4) == 2, "");
     static_assert(smath::clamp(5, 2, 4) == 4, "");
+
+    ////////////////////////////////////////////////////////////
+    // smath::constant overloads
+
+    using namespace smath::constant_literals;
+
+    static_assert(not smath::is_even(5_c), "");
+    static_assert(    smath::is_even(-4_c), "");
+    static_assert(    smath::is_even(0_c), "");
+
+    static_assert(not smath::is_odd(8_c), "");
+    static_assert(not smath::is_odd(0_c), "");
+    static_assert(    smath::is_odd(-5_c), "");
+
+    static_assert(not smath::is_prime(0_c), "");
+    static_assert(not smath::is_prime(1_c), "");
+    static_assert(    smath::is_prime(2_c), "");
+    static_assert(    smath::is_prime(3_c), "");
+    static_assert(not smath::is_prime(4_c), "");
+    static_assert(    smath::is_prime(5_c), "");
+    static_assert(    smath::is_prime(7_c), "");
+    static_assert(not smath::is_prime(8_c), "");
+    static_assert(not smath::is_prime(9_c), "");
+    static_assert(not smath::is_prime(128_c), "");
+
+    static_assert(smath::fibonacci(0_c) == 0_c, "");
+    static_assert(smath::fibonacci(1_c) == 1_c, "");
+    static_assert(smath::fibonacci(2_c) == 1_c, "");
+    static_assert(smath::fibonacci(3_c) == 2_c, "");
+    static_assert(smath::fibonacci(4_c) == 3_c, "");
+    static_assert(smath::fibonacci(5_c) == 5_c, "");
+    static_assert(smath::fibonacci(6_c) == 8_c, "");
+    static_assert(smath::fibonacci(7_c) == 13_c, "");
+    static_assert(smath::fibonacci(8_c) == 21_c, "");
+
+    static_assert(smath::factorial(0_c) == 1_c, "");
+    static_assert(smath::factorial(1_c) == 1_c, "");
+    static_assert(smath::factorial(2_c) == 2_c, "");
+    static_assert(smath::factorial(3_c) == 6_c, "");
+    static_assert(smath::factorial(4_c) == 24_c, "");
+    static_assert(smath::factorial(5_c) == 120_c, "");
+    static_assert(smath::factorial(6_c) == 720_c, "");
+    static_assert(smath::factorial(7_c) == 5040_c, "");
+
+    static_assert(
+        smath::sum(1_c, 2_c, 3_c, 4_c, 5_c) == 15_c,
+    "");
+
+    static_assert(
+        std::is_same<
+            decltype(smath::sum(1_c, 2_c, 3_c, 4_c, 5_c)),
+            smath::constant<int, 15>
+        >::value, "");
+
+    static_assert(smath::gcd(1071_c, 1029_c) == 21_c, "");
+    static_assert(smath::gcd(1029_c, 1071_c) == 21_c, "");
+    static_assert(smath::gcd(270_c, 84_c) == 6_c, "");
+    static_assert(smath::gcd(84_c, 270_c) == 6_c, "");
+
+    static_assert(smath::gcd(3_c, 6_c) == 3_c, "");
+    static_assert(smath::gcd(-3_c, 6_c) == 3_c, "");
+    static_assert(smath::gcd(3_c, -6_c) == 3_c, "");
+    static_assert(smath::gcd(-3_c, -6_c) == 3_c, "");
+
+    static_assert(smath::lcm(60_c, 168_c) == 840_c, "");
+    static_assert(smath::lcm(168_c, 60_c) == 840_c, "");
+
+    static_assert(smath::clamp(3_c, 2_c, 4_c) == 3_c, "");
+    static_assert(smath::clamp(1_c, 2_c, 4_c) == 2_c, "");
+    static_assert(smath::clamp(5_c, 2_c, 4_c) == 4_c, "");
+
+    static_assert(
+        std::is_same<
+            decltype(smath::clamp(5_c, 2_c, 4_c)),
+            smath::constant<int, 4>
+        >::value, "");
 }

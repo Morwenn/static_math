@@ -21,6 +21,9 @@
 
 int main()
 {
+    ////////////////////////////////////////////////////////////
+    // Regular functions
+
     static_assert(smath::abs(-5) == 5, "");
     static_assert(smath::abs(8) == 8, "");
     static_assert(smath::abs(-82L) == 82, "");
@@ -66,4 +69,50 @@ int main()
     static_assert(smath::is_close(smath::sqrt(4.0), 2.0), "");
     static_assert(smath::is_close(smath::sqrt(2.0), 1.414213562373095), "");
     static_assert(smath::is_close(smath::sqrt(3.0), 1.732050807568877), "");
+
+    ////////////////////////////////////////////////////////////
+    // smath::constant overloads
+
+    using namespace smath::constant_literals;
+
+    static_assert(smath::abs(-5_c) == 5_c, "");
+    static_assert(smath::abs(8_c) == 8_c, "");
+    static_assert(smath::abs(-82_cl) == 82_cl, "");
+
+    static_assert(
+        std::is_same<
+            decltype(smath::abs(-5_c)),
+            smath::constant<int, 5>
+        >::value, "");
+
+    static_assert(
+        smath::min(1_c, 2_c) == 1_c, "");
+    static_assert(
+        smath::min(0_c, 0_c) == 0_c, "");
+    static_assert(
+        smath::min(-2_c, -1_c, 0_c, 1_c, 2_c) == -2_c, "");
+    static_assert(
+        smath::min(2_c, 1_c, 0_c, -1_c, -2_c) == -2_c, "");
+
+    static_assert(
+        smath::max(3_c, 8_c) == 8_c, "");
+    static_assert(
+        smath::max(-8_c, -8_c) == -8_c, "");
+    static_assert(
+        smath::max(8_c, -1_c, 6_c, 3_c, 5_c, 2_c, -8_c) == 8_c, "");
+    static_assert(
+        smath::max(-1_c, 0_c, 1_c, 2_c, 3_c, 2_c, 1_c, 0_c, -1_c) == 3_c, "");
+
+    static_assert(smath::pow(2_c, 0_c) == 1_c, "");
+    static_assert(smath::pow(2_c, 1_c) == 2_c, "");
+    static_assert(smath::pow(5_c, 1_c) == 5_c, "");
+    static_assert(smath::pow(5_c, 0_c) == 1_c, "");
+    static_assert(smath::pow(2_c, 1_c) == 2_c, "");
+    static_assert(smath::pow(2_c, 2_c) == 4_c, "");
+
+    static_assert(
+        std::is_same<
+            decltype(smath::pow(5_c, 2_c)),
+            smath::constant<int, 25_c>
+        >::value, "");
 }

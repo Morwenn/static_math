@@ -57,14 +57,14 @@ constexpr auto is_close(T a, U b)
 
 template<typename T, typename U>
 constexpr auto sum(T first, U second)
-    -> std::common_type_t<T, U>
+    -> decltype(auto)
 {
     return first + second;
 }
 
 template<typename T, typename U, typename... Rest>
 constexpr auto sum(T first, U second, Rest... rest)
-    -> std::common_type_t<T, U, Rest...>
+    -> decltype(auto)
 {
     return first + sum(second, rest...);
 }
@@ -88,6 +88,13 @@ constexpr auto clamp(Number x, Number min, Number max)
     -> Number
 {
     return (x < min) ? min : (x > max) ? max : x;
+}
+
+template<typename Integer, Integer N, Integer M, Integer O>
+constexpr auto clamp(constant<Integer, N>, constant<Integer, M>, constant<Integer, O>)
+    -> constant<Integer, clamp(N, M, O)>
+{
+    return {};
 }
 
 ////////////////////////////////////////////////////////////
@@ -117,6 +124,13 @@ constexpr auto is_prime(Integer n)
                 detail::is_prime_helper(n, 3);
 }
 
+template<typename Integer, Integer N>
+constexpr auto is_prime(constant<Integer, N>)
+    -> constant<Integer, is_prime(N)>
+{
+    return {};
+}
+
 template<typename Integer>
 constexpr auto fibonacci(Integer n)
     -> Integer
@@ -124,9 +138,16 @@ constexpr auto fibonacci(Integer n)
     return (n < 2) ? n : fibonacci(n-2) + fibonacci(n-1);
 }
 
+template<typename Integer, Integer N>
+constexpr auto fibonacci(constant<Integer, N>)
+    -> constant<Integer, fibonacci(N)>
+{
+    return {};
+}
+
 template<typename Integer>
 constexpr auto factorial(Integer n)
-    -> Integer
+    -> decltype(auto)
 {
     return detail::factorial(n);
 }
@@ -141,12 +162,26 @@ constexpr auto gcd(T a, U b)
                 detail::gcd_helper(a, b % a);
 }
 
+template<typename Integer, Integer N, Integer M>
+constexpr auto gcd(constant<Integer, N>, constant<Integer, M>)
+    -> constant<Integer, gcd(N, M)>
+{
+    return {};
+}
+
 template<typename T, typename U>
 constexpr auto lcm(T a, U b)
     -> std::common_type_t<T, U>
 {
     return (a == 0 || b == 0) ? 1 :
         a * b / gcd(a, b);
+}
+
+template<typename Integer, Integer N, Integer M>
+constexpr auto lcm(constant<Integer, N>, constant<Integer, M>)
+    -> constant<Integer, lcm(N, M)>
+{
+    return {};
 }
 
 ////////////////////////////////////////////////////////////

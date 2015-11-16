@@ -57,7 +57,7 @@ namespace smath
      */
     template<typename T, typename U, typename... Rest>
     constexpr auto sum(T first, U second, Rest... rest)
-        -> std::common_type_t<T, U, Rest...>;
+        -> decltype(auto);
 
     /**
      * @brief Mean of a number of variables
@@ -132,7 +132,7 @@ namespace smath
      */
     template<typename Integer>
     constexpr auto factorial(Integer n)
-        -> Integer;
+        -> decltype(auto);
 
     /**
      * @brief Greatest common divisor
