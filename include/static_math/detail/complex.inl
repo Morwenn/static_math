@@ -455,12 +455,19 @@ constexpr auto operator!=(imaginary<T> lhs, complex<U> rhs)
 // Mathematical functions
 
 template<typename T>
-constexpr auto conj(complex<T> x)
+constexpr auto abs(complex<T> z)
+    -> T
+{
+    return smath::sqrt(smath::sqr(z.real) + smath::sqr(z.imag.value));
+}
+
+template<typename T>
+constexpr auto conj(complex<T> z)
     -> complex<T>
 {
     return {
-        x.real,
-        -x.imag
+        z.real,
+        -z.imag
     };
 }
 

@@ -22,6 +22,7 @@
 // Headers
 ////////////////////////////////////////////////////////////
 #include <type_traits>
+#include <static_math/cmath.h>
 #include <static_math/formula.h>
 
 namespace smath
@@ -235,7 +236,11 @@ namespace smath
     // Mathematical functions
 
     template<typename T>
-    constexpr auto conj(complex<T> x)
+    constexpr auto abs(complex<T> z)
+        -> T;
+
+    template<typename T>
+    constexpr auto conj(complex<T> z)
         -> complex<T>;
 
     inline namespace literals

@@ -97,6 +97,9 @@ int main()
     static_assert(4_i / complex<int>(2, 2) == complex<int>(1, 1), "");
 
     // Mathematical functions
+    constexpr auto c2 = complex<float>(3.0f, 4.0f);
+    static_assert(smath::is_close(smath::abs(c2), 5.0f), "");
+
     static_assert(smath::conj(comp4) == complex<int>(-2, -4), "");
     static_assert(smath::conj(comp5) == complex<int>(3, 1), "");
 }
