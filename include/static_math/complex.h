@@ -240,6 +240,10 @@ namespace smath
         -> T;
 
     template<typename T>
+    constexpr auto norm(complex<T> z)
+        -> T;
+
+    template<typename T>
     constexpr auto conj(complex<T> z)
         -> complex<T>;
 

@@ -462,6 +462,13 @@ constexpr auto abs(complex<T> z)
 }
 
 template<typename T>
+constexpr auto norm(complex<T> z)
+    -> T
+{
+    return smath::sqr(z.real) + smath::sqr(z.imag.value);
+}
+
+template<typename T>
 constexpr auto conj(complex<T> z)
     -> complex<T>
 {
