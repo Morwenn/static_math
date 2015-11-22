@@ -115,6 +115,17 @@ namespace smath
     constexpr auto sqrt(Float x)
         -> decltype(std::sqrt(x));
 
+    /**
+     * @brief Hypotenuse function
+     *
+     * Computes the square root of the sum of the squares of \a x
+     * and \a y, without undue overflow or underflow during the
+     * intermediate stages of the computation.
+     */
+    template<typename T, typename U>
+    constexpr auto hypot(T x, U y)
+        -> decltype(std::hypot(x, y));
+
     ////////////////////////////////////////////////////////////
     // Trigonometric functions
 

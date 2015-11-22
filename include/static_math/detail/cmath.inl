@@ -326,6 +326,19 @@ constexpr auto sqrt(Float x)
     return detail::sqrt_helper(x, x);
 }
 
+template<typename T, typename U>
+constexpr auto hypot(T x, U y)
+    -> decltype(std::hypot(x, y))
+{
+    x = smath::abs(x);
+    y = smath::abs(y);
+
+    auto t = smath::min(x, y);
+    x = smath::max(x, y);
+    t /= x;
+    return x * smath::sqrt(1 + t*t);
+}
+
 ////////////////////////////////////////////////////////////
 // Trigonometric functions
 

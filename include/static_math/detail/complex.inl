@@ -458,7 +458,7 @@ template<typename T>
 constexpr auto abs(complex<T> z)
     -> T
 {
-    return smath::sqrt(smath::sqr(z.real) + smath::sqr(z.imag.value));
+    return smath::hypot(z.real, z.imag.value);
 }
 
 template<typename T>

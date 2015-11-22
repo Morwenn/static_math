@@ -70,6 +70,8 @@ int main()
     static_assert(smath::is_close(smath::sqrt(2.0), 1.414213562373095), "");
     static_assert(smath::is_close(smath::sqrt(3.0), 1.732050807568877), "");
 
+    static_assert(smath::is_close(smath::hypot(3.0f, 4), 5.0), "");
+
     ////////////////////////////////////////////////////////////
     // smath::constant overloads
 
