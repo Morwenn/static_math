@@ -191,12 +191,12 @@ template<typename Float>
 constexpr auto degrees(Float x)
     -> Float
 {
-    return x * 180.0L / PI;
+    return x * 180.0L / constants::pi<Float>;
 }
 
 template<typename Float>
 constexpr auto radians(Float x)
     -> Float
 {
-    return x * PI / 180.0L;
+    return x * constants::pi<Float> / 180.0L;
 }

@@ -20,32 +20,41 @@
 
 namespace smath
 {
+namespace constants
+{
     ////////////////////////////////////////////////////////////
     // POSIX constants from cmath
 
     /** e */
-    constexpr double E        = 2.71828182845904523540;
+    template<typename T=double>
+    constexpr T e = static_cast<T>(2.71828182845904523540L);
 
     /** log2(e) */
-    constexpr double LOG2E    = 1.44269504088896340740;
+    template<typename T=double>
+    constexpr T log2e = static_cast<T>(1.44269504088896340740L);
 
     /** log10(e) */
-    constexpr double LOG10E   = 0.43429448190325182765;
+    template<typename T=double>
+    constexpr T log10e = static_cast<T>(0.43429448190325182765L);
 
     /** ln(2) */
-    constexpr double LN2      = 0.69314718055994530942;
+    template<typename T=double>
+    constexpr T ln2 = static_cast<T>(0.69314718055994530942L);
 
     /** ln(10) */
-    constexpr double LN10     = 2.30258509299404568402;
+    template<typename T=double>
+    constexpr T ln10 = static_cast<T>(2.30258509299404568402L);
 
     /** pi */
-    constexpr double PI       = 3.14159265358979323846;
+    template<typename T=double>
+    constexpr T pi = static_cast<T>(3.14159265358979323846L);
 
     ////////////////////////////////////////////////////////////
     // Other mathematical constants
 
     /** Golden ratio */
-    constexpr double PHI      = 1.61803398874989484820;
-}
+    template<typename T=double>
+    constexpr T phi = static_cast<T>(1.61803398874989484820L);
+}}
 
 #endif // SMATH_CONSTANTS_H_

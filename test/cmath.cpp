@@ -59,7 +59,7 @@ int main()
     static_assert(smath::trunc(-2.1) == -2.0, "");
 
     static_assert(smath::is_close(smath::exp(0.0), 1.0), "");
-    static_assert(smath::is_close(smath::exp(1.0), smath::E), "");
+    static_assert(smath::is_close(smath::exp(1.0), smath::constants::e<>), "");
 
     static_assert(smath::pow(2, 0) == 1, "");
     static_assert(smath::pow(5.8, 0) == 1.0, "");

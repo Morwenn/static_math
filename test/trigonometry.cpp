@@ -24,7 +24,9 @@
 
 int main()
 {
+    using namespace smath;
+
     // TODO: make this more exhaustive.
-    static_assert(smath::sin(smath::PI / 2) == 1, "");
-    static_assert(smath::cos(smath::PI / 2) == 0, "");
+    static_assert(smath::sin(constants::pi<> / 2) == 1, "");
+    static_assert(smath::cos(constants::pi<> / 2) == 0, "");
 }
