@@ -42,6 +42,7 @@
 #include <cmath>
 #include <cstddef>
 #include <type_traits>
+#include <utility>
 #include <static_math/constant.h>
 #include "detail/core.h"
 
@@ -128,9 +129,9 @@ namespace smath
      * and \a y, without undue overflow or underflow during the
      * intermediate stages of the computation.
      */
-    template<typename T, typename U>
-    constexpr auto hypot(T x, U y)
-        -> decltype(std::hypot(x, y));
+    template<typename... Args>
+    constexpr auto hypot(Args... args)
+        -> decltype(auto);
 
     ////////////////////////////////////////////////////////////
     // Trigonometric functions

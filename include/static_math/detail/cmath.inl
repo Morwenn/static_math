@@ -22,10 +22,6 @@
  * THE SOFTWARE.
  */
 
-/*
- * Part of this file is the work of theLOLflashlight's GitHub account.
- */
-
 ////////////////////////////////////////////////////////////
 // Helper functions
 
@@ -71,7 +67,56 @@ namespace detail
     }
 
     ////////////////////////////////////////////////////////////
-    // exp
+    // hypot (contributed by Orson Peters)
+
+    template<typename T>
+    constexpr auto hypot_impl_var(T s, T t)
+        -> T
+    {
+        return t * smath::sqrt(s);
+    }
+
+    template<typename T, typename... Args>
+    constexpr auto hypot_impl_var(T s, T t, T x, Args... args)
+        -> T
+    {
+        return t < x  ? hypot_impl_var(T(1) + s * ((t/x)*(t/x)), x, args...) :
+               t != 0 ? hypot_impl_var(s + (x/t)*(x/t), t, args...) :
+                        hypot_impl_var(s, t, args...);
+    }
+
+    template<typename T>
+    constexpr auto hypot_impl(T x, T y)
+        -> T
+    {
+        return x < y  ? y * smath::sqrt(T(1) + (x/y)*(x/y)) :
+               x != 0 ? x * smath::sqrt(T(1) + (y/x)*(y/x)) :
+                        0;
+    }
+
+    template<typename T, typename... Args>
+    constexpr auto hypot_impl(T x, T y, Args... args)
+        -> T
+    {
+        return x < y  ? hypot_impl_var(T(1) + (x/y)*(x/y), y, args...) :
+               x != 0 ? hypot_impl_var(T(1) + (y/x)*(y/x), x, args...) :
+                        hypot_impl_var(T(1), T(0), args...);
+    }
+
+    template<typename... Args>
+    using common_ftype_t = typename std::common_type_t<
+        decltype(std::fabs(std::declval<Args>()))...
+    >;
+
+    template<typename... Args>
+    constexpr auto hypot_helper(Args... args)
+        -> common_ftype_t<Args...>
+    {
+        return hypot_impl(smath::abs(common_ftype_t<Args...>(args))...);
+    }
+
+    ////////////////////////////////////////////////////////////
+    // exp (contributed by theLOLflashlight)
 
     constexpr std::size_t EXP_MAX_DEPTH = 50;
 
@@ -111,7 +156,7 @@ namespace detail
     }
 
     ////////////////////////////////////////////////////////////
-    // sin & sinh
+    // sin & sinh (contributed by theLOLflashlight)
 
     constexpr std::size_t SIN_MAX_DEPTH = 51;
     static_assert(detail::is_odd(SIN_MAX_DEPTH), "");
@@ -174,7 +219,7 @@ namespace detail
     }
 
     ////////////////////////////////////////////////////////////
-    // cos & cosh
+    // cos & cosh (contributed by theLOLflashlight)
 
     constexpr std::size_t COS_MAX_DEPTH = 50;
     static_assert(detail::is_even(COS_MAX_DEPTH), "");
@@ -332,17 +377,11 @@ constexpr auto sqrt(Float x)
     return detail::sqrt_helper(x, x);
 }
 
-template<typename T, typename U>
-constexpr auto hypot(T x, U y)
-    -> decltype(std::hypot(x, y))
+template<typename... Args>
+constexpr auto hypot(Args... args)
+    -> decltype(auto)
 {
-    x = smath::abs(x);
-    y = smath::abs(y);
-
-    auto t = smath::min(x, y);
-    x = smath::max(x, y);
-    t /= x;
-    return x * smath::sqrt(1 + t*t);
+    return detail::hypot_helper(args...);
 }
 
 ////////////////////////////////////////////////////////////
