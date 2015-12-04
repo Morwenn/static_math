@@ -1,3 +1,5 @@
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+
 `static_math` is a C++ library dedicated to compile time mathematics.
 
 ## Compatibility
@@ -69,6 +71,6 @@ auto c = gcd(a, b); // type is long int
 You can find some documentation in the [associated wiki](https://github.com/Morwenn/static_math/wiki).
 You can also generate some anemic documentation thanks to the Doxygen comments in
 the code. If you want to know more about the details, reading the source code might
-also be an interesting solution: the code should be pretty straightforward and
+still be an interesting solution: the code should be pretty straightforward and
 readable enough. Never hesiste to open a documentation issue if you ever feel that
-some parts of the documentation are not complete enough.
+some parts of the documentation are not complete enough or need more examples.
