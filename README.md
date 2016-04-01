@@ -4,9 +4,10 @@
 
 ## Compatibility
 
-`static_math` heavily relies on C++ features from the latest standard (C++14) and
-even on some planned features that from the Technical Specifications. Therefore, do
-not have high expectations, only a few compilers will be able to compile it.
+`static_math` heavily relies on C++ features from the latest standard (C++14 at the
+time of writing), therefore only recent compilers will be able to compile it. The
+latest g++ and clang++ should be able to compile it, but the `constexpr` support in
+Microsoft Visual Studio may not be sufficient yet.
 
 ## Principle
 
