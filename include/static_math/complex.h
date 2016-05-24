@@ -45,9 +45,19 @@ namespace smath
         using value_type = T;
 
         // Constructor
-        constexpr imaginary(value_type real);
+        constexpr imaginary(value_type real = T{0});
 
-        const value_type value;
+        //Operators
+        constexpr auto operator+=(imaginary i)
+            -> imaginary&;
+        constexpr auto operator-=(imaginary i)
+            -> imaginary&;
+        constexpr auto operator*=(T r)
+            -> imaginary&;
+        constexpr auto operator/=(T r)
+            -> imaginary&;
+
+        value_type value;
     };
 
     /**
@@ -64,9 +74,38 @@ namespace smath
         // Constructors
         constexpr complex(value_type real, value_type imag);
         constexpr complex(value_type real, imaginary<T> img);
+        constexpr complex(value_type real = T{0});
 
-        const value_type real;
-        const imaginary<T> imag;
+        // Operators
+        constexpr auto operator+=(T r)
+            -> complex&;
+        constexpr auto operator-=(T r)
+            -> complex&;
+        constexpr auto operator*=(T r)
+            -> complex&;
+        constexpr auto operator/=(T r)
+            -> complex&;
+
+        constexpr auto operator+=(imaginary<T> i)
+            -> complex&;
+        constexpr auto operator-=(imaginary<T> i)
+            -> complex&;
+        constexpr auto operator*=(imaginary<T> i)
+            -> complex&;
+        constexpr auto operator/=(imaginary<T> i)
+            -> complex&;
+
+        constexpr auto operator+=(complex o)
+            -> complex&;
+        constexpr auto operator-=(complex o)
+            -> complex&;
+        constexpr auto operator*=(complex o)
+            -> complex&;
+        constexpr auto operator/=(complex o)
+            -> complex&;
+
+        value_type real;
+        imaginary<T> imag;
     };
 
     ////////////////////////////////////////////////////////////
@@ -251,6 +290,10 @@ namespace smath
 
     template<typename T>
     constexpr auto conj(complex<T> z)
+        -> complex<T>;
+
+    template<typename T>
+    constexpr auto polar(T rho, T theta)
         -> complex<T>;
 
     inline namespace literals

@@ -30,6 +30,38 @@ constexpr imaginary<T>::imaginary(value_type real):
     value(real)
 {}
 
+template<typename T>
+constexpr auto imaginary<T>::operator +=(imaginary i)
+    -> imaginary&
+{
+    value += i.value;
+    return *this;
+}
+
+template<typename T>
+constexpr auto imaginary<T>::operator -=(imaginary i)
+    -> imaginary&
+{
+    value -= i.value;
+    return *this;
+}
+
+template<typename T>
+constexpr auto imaginary<T>::operator *=(T r)
+    -> imaginary&
+{
+    value *= r;
+    return *this;
+}
+
+template<typename T>
+constexpr auto imaginary<T>::operator /=(T r)
+    -> imaginary&
+{
+    value /= r;
+    return *this;
+}
+
 ////////////////////////////////////////////////////////////
 // complex<T> functions
 
@@ -44,6 +76,118 @@ constexpr complex<T>::complex(value_type real, imaginary<T> imag):
     real(real),
     imag(imag)
 {}
+
+template<typename T>
+constexpr complex<T>::complex(value_type real):
+    real(real),
+    imag()
+{}
+
+template<typename T>
+constexpr auto complex<T>::operator +=(T r)
+    -> complex&
+{
+    real += r;
+    return *this;
+}
+
+template<typename T>
+constexpr auto complex<T>::operator -=(T r)
+    -> complex&
+{
+    real -= r;
+    return *this;
+}
+
+template<typename T>
+constexpr auto complex<T>::operator *=(T r)
+    -> complex&
+{
+    real *= r;
+    imag *= r;
+    return *this;
+}
+
+template<typename T>
+constexpr auto complex<T>::operator /=(T r)
+    -> complex&
+{
+    real /= r;
+    imag /= r;
+    return *this;
+}
+
+template<typename T>
+constexpr auto complex<T>::operator +=(imaginary<T> i)
+    -> complex&
+{
+    imag += i;
+    return *this;
+}
+
+template<typename T>
+constexpr auto complex<T>::operator -=(imaginary<T> i)
+    -> complex&
+{
+    imag -= i;
+    return *this;
+}
+
+template<typename T>
+constexpr auto complex<T>::operator *=(imaginary<T> i)
+    -> complex&
+{
+    T temp = imag * i;
+    imag = real * i;
+    real = temp;
+    return *this;
+}
+
+template<typename T>
+constexpr auto complex<T>::operator /=(imaginary<T> i)
+    -> complex&
+{
+    T temp = imag / i;
+    imag = real / i;
+    real = temp;
+    return *this;
+}
+
+template<typename T>
+constexpr auto complex<T>::operator +=(complex o)
+    -> complex&
+{
+    real += o.real;
+    imag += o.imag;
+    return *this;
+}
+
+template<typename T>
+constexpr auto complex<T>::operator -=(complex o)
+    -> complex&
+{
+    real -= o.real;
+    imag -= o.imag;
+    return *this;
+}
+
+template<typename T>
+constexpr auto complex<T>::operator *=(complex o)
+    -> complex&
+{
+    real = real*o.real + imag*o.imag;
+    imag = real*o.imag + imag*o.real;
+    return *this;
+}
+
+template<typename T>
+constexpr auto complex<T>::operator /=(complex o)
+    -> complex&
+{
+    real = (real*o.real - imag*o.imag) / (sqr(o.real) + sqr(o.imag.value));
+    imag = (imag*o.real - real*o.imag) / (sqr(o.real) + sqr(o.imag.value));
+    return *this;
+}
 
 ////////////////////////////////////////////////////////////
 // Unary arithmetic operators
@@ -481,6 +625,16 @@ constexpr auto conj(complex<T> z)
     return {
         z.real,
         -z.imag
+    };
+}
+
+template<typename T>
+constexpr auto polar(T rho, T theta)
+    -> complex<T>
+{
+    return {
+        rho * smath::cos(theta),
+        rho * smath::sin(theta)
     };
 }
 
