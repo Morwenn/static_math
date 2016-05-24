@@ -26,25 +26,44 @@
 
 using namespace smath;
 
+constexpr auto test(complex<int> lhs, complex<long long> rhs)
+    -> complex<double>
+{
+    lhs += rhs;
+    lhs -= rhs;
+    lhs.imag += rhs.imag;
+    lhs.imag -= rhs.imag;
+
+    lhs.imag *= rhs.real;
+    lhs.imag /= rhs.real;
+
+    return complex<double>(lhs);
+}
+
 int main()
 {
     // Constructor tests
-    constexpr auto i1 = imaginary<float>(5.8f);
-    static_assert(smath::is_close(i1.value, 5.8f), "");
+    constexpr imaginary<int> i1;
+    static_assert(i1.value == 0, "");
+    constexpr auto i2 = imaginary<float>(5.8f);
+    static_assert(smath::is_close(i2.value, 5.8f), "");
 
-    constexpr auto c1 = complex<float>(1.2f, 2.5f);
-    static_assert(smath::is_close(c1.real, 1.2f), "");
-    static_assert(smath::is_close(c1.imag.value, 2.5f), "");
+    constexpr complex<int> c1;
+    static_assert(c1.real == 0, "");
+    static_assert(c1.imag.value == 0, "");
+    constexpr auto c2 = complex<float>(1.2f, 2.5f);
+    static_assert(smath::is_close(c2.real, 1.2f), "");
+    static_assert(smath::is_close(c2.imag.value, 2.5f), "");
 
     constexpr auto imag0 = imaginary<int>(0);
     constexpr auto imag1 = imaginary<int>(1);
     constexpr auto imag2 = imaginary<int>(-2);
-    constexpr auto comp0 = complex<int>(5, 0);
-    constexpr auto comp1 = complex<int>(0, 1);
+    constexpr auto comp0 = complex<int>(5, imag0);
+    constexpr auto comp1 = complex<int>(imag1);
     constexpr auto comp2 = complex<int>(-1, 3);
-    constexpr auto comp3 = complex<long long int>(5, 0);
+    constexpr auto comp3 = complex<long long int>(5);
     constexpr auto comp4 = complex<int>(-2, 4);
-    constexpr auto comp5 = complex<int>(3, -1);
+    constexpr auto comp5 = 3 - 1_i;
 
     // Unary + and -
     static_assert(-imag1 == imaginary<int>(-1), "");
@@ -102,10 +121,17 @@ int main()
     static_assert(comp4 / 2_i == complex<int>(2, 1), "");
     static_assert(4_i / complex<int>(2, 2) == complex<int>(1, 1), "");
 
+    // Augmented assignment operators
+    constexpr auto comp6 = 5 + 6_i;
+    constexpr auto comp7 = 8ll + 2_ill;
+    constexpr auto res = test(comp6, comp7);
+    static_assert(smath::is_close(res.real, 5.0), "");
+    static_assert(smath::is_close(res.imag.value, 6.0), "");
+
     // Mathematical functions
-    constexpr auto c2 = 3.0f + 4.0_if;
-    static_assert(smath::is_close(smath::norm(c2), 25.0f), "");
-    static_assert(smath::is_close(smath::abs(c2), 5.0f), "");
+    constexpr auto c3 = 3.0f + 4.0_if;
+    static_assert(smath::is_close(smath::norm(c3), 25.0f), "");
+    static_assert(smath::is_close(smath::abs(c3), 5.0f), "");
 
     static_assert(smath::conj(comp4) == complex<int>(-2, -4), "");
     static_assert(smath::conj(comp5) == complex<int>(3, 1), "");

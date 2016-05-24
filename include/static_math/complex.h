@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2015 Morwenn
+ * Copyright (c) 2013-2016 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -45,19 +45,27 @@ namespace smath
         using value_type = T;
 
         // Constructor
-        constexpr imaginary(value_type real = T{0});
+        constexpr imaginary() = default;
+        constexpr imaginary(const imaginary& other) = default;
 
-        //Operators
-        constexpr auto operator+=(imaginary i)
+        constexpr explicit imaginary(value_type real);
+        template<typename X>
+        constexpr explicit imaginary(imaginary<X> other);
+
+        // Operators
+        template<typename X>
+        constexpr auto operator+=(imaginary<X> other)
             -> imaginary&;
-        constexpr auto operator-=(imaginary i)
+        template<typename X>
+        constexpr auto operator-=(imaginary<X> other)
             -> imaginary&;
-        constexpr auto operator*=(T r)
+        constexpr auto operator*=(T real)
             -> imaginary&;
-        constexpr auto operator/=(T r)
+        constexpr auto operator/=(T real)
             -> imaginary&;
 
-        value_type value;
+        // Member data
+        value_type value = T{};
     };
 
     /**
@@ -71,41 +79,58 @@ namespace smath
 
         using value_type = T;
 
+        ////////////////////////////////////////////////////////////
         // Constructors
+
+        constexpr complex() = default;
+        constexpr complex(const complex& other) = default;
+
         constexpr complex(value_type real, value_type imag);
-        constexpr complex(value_type real, imaginary<T> img);
-        constexpr complex(value_type real = T{0});
+        constexpr complex(value_type real, imaginary<T> imag);
+        constexpr complex(value_type real);
+        constexpr complex(imaginary<T> imag);
+        template<typename X>
+        constexpr explicit complex(complex<X> other);
 
-        // Operators
-        constexpr auto operator+=(T r)
-            -> complex&;
-        constexpr auto operator-=(T r)
-            -> complex&;
-        constexpr auto operator*=(T r)
-            -> complex&;
-        constexpr auto operator/=(T r)
-            -> complex&;
+        ////////////////////////////////////////////////////////////
+        // Augmented assignment operators
 
-        constexpr auto operator+=(imaginary<T> i)
+        constexpr auto operator+=(T other)
             -> complex&;
-        constexpr auto operator-=(imaginary<T> i)
+        constexpr auto operator-=(T other)
             -> complex&;
-        constexpr auto operator*=(imaginary<T> i)
+        constexpr auto operator*=(T other)
             -> complex&;
-        constexpr auto operator/=(imaginary<T> i)
+        constexpr auto operator/=(T other)
             -> complex&;
 
-        constexpr auto operator+=(complex o)
+        constexpr auto operator+=(imaginary<T> other)
             -> complex&;
-        constexpr auto operator-=(complex o)
+        constexpr auto operator-=(imaginary<T> other)
             -> complex&;
-        constexpr auto operator*=(complex o)
+        constexpr auto operator*=(imaginary<T> other)
             -> complex&;
-        constexpr auto operator/=(complex o)
+        constexpr auto operator/=(imaginary<T> other)
             -> complex&;
 
-        value_type real;
-        imaginary<T> imag;
+        template<typename X>
+        constexpr auto operator+=(complex<X> other)
+            -> complex&;
+        template<typename X>
+        constexpr auto operator-=(complex<X> other)
+            -> complex&;
+        template<typename X>
+        constexpr auto operator*=(complex<X> other)
+            -> complex&;
+        template<typename X>
+        constexpr auto operator/=(complex<X> other)
+            -> complex&;
+
+        ////////////////////////////////////////////////////////////
+        // Member data
+
+        value_type real = T{};
+        imaginary<T> imag = imaginary<T>{};
     };
 
     ////////////////////////////////////////////////////////////
@@ -287,9 +312,15 @@ namespace smath
     template<typename T>
     constexpr auto norm(complex<T> z)
         -> T;
+    template<typename T>
+    constexpr auto norm(T value)
+        -> T;
 
     template<typename T>
     constexpr auto conj(complex<T> z)
+        -> complex<T>;
+    template<typename T>
+    constexpr auto conj(T value)
         -> complex<T>;
 
     template<typename T>
