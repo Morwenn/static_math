@@ -16,6 +16,13 @@ a number of existing mathematical functions and some new ones. It also provides
 a range of classes (`rational`, `complex`, etc...) whose functions can be used
 at compile time too. The library also contains some common mathematical constants.
 
+The library also offers compile-time mathematics at the template parameter level
+thanks to it [`constant`](https://github.com/Morwenn/static_math/wiki/Integral-constants)
+class, which is a bit like `std::integral_constant` but with an an explicit math
+support: for example `constant<int, 5>{} + constant<int, 3>{}` will return an
+instance of `constant<int, 8>`. One could also write `5_c + 3_c` thanks to the
+provided user-defined literals.
+
 ## Design choices
 
 ### Compile time library
@@ -27,14 +34,8 @@ well advised.
 Since the library is only meant to be used at compile time, some design choices
 have been made to improve usability, convenience or safety over performance. For
 example, the rational numbers are simplified after each operation, which could
-badly alter the performance in a runtime context.
-
-In order to force the users to think of this library as only a compile-time only
-library, some class functions that could have been implemented (without being
-compile-time functions) have simply not been implemented. For example, even though
-the classes provide arithmetic operators, none of them provides the corresponding
-coumpound assignement operators. Another notable design choice is the classes
-exposing `const` public member variables.
+badly alter the performance in a runtime context, but which greatly lessens the
+risk of overflow in rational operations.
 
 ### Intuitive feel
 
