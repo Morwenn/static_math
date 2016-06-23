@@ -45,12 +45,14 @@ int main()
                 smath::constant<int, 58>
             >::value, "");
 
-        // Should be too big for an int
+        // Should be too big for an int but will either fit
+        // a long or a long long depending on the platform
+        // (assume well-known reasonable platforms)
+        using big_type = decltype(1844674407370955161_c);
         static_assert(
-            std::is_same<
-                decltype(1844674407370955161_c),
-                smath::constant<long long, 1844674407370955161>
-            >::value, "");
+            std::is_same<big_type::value_type, long>::value ||
+            std::is_same<big_type::value_type, long long>::value,
+            "");
 
         constexpr auto a = 42_c;
         constexpr auto b = +a;
