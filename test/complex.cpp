@@ -43,12 +43,12 @@ constexpr auto test(complex<int> lhs, complex<long long> rhs)
 int main()
 {
     // Constructor tests
-    constexpr imaginary<int> i1;
+    constexpr imaginary<int> i1{};
     static_assert(i1.value == 0, "");
     constexpr auto i2 = imaginary<float>(5.8f);
     static_assert(smath::is_close(i2.value, 5.8f), "");
 
-    constexpr complex<int> c1;
+    constexpr complex<int> c1{};
     static_assert(c1.real == 0, "");
     static_assert(c1.imag.value == 0, "");
     constexpr auto c2 = complex<float>(1.2f, 2.5f);
