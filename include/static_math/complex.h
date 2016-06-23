@@ -31,6 +31,8 @@
 #include <static_math/cmath.h>
 #include <static_math/formula.h>
 
+#define ARITH_NUM(name) name, typename CHECK = std::enable_if_t<std::is_arithmetic< name >::value, name>
+
 namespace smath
 {
     /**
@@ -166,29 +168,29 @@ namespace smath
     constexpr auto operator/(imaginary<T> lhs, imaginary<U> rhs)
         -> std::common_type_t<T, U>;
 
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator+(imaginary<T> lhs, Number rhs)
         -> complex<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator-(imaginary<T> lhs, Number rhs)
         -> complex<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator*(imaginary<T> lhs, Number rhs)
         -> imaginary<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator/(imaginary<T> lhs, Number rhs)
         -> imaginary<std::common_type_t<T, Number>>;
 
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator+(Number lhs, imaginary<T> rhs)
         -> complex<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator-(Number lhs, imaginary<T> rhs)
         -> complex<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator*(Number lhs, imaginary<T> rhs)
         -> imaginary<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator/(Number lhs, imaginary<T> rhs)
         -> imaginary<std::common_type_t<T, Number>>;
 
@@ -205,29 +207,29 @@ namespace smath
     constexpr auto operator/(complex<T> lhs, complex<U> rhs)
         -> complex<std::common_type_t<T, U>>;
 
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator+(complex<T> lhs, Number rhs)
         -> complex<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator-(complex<T> lhs, Number rhs)
         -> complex<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator*(complex<T> lhs, Number rhs)
         -> complex<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator/(complex<T> lhs, Number rhs)
         -> complex<std::common_type_t<T, Number>>;
 
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator+(Number lhs, complex<T> rhs)
         -> complex<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator-(Number lhs, complex<T> rhs)
         -> complex<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator*(Number lhs, complex<T> rhs)
         -> complex<std::common_type_t<T, Number>>;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator/(Number lhs, complex<T> rhs)
         -> complex<std::common_type_t<T, Number>>;
 
@@ -274,17 +276,17 @@ namespace smath
     constexpr auto operator!=(complex<T> lhs, complex<U> rhs)
         -> bool;
 
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator==(complex<T> lhs, Number rhs)
         -> bool;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator!=(complex<T> lhs, Number rhs)
         -> bool;
 
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator==(Number lhs, complex<T> rhs)
         -> bool;
-    template<typename T, typename Number>
+    template<typename T, typename ARITH_NUM(Number)>
     constexpr auto operator!=(Number lhs, complex<T> rhs)
         -> bool;
 
@@ -367,5 +369,7 @@ namespace smath
 
     #include "detail/complex.inl"
 }
+
+#undef ARITH_NUM
 
 #endif // SMATH_COMPLEX_H_
