@@ -45,7 +45,7 @@ namespace smath
         using value_type = T;
 
         // Constructor
-        constexpr imaginary() = default;
+        constexpr imaginary();
         constexpr imaginary(const imaginary& other) = default;
 
         constexpr explicit imaginary(value_type real);
@@ -82,7 +82,7 @@ namespace smath
         ////////////////////////////////////////////////////////////
         // Constructors
 
-        constexpr complex() = default;
+        constexpr complex();
         constexpr complex(const complex& other) = default;
 
         constexpr complex(value_type real, value_type imag);

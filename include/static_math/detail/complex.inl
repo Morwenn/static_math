@@ -26,6 +26,11 @@
 // imaginary<T> functions
 
 template<typename T>
+constexpr imaginary<T>::imaginary():
+    value(T{})
+{}
+
+template<typename T>
 constexpr imaginary<T>::imaginary(value_type real):
     value(real)
 {}
@@ -72,6 +77,12 @@ constexpr auto imaginary<T>::operator/=(T real)
 
 ////////////////////////////////////////////////////////////
 // complex<T> functions
+
+template<typename T>
+constexpr complex<T>::complex():
+    real(T{}),
+    imag(imaginary<T>{})
+{}
 
 template<typename T>
 constexpr complex<T>::complex(value_type real, value_type imag):
