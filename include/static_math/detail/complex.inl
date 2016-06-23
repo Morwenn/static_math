@@ -288,56 +288,64 @@ constexpr auto operator/(imaginary<T> lhs, imaginary<U> rhs)
     return { lhs.value*rhs.value / sqr(rhs.value) };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator+(imaginary<T> lhs, Number rhs)
     -> complex<std::common_type_t<T, Number>>
 {
     return { rhs, lhs };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator-(imaginary<T> lhs, Number rhs)
     -> complex<std::common_type_t<T, Number>>
 {
     return { -rhs, lhs };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator*(imaginary<T> lhs, Number rhs)
     -> imaginary<std::common_type_t<T, Number>>
 {
     return imaginary<std::common_type_t<T, Number>>(lhs.value * rhs);
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator/(imaginary<T> lhs, Number rhs)
     -> imaginary<std::common_type_t<T, Number>>
 {
     return imaginary<std::common_type_t<T, Number>>(lhs.value / rhs);
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator+(Number lhs, imaginary<T> rhs)
     -> complex<std::common_type_t<T, Number>>
 {
     return { lhs, rhs };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator-(Number lhs, imaginary<T> rhs)
     -> complex<std::common_type_t<T, Number>>
 {
     return { lhs, -rhs };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator*(Number lhs, imaginary<T> rhs)
     -> imaginary<std::common_type_t<T, Number>>
 {
     return imaginary<std::common_type_t<T, Number>>(lhs * rhs.value);
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator/(Number lhs, imaginary<T> rhs)
     -> imaginary<std::common_type_t<T, Number>>
 {
@@ -384,7 +392,8 @@ constexpr auto operator/(complex<T> lhs, complex<U> rhs)
     };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator+(complex<T> lhs, Number rhs)
     -> complex<std::common_type_t<T, Number>>
 {
@@ -394,7 +403,8 @@ constexpr auto operator+(complex<T> lhs, Number rhs)
     };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator-(complex<T> lhs, Number rhs)
     -> complex<std::common_type_t<T, Number>>
 {
@@ -404,7 +414,8 @@ constexpr auto operator-(complex<T> lhs, Number rhs)
     };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator*(complex<T> lhs, Number rhs)
     -> complex<std::common_type_t<T, Number>>
 {
@@ -414,7 +425,8 @@ constexpr auto operator*(complex<T> lhs, Number rhs)
     };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator/(complex<T> lhs, Number rhs)
     -> complex<std::common_type_t<T, Number>>
 {
@@ -424,7 +436,8 @@ constexpr auto operator/(complex<T> lhs, Number rhs)
     };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator+(Number lhs, complex<T> rhs)
     -> complex<std::common_type_t<T, Number>>
 {
@@ -434,7 +447,8 @@ constexpr auto operator+(Number lhs, complex<T> rhs)
     };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator-(Number lhs, complex<T> rhs)
     -> complex<std::common_type_t<T, Number>>
 {
@@ -443,7 +457,8 @@ constexpr auto operator-(Number lhs, complex<T> rhs)
         -rhs.imag
     };
 }
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator*(Number lhs, complex<T> rhs)
     -> complex<std::common_type_t<T, Number>>
 {
@@ -453,7 +468,8 @@ constexpr auto operator*(Number lhs, complex<T> rhs)
     };
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator/(Number lhs, complex<T> rhs)
     -> complex<std::common_type_t<T, Number>>
 {
@@ -575,7 +591,8 @@ constexpr auto operator!=(complex<T> lhs, complex<U> rhs)
     return !(lhs == rhs);
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator==(complex<T> lhs, Number rhs)
     -> bool
 {
@@ -583,14 +600,16 @@ constexpr auto operator==(complex<T> lhs, Number rhs)
         && lhs.imag.value == 0;
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator!=(complex<T> lhs, Number rhs)
     -> bool
 {
     return !(lhs == rhs);
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator==(Number lhs, complex<T> rhs)
     -> bool
 {
@@ -598,7 +617,8 @@ constexpr auto operator==(Number lhs, complex<T> rhs)
         && rhs.imag_value == 0;
 }
 
-template<typename T, typename Number>
+template<typename T, typename Number,
+         typename = std::enable_if_t<std::is_arithmetic<Number>::value>>
 constexpr auto operator!=(Number lhs, complex<T> rhs)
     -> bool
 {
