@@ -59,14 +59,16 @@ namespace detail
     ////////////////////////////////////////////////////////////
     // Minimal and maximal values
 
-    template<typename T, typename U>
+    template<typename T, typename U,
+             typename = std::enable_if_t<std::is_arithmetic<T>::value && std::is_arithmetic<U>::value>>
     constexpr auto min(T first, U second)
         -> std::common_type_t<T, U>
     {
         return (first < second) ? first : second;
     }
 
-    template<typename T, typename U, typename... Rest>
+    template<typename T, typename U, typename... Rest,
+             typename = std::enable_if_t<std::is_arithmetic<T>::value && std::is_arithmetic<U>::value>>
     constexpr auto min(T first, U second, Rest... rest)
         -> std::common_type_t<T, U, Rest...>
     {
@@ -82,14 +84,16 @@ namespace detail
         return {};
     }
 
-    template<typename T, typename U>
+    template<typename T, typename U,
+             typename = std::enable_if_t<std::is_arithmetic<T>::value && std::is_arithmetic<U>::value>>
     constexpr auto max(T first, U second)
         -> std::common_type_t<T, U>
     {
         return (first > second) ? first : second;
     }
 
-    template<typename T, typename U, typename... Rest>
+    template<typename T, typename U, typename... Rest,
+             typename = std::enable_if_t<std::is_arithmetic<T>::value && std::is_arithmetic<U>::value>>
     constexpr auto max(T first, U second, Rest... rest)
         -> std::common_type_t<T, U, Rest...>
     {
