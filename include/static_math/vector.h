@@ -31,6 +31,11 @@
 #include <cstddef>
 #include <utility>
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-braces"
+#endif
+
 namespace smath
 {
     /**
@@ -101,5 +106,9 @@ namespace smath
 
     #include "detail/vector.inl"
 }
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 
 #endif // SMATH_VECTOR_H_
