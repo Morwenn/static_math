@@ -62,6 +62,7 @@ if (STATIC_MATH_BUILD_TESTS)
         
         # Add executable for the example
         add_executable(test-${test_tgt} ${headers} ${detail_headers} test/${test_tgt}.cpp)
+        add_custom_target(run-test-${test_tgt} COMMAND $<TARGET_FILE:test-${test_tgt}> )
         add_test(NAME ${test_tgt}
                 COMMAND test-${test_tgt})
 

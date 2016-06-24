@@ -170,7 +170,7 @@ namespace detail
     template<typename T, typename U>
     constexpr auto is_close(T a, U b)
         -> std::enable_if_t<
-            not std::is_floating_point<T>::value || not std::is_floating_point<U>::value,
+            !std::is_floating_point<T>::value || !std::is_floating_point<U>::value,
             bool
         >
     {
