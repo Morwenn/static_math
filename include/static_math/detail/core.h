@@ -30,6 +30,7 @@
 #include <limits>
 #include <type_traits>
 #include <static_math/constant.h>
+#include "logical_traits.h"
 
 // This header contains very basic functions that are
 // often used by many headers but may introduce some
@@ -39,6 +40,17 @@ namespace smath
 {
 namespace detail
 {
+    ////////////////////////////////////////////////////////////
+    // Trait to delay instantiation of value_type
+
+    template<typename T, typename U>
+    struct is_same_value_type:
+        std::is_same<
+            typename T::value_type,
+            typename U::value_type
+        >
+    {};
+
     ////////////////////////////////////////////////////////////
     // Absolute value
 
@@ -59,14 +71,28 @@ namespace detail
     ////////////////////////////////////////////////////////////
     // Minimal and maximal values
 
-    template<typename T, typename U>
+    template<
+        typename T, typename U,
+        typename = std::enable_if_t<negation<conjunction<
+            is_integral_constant<T>,
+            is_integral_constant<U>,
+            is_same_value_type<T, U>
+        >>::value>
+    >
     constexpr auto min(T first, U second)
         -> std::common_type_t<T, U>
     {
         return (first < second) ? first : second;
     }
 
-    template<typename T, typename U, typename... Rest>
+    template<
+        typename T, typename U, typename... Rest,
+        typename = std::enable_if_t<negation<conjunction<
+            is_integral_constant<T>,
+            is_integral_constant<U>,
+            is_same_value_type<T, U>
+        >>::value>
+    >
     constexpr auto min(T first, U second, Rest... rest)
         -> std::common_type_t<T, U, Rest...>
     {
@@ -82,14 +108,28 @@ namespace detail
         return {};
     }
 
-    template<typename T, typename U>
+    template<
+        typename T, typename U,
+        typename = std::enable_if_t<negation<conjunction<
+            is_integral_constant<T>,
+            is_integral_constant<U>,
+            is_same_value_type<T, U>
+        >>::value>
+    >
     constexpr auto max(T first, U second)
         -> std::common_type_t<T, U>
     {
         return (first > second) ? first : second;
     }
 
-    template<typename T, typename U, typename... Rest>
+    template<
+        typename T, typename U, typename... Rest,
+        typename = std::enable_if_t<negation<conjunction<
+            is_integral_constant<T>,
+            is_integral_constant<U>,
+            is_same_value_type<T, U>
+        >>::value>
+    >
     constexpr auto max(T first, U second, Rest... rest)
         -> std::common_type_t<T, U, Rest...>
     {

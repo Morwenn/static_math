@@ -23,6 +23,22 @@
  */
 
 ////////////////////////////////////////////////////////////
+// Check whether a type is an integral constant
+
+namespace detail
+{
+    template<typename T>
+    struct is_integral_constant:
+        std::false_type
+    {};
+
+    template<typename Integer, Integer N>
+    struct is_integral_constant<constant<Integer, N>>:
+        std::true_type
+    {};
+}
+
+////////////////////////////////////////////////////////////
 // Unary arithmetic operators
 
 template<typename Integer, Integer N>
