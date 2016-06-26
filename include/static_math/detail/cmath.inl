@@ -131,9 +131,10 @@ namespace detail
         static constexpr auto compute(T x)
             -> T
         {
+            const auto EPSILON = std::numeric_limits<T>::epsilon() * x;
             const T term = xn_nfac(x, N);
 
-            if (term <= std::numeric_limits<T>::epsilon())
+            if (term < EPSILON)
             {
                 return term;
             }
