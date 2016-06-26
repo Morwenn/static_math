@@ -13,3 +13,7 @@
 *.cbp
 *.depend
 *.layout
+
+# CMake
+build*
+CMakeCache.txt

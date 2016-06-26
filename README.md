@@ -1,4 +1,5 @@
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+[![Build Status](https://travis-ci.org/Morwenn/static_math.svg?branch=master)](https://travis-ci.org/Morwenn/static_math)
 
 `static_math` is a C++ library dedicated to compile time mathematics.
 

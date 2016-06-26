@@ -41,6 +41,7 @@
 ////////////////////////////////////////////////////////////
 #include <cmath>
 #include <cstddef>
+#include <tuple>
 #include <type_traits>
 #include <utility>
 #include <static_math/constant.h>
@@ -110,6 +111,24 @@ namespace smath
     template<typename Number, typename Integer>
     constexpr auto pow(Number x, Integer exponent)
         -> std::common_type_t<Number, Integer>;
+    
+    /**
+     * @brief Natural Log function
+     */
+    template<typename Type>
+    constexpr auto log(Type x) -> decltype(std::log(x));
+    
+    /**
+     * @brief Log base 2 function
+     */
+    template<typename Type>
+    constexpr auto log2(Type x) -> decltype(std::log2(x));
+    
+    /**
+     * @brief Log base 10 function
+     */
+    template<typename Type>
+    constexpr auto log10(Type x) -> decltype(std::log10(x));
 
     /**
      * @brief Square root function

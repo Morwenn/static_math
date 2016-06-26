@@ -66,17 +66,32 @@ int main()
 
     static_assert(smath::is_close(smath::exp(0.0), 1.0), "");
     static_assert(smath::is_close(smath::exp(1.0), smath::constants::e<>), "");
-
+    
+    static_assert(smath::pow(2, -1) == 0, "");
     static_assert(smath::pow(2, 0) == 1, "");
-    static_assert(smath::pow(5.8, 0) == 1.0, "");
     static_assert(smath::pow(2, 1) == 2, "");
     static_assert(smath::pow(2, 2) == 4, "");
+    
+    static_assert(smath::pow(5.8, 0) == 1.0, "");
+    static_assert(smath::is_close(smath::pow(5.8, 2), 33.64), "");
+    static_assert(smath::is_close(smath::pow(2.0, -1), 0.5), "");
+    static_assert(smath::is_close(smath::pow(2.0, -2), 0.25), "");
 
     static_assert(smath::is_close(smath::sqrt(4.0), 2.0), "");
     static_assert(smath::is_close(smath::sqrt(2.0), 1.414213562373095), "");
     static_assert(smath::is_close(smath::sqrt(3.0), 1.732050807568877), "");
 
     static_assert(smath::is_close(smath::hypot(3.0f, 4), 5.0), "");
+    
+    static_assert(smath::is_close(smath::exp(5.0), 148.4131591025766), "");
+
+    static_assert(smath::log2(256) == 8, "");
+    static_assert(smath::log10(100) == 2, "");
+    static_assert(smath::is_close(smath::log(1.0), 0.0), "");
+    static_assert(smath::is_close(smath::log(2.0),    0.693147180559945286226763982995180413126945496), "");
+    static_assert(smath::is_close(smath::log(0.5),   -0.693147180559945286226763982995180413126945496), "");
+    static_assert(smath::is_close(smath::log(0.1),   -2.302585084356761679913461193791590631008148193), "");
+    static_assert(smath::is_close(smath::log(256.0),  5.545177444479563177992531564086675643920898438), "");
 
     ////////////////////////////////////////////////////////////
     // smath::constant overloads
