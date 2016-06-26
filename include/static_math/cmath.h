@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2015 Morwenn
+ * Copyright (c) 2013-2016 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -45,6 +45,7 @@
 #include <type_traits>
 #include <utility>
 #include <static_math/constant.h>
+#include <static_math/constants.h>
 #include "detail/core.h"
 
 namespace smath
@@ -111,24 +112,27 @@ namespace smath
     template<typename Number, typename Integer>
     constexpr auto pow(Number x, Integer exponent)
         -> std::common_type_t<Number, Integer>;
-    
+
     /**
      * @brief Natural Log function
      */
-    template<typename Type>
-    constexpr auto log(Type x) -> decltype(std::log(x));
-    
+    template<typename Float>
+    constexpr auto log(Float x)
+        -> decltype(std::log(x));
+
     /**
      * @brief Log base 2 function
      */
-    template<typename Type>
-    constexpr auto log2(Type x) -> decltype(std::log2(x));
-    
+    template<typename Float>
+    constexpr auto log2(Float x)
+        -> decltype(std::log2(x));
+
     /**
      * @brief Log base 10 function
      */
-    template<typename Type>
-    constexpr auto log10(Type x) -> decltype(std::log10(x));
+    template<typename Float>
+    constexpr auto log10(Float x)
+        -> decltype(std::log10(x));
 
     /**
      * @brief Square root function

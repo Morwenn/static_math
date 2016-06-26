@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2015 Morwenn
+ * Copyright (c) 2013-2016 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -45,11 +45,11 @@ namespace constants
 
     /** ln(2) */
     template<typename T=double>
-    constexpr T ln2 = static_cast<T>(0.69314718055994530942L);
+    constexpr T ln2 = static_cast<T>(0.693147180559945309417232121L);
 
     /** ln(10) */
     template<typename T=double>
-    constexpr T ln10 = static_cast<T>(2.30258509299404568402L);
+    constexpr T ln10 = static_cast<T>(2.302585092994045684017991454L);
 
     /** pi */
     template<typename T=double>

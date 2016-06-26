@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2015 Morwenn
+ * Copyright (c) 2013-2016 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -66,12 +66,12 @@ int main()
 
     static_assert(smath::is_close(smath::exp(0.0), 1.0), "");
     static_assert(smath::is_close(smath::exp(1.0), smath::constants::e<>), "");
-    
+
     static_assert(smath::pow(2, -1) == 0, "");
     static_assert(smath::pow(2, 0) == 1, "");
     static_assert(smath::pow(2, 1) == 2, "");
     static_assert(smath::pow(2, 2) == 4, "");
-    
+
     static_assert(smath::pow(5.8, 0) == 1.0, "");
     static_assert(smath::is_close(smath::pow(5.8, 2), 33.64), "");
     static_assert(smath::is_close(smath::pow(2.0, -1), 0.5), "");
@@ -82,7 +82,7 @@ int main()
     static_assert(smath::is_close(smath::sqrt(3.0), 1.732050807568877), "");
 
     static_assert(smath::is_close(smath::hypot(3.0f, 4), 5.0), "");
-    
+
     static_assert(smath::is_close(smath::exp(5.0), 148.4131591025766), "");
 
     static_assert(smath::log2(256) == 8, "");

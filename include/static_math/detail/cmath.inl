@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2015 Morwenn
+ * Copyright (c) 2013-2016 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -118,27 +118,27 @@ namespace detail
     ////////////////////////////////////////////////////////////
     // exp (contributed by theLOLflashlight)
 
-    constexpr std::size_t EXP_MAX_DEPTH = 50;
+    constexpr std::size_t exp_max_depth = 50;
 
     template<std::size_t N>
     struct exponential
     {
         exponential() = delete;
 
-        static_assert(N < EXP_MAX_DEPTH, "exceeded maximum recursion depth");
+        static_assert(N < exp_max_depth, "exceeded maximum recursion depth");
 
         template<typename T>
         static constexpr auto compute(T x)
             -> T
         {
-            const auto EPSILON = std::numeric_limits<T>::epsilon() * x;
+            const auto epsilon = std::numeric_limits<T>::epsilon() * x;
             const T term = xn_nfac(x, N);
 
-            if (term < EPSILON)
+            if (term < epsilon)
             {
                 return term;
             }
-            else 
+            else
             {
                 return term + exponential<N + 1>::compute(x);
             }
@@ -146,7 +146,7 @@ namespace detail
     };
 
     template<>
-    struct exponential<EXP_MAX_DEPTH>
+    struct exponential<exp_max_depth>
     {
         exponential() = delete;
 
@@ -164,36 +164,36 @@ namespace detail
     {
         return exponential<N>::compute(x);
     }
-    
+
     ////////////////////////////////////////////////////////////
     // logarithm (contributed by Nava2)
-    
-    constexpr std::size_t LOG_MAX_DEPTH = 150;
 
-    constexpr const auto NAT_LOG_10 = 2.302585092994045684017991454;
-    constexpr const auto NAT_LOG_2 =  0.693147180559945309417232121;
+    constexpr std::size_t log_max_depth = 150;
 
-    template<size_t base = 2>
+    template<std::size_t Base=2>
     struct ilogarithm
     {
         ilogarithm() = delete;
-        
-        template <typename Type>
-        static constexpr auto compute(Type x)
+
+        template<typename Float>
+        static constexpr auto compute(Float x)
             -> decltype(std::log(x))
         {
-            const auto EPSILON = std::numeric_limits<Type>::epsilon() * x;
+            const auto epsilon = std::numeric_limits<Float>::epsilon() * x;
 
-            const Type x_div = x/base;
-            return (x_div > EPSILON 
-                        ? 1 + ilogarithm<base>::compute(x_div) 
+            const Float x_div = x / Base;
+            return (x_div > epsilon
+                        ? 1 + ilogarithm<Base>::compute(x_div)
                         : 0);
         }
     };
 
     // We specialize the integer version, it's much simpler
-    template <size_t base, typename Integer,
-              typename = std::enable_if_t<std::numeric_limits<Integer>::is_integer>>
+    template<
+        std::size_t Base,
+        typename Integer,
+        typename = std::enable_if_t<std::is_integral<Integer>::value>
+    >
     static constexpr auto logi_helper(Integer N)
         -> decltype(std::log(N))
     {
@@ -205,109 +205,113 @@ namespace detail
         {
             return -1.0 * std::numeric_limits<Integer>::infinity();
         }
-        else if (N < base)
+        else if (N < static_cast<Integer>(Base))
         {
             return 0;
         }
-        else 
+        else
         {
-            return ilogarithm<base>::compute(N);
+            return ilogarithm<Base>::compute(N);
         }
     }
 
-    template<size_t N>
+    template<std::size_t N>
     struct logarithm_lte2
-    {        
+    {
         logarithm_lte2() = delete;
-        
-        template <typename Type>
-        static constexpr auto compute(Type x)
+
+        template<typename Float>
+        static constexpr auto compute(Float x)
             -> decltype(std::log(x))
         {
             // Use ln x = \sigma (-1)^(N+1)/ N * (x - 1)^(N)
-            const Type term = (pow_helper(-1.0, N + 1) / N) * pow_helper(x - 1.0, N);
+            const Float term = (pow_helper(-1.0, N + 1) / N) * pow_helper(x - 1.0, N);
 
             return term + logarithm_lte2<N + 1>::compute(x);
         }
     };
-    
-    template <>
-    struct logarithm_lte2<LOG_MAX_DEPTH>
+
+    template<>
+    struct logarithm_lte2<log_max_depth>
     {
         logarithm_lte2() = delete;
 
-        template <typename Type>
-        static constexpr auto compute(Type x)
-        -> decltype(std::log(x))
+        template<typename Float>
+        static constexpr auto compute(Float x)
+            -> decltype(std::log(x))
         {
-            return Type(0.0);
+            (void) x;
+            return Float(0);
         }
     };
 
-    template<typename Type>
-    static constexpr 
-    void get_fast_converge_params(Type* const A, size_t* const n, Type x)
+    template<typename Float>
+    static constexpr auto get_fast_converge_params(Float* const A, std::size_t* const n, Float x)
+        -> void
     {
-        const size_t _x = trunc(x);
-        const size_t _n = logi_helper<10>(_x);
+        const std::size_t _x = trunc(x);
+        const std::size_t _n = logi_helper<10>(_x);
         *n = _n;
         *A = x / pow_helper(10, _n);
     }
 
-    template <size_t N>
+    template<std::size_t N>
     struct fast_converge_log
     {
         fast_converge_log() = delete;
 
-        template <typename Type>
-        static constexpr Type compute(Type x)
+        template<typename Float>
+        static constexpr auto compute(Float x)
+            -> Float
         {
-            Type A(0);
-            size_t n(0);
+            Float a(0);
+            std::size_t n(0);
 
-            get_fast_converge_params(&A, &n, x);
+            get_fast_converge_params(&a, &n, x);
 
-            const Type y = (A - 1.0)/(A + 1.0);
+            const Float y = (a - 1.0) / (a + 1.0);
 
-            return n * NAT_LOG_10 + 2.0 * fast_converge_log<0>::S(y);
+            return n * constants::ln10<Float> + 2.0 * fast_converge_log<0>::S(y);
         }
 
-        template <typename Type>
-        static constexpr Type S(Type y)
+        template<typename Float>
+        static constexpr auto S(Float y)
+            -> Float
         {
-            const auto EPSILON = std::numeric_limits<Type>::epsilon() * y;
-
-            const auto NNP1 = 2 * N + 1;
-            const auto term = (pow_helper(y, NNP1) / NNP1);
+            const auto nnp1 = 2 * N + 1;
+            const auto term = (pow_helper(y, nnp1) / nnp1);
 
             return term + fast_converge_log<N+1>::S(y);
         }
     };
-    
-    template <>
-    struct fast_converge_log<LOG_MAX_DEPTH>
+
+    template<>
+    struct fast_converge_log<log_max_depth>
     {
         fast_converge_log() = delete;
 
-        template <typename Type>
-        static constexpr Type S(Type y)
+        template<typename Float>
+        static constexpr auto S(Float)
+            -> Float
         {
-            return Type(0);
+            return Float(0);
         }
     };
-    
-    template <typename Type,
-              typename = std::enable_if_t<std::is_floating_point<Type>::value>>
-    static constexpr auto logf_helper(Type x)
+
+    template<
+        typename Float,
+        typename = std::enable_if_t<std::is_floating_point<Float>::value>
+    >
+    static constexpr auto logf_helper(Float x)
         -> decltype(std::log(x))
     {
-        if (x < 0.0)
+        if (x < Float(0))
         {
-            return std::numeric_limits<Type>::quiet_NaN();
+            return std::numeric_limits<Float>::quiet_NaN();
         }
-        else if (is_close(x, 0.0))
+        else if (is_close(x, Float(0)))
         {
-            return -1.0 * std::numeric_limits<Type>::infinity();
+            return -1.0 * std::numeric_limits<Float>::infinity();
         }
         else if (x < 2.0)
         {
@@ -319,34 +323,52 @@ namespace detail
         }
     }
 
-    template <typename Type>
-    constexpr auto log10_helper(std::enable_if_t<!std::is_floating_point<Type>::value, Type> x) -> decltype(std::log10(x))
+    template<typename Float>
+    constexpr auto log10_helper(std::false_type, Float x)
+        -> decltype(std::log10(x))
     {
         return detail::logi_helper<10>(x);
     }
 
-    template <typename Type>
-    constexpr auto log10_helper(std::enable_if_t<std::is_floating_point<Type>::value, Type> x) -> decltype(std::log10(x))
+    template<typename Float>
+    constexpr auto log10_helper(std::true_type, Float x)
+        -> decltype(std::log10(x))
     {
-        return detail::logf_helper(x) / NAT_LOG_10;
+        return detail::logf_helper(x) / constants::ln10<Float>;
     }
 
-    template <typename Type>
-    constexpr auto log2_helper(std::enable_if_t<!std::is_floating_point<Type>::value, Type> x) -> decltype(std::log2(x))
+    template<typename Float>
+    constexpr auto log10_helper(Float x)
+        -> decltype(std::log10(x))
+    {
+        return log10_helper(std::is_floating_point<Float>{}, x);
+    }
+
+    template<typename Float>
+    constexpr auto log2_helper(std::false_type, Float x)
+        -> decltype(std::log2(x))
     {
         return detail::logi_helper<2>(x);
     }
 
-    template <typename Type>
-    constexpr auto log2_helper(std::enable_if_t<std::is_floating_point<Type>::value, Type> x) -> decltype(std::log2(x))
+    template<typename Float>
+    constexpr auto log2_helper(std::true_type, Float x)
+        -> decltype(std::log2(x))
     {
-        return detail::logf_helper(x) / NAT_LOG_2;
+        return detail::logf_helper(x) / constants::ln2<Float>;
+    }
+
+    template<typename Float>
+    constexpr auto log2_helper(Float x)
+        -> decltype(std::log2(x))
+    {
+        return log2_helper(std::is_floating_point<Float>{}, x);
     }
     ////////////////////////////////////////////////////////////
     // sin & sinh (contributed by theLOLflashlight)
 
-    constexpr std::size_t SIN_MAX_DEPTH = 51;
-    static_assert(detail::is_odd(SIN_MAX_DEPTH), "");
+    constexpr std::size_t sin_max_depth = 51;
+    static_assert(detail::is_odd(sin_max_depth), "");
 
     template<std::size_t N>
     struct sine
@@ -354,7 +376,7 @@ namespace detail
         sine() = delete;
 
         static_assert(detail::is_odd(N), "N must be odd for sin functions");
-        static_assert(N < SIN_MAX_DEPTH, "exceeded maximum recursion depth");
+        static_assert(N < sin_max_depth, "exceeded maximum recursion depth");
 
         template<typename T>
         static constexpr auto trig(T x)
@@ -372,7 +394,7 @@ namespace detail
     };
 
     template<>
-    struct sine<SIN_MAX_DEPTH>
+    struct sine<sin_max_depth>
     {
         sine() = delete;
 
@@ -408,8 +430,8 @@ namespace detail
     ////////////////////////////////////////////////////////////
     // cos & cosh (contributed by theLOLflashlight)
 
-    constexpr std::size_t COS_MAX_DEPTH = 50;
-    static_assert(detail::is_even(COS_MAX_DEPTH), "");
+    constexpr std::size_t cos_max_depth = 50;
+    static_assert(detail::is_even(cos_max_depth), "");
 
     template<std::size_t N>
     struct cosine
@@ -417,7 +439,7 @@ namespace detail
         cosine() = delete;
 
         static_assert(detail::is_even(N), "N must be even for cos functions");
-        static_assert(N < COS_MAX_DEPTH, "exceeded maximum recursion depth");
+        static_assert(N < cos_max_depth, "exceeded maximum recursion depth");
 
         template<typename T>
         static constexpr auto trig(T x)
@@ -435,7 +457,7 @@ namespace detail
     };
 
     template<>
-    struct cosine<COS_MAX_DEPTH>
+    struct cosine<cos_max_depth>
     {
         cosine() = delete;
 
@@ -571,22 +593,25 @@ constexpr auto hypot(Args... args)
     return detail::hypot_helper(args...);
 }
 
-template <typename Type>
-constexpr auto log(Type x) -> decltype(std::log(x))
+template<typename Float>
+constexpr auto log(Float x)
+    -> decltype(std::log(x))
 {
     return detail::logf_helper(x);
 }
 
-template <typename Type>
-constexpr auto log2(Type x) -> decltype(std::log2(x))
+template<typename Float>
+constexpr auto log2(Float x)
+    -> decltype(std::log2(x))
 {
-    return detail::log2_helper<Type>(x);
+    return detail::log2_helper<Float>(x);
 }
 
-template <typename Type>
-constexpr auto log10(Type x) -> decltype(std::log10(x))
+template<typename Float>
+constexpr auto log10(Float x)
+    -> decltype(std::log10(x))
 {
-    return detail::log10_helper<Type>(x);
+    return detail::log10_helper<Float>(x);
 }
 
 ////////////////////////////////////////////////////////////
