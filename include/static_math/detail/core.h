@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Morwenn
+ * Copyright (c) 2015-2017 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -61,12 +61,14 @@ namespace detail
         return (x >= 0) ? x : -x;
     }
 
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
     template<typename Integer, Integer N>
     constexpr auto abs(constant<Integer, N>)
         -> constant<Integer, abs(N)>
     {
         return {};
     }
+#endif
 
     ////////////////////////////////////////////////////////////
     // Minimal and maximal values
@@ -101,12 +103,14 @@ namespace detail
             detail::min(second, rest...);
     }
 
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
     template<typename Integer, Integer... Numbers>
     constexpr auto min(constant<Integer, Numbers>...)
         -> constant<Integer, detail::min(Numbers...)>
     {
         return {};
     }
+#endif
 
     template<
         typename T, typename U,
@@ -138,12 +142,14 @@ namespace detail
             detail::max(second, rest...);
     }
 
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
     template<typename Integer, Integer... Numbers>
     constexpr auto max(constant<Integer, Numbers>...)
         -> constant<Integer, max(Numbers...)>
     {
         return {};
     }
+#endif
 
     ////////////////////////////////////////////////////////////
     // Whether two values are close
@@ -184,8 +190,12 @@ namespace detail
     constexpr auto is_even(Integer n)
         -> decltype(auto)
     {
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
         using namespace constant_literals;
         return not (n % 2_c);
+#else
+        return not (n % 2);
+#endif
     }
 
     template<typename Integer>
@@ -210,12 +220,14 @@ namespace detail
         return res;
     }
 
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
     template<typename Integer, Integer N>
     constexpr auto factorial(constant<Integer, N>)
         -> constant<Integer, factorial(N)>
     {
         return {};
     }
+#endif
 }}
 
 #endif // SMATH_DETAIL_CORE_H_

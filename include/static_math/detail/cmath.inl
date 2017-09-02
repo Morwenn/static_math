@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2016 Morwenn
+ * Copyright (c) 2013-2017 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -572,12 +572,14 @@ constexpr auto pow(Number x, Integer exponent)
             1 / detail::pow_helper(x, -exponent);
 }
 
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
 template<typename Integer, Integer N, Integer M>
 constexpr auto pow(constant<Integer, N>, constant<Integer, M>)
     -> constant<Integer, smath::pow(N, M)>
 {
     return {};
 }
+#endif
 
 template<typename Float>
 constexpr auto sqrt(Float x)

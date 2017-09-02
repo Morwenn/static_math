@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2015 Morwenn
+ * Copyright (c) 2013-2017 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -97,6 +97,7 @@ int main()
     ////////////////////////////////////////////////////////////
     // smath::constant overloads
 
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
     using namespace smath::constant_literals;
 
     static_assert(not smath::is_even(5_c), "");
@@ -169,4 +170,5 @@ int main()
             decltype(smath::clamp(5_c, 2_c, 4_c)),
             smath::constant<int, 4>
         >::value, "");
+#endif
 }

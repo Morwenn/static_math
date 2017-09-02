@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Morwenn
+ * Copyright (c) 2015-2017 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,32 @@
  */
 #ifndef SMATH_CONSTANT_H_
 #define SMATH_CONSTANT_H_
+
+// Integral constants are broken with MSVC
+
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
+#   ifdef _MSC_VER
+#       define STATIC_MATH_NO_INTEGRAL_CONSTANT
+#   endif
+#endif
+
+#ifdef STATIC_MATH_NO_INTEGRAL_CONSTANT
+
+#include <type_traits>
+
+namespace smath
+{
+namespace detail
+{
+    // Required even when smath::constant does not exist,
+    // normal definition is in constant.inl
+    template<typename T>
+    struct is_integral_constant:
+        std::false_type
+    {};
+}}
+
+#else
 
 ////////////////////////////////////////////////////////////
 // Headers
@@ -186,5 +212,7 @@ namespace std
         public std::numeric_limits<Integer>
     {};
 }
+
+#endif // STATIC_MATH_NO_INTEGRAL_CONSTANT
 
 #endif // SMATH_CONSTANT_H_
