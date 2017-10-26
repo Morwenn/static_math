@@ -8,7 +8,6 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test # cmake requirement
-    - george-edison55-precise-backports
     
     packages:
     - [cmake, cmake-data]
