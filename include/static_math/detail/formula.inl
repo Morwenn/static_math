@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2015 Morwenn
+ * Copyright (c) 2013-2017 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -96,12 +96,14 @@ constexpr auto clamp(Number x, Number min, Number max)
     return (x < min) ? min : (x > max) ? max : x;
 }
 
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
 template<typename Integer, Integer N, Integer M, Integer O>
 constexpr auto clamp(constant<Integer, N>, constant<Integer, M>, constant<Integer, O>)
     -> constant<Integer, clamp(N, M, O)>
 {
     return {};
 }
+#endif
 
 ////////////////////////////////////////////////////////////
 // Integer-related functions
@@ -130,12 +132,14 @@ constexpr auto is_prime(Integer n)
                 detail::is_prime_helper(n, 3);
 }
 
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
 template<typename Integer, Integer N>
 constexpr auto is_prime(constant<Integer, N>)
     -> constant<Integer, is_prime(N)>
 {
     return {};
 }
+#endif
 
 template<typename Integer>
 constexpr auto fibonacci(Integer n)
@@ -144,12 +148,14 @@ constexpr auto fibonacci(Integer n)
     return (n < 2) ? n : fibonacci(n-2) + fibonacci(n-1);
 }
 
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
 template<typename Integer, Integer N>
 constexpr auto fibonacci(constant<Integer, N>)
     -> constant<Integer, fibonacci(N)>
 {
     return {};
 }
+#endif
 
 template<typename Integer>
 constexpr auto factorial(Integer n)
@@ -168,12 +174,14 @@ constexpr auto gcd(T a, U b)
                 detail::gcd_helper(a, b % a);
 }
 
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
 template<typename Integer, Integer N, Integer M>
 constexpr auto gcd(constant<Integer, N>, constant<Integer, M>)
     -> constant<Integer, gcd(N, M)>
 {
     return {};
 }
+#endif
 
 template<typename T, typename U>
 constexpr auto lcm(T a, U b)
@@ -183,12 +191,14 @@ constexpr auto lcm(T a, U b)
         a * b / gcd(a, b);
 }
 
+#ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
 template<typename Integer, Integer N, Integer M>
 constexpr auto lcm(constant<Integer, N>, constant<Integer, M>)
     -> constant<Integer, lcm(N, M)>
 {
     return {};
 }
+#endif
 
 ////////////////////////////////////////////////////////////
 // Angle conversions
