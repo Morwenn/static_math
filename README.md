@@ -5,14 +5,16 @@
 
 ## Compatibility
 
-`static_math` heavily relies on C++ features from the latest standard (C++14 at the
-time of writing), therefore only recent compilers will be able to compile it. The
-latest g++ and clang++ should be able to compile it, but the `constexpr` support in
-Microsoft Visual Studio may not be sufficient yet.
+`static_math` heavily relies on C++ features from the C++14 standard - most notably
+extended `constexpr` -, therefore only somewhat recent compilers should be able to
+compile it. From the latest tests (no as good as they could be), it should work with
+at least g++5, clang++4 and VS2017. One semi-obscure feature does not work with
+VS2017 and had been deactivated for that compiler; you can read more about it in the
+documentation wiki.
 
 ## Principle
 
-`static_math` makes a heavy use of the C++11 keyword `constexpr` to reimplement
+`static_math` makes a heavy use of the C++14 extended `constexpr` to reimplement
 a number of existing mathematical functions and some new ones. It also provides
 a range of classes (`rational`, `complex`, etc...) whose functions can be used
 at compile time too. The library also contains some common mathematical constants.
