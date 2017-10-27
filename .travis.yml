@@ -75,6 +75,7 @@ before_install:
     esac
 
     if [[ ${OS_NAME} == osx ]]; then
+        brew update
         brew install cmake ninja
     fi
 
