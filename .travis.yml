@@ -8,7 +8,7 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test # cmake requirement
-    
+
     packages:
     - [cmake, cmake-data]
     - ccache
@@ -36,30 +36,30 @@ matrix:
     - os: linux
       env: COMPILER=g++-5 CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR=Ninja
       compiler: gcc
-          
+
     - os: linux
       env: COMPILER=g++-5 CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR=Ninja
       compiler: gcc
-        
+
 
     # Mac OSX
     - os: osx
-      osx_image: xcode7
+      osx_image: xcode7.3
       compiler: clang
       env: CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR=Ninja 
 
     - os: osx
-      osx_image: xcode7
+      osx_image: xcode7.3
       compiler: gcc
       env: CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR=Ninja
 
     - os: osx
-      osx_image: xcode7
+      osx_image: xcode7.3
       compiler: clang
       env: CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR=Ninja 
 
     - os: osx
-      osx_image: xcode7
+      osx_image: xcode7.3
       compiler: clang
       env: CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR=Xcode  
 
@@ -76,7 +76,7 @@ before_install:
 
     if [[ ${OS_NAME} == osx ]]; then
         brew update
-        brew install cmake ninja
+        brew install ninja
     fi
 
 - |
