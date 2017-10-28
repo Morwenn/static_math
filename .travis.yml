@@ -16,10 +16,6 @@ addons:
     - [gcc-5, g++-5]
 
 matrix:
-  allow_failures:
-    - os: linux
-      compiler: clang
-
   include: 
     # Linux
 
