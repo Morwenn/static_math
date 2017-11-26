@@ -56,7 +56,20 @@ namespace detail
 
     template<typename Number>
     constexpr auto abs(Number x)
-        -> Number
+        -> std::enable_if_t<
+            std::is_unsigned<Number>::value,
+            Number
+        >
+    {
+        return x;
+    }
+
+    template<typename Number>
+    constexpr auto abs(Number x)
+        -> std::enable_if_t<
+            not std::is_unsigned<Number>::value,
+            Number
+        >
     {
         return (x >= 0) ? x : -x;
     }

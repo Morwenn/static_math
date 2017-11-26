@@ -249,8 +249,8 @@ namespace detail
     static constexpr auto get_fast_converge_params(Float* const A, std::size_t* const n, Float x)
         -> void
     {
-        const std::size_t _x = trunc(x);
-        const std::size_t _n = logi_helper<10>(_x);
+        auto _x = static_cast<std::size_t>(trunc(x));
+        auto _n = static_cast<std::size_t>(logi_helper<10>(_x));
         *n = _n;
         *A = x / pow_helper(10, _n);
     }
