@@ -197,22 +197,18 @@ namespace detail
     static constexpr auto logi_helper(Integer N)
         -> decltype(std::log(N))
     {
-        if (N < 0)
-        {
-            return std::numeric_limits<Integer>::quiet_NaN();
+        using return_type = decltype(std::log(N));
+
+        if (N < 0) {
+            return std::numeric_limits<return_type>::quiet_NaN();
         }
-        else if (N == 0)
-        {
-            return -1.0 * std::numeric_limits<Integer>::infinity();
+        if (N == 0) {
+            return -1.0 * std::numeric_limits<return_type>::infinity();
         }
-        else if (N < static_cast<Integer>(Base))
-        {
+        if (N < static_cast<Integer>(Base)) {
             return 0;
         }
-        else
-        {
-            return ilogarithm<Base>::compute(N);
-        }
+        return ilogarithm<Base>::compute(N);
     }
 
     template<std::size_t N>
