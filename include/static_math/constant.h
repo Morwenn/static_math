@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2017 Morwenn
+ * Copyright (c) 2015-2018 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,10 +24,10 @@
 #ifndef SMATH_CONSTANT_H_
 #define SMATH_CONSTANT_H_
 
-// Integral constants are broken with MSVC
+// Integral constants were broken with old MSVC++ versions
 
 #ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
-#   ifdef _MSC_VER
+#   if defined(_MSC_VER) && _MSC_VER < 1912
 #       define STATIC_MATH_NO_INTEGRAL_CONSTANT
 #   endif
 #endif

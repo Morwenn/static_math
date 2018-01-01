@@ -8,9 +8,13 @@
 `static_math` heavily relies on C++ features from the C++14 standard - most notably
 extended `constexpr` -, therefore only somewhat recent compilers should be able to
 compile it. From the latest tests (no as good as they could be), it should work with
-at least g++5, clang++4 and VS2017. One semi-obscure feature does not work with
-VS2017 and had been deactivated for that compiler; you can read more about it in the
-documentation wiki.
+at least the following compilers or more recent versions of them:
+* g++5
+* clang++4
+* MSVC++ 19.12 (corresponding to VS 2017 15.5)
+
+It should also work with older versions of VS 2017 minus a single feature (integral
+constants) which has been deactivated for these versions.
 
 ## Principle
 
