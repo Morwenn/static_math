@@ -34,6 +34,10 @@ int main()
     static_assert(smath::abs(8) == 8, "");
     static_assert(smath::abs(-82L) == 82, "");
 
+    static_assert(smath::div(9, 5).quot == 1 && smath::div(9, 5).rem == 4, "");
+    static_assert(smath::div(5, 9).quot == 0 && smath::div(5, 9).rem == 5, "");
+    static_assert(smath::div(9L, 5L).quot == 1L && smath::div(9L, 5L).rem == 4L, "");
+
     static_assert(smath::min(1, 2) == 1, "");
     static_assert(smath::min(0, 0) == 0, "");
     static_assert(smath::min(-2, -1, 0, 1, 2) == -2, "");

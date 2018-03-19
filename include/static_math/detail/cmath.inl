@@ -497,6 +497,14 @@ constexpr auto abs(Number x)
     return detail::abs(x);
 }
 
+template<typename Number>
+constexpr auto div(Number x, Number y)
+    -> decltype(std::div(x, y))
+{
+    static_assert(std::is_integral<Number>::value, "");
+    return { .quot = x / y, .rem = x % y };
+}
+
 template<typename... Args>
 constexpr auto min(Args... args)
     -> decltype(auto)
