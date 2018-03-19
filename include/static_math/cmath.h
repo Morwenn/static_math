@@ -61,6 +61,13 @@ namespace smath
         -> decltype(auto);
 
     /**
+     * @brief Quotient and remainder of integer division
+     */
+    template<typename Number>
+    constexpr auto div(Number x, Number y)
+        -> decltype(std::div(x, y));
+
+    /**
      * @brief Min of a number of variables
      */
     template<typename... Args>
