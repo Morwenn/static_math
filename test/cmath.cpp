@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2017 Morwenn
+ * Copyright (c) 2013-2018 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#include <cstdlib>
 #include <static_math/cmath.h>
 #include <static_math/constants.h>
 #include <static_math/formula.h>
@@ -33,6 +34,18 @@ int main()
     static_assert(smath::abs(-5) == 5, "");
     static_assert(smath::abs(8) == 8, "");
     static_assert(smath::abs(-82L) == 82, "");
+
+    static_assert(smath::div(9, 5).quot == 1 && smath::div(9, 5).rem == 4, "");
+    static_assert(smath::div(5, 9).quot == 0 && smath::div(5, 9).rem == 5, "");
+    static_assert(smath::div(9L, 5L).quot == 1L && smath::div(9L, 5L).rem == 4L, "");
+
+    // Check that it correctly converts to std::div and friends
+    constexpr std::div_t d1 = smath::div(9, 2);
+    constexpr std::ldiv_t d2 = smath::div(7L, 1L);
+    constexpr std::lldiv_t d3 = smath::div(15LL, 5LL);
+    static_assert(d1.quot == 4 && d1.rem == 1, "");
+    static_assert(d2.quot == 7L && d2.rem == 0L, "");
+    static_assert(d3.quot == 3LL && d3.rem == 0L, "");
 
     static_assert(smath::min(1, 2) == 1, "");
     static_assert(smath::min(0, 0) == 0, "");

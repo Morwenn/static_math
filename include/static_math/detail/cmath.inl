@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2017 Morwenn
+ * Copyright (c) 2013-2018 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -495,6 +495,49 @@ constexpr auto abs(Number x)
     -> decltype(auto)
 {
     return detail::abs(x);
+}
+
+template<typename Number, typename Enable>
+struct div_t
+{
+    Number quot;
+    Number rem;
+};
+
+template<>
+struct div_t<int, void>:
+    std::div_t
+{};
+
+template<>
+struct div_t<long, void>:
+    std::ldiv_t
+{};
+
+template<>
+struct div_t<long long, void>:
+    std::lldiv_t
+{};
+
+template<typename Number>
+struct div_t<
+    Number,
+    std::enable_if_t<
+        std::is_same<Number, std::intmax_t>::value &&
+        not std::is_same<Number, long long>::value
+    >
+>:
+    std::imaxdiv_t
+{};
+
+template<typename Number>
+constexpr auto div(Number x, Number y)
+    -> div_t<Number>
+{
+    div_t<Number> res{};
+    res.quot = x / y;
+    res.rem = x % y;
+    return res;
 }
 
 template<typename... Args>
