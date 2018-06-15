@@ -100,6 +100,12 @@ int main()
 #ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
     using namespace smath::constant_literals;
 
+    static_assert(
+        std::is_same<
+            decltype(smath::sqr(5_c)),
+            smath::constant<int, 25>
+        >::value, "");
+
     static_assert(not smath::is_even(5_c), "");
     static_assert(    smath::is_even(-4_c), "");
     static_assert(    smath::is_even(0_c), "");
