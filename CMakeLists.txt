@@ -27,7 +27,8 @@ if (USE_CCACHE)
     endif(CCACHE_FOUND)
 endif(USE_CCACHE)
 
-set(headers include/static_math/cmath.h
+set(headers include/static_math/bit.h
+            include/static_math/cmath.h
             include/static_math/complex.h
             include/static_math/constant.h
             include/static_math/constants.h
@@ -38,6 +39,7 @@ set(headers include/static_math/cmath.h
             include/static_math/vector.h)
 
 set(detail_headers
+            include/static_math/detail/bit.inl
             include/static_math/detail/can_fit.h
             include/static_math/detail/cmath.inl
             include/static_math/detail/complex.inl
@@ -73,6 +75,7 @@ if (STATIC_MATH_BUILD_TESTS)
 
     add_custom_target(all_tests ALL)
 
+    build_test(bit          all_tests)
     build_test(cmath        all_tests)
     build_test(complex      all_tests)
     build_test(constant     all_tests)
