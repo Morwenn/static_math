@@ -596,7 +596,9 @@ template<typename Float>
 constexpr auto exp(Float x)
     -> decltype(std::exp(x))
 {
-    return 1 + x + detail::exp_helper<2>(x);
+    return (x < 0.0) ?
+        1.0 / smath::exp(-x) :
+        1 + x + detail::exp_helper<2>(x);
 }
 
 template<typename Number, typename Integer>

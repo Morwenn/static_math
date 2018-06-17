@@ -96,6 +96,11 @@ int main()
 
     static_assert(smath::is_close(smath::hypot(3.0f, 4), 5.0), "");
 
+    static_assert(smath::is_close(smath::exp(-2.0), 0.1353352832366127), "");
+    static_assert(smath::is_close(smath::exp(-1.0), 0.36787944117144233), "");
+    static_assert(smath::is_close(smath::exp(0.0), 1.0), "");
+    static_assert(smath::is_close(smath::exp(1.0), 2.718281828459045), "");
+    static_assert(smath::is_close(smath::exp(2.0), 7.38905609893065), "");
     static_assert(smath::is_close(smath::exp(5.0), 148.4131591025766), "");
 
     static_assert(smath::log2(256) == 8, "");
