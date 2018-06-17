@@ -46,11 +46,6 @@ matrix:
 
     - os: osx
       osx_image: xcode7.3
-      compiler: gcc
-      env: CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR=Ninja
-
-    - os: osx
-      osx_image: xcode7.3
       compiler: clang
       env: CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR=Ninja 
 
