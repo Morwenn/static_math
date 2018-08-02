@@ -72,6 +72,7 @@ int main()
     static_assert(-comp0 == complex<int>(-5, 0), "");
 
     // Comparison tests
+    static_assert(5 == comp0, "");
     static_assert(comp0 == 5, "");
     static_assert(comp1 == imag1, "");
     static_assert(comp0 == comp3, "");
