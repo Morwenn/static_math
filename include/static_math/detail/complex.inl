@@ -595,7 +595,7 @@ constexpr auto operator==(Number lhs, complex<T> rhs)
     -> bool
 {
     return rhs.real == lhs
-        && rhs.imag_value == 0;
+        && rhs.imag.value == 0;
 }
 
 template<typename T, typename Number, typename>

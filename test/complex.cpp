@@ -72,12 +72,18 @@ int main()
     static_assert(-comp0 == complex<int>(-5, 0), "");
 
     // Comparison tests
+    static_assert(5 == comp0, "");
     static_assert(comp0 == 5, "");
     static_assert(comp1 == imag1, "");
+    static_assert(imag1 == comp1, "");
     static_assert(comp0 == comp3, "");
+    static_assert(comp3 == comp0, "");
     static_assert(comp0 != 3, "");
+    static_assert(3 != comp0, "");
     static_assert(imag0 != imag1, "");
+    static_assert(imag1 != imag0, "");
     static_assert(comp0 != comp1, "");
+    static_assert(comp1 != comp0, "");
 
     // imaginary-imaginary arithmetic
     static_assert(imag1 + imag1 == 2_i, "");
