@@ -62,6 +62,7 @@ int main()
     static_assert(smath::floor(2.8) == 2.0, "");
     static_assert(smath::floor(-2.5) == -3.0, "");
 
+    static_assert(smath::ceil(0) == 0.0, "");
     static_assert(smath::ceil(2.5) == 3.0, "");
     static_assert(smath::ceil(2.01) == 3.0, "");
     static_assert(smath::ceil(2.8) == 3.0, "");
@@ -71,6 +72,20 @@ int main()
     static_assert(smath::round(2.01) == 2.0, "");
     static_assert(smath::round(2.8) == 3.0, "");
     static_assert(smath::round(-2.1) == -2.0, "");
+
+    static_assert(smath::lround(6000000000.5)== 6000000001, "");
+    static_assert(smath::lround(2.5) == 3.0, "");
+    static_assert(smath::lround(2.01) == 2.0, "");
+    static_assert(smath::lround(2.8) == 3.0, "");
+    static_assert(smath::lround(-2.1) == -2.0, "");
+    static_assert(smath::lround(-6000000000.5) == -6000000001, "");
+
+    static_assert(smath::llround(6000000000.5)== 6000000001, "");
+    static_assert(smath::llround(2.5) == 3.0, "");
+    static_assert(smath::llround(2.01) == 2.0, "");
+    static_assert(smath::llround(2.8) == 3.0, "");
+    static_assert(smath::llround(-2.1) == -2.0, "");
+    static_assert(smath::llround(-6000000000.5) == -6000000001, "");
 
     static_assert(smath::trunc(2.5) == 2.0, "");
     static_assert(smath::trunc(2.01) == 2.0, "");

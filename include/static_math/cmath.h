@@ -103,6 +103,14 @@ namespace smath
         -> decltype(std::round(x));
 
     template<typename Float>
+    constexpr auto lround(Float x)
+        -> decltype(std::lround(x));
+
+    template<typename Float>
+    constexpr auto llround(Float x)
+        -> decltype(std::llround(x));
+
+    template<typename Float>
     constexpr auto trunc(Float x)
         -> decltype(std::trunc(x));
 
