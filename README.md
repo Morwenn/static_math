@@ -25,7 +25,7 @@ at compile time too. The library also contains some common mathematical constant
 
 The library also offers compile-time mathematics at the template parameter level
 thanks to it [`constant`](https://github.com/Morwenn/static_math/wiki/Integral-constants)
-class, which is a bit like `std::integral_constant` but with an an explicit math
+class, which is a bit like `std::integral_constant` but with an explicit math
 support: for example `constant<int, 5>{} + constant<int, 3>{}` will return an
 instance of `constant<int, 8>`. One could also write `5_c + 3_c` thanks to the
 provided user-defined literals.
