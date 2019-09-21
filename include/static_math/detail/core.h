@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015-2017 Morwenn
+ * Copyright (c) 2015-2019 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -181,9 +181,10 @@ namespace detail
             bool
         >
     {
+        // https://en.cppreference.com/w/cpp/types/numeric_limits/epsilon
         return smath::detail::abs(a - b) <=
-            std::numeric_limits<lesser_of<T, U>>::epsilon() *
-            max(smath::detail::abs(a), smath::detail::abs(b));
+            std::numeric_limits<lesser_of<T, U>>::epsilon() * smath::detail::abs(a + b)
+            || smath::detail::abs(a - b) < std::numeric_limits<lesser_of<T, U>>::min();
     }
 
     template<typename T, typename U>

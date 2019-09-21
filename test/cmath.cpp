@@ -109,6 +109,13 @@ int main()
     static_assert(smath::is_close(smath::sqrt(2.0), 1.414213562373095), "");
     static_assert(smath::is_close(smath::sqrt(3.0), 1.732050807568877), "");
 
+    // From GitHub issue #25
+    static_assert(smath::is_close(smath::sqrt(4.916330874e-01f), 0.701165520686806f), "");
+    static_assert(smath::is_close(smath::sqrt(3.804553151e-01f), 0.616810599049660f), "");
+    static_assert(smath::is_close(smath::sqrt(4.505589902e-01f), 0.671236910635880f), "");
+    static_assert(smath::is_close(smath::sqrt(3.162864149e-01f), 0.562393469823397f), "");
+    static_assert(smath::is_close(smath::sqrt(4.889709353e-01f), 0.699264567456410f), "");
+
     static_assert(smath::is_close(smath::hypot(3.0f, 4), 5.0), "");
 
     static_assert(smath::is_close(smath::exp(-2.0), 0.1353352832366127), "");
