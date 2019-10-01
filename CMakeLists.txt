@@ -1,72 +1,36 @@
 cmake_minimum_required(VERSION 3.0)
-project(static_math)
 
-set(CMAKE_CXX_STANDARD 14)
+project(static_math LANGUAGES CXX)
 
-option(STATIC_MATH_BUILD_TESTS  "Build the tests them." ON)
-option(USE_CCACHE               "Use `ccache` if available"         ON)
+option(STATIC_MATH_BUILD_TESTS "Build the tests them." ON)
 
-if (NOT CMAKE_BUILD_TYPE)
-    if(CMAKE_GENERATOR STREQUAL "Xcode")
-        set(CMAKE_BUILD_TYPE "Debug")
-    else()
-        set(CMAKE_BUILD_TYPE "Release")
-    endif()
-    
-    message(STATUS "No build type selected, default to ${CMAKE_BUILD_TYPE}")
-endif()
+# Create static_math library and configure it
+add_library(static_math INTERFACE)
+target_include_directories(static_math INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+)
 
-if (USE_CCACHE)
-    find_program(CCACHE_FOUND ccache)
+target_compile_features(static_math INTERFACE cxx_std_14)
 
-    if (CCACHE_FOUND)
-        message(STATUS "Using ccache")
-    
-        set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-        set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache) 
-    endif(CCACHE_FOUND)
-endif(USE_CCACHE)
+add_library(static_math::static_math ALIAS static_math)
 
-set(headers include/static_math/bit.h
-            include/static_math/cmath.h
-            include/static_math/complex.h
-            include/static_math/constant.h
-            include/static_math/constants.h
-            include/static_math/formula.h
-            include/static_math/rational.h
-            include/static_math/static_math.h
-            include/static_math/trigonometry.h
-            include/static_math/vector.h)
-
-set(detail_headers
-            include/static_math/detail/bit.inl
-            include/static_math/detail/can_fit.h
-            include/static_math/detail/cmath.inl
-            include/static_math/detail/complex.inl
-            include/static_math/detail/constant.inl
-            include/static_math/detail/core.h
-            include/static_math/detail/formula.inl
-            include/static_math/detail/parse.h
-            include/static_math/detail/rational.inl
-            include/static_math/detail/trigonometry.inl
-            include/static_math/detail/vector.inl)
-
-install(DIRECTORY include/
-        DESTINATION include/)
+install(
+    DIRECTORY "include/"
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+)
 
 if (STATIC_MATH_BUILD_TESTS)
     include(CTest)
     enable_testing()
 
-    include_directories(./include)
-    # Generate all of the example parsers
     function(build_test test_tgt check_tgt)
-        
         # Add executable for the example
         add_executable(test-${test_tgt} ${headers} ${detail_headers} test/${test_tgt}.cpp)
+        target_link_libraries(test-${test_tgt} PRIVATE static_math::static_math)
         add_custom_target(run-test-${test_tgt} COMMAND $<TARGET_FILE:test-${test_tgt}> )
         add_test(NAME ${test_tgt}
-                COMMAND test-${test_tgt})
+                 COMMAND test-${test_tgt})
 
         if(TARGET ${check_tgt})
             add_dependencies(${check_tgt} test-${test_tgt})
