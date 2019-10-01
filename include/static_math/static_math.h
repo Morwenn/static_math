@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013-2015 Morwenn
+ * Copyright (c) 2013-2019 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <static_math/bit.h>
 #include <static_math/cmath.h>
 #include <static_math/complex.h>
 #include <static_math/constant.h>
@@ -39,7 +40,7 @@
  * @file static_math/static_math.h
  * @brief Main library file.
  *
- * This file includes the whole library.
+ * This file includes the whole library (almost).
  */
 
 /**
@@ -50,16 +51,9 @@
  * The library does not contain any other namespace.
  *
  * All the functions in this library are meant to be used
- * at compile time. Though can also be used at runtime, it's
- * generally not a good idea: the functions are implemented
- * in a way they can actually run at compile time, often at
- * the expense of performance. The global idea is that
- * performance of the functions is not an issue since all
- * will just be computed once.
- *
- * If you want some powerful and fast mathematical functions,
- * you better use those in the standard library or Boost or
- * any library dedicated to maths.
+ * at compile time. Even though can also be used at runtime,
+ * but it's generally not a good idea: the ability to run at
+ * compile time is often at the expense of runtime speed.
  */
 
 #endif // SMATH_STATIC_MATH_H_
