@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2016-2017 Morwenn
+ * Copyright (c) 2016-2019 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,6 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <ciso646>
 #include <type_traits>
 
 namespace smath
@@ -75,7 +74,7 @@ namespace detail
 
     template<typename T>
     struct negation:
-        std::integral_constant<bool, not T::value>
+        std::integral_constant<bool, !T::value>
     {};
 }}
 

@@ -67,7 +67,7 @@ namespace detail
     template<typename Number>
     constexpr auto abs(Number x)
         -> std::enable_if_t<
-            not std::is_unsigned<Number>::value,
+            !std::is_unsigned<Number>::value,
             Number
         >
     {
@@ -206,9 +206,9 @@ namespace detail
     {
 #ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
         using namespace constant_literals;
-        return not (n % 2_c);
+        return !(n % 2_c);
 #else
-        return not (n % 2);
+        return !(n % 2);
 #endif
     }
 
@@ -216,7 +216,7 @@ namespace detail
     constexpr auto is_odd(Integer n)
         -> decltype(auto)
     {
-        return not detail::is_even(n);
+        return !detail::is_even(n);
     }
 
     ////////////////////////////////////////////////////////////

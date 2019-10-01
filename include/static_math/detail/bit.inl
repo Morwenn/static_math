@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2018 Morwenn
+ * Copyright (c) 2018-2019 Morwenn
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ template<typename Unsigned>
 constexpr auto ispow2(Unsigned x) noexcept
     -> bool
 {
-    return (x != 0) && not(x & (x - 1));
+    return (x != 0) && !(x & (x - 1));
 }
 
 #ifndef STATIC_MATH_NO_INTEGRAL_CONSTANT
