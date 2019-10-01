@@ -11,7 +11,11 @@ target_include_directories(static_math INTERFACE
     $<INSTALL_INTERFACE:include>
 )
 
-target_compile_features(static_math INTERFACE cxx_std_14)
+if (${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.8.0")
+    target_compile_features(static_math INTERFACE cxx_std_14)
+else()
+    set(CMAKE_CXX_STANDARD 14)
+endif()
 
 add_library(static_math::static_math ALIAS static_math)
 
