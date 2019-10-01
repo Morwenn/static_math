@@ -1,16 +1,18 @@
-
 language: cpp
 
 addons: 
   apt:
     sources:
-    - ubuntu-toolchain-r-test # cmake requirement
-
+      - ubuntu-toolchain-r-test
     packages:
-    - [cmake, cmake-data]
-    - ccache
-    - ninja-build
-    - [g++-5, g++-6, g++-7, g++-8, g++-9]
+      - [cmake, cmake-data]
+      - ninja-build
+      - [g++-5, g++-6, g++-7, g++-8, g++-9]
+  homebrew:
+    update: true
+    packages:
+      - cmake
+      - ninja
 
 matrix:
   include: 
@@ -18,116 +20,118 @@ matrix:
 
     ## Clang
     - os: linux
-      env: COMPILER=clang++ CMAKE_BUILD_TYPE=Release
+      env: COMPILER=clang++ CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR="Ninja"
       compiler: clang
 
     - os: linux
-      env: COMPILER=clang++ CMAKE_BUILD_TYPE=Debug
+      env: COMPILER=clang++ CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR="Ninja"
       compiler: clang
 
-    ## gcc
+    ## GCC
     - os: linux
-      env: COMPILER=g++-5 CMAKE_BUILD_TYPE=Debug
+      env: COMPILER=g++-5 CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR="Ninja"
       compiler: gcc
 
     - os: linux
-      env: COMPILER=g++-5 CMAKE_BUILD_TYPE=Release
+      env: COMPILER=g++-5 CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR="Ninja"
       compiler: gcc
 
     - os: linux
-      env: COMPILER=g++-6 CMAKE_BUILD_TYPE=Debug
+      env: COMPILER=g++-6 CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR="Ninja"
       compiler: gcc
 
     - os: linux
-      env: COMPILER=g++-6 CMAKE_BUILD_TYPE=Release
+      env: COMPILER=g++-6 CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR="Ninja"
       compiler: gcc
 
     - os: linux
-      env: COMPILER=g++-7 CMAKE_BUILD_TYPE=Debug
+      env: COMPILER=g++-7 CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR="Ninja"
       compiler: gcc
 
     - os: linux
-      env: COMPILER=g++-7 CMAKE_BUILD_TYPE=Release
+      env: COMPILER=g++-7 CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR="Ninja"
       compiler: gcc
 
     - os: linux
-      env: COMPILER=g++-8 CMAKE_BUILD_TYPE=Debug
+      env: COMPILER=g++-8 CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR="Ninja"
       compiler: gcc
 
     - os: linux
-      env: COMPILER=g++-8 CMAKE_BUILD_TYPE=Release
+      env: COMPILER=g++-8 CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR="Ninja"
       compiler: gcc
 
     - os: linux
-      env: COMPILER=g++-9 CMAKE_BUILD_TYPE=Debug
+      env: COMPILER=g++-9 CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR="Ninja"
       compiler: gcc
 
     - os: linux
-      env: COMPILER=g++-9 CMAKE_BUILD_TYPE=Release
+      env: COMPILER=g++-9 CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR="Ninja"
       compiler: gcc
 
     # Mac OSX
     - os: osx
       osx_image: xcode7.3
       compiler: clang
-      env: CMAKE_BUILD_TYPE=Debug
+      env: CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR="Ninja"
 
     - os: osx
       osx_image: xcode7.3
       compiler: clang
-      env: CMAKE_BUILD_TYPE=Release
+      env: CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR="Ninja"
 
-cache:
-  directories:
-    - $HOME/.ccache
+    # Windows
 
-before_install:
-- |
-    case `uname` in 
-        Darwin)     export OS_NAME="osx"    ;;
-        Linux)      export OS_NAME="linux"  ;;
-    esac
+    ## MinwGW-w64
+    - os: windows
+      env: CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR="MinGW Makefiles"
+      language: sh
+      compiler: gcc
 
-    if [[ ${OS_NAME} == osx ]]; then
-        brew update
-        brew install ninja
-    fi
+    - os: windows
+      env: CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR="MinGW Makefiles"
+      language: sh
+      compiler: gcc
 
-- |
-    if [[ ${OS_NAME} == linux ]]; then
+    ## MSVC (using a pseudo-generator)
+    - os: windows
+      env: CMAKE_BUILD_TYPE=Debug CMAKE_GENERATOR="MSVC"
+      compiler: msvc
+
+    - os: windows
+      env: CMAKE_BUILD_TYPE=Release CMAKE_GENERATOR="MSVC"
+      compiler: msvc
+
+install:
+  - if [[ $TRAVIS_OS_NAME = "linux" ]]; then
         case ${COMPILER} in
             clang*)
-                export CC=$(echo ${COMPILER} | sed 's/\+//g')
                 export CXX=${COMPILER}
             ;;
-
             g++-*)
-                export CC=$(echo ${COMPILER} | sed 's/\+/c/g')
-                export CXX=${COMPILER} 
+                export CXX=${COMPILER}
             ;;
-
             *) echo "Invalid compiler version" ; exit 2 ;;
         esac
     fi
 
 script:
-
-- |
-  cmake --version
-  ninja --version 
-
-  echo "CC=${CC}"
-  $CC --version
-  echo "CXX=${CXX}"
-  $CXX --version
-
-- mkdir build; cd build
-- |
-    cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} \
-          -G"Ninja" \
-          ..
-
-- cmake --build . --target check
+  - cmake --version
+  - if [[ $TRAVIS_OS_NAME != "windows" ]]; then
+        ninja --version;
+    fi
+  - echo "CXX=${CXX}"
+  - $CXX --version
+  - if [[ $CMAKE_GENERATOR = "MSVC" ]]; then
+        cmake -H. -Bbuild
+              -DCMAKE_CONFIGURATION_TYPES="${CMAKE_BUILD_TYPE}";
+    else
+        cmake -H. -Bbuild
+              -DCMAKE_CONFIGURATION_TYPES="${CMAKE_BUILD_TYPE}"
+              -DCMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE}"
+              -G"${CMAKE_GENERATOR}"
+              -DCMAKE_SH="CMAKE_SH-NOTFOUND";
+    fi
+  - cmake --build build --target check
 
 notifications:
   email: false
