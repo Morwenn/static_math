@@ -4,6 +4,6 @@ You probably already read all the promotional stuff in the project's README, so 
 
 Also, note that this documentation documents what functions or classes you should expect to find when including a header, even if you are bound to include more because of headers interdependencies. This problem would be solved by modules, but they are still not in the standard.
 
-If you ever feel that this wiki is incomplete, that it needs more examples or more detailed explanation about stuff, you are welcome to report it and/or contribute.
+If you ever feel that this wiki is incomplete, that it needs more examples or more detailed explanation about stuff, PRs are welcome: the `docs` subdirectory of the sources is automatically uploaded to the GitHub Wiki.
 
 Hope this will be useful!
