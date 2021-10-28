@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(static_math LANGUAGES CXX)
 
-option(STATIC_MATH_BUILD_TESTS "Build the tests them." ON)
+option(STATIC_MATH_BUILD_TESTS "Build the tests them." OFF)
 
 # Create static_math library and configure it
 add_library(static_math INTERFACE)
